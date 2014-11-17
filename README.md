@@ -1,21 +1,6 @@
-#### CFPB Open Source Project Template Instructions
-
-1. Create a new project.
-2. Copy these files into the new project.
-3. Update the README, replacing the contents below as prescribed.
-4. Add any libraries, assets, or hard dependencies whose source code will be included
-   in the project's repository to the _Exceptions_ section in the [TERMS](TERMS.md).
-  - If no exceptions are needed, remove that section from TERMS.
-5. Delete these instructions and everything up to the _Project Title_ from the README.
-6. Write some great software and tell people about it.
-
-> Keep the README fresh! It's the first thing people see and will make the initial impression.
-
-----
-
 # HMDA Pilot
 
-## THis project is a work in progress
+## This project is a work in progress
 Nothing presented in the issues or in this repo is a final product unless it is marked as such.
 
 **Description**:  The HMDA Pilot provides a client side tool to perform validation and error checking
