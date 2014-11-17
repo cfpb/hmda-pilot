@@ -13,37 +13,28 @@
 
 ----
 
-# Project Title
+# HMDA Pilot
 
-**Description**:  Put a meaningful, short, plain-language description of what
-this project is trying to accomplish and why it matters.
+## THis project is a work in progress
+Nothing presented in the issues or in this repo is a final product unless it is marked as such.
 
-Other things to include:
+**Description**:  The HMDA Pilot provides a client side tool to perform validation and error checking
+of HMDA submitted files for the current conditions, by following the specifications found on the [FFIEC](http://www.ffiec.gov/hmda)
+website. In particular, it implements the file specification and most of the edit checks for 2014.
 
-  - **Status**:  Alpha, Beta, 1.1, etc. It's OK to write a sentence, too. The goal is to let interested people know where this project is at. This is also a good place to link to the [CHANGELOG](CHANGELOG.md).
-  - **Links to production or demo instances**
-  - Describe what sets this apart from related-projects. Linking to another doc or page is OK if this can't be expressed in a sentence or two.
+## Requirements
 
-
-**Screenshot**: If the software has visual components, place a screenshot after the description; e.g.,
-
-![](https://raw.githubusercontent.com/cfpb/open-source-project-template/master/screenshot.png)
-
+- [AngularJS](https://angularjs.org)
+- [Node](http://nodejs.org)
+- [MongoDB](http://mongodb.org)
 
 ## How to get this running or how to use it
 
-Detailed instructions on how to install, configure, and get the project running.
-This should be frequently tested to ensure reliability. Alternatively, a link to
-another page is fine, but it's important that this works.
-
+TBD
 
 ## Getting involved
 
-This section should detail why people should get involved and describe key areas you are
-currently focusing on; e.g., trying to get feedback on features, fixing certain bugs, building
-important pieces, etc.
-
-General instructions on _how_ to contribute should be stated with a link to [CONTRIBUTING](CONTRIBUTING.md).
+For details on how to get involved, please first read our [CONTRIBUTING](CONTRIBUTING.md) guidelines.
 
 
 ----
