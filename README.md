@@ -20,6 +20,7 @@ TBD
 ## Getting involved
 
 For details on how to get involved, please first read our [CONTRIBUTING](CONTRIBUTING.md) guidelines.
+This project follows an adapted pull request [workflow](https://github.com/cfpb/hmda-pilot/wiki/GitHub-workflow) on top of GitHub, please consult the details before adding features to the project.
 
 
 ----
