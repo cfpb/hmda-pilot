@@ -18,7 +18,9 @@ To build, first install [Grunt](http://gruntjs.com) and [Bower](http://bower.io)
 
 ```
 npm install -g grunt-cli
-npm install -f bower
+npm install -g bower
+npm install -g yo
+npm install -g generator-angular
 ```
 
 Then install dependencies from the project root directory:
