@@ -3,7 +3,7 @@
 ## This project is a work in progress
 Nothing presented in the issues or in this repo is a final product unless it is marked as such.
 
-**Description**:  The HMDA Pilot provides a client side tool to perform validation and error checking
+**Description**:  The HMDA Pilot provides a client side tool to perform validation, error checking and reporting
 of HMDA submitted files for the current conditions, by following the specifications found on the [FFIEC](http://www.ffiec.gov/hmda)
 website. In particular, it implements the file specification and most of the edit checks for 2014.
 
