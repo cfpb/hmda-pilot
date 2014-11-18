@@ -9,13 +9,31 @@ website. In particular, it implements the file specification and most of the edi
 
 ## Requirements
 
-- [AngularJS](https://angularjs.org)
-- [Node](http://nodejs.org)
-- [MongoDB](http://mongodb.org)
+The project requires [NodeJS](http://nodejs.org) (npm) to build and manage dependencies. This project is built with AngularJS and the Capital Framework.
+Project scaffolding is provided through [Yeoman](http://yeoman.io)
 
 ## How to get this running or how to use it
 
-TBD
+To build, first install [Grunt](http://gruntjs.com) and [Bower](http://bower.io) globally:
+
+```
+npm install -g grunt-cli
+npm install -f bower
+```
+
+Then install dependencies from the project root directory:
+
+```
+npm install
+bower install
+```
+
+And run locally by issuing:
+
+```
+grunt serve
+```
+
 
 ## Getting involved
 
