@@ -39,3 +39,4 @@ dist
 .tmp
 .sass-cache
 bower_components
+bundle.js

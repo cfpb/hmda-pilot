@@ -14,21 +14,12 @@ module.exports = function(config) {
     basePath: '../',
 
     // testing framework to use (jasmine/mocha/qunit/...)
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', 'browserify'],
 
     // list of files / patterns to load in the browser
     files: [
-      'bower_components/angular/angular.js',
-      'bower_components/angular-mocks/angular-mocks.js',
-      'bower_components/angular-animate/angular-animate.js',
-      'bower_components/angular-aria/angular-aria.js',
-      'bower_components/angular-cookies/angular-cookies.js',
-      'bower_components/angular-resource/angular-resource.js',
-      'bower_components/angular-route/angular-route.js',
-      'bower_components/angular-sanitize/angular-sanitize.js',
-      'bower_components/angular-touch/angular-touch.js',
-      'app/scripts/**/*.js',
-      'test/mock/**/*.js',
+      //'app/bundle/bundle.js',
+      //'test/mock/**/*.js',
       'test/spec/**/*.js'
     ],
 
@@ -52,6 +43,7 @@ module.exports = function(config) {
 
     // Which plugins to enable
     plugins: [
+      'karma-browserify',
       'karma-phantomjs-launcher',
       'karma-jasmine'
     ],
@@ -72,5 +64,13 @@ module.exports = function(config) {
     // },
     // URL root prevent conflicts with the site root
     // urlRoot: '_karma_'
+
+    // Browserify config
+    browserify: {
+      watch: true,
+    },
+
+    // Add browserify to preprocessors
+    preprocessors: {'test/**/*.js': ['browserify']}
   });
 };
