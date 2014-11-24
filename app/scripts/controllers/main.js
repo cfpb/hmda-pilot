@@ -7,11 +7,10 @@
  * # MainCtrl
  * Controller of the hmdaPilotApp
  */
-angular.module('hmdaPilotApp')
-  .controller('MainCtrl', function ($scope) {
+module.exports = function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
-  });
+};

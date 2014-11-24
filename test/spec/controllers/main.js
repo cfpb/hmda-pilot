@@ -1,20 +1,17 @@
 'use strict';
 
+var MainCtrl = require('../../../app/scripts/controllers/main');
+
 describe('Controller: MainCtrl', function () {
 
-  // load the controller's module
-  beforeEach(module('hmdaPilotApp'));
-
-  var MainCtrl,
+  var ctrl,
     scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
-    scope = $rootScope.$new();
-    MainCtrl = $controller('MainCtrl', {
-      $scope: scope
-    });
-  }));
+  beforeEach(function () {
+    scope = {};
+    ctrl = new MainCtrl(scope);
+  });
 
   it('should attach a list of awesomeThings to the scope', function () {
     expect(scope.awesomeThings.length).toBe(3);

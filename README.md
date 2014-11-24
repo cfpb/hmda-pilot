@@ -9,33 +9,47 @@ website. In particular, it implements the file specification and most of the edi
 
 ## Requirements
 
-The project requires [NodeJS](http://nodejs.org) (npm) to build and manage dependencies. This project is built with AngularJS and the Capital Framework.
-Project scaffolding is provided through [Yeoman](http://yeoman.io)
+The project requires [NodeJS](http://nodejs.org) (npm) to build and manage dependencies.
+
+Technologies used include [AngularJS](http://angularjs.org), [Browserify](http://browserify.org), [Grunt](http://gruntjs.com), and the [Capital Framework](http://cfpb.github.io/capital-framework/).
+
 
 ## How to get this running or how to use it
 
-To build, first install [Grunt](http://gruntjs.com) and [Bower](http://bower.io) globally:
+Make sure you have [NodeJS](https://nodejs.org) installed (version 0.10.33), and you can use the `npm` command:
 
+```shell
+npm version
 ```
+
+Install [Grunt](http://gruntjs.com) globally:
+
+```shell
 npm install -g grunt-cli
-npm install -g bower
-npm install -g yo
-npm install -g generator-angular
 ```
 
 Then install dependencies from the project root directory:
 
-```
+```shell
 npm install
-bower install
 ```
 
-And run locally by issuing:
+### Running locally
 
-```
+Run locally by issuing:
+
+```shell
 grunt serve
 ```
 
+### On your own server
+To use on your own server:
+
+```shell
+grunt build
+```
+
+Copy the files in `dist` to your web server root
 
 ## Getting involved
 
@@ -57,4 +71,4 @@ This project follows an adapted pull request [workflow](https://github.com/cfpb/
 
 1. Projects that inspired you
 2. Related projects
-3. Books, papers, talks, or other sources that have meaniginful impact or influence on this project 
+3. Books, papers, talks, or other sources that have meaniginful impact or influence on this project
