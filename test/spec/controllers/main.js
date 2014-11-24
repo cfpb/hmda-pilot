@@ -1,6 +1,6 @@
 'use strict';
 
-var MainCtrl = require('../../../app/scripts/controllers/about');
+var MainCtrl = require('../../../app/scripts/controllers/main');
 
 describe('Controller: MainCtrl', function () {
 

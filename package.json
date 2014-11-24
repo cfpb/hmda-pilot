@@ -37,6 +37,7 @@
     "jasmine-core": "^2.1.2",
     "jshint-stylish": "^0.2.0",
     "karma": "^0.12.25",
+    "karma-browserify": "^1.0.0",
     "karma-jasmine": "^0.3.0",
     "karma-phantomjs-launcher": "^0.1.4",
     "load-grunt-tasks": "^0.4.0",
