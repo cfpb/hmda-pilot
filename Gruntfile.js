@@ -31,7 +31,7 @@ module.exports = function (grunt) {
     watch: {
       js: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
-        tasks: ['newer:jshint:all', 'browserify'],
+        tasks: ['newer:jshint:all', 'browserify:dev'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
@@ -301,7 +301,17 @@ module.exports = function (grunt) {
     },
 
     browserify: {
-      js: {
+      dev: {
+        options: {
+          debug: true,
+        },
+        src: '<%= yeoman.app %>/scripts/app.js',
+        dest: '<%= yeoman.app %>/bundle/bundle.js'
+      },
+      dist: {
+        options: {
+          debug: false,
+        },
         src: '<%= yeoman.app %>/scripts/app.js',
         dest: '<%= yeoman.app %>/bundle/bundle.js'
       }
@@ -324,7 +334,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'browserify',
+      'browserify:dev',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -339,7 +349,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'clean:server',
-    'browserify',
+    'browserify:dev',
     'concurrent:test',
     'autoprefixer',
     'connect:test',
@@ -348,7 +358,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'browserify',
+    'browserify:dist',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
