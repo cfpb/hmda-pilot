@@ -11,7 +11,7 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/hmda-pilot.css">
     <!-- endbuild -->
   </head>
   <body ng-app="hmdaPilotApp">
@@ -21,22 +21,15 @@
 
     <!-- Add your site or application content here -->
     <div class="container">
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a ng-href="#">Home</a></li>
-          <li><a ng-href="#/about">About</a></li>
-          <li><a ng-href="#">Contact</a></li>
-        </ul>
-        <h3 class="text-muted">hmdaPilot</h3>
-      </div>
+        <header role="banner">
+            <p class="h1">HMDA Pilot</p>
+        </header>
 
-      <div ng-view=""></div>
+        <main role="main" ng-view=""></main>
 
-      <div class="footer">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
-      </div>
+        <footer role="contentinfo">
+        </footer>
     </div>
-
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -48,7 +41,6 @@
        ga('create', 'UA-XXXXX-X');
        ga('send', 'pageview');
     </script>
-
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="bundle/bundle.js"></script>
