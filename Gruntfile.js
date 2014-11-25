@@ -27,6 +27,9 @@ module.exports = function (grunt) {
     // Project settings
     yeoman: appConfig,
 
+    // Pull in the package.json file so we can read its metadata.
+    pkg: grunt.file.readJSON('package.json'),
+
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       js: {
@@ -43,6 +46,10 @@ module.exports = function (grunt) {
       styles: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
         tasks: ['newer:copy:styles', 'autoprefixer']
+      },
+      less: {
+        files: ['<%= yeoman.app %>/styles/{,*/}*.less'],
+        tasks: ['less:server', 'autoprefixer']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -145,6 +152,32 @@ module.exports = function (grunt) {
           src: '{,*/}*.css',
           dest: '.tmp/styles/'
         }]
+      }
+    },
+
+    // Compile LESS files to CSS.
+    // All of the cf-framework LESS files have been added to styles.css.
+    less: {
+      options: {
+        paths: ['app/styles'],
+        compress: false,
+        sourceMap: true,
+        sourceMapFilename: 'dist/css/<%= pkg.name %>_sourcemap.css.map',
+        sourceMapURL: '/static/css/<%= pkg.name %>_sourcemap.css.map'
+      },
+      server: {
+        files: {
+          '.tmp/styles/<%= pkg.name %>.css': ['app/styles/<%= pkg.name %>.less']
+        }
+      },
+      dist: {
+        options: {
+          compress: true,
+          sourceMap: false
+        },
+        files: {
+          'dist/css/<%= pkg.name %>.css': ['app/styles/<%= pkg.name %>.less']
+        }
       }
     },
 
@@ -335,6 +368,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'browserify:dev',
+      'less:server',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -359,6 +393,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'browserify:dist',
+    'less:dist',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
