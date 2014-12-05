@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/cfpb/hmda-pilot.png?label=ready&title=Ready)](https://waffle.io/cfpb/hmda-pilot)
 #### CFPB Open Source Project Template Instructions
 
 1. Create a new project.
