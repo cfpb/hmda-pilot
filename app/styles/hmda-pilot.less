@@ -11,7 +11,34 @@
 @import (less) "../../node_modules/cf-grid/src/cf-grid.less";
 @import (less) "../../node_modules/cf-buttons/src/cf-buttons.less";
 @import (less) "../../node_modules/cf-forms/src/cf-forms.less";
+@import (less) "../../node_modules/cf-icons/src/less/icons.less";
 
-.container {
+@import (less) "cf-enhancements.less";
+
+@import (less) "header.less";
+@import (less) "footer.less";
+
+.wrapper, .wrap {
     .grid_wrapper();
+}
+
+.visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+
+    .focusable:active,
+    .focusable:focus {
+        clip: auto;
+        height: auto;
+        margin: 0;
+        overflow: visible;
+        position: static;
+        width: auto;
+    }
 }
