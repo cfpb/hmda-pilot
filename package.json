@@ -2,14 +2,14 @@
   "name": "hmda-pilot",
   "version": "0.0.0",
   "dependencies": {
-    "angular": "^1.3.3",
-    "angular-animate": "^1.3.3",
-    "angular-aria": "^1.3.3",
-    "angular-cookies": "^1.3.3",
-    "angular-resource": "^1.3.3",
-    "angular-route": "^1.3.3",
-    "angular-sanitize": "^1.3.3",
-    "angular-touch": "^1.3.3",
+    "angular": "^1.3.7",
+    "angular-animate": "^1.3.7",
+    "angular-aria": "^1.3.7",
+    "angular-cookies": "^1.3.7",
+    "angular-resource": "^1.3.7",
+    "angular-route": "^1.3.7",
+    "angular-sanitize": "^1.3.7",
+    "angular-touch": "^1.3.7",
     "normalize-css": "^2.3.1"
   },
   "napa": {
@@ -20,7 +20,7 @@
     "normalize-legacy-addon": "cfpb/normalize-legacy-addon#0.1.0"
   },
   "devDependencies": {
-    "angular-mocks": "^1.3.3",
+    "angular-mocks": "^1.3.7",
     "grunt": "^0.4.1",
     "grunt-autoprefixer": "^0.7.3",
     "grunt-browserify": "^3.2.1",
