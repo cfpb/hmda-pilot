@@ -17,6 +17,7 @@
     "cf-core": "cfpb/cf-core#0.8.0",
     "cf-forms": "cfpb/cf-forms#1.1.0",
     "cf-grid": "cfpb/cf-grid#0.9.0",
+    "cf-icons": "cfpb/cf-icons#0.4.1",
     "normalize-legacy-addon": "cfpb/normalize-legacy-addon#0.1.0"
   },
   "devDependencies": {

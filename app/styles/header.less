@@ -1,0 +1,61 @@
+.header {
+    border-bottom: 4px solid @green;
+    padding: 1em 0;
+    margin-bottom: 2em;
+    width: 100%;
+
+    .site-title {
+        display: inline-block;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        border: solid transparent;
+        border-width: 0 15px;
+        margin-right: -0.25em;
+        vertical-align: top;
+        width: 100%;
+        text-align: center;
+
+        @media only screen and (min-width: 37.5em) {
+            width: 50%;
+            text-align: left;
+        }
+
+        h1 {
+            margin: .4em 0;
+            font-size: 1.5em;
+
+            @media only screen and (min-width: 37.5em) {
+                font-size: 1.625em;
+            }
+        }
+
+        .title-link,
+        .title-link:visited {
+            color: @gray-80;
+        }
+    }
+
+    .site-logo {
+        display: none;
+
+        .logo {
+            @media only screen and (min-width: 37.5em) {
+                display: inline;
+            }
+        }
+
+        @media only screen and (min-width: 37.5em) {
+            display: inline-block;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            border: solid transparent;
+            border-width: 0 15px;
+            margin-right: -0.25em;
+            vertical-align: top;
+            width: 50%;
+            text-align: right;
+        }
+    }
+}
