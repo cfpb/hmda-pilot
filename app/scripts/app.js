@@ -30,8 +30,8 @@ angular
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        templateUrl: 'views/selectFile.html',
+        controller: 'SelectFileCtrl'
       })
       .when('/about', {
         templateUrl: 'views/about.html',
@@ -42,4 +42,5 @@ angular
       });
   });
 
+require('./services');
 require('./controllers');
