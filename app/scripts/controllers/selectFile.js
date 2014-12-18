@@ -21,6 +21,7 @@ module.exports = function ($scope, RuleEngine) {
 
     // Process the form submission
     $scope.submit = function(hmdaData) {
+        console.log('HMDA Data: ', hmdaData);
         // Nothing to hook up to yet...
     };
 };
