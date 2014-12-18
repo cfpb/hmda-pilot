@@ -18,10 +18,41 @@
 @import (less) "header.less";
 @import (less) "footer.less";
 
+// Layouts
 .wrapper, .wrap {
     .grid_wrapper();
 }
 
+footer {
+    margin-top: 2em;
+}
+
+
+// Forms
+.form-label-col {
+    .grid_column(2, 12);
+}
+
+.form-data-col {
+    .grid_column(8, 12);
+}
+
+.form-buttons {
+    .grid_column(8, 12, 2);
+}
+
+.note-required {
+    font-style: italic;
+    font-size: .8em;
+}
+
+.form-label-required {
+    font-size: .8em;
+    vertical-align: super;
+}
+
+
+// Utility classes
 .visually-hidden {
     border: 0;
     clip: rect(0 0 0 0);
