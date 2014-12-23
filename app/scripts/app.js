@@ -33,6 +33,22 @@ angular
         templateUrl: 'views/selectFile.html',
         controller: 'SelectFileCtrl'
       })
+      .when('/summarySyntacticalValidity', {
+        templateUrl: 'views/summarySyntacticalValidity.html',
+        controller: 'SummarySyntacticalValidityCtrl'
+      })
+      .when('/summaryQualityMacro', {
+        templateUrl: 'views/summaryQualityMacro.html',
+        controller: 'SummaryQualityMacroCtrl'
+      })
+      .when('/summaryMSA-IRS', {
+        templateUrl: 'views/summaryMSA-IRS.html',
+        controller: 'SummaryMSAIRSCtrl'
+      })
+      .when('/submit', {
+        templateUrl: 'views/submit.html',
+        controller: 'SubmitCtrl'
+      })
       .when('/about', {
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
@@ -43,4 +59,5 @@ angular
   });
 
 require('./services');
+require('./directives');
 require('./controllers');
