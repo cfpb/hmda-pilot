@@ -49,10 +49,6 @@ angular
         templateUrl: 'views/submit.html',
         controller: 'SubmitCtrl'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
-      })
       .otherwise({
         redirectTo: '/'
       });
