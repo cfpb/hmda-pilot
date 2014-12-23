@@ -17,6 +17,3 @@ app.controller('SummaryMSAIRSCtrl', SummaryMSAIRSCtrl);
 
 var SubmitCtrl = require('./submit');
 app.controller('SubmitCtrl', SubmitCtrl);
-
-var AboutCtrl = require('./about');
-app.controller('AboutCtrl', AboutCtrl);
