@@ -1,0 +1,90 @@
+// Wizard Navigation
+.nav-wizard {
+    .grid_wrapper();
+    .webfont-regular;
+    margin-bottom: 40px;
+    width: 100%;
+
+    ol {
+        list-style-type: none;
+        padding: 0;
+        margin: 28px auto;
+        overflow: hidden;
+        width: 100%;
+
+        li {
+            position: relative;
+            float: left;
+            width: 17%;
+            min-height: 50px;
+            height: 50px;
+            margin-right: 1.5%;
+            margin-bottom: 0;
+            padding-bottom: 4px;
+            background-color: @gray-5;
+            border-bottom: 5px solid @gray-50;
+            list-style: none;
+
+            // Wizard states
+            &.error {
+                border-color: @redorange;
+                background-color: @redorange-20;
+
+                .icon {
+                    color: @redorange-20;
+                    background-color: @redorange;
+                }
+            }
+            &.complete {
+                border-color: @green;
+                background-color: @green-tint;
+
+                .icon {
+                    color: @green-tint;
+                    background-color: @green;
+                }
+            }
+            &.incomplete {
+                border-color: @gray-50;
+                background-color: @gray-5;
+
+                .icon {
+                    color: @gray-5;
+                    background-color: @gray-50;
+                }
+            }
+            &.active,
+            &:hover,
+            &:focus {
+                border-color: @teal-80;
+                background-color: @teal-20;
+
+                .icon {
+                    color: @teal-20;
+                    background-color: @teal-80;
+                }
+            }
+
+            a { outline: 0; }
+
+            .title {
+                .vertical-align(55%);
+                display: block;
+                float: left;
+                width: 80%;
+                color: @black;
+            }
+
+            .icon {
+                .webfont-demi;
+                .vertical-align(55%);
+                font-size: .8em;
+                display: block;
+                float: left;
+                border-radius: 50%;
+                padding: .2em .55em;
+                margin: 0 .5em;
+            }
+        }
+    }
+}

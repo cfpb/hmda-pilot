@@ -1,0 +1,11 @@
+// Vertically align an element within its container.
+//
+// @param offset defaults to 50%
+.vertical-align(@offset:50%) {
+    position: relative;
+    top: @offset;
+    -webkit-transform: translateY(-@offset);
+    -ms-transform: translateY(-@offset);
+    transform: translateY(-@offset);
+}
+
