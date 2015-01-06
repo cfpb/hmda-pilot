@@ -21,6 +21,14 @@ module.exports = function (StepStatus) {
             return this.status === StepStatus.active;
         },
 
+        isComplete: function() {
+            return this.status === StepStatus.complete;
+        },
+
+        isIncomplete: function() {
+            return this.status === StepStatus.incomplete;
+        },
+
         markComplete: function() {
             this.status = StepStatus.complete;
         },
