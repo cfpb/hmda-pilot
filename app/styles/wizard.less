@@ -58,14 +58,16 @@
                 }
             }
             &.active,
-            &:hover,
-            &:focus {
-                border-color: @teal-80;
+            &.focusable:hover,
+            &.focusable:focus {
+                @a11y-color: tint(@teal, 8%);
+
+                border-color: @a11y-color;
                 background-color: @teal-20;
 
                 .icon {
                     color: @teal-20;
-                    background-color: @teal-80;
+                    background-color: @a11y-color;
                 }
             }
 
@@ -80,14 +82,22 @@
             }
 
             .icon {
-                .webfont-demi;
                 .vertical-align(55%);
-                font-size: .8em;
                 display: block;
                 float: left;
+                margin: 0 .5em;
+            }
+
+            .icon-num {
+                .webfont-demi;
+                font-size: .8em;
                 border-radius: 50%;
                 padding: .2em .55em;
-                margin: 0 .5em;
+            }
+
+            .cf-icon {
+                border-radius: 50%;
+                padding: .1em .2em;
             }
         }
     }

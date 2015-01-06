@@ -1,9 +1,9 @@
 <nav class="nav-wizard">
-    <ol role="tablist">
-        <li ng-repeat="step in steps" ng-class="step.status" role="tab" tabindex="0">
-            <span class="icon">{{$index+1}}</span>
-            <a class="title" ng-if="step.status !== 'incomplete'" ng-href="/#/{{step.view}}">{{step.title}}</a>
-            <span class="title" ng-if="step.status === 'incomplete'">{{step.title}}</span>
+    <ol>
+        <li ng-repeat="step in steps" class="{{step.stepClass}}">
+            <span class="{{step.iconClass}}">{{step.iconText}}</span>
+            <a class="title" ng-if="step.isComplete()" ng-href="/#/{{step.view}}">{{step.title}}</a>
+            <span class="title" ng-if="!step.isComplete()">{{step.title}}</span>
         </li>
     </ol>
 </nav>
