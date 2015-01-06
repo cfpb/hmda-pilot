@@ -22,35 +22,39 @@
             margin-bottom: 0;
             padding-bottom: 4px;
             background-color: @gray-5;
-            border-bottom: 5px solid @gray-50;
+            border-bottom: 5px solid @darkgray;
             list-style: none;
 
             // Wizard states
             &.error {
+                @a11y-color: tint(@redorange, 90%);
+
                 border-color: @redorange;
-                background-color: @redorange-20;
+                background-color: @a11y-color;
 
                 .icon {
-                    color: @redorange-20;
+                    color: @a11y-color;
                     background-color: @redorange;
                 }
             }
             &.complete {
-                border-color: @green;
+                @a11y-color: shade(@green, 27%);
+
+                border-color: @a11y-color;
                 background-color: @green-tint;
 
                 .icon {
                     color: @green-tint;
-                    background-color: @green;
+                    background-color: @a11y-color;
                 }
             }
             &.incomplete {
-                border-color: @gray-50;
+                border-color: @darkgray;
                 background-color: @gray-5;
 
                 .icon {
                     color: @gray-5;
-                    background-color: @gray-50;
+                    background-color: @darkgray;
                 }
             }
             &.active,
