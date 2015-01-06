@@ -1,0 +1,9 @@
+<nav class="nav-wizard">
+    <ol>
+        <li ng-repeat="step in steps" class="{{step.stepClass}}">
+            <span class="{{step.iconClass}}">{{step.iconText}}</span>
+            <a class="title" ng-if="step.isComplete()" ng-href="/#/{{step.view}}">{{step.title}}</a>
+            <span class="title" ng-if="!step.isComplete()">{{step.title}}</span>
+        </li>
+    </ol>
+</nav>

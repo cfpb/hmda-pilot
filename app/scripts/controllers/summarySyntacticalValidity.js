@@ -2,9 +2,9 @@
 
 /**
  * @ngdoc function
- * @name hmdaPilotApp.controller:AboutCtrl
+ * @name hmdaPilotApp.controller:SummarySyntacticalValidityCtrl
  * @description
- * # AboutCtrl
+ * # SummarySyntacticalValidityCtrl
  * Controller of the hmdaPilotApp
  */
 module.exports = function ($scope) {
