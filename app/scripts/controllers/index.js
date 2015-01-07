@@ -4,7 +4,7 @@ require('angular');
 var app = angular.module('hmdaPilotApp');
 
 var AboutCtrl = require('./about');
-var MainCtrl = require('./main');
+var SelectFileCtrl = require('./selectFile');
 
 app.controller('AboutCtrl', AboutCtrl);
-app.controller('MainCtrl', MainCtrl);
+app.controller('SelectFileCtrl', SelectFileCtrl);

@@ -18,7 +18,8 @@ module.exports = function (grunt) {
   // Configurable paths for the application
   var appConfig = {
     app: 'app',
-    dist: 'dist'
+    dist: 'dist',
+    modules: 'node_modules'
   };
 
   // Define the configuration for all the tasks
@@ -315,13 +316,20 @@ module.exports = function (grunt) {
         cwd: '<%= yeoman.app %>/styles',
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
+      },
+      fonts: {
+        expand: true,
+        cwd: '<%= yeoman.modules %>/cf-icons/src/fonts',
+        dest: '.tmp/fonts/',
+        src: '{,*/}*.{eot,svg,ttf,woff}'
       }
     },
 
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
-        'copy:styles'
+        'copy:styles',
+        'copy:fonts'
       ],
       test: [
         'copy:styles'
