@@ -18,6 +18,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'node_modules/jquery/dist/jquery.js',
       'app/bundle/bundle.js',
       //'test/mock/**/*.js',
       'test/spec/**/*.js',

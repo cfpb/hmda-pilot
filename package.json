@@ -48,6 +48,7 @@
     "grunt-usemin": "^2.1.1",
     "grunt-wiredep": "^1.7.0",
     "jasmine-core": "^2.1.2",
+    "jquery": "^1.11.2",
     "jshint-stylish": "^0.2.0",
     "karma": "^0.12.25",
     "karma-browserify": "^1.0.0",
