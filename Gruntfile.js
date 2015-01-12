@@ -364,9 +364,30 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
+    },
+
+    compress: {
+      'hmda-pilot': {
+        options: {
+          archive: './dist/hmda-pilot.zip',
+          mode: 'zip',  //zip | gzip | deflate | tgz
+          pretty: true
+        },
+        files: [
+          {
+            expand: true,
+            dot: true,
+            cwd: './dist',
+
+            //zip dist directory
+            src: ['**', '!hmda-pilot.zip']
+          }
+        ]
+      }
     }
   });
 
+  grunt.loadNpmTasks('grunt-contrib-compress');
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
@@ -411,6 +432,10 @@ module.exports = function (grunt) {
     'filerev',
     'usemin',
     'htmlmin'
+  ]);
+
+  grunt.registerTask('zip', [
+    'compress:hmda-pilot'
   ]);
 
   grunt.registerTask('default', [
