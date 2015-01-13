@@ -23,12 +23,40 @@
     .grid_wrapper();
 }
 
+body {
+    .webfont-regular;
+}
 footer {
     margin-top: 2em;
 }
 
 
 // Forms
+.form-well {
+    background-color: @gray-5;
+    padding: 1.5em;
+}
+
+.form-group-horizontal {
+    .form-group_item {
+        .grid_column(6, 12);
+        margin-top: 0;
+        border: 0;
+    }
+
+    .form-label-header {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form-buttons {
+        .grid_column(8, 12);
+        margin-top: 1.5em;
+        border: 0;
+    }
+}
+
+.form-group-veritcal {
 .form-label-col {
     .grid_column(2, 12);
 }
@@ -36,9 +64,6 @@ footer {
 .form-data-col {
     .grid_column(8, 12);
 }
-
-.form-buttons {
-    .grid_column(8, 12, 2);
 }
 
 .note-required {

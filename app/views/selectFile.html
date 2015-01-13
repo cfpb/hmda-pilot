@@ -1,27 +1,23 @@
 <h2>Select File and Upload</h2>
-<p>To validate a file, select the Reporting Year and a file you want to validate.</p>
+<p>To validate a file, select the Reporting year and <abbr title="Home Mortgage Disclosure Act">HMDA</abbr> dataset you want to validate.</p>
 <p>The file must pass all Syntactical and Validity edits before running the Quality and Macro Quality edits.</p>
 
-<p class="note-required">* indicates required field</p>
+<form name="select-file" class="form-group form-group-horizontal form-well" ng-submit="submit(hmdaData)">
+    <p class="note-required">* indicates required field</p>
 
-<form name="select-file" class="form-group" ng-submit="submit(hmdaData)">
     <div class="form-group_item">
-        <label for="year" class="form-label-header form-label-col"><span class="form-label-required" role="presentation">*</span> Reporting Year</label>
-        <div class="form-data-col">
-            <select id="year" class="form-input" name="year" ng-model="hmdaData.year" required>
-                <option ng-repeat="year in reportingYears" value="{{year}}" ng-selected="hmdaData.year">{{year}}</option>
-            </select>
-        </div>
+        <label for="year" class="form-label-header"><span class="form-label-required" role="presentation">*</span> Reporting year</label>
+        <select id="year" class="form-input" name="year" ng-model="hmdaData.year" required>
+            <option ng-repeat="year in reportingYears" value="{{year}}" ng-selected="hmdaData.year">{{year}}</option>
+        </select>
     </div>
 
     <div class="form-group_item">
-        <label for="file" class="form-label-header form-label-col"><span class="form-label-required" role="presentation">*</span> File</label>
-        <div class="form-data-col">
-            <input type="file" class="form-input" id="file" name="file" ng-model="hmdaData.file" required>
-        </div>
+        <label for="file" class="form-label-header"><span class="form-label-required" role="presentation">*</span> HMDA dataset</label>
+        <input type="file" class="form-input" id="file" name="file" ng-model="hmdaData.file" required>
     </div>
 
-    <div class="form-group_item form-buttons">
-        <button type="submit" class="btn">Start Validation</button>
+    <div class="form-buttons">
+        <button type="submit" class="btn">Start validation</button>
     </div>
 </form>
