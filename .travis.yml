@@ -4,7 +4,10 @@ node_js:
 before_install:
 - npm install -g npm@next
 - npm install -g grunt-cli
-install: npm install
+install:
+- npm install
+- grunt build
+- grunt zip
 deploy:
   provider: s3
   access_key_id: AKIAIMTOX4BXGVFOB56Q
@@ -12,5 +15,6 @@ deploy:
     secure: LZToB5h0IoW4K21i2gYT4cdiWjzlb8rnz7pL8gL/y/gRX9UjWr2xHDtNgBbAi8nQcle0/z4NgwG2UzfaP4EmKN09P9WFyUtmIOtwO8cPMqg0L/W8pP6gWe/Ebfd42AILJ/niuklP79Hb9m71pNJfm+XhFbWXCEDAo3DYFa1uYEE=
   skip_cleanup: true
   bucket: hmda-pilot
+  local_dir: dist
   on:
     branch: milestone3
