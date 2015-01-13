@@ -13,3 +13,5 @@ deploy:
   skip_cleanup: true
   local_dir: dist
   bucket: hmda-pilot
+  on:
+    branch: milestone3
