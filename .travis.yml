@@ -6,15 +6,10 @@ before_install:
 - npm install -g grunt-cli
 install: npm install
 deploy:
-  provider: codedeploy
+  provider: s3
   access_key_id: AKIAIMTOX4BXGVFOB56Q
   secret_access_key:
     secure: LZToB5h0IoW4K21i2gYT4cdiWjzlb8rnz7pL8gL/y/gRX9UjWr2xHDtNgBbAi8nQcle0/z4NgwG2UzfaP4EmKN09P9WFyUtmIOtwO8cPMqg0L/W8pP6gWe/Ebfd42AILJ/niuklP79Hb9m71pNJfm+XhFbWXCEDAo3DYFa1uYEE=
-  bucket: codedeploy-cfpb-hmda
-  key: latest/hmda-pilot.zip
-  application: cfpb-hmda-pilot
-  deployment_group: cfpb-hmda-pilot-dev
-  on:
-    branch: milestone3
-after_deploy:
-  - /usr/local/bin/angulardeploy.bash hmda-pilot.zip
+  skip_cleanup: true
+  local_dir: dist
+  bucket: hmda-pilot
