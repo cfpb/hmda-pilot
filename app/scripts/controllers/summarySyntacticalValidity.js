@@ -7,10 +7,6 @@
  * # SummarySyntacticalValidityCtrl
  * Controller of the hmdaPilotApp
  */
-module.exports = function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+module.exports = function ($scope, $location, HMDAEngine) {
+    $scope.errors = HMDAEngine.getErrors();
 };
