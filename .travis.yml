@@ -30,3 +30,23 @@ deploy:
     deployment_group: hmda-pilot-dev
     on:
       branch: milestone3
+  - provider: s3
+    access_key_id: AKIAIMTOX4BXGVFOB56Q
+    secret_access_key:
+      secure: LZToB5h0IoW4K21i2gYT4cdiWjzlb8rnz7pL8gL/y/gRX9UjWr2xHDtNgBbAi8nQcle0/z4NgwG2UzfaP4EmKN09P9WFyUtmIOtwO8cPMqg0L/W8pP6gWe/Ebfd42AILJ/niuklP79Hb9m71pNJfm+XhFbWXCEDAo3DYFa1uYEE=
+    skip_cleanup: true
+    bucket: hmda-pilot
+    local_dir: dist
+    upload-dir: master
+    on:
+      branch: master
+  - provider: codedeploy
+    access_key_id: AKIAIMTOX4BXGVFOB56Q
+    secret_access_key:
+      secure: LZToB5h0IoW4K21i2gYT4cdiWjzlb8rnz7pL8gL/y/gRX9UjWr2xHDtNgBbAi8nQcle0/z4NgwG2UzfaP4EmKN09P9WFyUtmIOtwO8cPMqg0L/W8pP6gWe/Ebfd42AILJ/niuklP79Hb9m71pNJfm+XhFbWXCEDAo3DYFa1uYEE=
+    bucket: hmda-pilot
+    key: master/hmda-pilot-codedeploy.zip
+    application: hmda-pilot
+    deployment_group: hmda-pilot-prod
+    on:
+      branch: master
