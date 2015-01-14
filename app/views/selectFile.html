@@ -16,7 +16,7 @@
 
     <div class="form-group_item">
         <label for="file" class="form-label-header"><span class="form-label-required" role="presentation">*</span> HMDA dataset</label>
-        <input type="file" class="form-input" id="file" name="file" ng-model="hmdaData.file" required>
+        <input type="file" class="form-input" id="file" name="file" required ng-file-select="onFileSelect($files)">
     </div>
 
     <div class="form-buttons">
