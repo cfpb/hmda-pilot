@@ -1,6 +1,18 @@
 {
   "name": "hmda-pilot",
   "version": "0.0.0",
+  "license": "Public Domain",
+  "author": {
+    "name": "Consumer Financial Protection Bureau"
+  },
+  "homepage": "https://github.com/cfpb/hmda-pilot",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cfpb/hmda-pilot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cfpb/hmda-pilot/issues"
+  },
   "dependencies": {
     "angular": "1.3.8",
     "angular-animate": "1.3.8",
