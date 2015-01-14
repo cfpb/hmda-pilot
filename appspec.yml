@@ -5,4 +5,4 @@ files:
     destination: /usr/local/angularfiles
 hooks:
   AfterInstall:
-    - location: /usr/local/bin/angulardeploy.bash
+    - location: scripts/angulardeploy.bash
