@@ -380,7 +380,7 @@ module.exports = function (grunt) {
             cwd: './dist',
 
             //zip dist directory
-            src: ['**', '!hmda-pilot.zip']
+            src: ['**', '../appspec.yml', '!hmda-pilot.zip']
           }
         ]
       }
