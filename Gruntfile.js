@@ -390,10 +390,26 @@ module.exports = function (grunt) {
           }
         ]
       }
+    },
+
+    ngAnnotate: {
+      options: {
+        singleQuotes: true
+      },
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>/bundle',
+          src: '{,*/}*.js',
+          dest: '<%= yeoman.app %>/bundle'
+        }]
+      }
+
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-compress');
+  grunt.loadNpmTasks('grunt-ng-annotate');
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
@@ -428,6 +444,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'browserify:dist',
+    'ngAnnotate:dist',
     'less:dist',
     'useminPrepare',
     'concurrent:dist',
