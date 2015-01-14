@@ -13,6 +13,9 @@ module.exports = function ($scope, RuleEngine) {
     // Populate the $scope
     $scope.reportingYears = fiscalYears;
 
+    // Initialize the errors for the form fields
+    $scope.errors = {};
+
     // Set default values for any form fields
     $scope.hmdaData = {
         year: fiscalYears[1],

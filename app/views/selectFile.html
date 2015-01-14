@@ -5,6 +5,8 @@
 <form name="select-file" class="form-group form-group-horizontal form-well" ng-submit="submit(hmdaData)">
     <p class="note-required">* indicates required field</p>
 
+    <p ng-if="errors.global" class="page-errors">{{errors.global}}</p>
+
     <div class="form-group_item">
         <label for="year" class="form-label-header"><span class="form-label-required" role="presentation">*</span> Reporting year</label>
         <select id="year" class="form-input" name="year" ng-model="hmdaData.year" required>
