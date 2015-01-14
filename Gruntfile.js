@@ -160,15 +160,15 @@ module.exports = function (grunt) {
     // All of the cf-framework LESS files have been added to styles.css.
     less: {
       options: {
-        paths: ['app/styles'],
+        paths: ['<%= yeoman.app %>/styles'],
         compress: false,
         sourceMap: true,
-        sourceMapFilename: 'dist/css/<%= pkg.name %>_sourcemap.css.map',
+        sourceMapFilename: '<%= yeoman.dist %>/css/<%= pkg.name %>_sourcemap.css.map',
         sourceMapURL: '/static/css/<%= pkg.name %>_sourcemap.css.map'
       },
       server: {
         files: {
-          '.tmp/styles/<%= pkg.name %>.css': ['app/styles/<%= pkg.name %>.less']
+          '.tmp/styles/<%= pkg.name %>.css': ['<%= yeoman.app %>/styles/<%= pkg.name %>.less']
         }
       },
       dist: {
@@ -177,7 +177,7 @@ module.exports = function (grunt) {
           sourceMap: false
         },
         files: {
-          'dist/css/<%= pkg.name %>.css': ['app/styles/<%= pkg.name %>.less']
+          '<%= yeoman.dist %>/styles/<%= pkg.name %>.css': ['<%= yeoman.app %>/styles/<%= pkg.name %>.less']
         }
       }
     },
@@ -189,7 +189,7 @@ module.exports = function (grunt) {
           '<%= yeoman.dist %>/scripts/{,*/}*.js',
           '<%= yeoman.dist %>/styles/{,*/}*.css',
           '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-          '<%= yeoman.dist %>/styles/fonts/*'
+          '<%= yeoman.dist %>/fonts/*'
         ]
       }
     },
@@ -309,6 +309,11 @@ module.exports = function (grunt) {
           cwd: '.tmp/images',
           dest: '<%= yeoman.dist %>/images',
           src: ['generated/*']
+        }, {
+          expand: true,
+          cwd: '<%= yeoman.modules %>/cf-icons/src/fonts',
+          dest: '<%= yeoman.dist %>/fonts',
+          src: '{,*/}*.{eot,svg,ttf,woff}'
         }]
       },
       styles: {
