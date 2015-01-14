@@ -7,11 +7,6 @@
 #       directory will be cleaned at the end of the script.
 #
 
-if [ -z "$1" ]; then
-    echo "$0 [zipfile]"
-    exit 1
-fi
-
 ZIPFILE=hmda-pilot.zip
 BASENAME=$(basename $ZIPFILE .zip)
 ANGULARDIR=/usr/local/angularfiles
