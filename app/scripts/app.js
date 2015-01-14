@@ -8,6 +8,7 @@ require('angular-resource');
 require('angular-route');
 require('angular-sanitize');
 require('angular-touch');
+require('./modules/HMDAEngine');
 
 /**
  * @ngdoc overview
@@ -25,7 +26,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'HMDAEngine'
   ])
   .config(function ($routeProvider) {
     $routeProvider
