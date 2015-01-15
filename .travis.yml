@@ -10,43 +10,43 @@ before_deploy:
 - grunt zip
 - grunt codedeploy
 deploy:
-- provider: s3
-  access_key_id: AKIAIMTOX4BXGVFOB56Q
-  secret_access_key:
-    secure: e3Y2WLatCBW6M++RUuGRP3y7mM5FGoSAX68ZMwfXx3L6to252ClsBNTh05f2rW3IZl1/LZUtr4WTSifPDaxWU64MoVNorUQ8DIUeQYl+OOjcDy87CFyEGEk5EDSYeQn+wphUYlGXBl6e0FsXb7FXJtBgt4XLKTNoVC9f60EyNaM=
-  skip_cleanup: true
-  bucket: hmda-pilot
-  local_dir: dist
-  upload-dir: develop
-  on:
-    all_branches: true
-- provider: codedeploy
-  access_key_id: AKIAIMTOX4BXGVFOB56Q
-  secret_access_key:
-    secure: e3Y2WLatCBW6M++RUuGRP3y7mM5FGoSAX68ZMwfXx3L6to252ClsBNTh05f2rW3IZl1/LZUtr4WTSifPDaxWU64MoVNorUQ8DIUeQYl+OOjcDy87CFyEGEk5EDSYeQn+wphUYlGXBl6e0FsXb7FXJtBgt4XLKTNoVC9f60EyNaM=
-  bucket: hmda-pilot
-  key: develop/hmda-pilot-codedeploy.zip
-  application: hmda-pilot
-  deployment_group: hmda-pilot-dev
-  on:
-    all_branches: true
-- provider: s3
-  access_key_id: AKIAIMTOX4BXGVFOB56Q
-  secret_access_key:
-    secure: e3Y2WLatCBW6M++RUuGRP3y7mM5FGoSAX68ZMwfXx3L6to252ClsBNTh05f2rW3IZl1/LZUtr4WTSifPDaxWU64MoVNorUQ8DIUeQYl+OOjcDy87CFyEGEk5EDSYeQn+wphUYlGXBl6e0FsXb7FXJtBgt4XLKTNoVC9f60EyNaM=
-  skip_cleanup: true
-  bucket: hmda-pilot
-  local_dir: dist
-  upload-dir: master
-  on:
-    branch: master
-- provider: codedeploy
-  access_key_id: AKIAIMTOX4BXGVFOB56Q
-  secret_access_key:
-    secure: e3Y2WLatCBW6M++RUuGRP3y7mM5FGoSAX68ZMwfXx3L6to252ClsBNTh05f2rW3IZl1/LZUtr4WTSifPDaxWU64MoVNorUQ8DIUeQYl+OOjcDy87CFyEGEk5EDSYeQn+wphUYlGXBl6e0FsXb7FXJtBgt4XLKTNoVC9f60EyNaM=
-  bucket: hmda-pilot
-  key: master/hmda-pilot-codedeploy.zip
-  application: hmda-pilot
-  deployment_group: hmda-pilot-prod
-  on:
-    branch: master
+  - provider: s3
+    access_key_id: AKIAIMTOX4BXGVFOB56Q
+    secret_access_key:
+      secure: Jj7g/2W66/6jUckPHpPdAxv+jhW4JCJACoNsvBufR8gtbfpYVGyYmdFa3zsOIUs0D4UZMH4uK/BhO19J+2r6FVBafWwfNLSbFtGzlx1nMOp3M3lqSbeqLdgeIQf9nFwqd4nFUpDOLMcsK7DqpQpyqAoCbSotxCcPFTy9pQ3o410=
+    skip_cleanup: true
+    bucket: hmda-pilot
+    local_dir: dist
+    upload-dir: develop
+    on:
+      all_branches: true
+  - provider: codedeploy
+    access_key_id: AKIAIMTOX4BXGVFOB56Q
+    secret_access_key:
+      secure: Jj7g/2W66/6jUckPHpPdAxv+jhW4JCJACoNsvBufR8gtbfpYVGyYmdFa3zsOIUs0D4UZMH4uK/BhO19J+2r6FVBafWwfNLSbFtGzlx1nMOp3M3lqSbeqLdgeIQf9nFwqd4nFUpDOLMcsK7DqpQpyqAoCbSotxCcPFTy9pQ3o410=
+    bucket: hmda-pilot
+    key: develop/hmda-pilot-codedeploy.zip
+    application: hmda-pilot
+    deployment_group: hmda-pilot-dev
+    on:
+      all_branches: true
+  - provider: s3
+    access_key_id: AKIAIMTOX4BXGVFOB56Q
+    secret_access_key:
+      secure: Jj7g/2W66/6jUckPHpPdAxv+jhW4JCJACoNsvBufR8gtbfpYVGyYmdFa3zsOIUs0D4UZMH4uK/BhO19J+2r6FVBafWwfNLSbFtGzlx1nMOp3M3lqSbeqLdgeIQf9nFwqd4nFUpDOLMcsK7DqpQpyqAoCbSotxCcPFTy9pQ3o410=
+    skip_cleanup: true
+    bucket: hmda-pilot
+    local_dir: dist
+    upload-dir: master
+    on:
+      branch: master
+  - provider: codedeploy
+    access_key_id: AKIAIMTOX4BXGVFOB56Q
+    secret_access_key:
+      secure: Jj7g/2W66/6jUckPHpPdAxv+jhW4JCJACoNsvBufR8gtbfpYVGyYmdFa3zsOIUs0D4UZMH4uK/BhO19J+2r6FVBafWwfNLSbFtGzlx1nMOp3M3lqSbeqLdgeIQf9nFwqd4nFUpDOLMcsK7DqpQpyqAoCbSotxCcPFTy9pQ3o410=
+    bucket: hmda-pilot
+    key: master/hmda-pilot-codedeploy.zip
+    application: hmda-pilot
+    deployment_group: hmda-pilot-prod
+    on:
+      branch: master
