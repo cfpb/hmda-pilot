@@ -1,20 +1,33 @@
 'use strict';
 
-var SelectFileCtrl = require('../../../app/scripts/controllers/selectFile');
-var RuleEngine = require('../../../app/scripts/services/ruleEngine');
+require('angular');
+require('angular-mocks');
 
 describe('Controller: SelectFileCtrl', function () {
 
-    var ctrl,
-        ruleEngine,
-        scope;
+    var scope,
+        location,
+        RuleEngine,
+        FileReader,
+        HMDAEngine;
 
-    // Initialize the controller
-    beforeEach(function () {
-        scope = {};
-        ruleEngine = new RuleEngine();
-        ctrl = new SelectFileCtrl(scope, ruleEngine);
-    });
+    beforeEach(angular.mock.module('hmdaPilotApp'));
+
+    beforeEach(inject(function ($rootScope, $location, $controller, _RuleEngine_, _FileReader_, _HMDAEngine_) {
+        scope = $rootScope.$new();
+        location = $location;
+        RuleEngine = _RuleEngine_;
+        FileReader = _FileReader_;
+        HMDAEngine = _HMDAEngine_;
+
+        $controller('SelectFileCtrl', {
+            $scope: scope,
+            $location: location,
+            RuleEngine: _RuleEngine_,
+            FileReader: _FileReader_,
+            HMDAEngine: _HMDAEngine_
+        });
+    }));
 
     describe('Initial state', function () {
         it('should include a list of reporting years', function () {
@@ -24,6 +37,11 @@ describe('Controller: SelectFileCtrl', function () {
         it('should default the HMDA filing year to current reporting year - 1', function() {
             expect(scope.reportingYears[0]).toBe('2014');
             expect(scope.hmdaData.year).toBe('2013');
+        });
+
+        it('should include an empty errors object', function () {
+            expect(scope.errors).toBeDefined();
+            expect(scope.errors).toEqual({});
         });
     });
 

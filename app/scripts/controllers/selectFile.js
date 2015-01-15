@@ -7,7 +7,7 @@
  * # Select File
  * Controller for selecting a HMDA file and Reporting Year for verification.
  */
-module.exports = function ($scope, RuleEngine, FileReader) {
+module.exports = function ($scope, $location, FileReader, RuleEngine, HMDAEngine) {
     var fiscalYears = RuleEngine.getFiscalYears();
 
     // Populate the $scope
@@ -30,7 +30,19 @@ module.exports = function ($scope, RuleEngine, FileReader) {
 
     // Process the form submission
     $scope.submit = function(hmdaData) {
-        console.log('HMDA Data: ', hmdaData);
-        // Nothing to hook up to yet...
+        // Convert the file to JSON
+        HMDAEngine.fileToJson(hmdaData.file, hmdaData.year, function(err) {
+            if (err) {
+                $scope.errors.global = err;
+                return;
+            }
+
+            // Run the first set of validations
+            HMDAEngine.runSyntactical(hmdaData.year);
+            HMDAEngine.runValidity(hmdaData.year);
+
+            // And go the summary page
+            $location.path('/summarySyntacticalValidity');
+        });
     };
 };
