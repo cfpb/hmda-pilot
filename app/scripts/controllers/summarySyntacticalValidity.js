@@ -5,13 +5,18 @@
  * @name hmdaPilotApp.controller:SummarySyntacticalValidityCtrl
  * @description
  * # SummarySyntacticalValidityCtrl
- * Controller of the hmdaPilotApp
+ * Controller for the Syntactical and Validity Summary view
  */
 module.exports = function ($scope, $location, HMDAEngine) {
-    $scope.errors = HMDAEngine.getErrors();
+
+    // Get the list of errors from the HMDAEngine
+    var editErrors = HMDAEngine.getErrors();
+
+    $scope.syntacticalErrors = editErrors.syntactical || {};
+    $scope.validityErrors = editErrors.validity || {};
 
     $scope.hasNext = function() {
-        return angular.equals({}, $scope.errors.syntactical) && angular.equals({}, $scope.errors.validity);
+        return angular.equals({}, $scope.syntacticalErrors) && angular.equals({}, $scope.validityErrors);
     };
 
     $scope.next = function() {
