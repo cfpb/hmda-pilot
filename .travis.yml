@@ -13,7 +13,7 @@ deploy:
   - provider: s3
     access_key_id: AKIAIMTOX4BXGVFOB56Q
     secret_access_key:
-      secure: NxMG05K8yLXd8XH4U+u2B5kF4Tr0HoIox3qUKWi4BqLK5Ze2dMaCHQZCBz2hCrdPY+Jj5AiktyTF9PeRn2gz/jOsT5XVh/I1XG7xk7s6w6ml13vdwNbp2ZVo0ENXjmQ1OT44a8QebhbqJwjiaQ2sERGNRM6nqbKpwOFdbL50VoQ=
+      secure: Xruh9ngqcewjMw/6E+ZO7Q7hkePp9nJWJeaaJydmLN1kJV8oSDrAl40Hw9kWFUyk0SjLQmFcEMVkHaaEBHMsx6/X0JV+fWXSRba8Nh9zHdSRMmcJTHTVaRuslbvVnqxOsYqmBUrDpvgNoD3SgqqPmy3LW3TC8RKWscNZcVd7JOM=
     skip_cleanup: true
     bucket: hmda-pilot
     local_dir: dist
@@ -23,7 +23,7 @@ deploy:
   - provider: codedeploy
     access_key_id: AKIAIMTOX4BXGVFOB56Q
     secret_access_key:
-      secure: NxMG05K8yLXd8XH4U+u2B5kF4Tr0HoIox3qUKWi4BqLK5Ze2dMaCHQZCBz2hCrdPY+Jj5AiktyTF9PeRn2gz/jOsT5XVh/I1XG7xk7s6w6ml13vdwNbp2ZVo0ENXjmQ1OT44a8QebhbqJwjiaQ2sERGNRM6nqbKpwOFdbL50VoQ=
+      secure: Xruh9ngqcewjMw/6E+ZO7Q7hkePp9nJWJeaaJydmLN1kJV8oSDrAl40Hw9kWFUyk0SjLQmFcEMVkHaaEBHMsx6/X0JV+fWXSRba8Nh9zHdSRMmcJTHTVaRuslbvVnqxOsYqmBUrDpvgNoD3SgqqPmy3LW3TC8RKWscNZcVd7JOM=
     bucket: hmda-pilot
     key: develop/hmda-pilot-codedeploy.zip
     application: hmda-pilot
@@ -33,7 +33,7 @@ deploy:
   - provider: s3
     access_key_id: AKIAIMTOX4BXGVFOB56Q
     secret_access_key:
-      secure: NxMG05K8yLXd8XH4U+u2B5kF4Tr0HoIox3qUKWi4BqLK5Ze2dMaCHQZCBz2hCrdPY+Jj5AiktyTF9PeRn2gz/jOsT5XVh/I1XG7xk7s6w6ml13vdwNbp2ZVo0ENXjmQ1OT44a8QebhbqJwjiaQ2sERGNRM6nqbKpwOFdbL50VoQ=
+      secure: Xruh9ngqcewjMw/6E+ZO7Q7hkePp9nJWJeaaJydmLN1kJV8oSDrAl40Hw9kWFUyk0SjLQmFcEMVkHaaEBHMsx6/X0JV+fWXSRba8Nh9zHdSRMmcJTHTVaRuslbvVnqxOsYqmBUrDpvgNoD3SgqqPmy3LW3TC8RKWscNZcVd7JOM=
     skip_cleanup: true
     bucket: hmda-pilot
     local_dir: dist
@@ -43,7 +43,7 @@ deploy:
   - provider: codedeploy
     access_key_id: AKIAIMTOX4BXGVFOB56Q
     secret_access_key:
-      secure: NxMG05K8yLXd8XH4U+u2B5kF4Tr0HoIox3qUKWi4BqLK5Ze2dMaCHQZCBz2hCrdPY+Jj5AiktyTF9PeRn2gz/jOsT5XVh/I1XG7xk7s6w6ml13vdwNbp2ZVo0ENXjmQ1OT44a8QebhbqJwjiaQ2sERGNRM6nqbKpwOFdbL50VoQ=
+      secure: Xruh9ngqcewjMw/6E+ZO7Q7hkePp9nJWJeaaJydmLN1kJV8oSDrAl40Hw9kWFUyk0SjLQmFcEMVkHaaEBHMsx6/X0JV+fWXSRba8Nh9zHdSRMmcJTHTVaRuslbvVnqxOsYqmBUrDpvgNoD3SgqqPmy3LW3TC8RKWscNZcVd7JOM=
     bucket: hmda-pilot
     key: master/hmda-pilot-codedeploy.zip
     application: hmda-pilot
