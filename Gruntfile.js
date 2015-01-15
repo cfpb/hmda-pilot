@@ -389,6 +389,23 @@ module.exports = function (grunt) {
             src: ['**', '!hmda-pilot.zip']
           }
         ]
+      },
+      'codedeploy': {
+        options: {
+          archive: './dist/hmda-pilot-codedeploy.zip',
+          mode: 'zip',  //zip | gzip | deflate | tgz
+          pretty: true
+        },
+        files: [
+          {
+            expand: true,
+            dot: true,
+            cwd: './',
+
+            //zip dist directory
+            src: ['dist/hmda-pilot.zip', 'scripts/*', 'appspec.yml']
+          }
+        ]
       }
     },
 
@@ -459,6 +476,10 @@ module.exports = function (grunt) {
 
   grunt.registerTask('zip', [
     'compress:hmda-pilot'
+  ]);
+
+  grunt.registerTask('codedeploy', [
+    'compress:codedeploy'
   ]);
 
   grunt.registerTask('default', [
