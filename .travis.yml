@@ -17,7 +17,7 @@ deploy:
     skip_cleanup: true
     bucket: hmda-pilot
     local_dir: dist
-    upload-dir: milestone3
+    upload-dir: develop
     on:
       all_branches: true
   - provider: codedeploy
@@ -25,7 +25,7 @@ deploy:
     secret_access_key:
       secure: LZToB5h0IoW4K21i2gYT4cdiWjzlb8rnz7pL8gL/y/gRX9UjWr2xHDtNgBbAi8nQcle0/z4NgwG2UzfaP4EmKN09P9WFyUtmIOtwO8cPMqg0L/W8pP6gWe/Ebfd42AILJ/niuklP79Hb9m71pNJfm+XhFbWXCEDAo3DYFa1uYEE=
     bucket: hmda-pilot
-    key: milestone3/hmda-pilot-codedeploy.zip
+    key: develop/hmda-pilot-codedeploy.zip
     application: hmda-pilot
     deployment_group: hmda-pilot-dev
     on:
