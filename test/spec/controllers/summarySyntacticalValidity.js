@@ -7,6 +7,7 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
 
     var scope,
         location,
+        controller,
         mockEngine,
         mockErrors = {
             syntactical: {},
@@ -18,6 +19,7 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
     beforeEach(inject(function ($rootScope, $location, $controller) {
         scope = $rootScope.$new();
         location = $location;
+        controller = $controller;
         mockEngine = {
             getErrors: function() {
                 return mockErrors;
@@ -43,6 +45,12 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
             it('should return true', function () {
                 mockErrors.syntactical = {};
                 mockErrors.validity = {};
+                controller('SummarySyntacticalValidityCtrl', {
+                    $scope: scope,
+                    $location: location,
+                    HMDAEngine: mockEngine
+                });
+
                 expect(scope.hasNext()).toBeTruthy();
             });
         });
@@ -51,9 +59,13 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
             it('should return false', function () {
                 mockErrors.syntactical = {error: 'test'};
                 mockErrors.validity = {};
-                // TODO: Need to fix this test.
-                // See http://stackoverflow.com/questions/27954981/how-do-you-update-the-value-returned-by-a-mocked-service-in-angular
-                // expect(scope.hasNext()).toBeFalsy();
+                controller('SummarySyntacticalValidityCtrl', {
+                    $scope: scope,
+                    $location: location,
+                    HMDAEngine: mockEngine
+                });
+
+                expect(scope.hasNext()).toBeFalsy();
             });
         });
 
@@ -61,6 +73,12 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
             it('should return false', function () {
                 mockErrors.syntactical = {};
                 mockErrors.validity = {error: 'test'};
+                controller('SummarySyntacticalValidityCtrl', {
+                    $scope: scope,
+                    $location: location,
+                    HMDAEngine: mockEngine
+                });
+
                 expect(scope.hasNext()).toBeFalsy();
             });
         });
