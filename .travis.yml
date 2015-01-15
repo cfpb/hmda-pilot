@@ -19,7 +19,7 @@ deploy:
     local_dir: dist
     upload-dir: milestone3
     on:
-      branch: milestone3
+      all_branches: true
   - provider: codedeploy
     access_key_id: AKIAIMTOX4BXGVFOB56Q
     secret_access_key:
@@ -29,7 +29,7 @@ deploy:
     application: hmda-pilot
     deployment_group: hmda-pilot-dev
     on:
-      branch: milestone3
+      all_branches: true
   - provider: s3
     access_key_id: AKIAIMTOX4BXGVFOB56Q
     secret_access_key:
