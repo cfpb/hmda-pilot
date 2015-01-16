@@ -2,9 +2,9 @@
 
 /**
  * @ngdoc function
- * @name hmdaPilotApp.controller:AboutCtrl
+ * @name hmdaPilotApp.controller:SubmitCtrl
  * @description
- * # AboutCtrl
+ * # SubmitCtrl
  * Controller of the hmdaPilotApp
  */
 module.exports = function ($scope) {

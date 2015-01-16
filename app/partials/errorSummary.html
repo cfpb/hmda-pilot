@@ -1,0 +1,18 @@
+<table class="summary-table" ng-if="errors">
+    <thead>
+        <tr>
+            <th class="id" scope="col">Edit Identifier</th>
+            <th class="description" scope="col">Error Explanation</th>
+            <th class="count" scope="col">Number of Errors</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="(key, value) in errors">
+            <td class="id"><a ng-href="detailSyntactical/{{key}}">{{key}}</a></td>
+            <td class="description">{{value.explanation}}</td>
+            <td class="count">{{value.errors.length}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<p ng-if="!errors">No errors found.</p>
