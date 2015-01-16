@@ -47,6 +47,7 @@ module.exports = function ($scope, $location, FileReader, RuleEngine, HMDAEngine
 
             // And go the summary page
             $location.path('/summarySyntacticalValidity');
+            $scope.$apply(); // Force the angular to update the $scope since we're technically in a callback func
         });
     };
 };
