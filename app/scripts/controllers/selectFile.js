@@ -23,9 +23,13 @@ module.exports = function ($scope, $location, FileReader, RuleEngine, HMDAEngine
     };
 
     $scope.getFile = function() {
+        // Read the contents of the file and set a value in the scope when its complete
         FileReader.readFile($scope.file, $scope).then(function(result) {
             $scope.hmdaData.file = result;
         });
+
+        // Set the filename so that we can use it when displaying the metadata
+        RuleEngine.setFilename($scope.file.name);
     };
 
     // Process the form submission
