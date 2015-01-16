@@ -1,4 +1,5 @@
 /*global jQuery:true*/
+
 'use strict';
 
 require('angular');
