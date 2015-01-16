@@ -8,7 +8,7 @@
  * Controller for selecting a HMDA file and Reporting Year for verification.
  */
 module.exports = function ($scope, $location, FileReader, RuleEngine, HMDAEngine) {
-    var fiscalYears = RuleEngine.getFiscalYears();
+    var fiscalYears = HMDAEngine.getValidYears();
 
     // Populate the $scope
     $scope.reportingYears = fiscalYears;
@@ -18,7 +18,7 @@ module.exports = function ($scope, $location, FileReader, RuleEngine, HMDAEngine
 
     // Set default values for any form fields
     $scope.hmdaData = {
-        year: fiscalYears[1],
+        year: fiscalYears[fiscalYears.length-2], // 2 because of 0 indexes
         file: ''
     };
 

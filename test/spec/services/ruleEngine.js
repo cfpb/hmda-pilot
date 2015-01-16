@@ -24,15 +24,6 @@ describe('Service: RuleEngine', function () {
         HMDAEngine = _HMDAEngine_;
     }));
 
-    describe('getFiscalYears', function() {
-        it('should return a list of fiscal years sorted in ascending order', function () {
-            var years = service.getFiscalYears();
-            expect(years.length).toBe(2);
-            expect(years[0]).toBe('2014');
-            expect(years[1]).toBe('2013');
-        });
-    });
-
     describe('getFileMetadata', function (){
         describe('when the rule-engine has processed the file', function() {
             beforeEach(function() {

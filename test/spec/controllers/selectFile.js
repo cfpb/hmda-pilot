@@ -35,7 +35,6 @@ describe('Controller: SelectFileCtrl', function () {
         });
 
         it('should default the HMDA filing year to current reporting year - 1', function() {
-            expect(scope.reportingYears[0]).toBe('2014');
             expect(scope.hmdaData.year).toBe('2013');
         });
 
