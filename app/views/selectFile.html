@@ -10,7 +10,7 @@
     <div class="form-group_item">
         <label for="year" class="form-label-header"><span class="form-label-required" role="presentation">*</span> Reporting year</label>
         <select id="year" class="form-input" name="year" ng-model="hmdaData.year" required>
-            <option ng-repeat="year in reportingYears" value="{{year}}" ng-selected="hmdaData.year">{{year}}</option>
+            <option ng-repeat="year in reportingYears" value="{{year}}" ng-selected="{{hmdaData.year === year}}">{{year}}</option>
         </select>
     </div>
 
