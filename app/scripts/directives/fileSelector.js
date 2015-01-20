@@ -7,7 +7,7 @@
  * # File Selector directive
  * Directive for selecting the HMDA Data file
  */
-module.exports = function () {
+module.exports = /*@ngInject*/ function () {
 
     return {
         link: function(scope, element){

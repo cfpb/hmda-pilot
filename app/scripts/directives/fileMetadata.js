@@ -7,7 +7,7 @@
  * # File Metadata directive
  * Directive for displaying metadata relevent to the current HMDA data file
  */
-module.exports = function (RuleEngine) {
+module.exports = /*@ngInject*/ function (RuleEngine) {
 
     return {
         restrict: 'E',

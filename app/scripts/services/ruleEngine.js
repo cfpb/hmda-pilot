@@ -7,7 +7,7 @@
  * # Rule Engine service
  * Service to interface with the HMDA Rule Engine
  */
-module.exports = function (HMDAEngine) {
+module.exports = /*@ngInject*/ function (HMDAEngine) {
 
     var filename;
 
