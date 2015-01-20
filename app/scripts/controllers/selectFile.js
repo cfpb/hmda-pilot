@@ -38,6 +38,7 @@ module.exports = /*@ngInject*/ function ($scope, $location, FileReader, RuleEngi
         HMDAEngine.fileToJson(hmdaData.file, hmdaData.year, function(err) {
             if (err) {
                 $scope.errors.global = err;
+                $scope.$apply();
                 return;
             }
 
