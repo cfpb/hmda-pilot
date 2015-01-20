@@ -7,7 +7,7 @@
  * # SummarySyntacticalValidityCtrl
  * Controller for the Syntactical and Validity Summary view
  */
-module.exports = function ($scope, $location, HMDAEngine) {
+module.exports = /*@ngInject*/ function ($scope, $location, HMDAEngine) {
 
     // Get the list of errors from the HMDAEngine
     var editErrors = HMDAEngine.getErrors();

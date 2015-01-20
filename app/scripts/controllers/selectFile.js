@@ -7,7 +7,7 @@
  * # Select File
  * Controller for selecting a HMDA file and Reporting Year for verification.
  */
-module.exports = function ($scope, $location, FileReader, RuleEngine, HMDAEngine) {
+module.exports = /*@ngInject*/ function ($scope, $location, FileReader, RuleEngine, HMDAEngine) {
     var fiscalYears = HMDAEngine.getValidYears();
 
     // Populate the $scope

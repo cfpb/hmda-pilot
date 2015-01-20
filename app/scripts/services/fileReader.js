@@ -7,7 +7,7 @@
  * # File Reader service
  * Factory for reading a file using the File API
  */
-module.exports = function ($q) {
+module.exports = /*@ngInject*/ function ($q) {
 
     var onLoad = function(reader, deferred, scope) {
         return function () {

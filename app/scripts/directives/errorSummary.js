@@ -7,7 +7,7 @@
  * # Error Summary directive
  * Directive for displaying a summary of edit errors
  */
-module.exports = function () {
+module.exports = /*@ngInject*/ function () {
 
     return {
         restrict: 'E',
