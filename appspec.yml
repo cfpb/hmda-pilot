@@ -1,0 +1,8 @@
+version: 0.0
+os: linux
+files:
+  - source: dist/hmda-pilot.zip
+    destination: /usr/local/angularfiles
+hooks:
+  AfterInstall:
+    - location: scripts/angulardeploy.bash

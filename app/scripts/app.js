@@ -8,6 +8,7 @@ require('angular-resource');
 require('angular-route');
 require('angular-sanitize');
 require('angular-touch');
+require('./modules/HMDAEngine');
 
 /**
  * @ngdoc overview
@@ -25,7 +26,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'HMDAEngine'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -33,9 +35,21 @@ angular
         templateUrl: 'views/selectFile.html',
         controller: 'SelectFileCtrl'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
+      .when('/summarySyntacticalValidity', {
+        templateUrl: 'views/summarySyntacticalValidity.html',
+        controller: 'SummarySyntacticalValidityCtrl'
+      })
+      .when('/summaryQualityMacro', {
+        templateUrl: 'views/summaryQualityMacro.html',
+        controller: 'SummaryQualityMacroCtrl'
+      })
+      .when('/summaryMSA-IRS', {
+        templateUrl: 'views/summaryMSA-IRS.html',
+        controller: 'SummaryMSAIRSCtrl'
+      })
+      .when('/submit', {
+        templateUrl: 'views/submit.html',
+        controller: 'SubmitCtrl'
       })
       .otherwise({
         redirectTo: '/'
@@ -43,4 +57,5 @@ angular
   });
 
 require('./services');
+require('./directives');
 require('./controllers');

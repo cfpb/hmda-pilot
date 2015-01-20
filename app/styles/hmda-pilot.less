@@ -23,22 +23,52 @@
     .grid_wrapper();
 }
 
+body {
+    .webfont-regular;
+}
 footer {
     margin-top: 2em;
 }
 
 
 // Forms
-.form-label-col {
-    .grid_column(2, 12);
+.form-well {
+    background-color: @gray-5;
+    padding: 1.5em;
 }
 
-.form-data-col {
-    .grid_column(8, 12);
+.form-group-horizontal {
+    .form-group_item {
+        .grid_column(6, 12);
+        margin-top: 0;
+        border: 0;
+    }
+
+    .form-label-header {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form-buttons {
+        .grid_column(8, 12);
+        margin-top: 1.5em;
+        border: 0;
+    }
 }
 
-.form-buttons {
-    .grid_column(8, 12, 2);
+.page-errors {
+    .webfont-demi;
+    color: @redorange;
+}
+
+.form-group-veritcal {
+    .form-label-col {
+        .grid_column(2, 12);
+    }
+
+    .form-data-col {
+        .grid_column(8, 12);
+    }
 }
 
 .note-required {
@@ -51,6 +81,39 @@ footer {
     vertical-align: super;
 }
 
+// File Metadata
+.file-metadata {
+    padding: 2em 0;
+
+    dt, dd {
+        display: inline;
+    }
+    dt:after {
+        content: ":";
+    }
+    dd {
+        .webfont-demi;
+        margin: 0 2em 0 0;
+    }
+}
+
+// Summary tables
+table.summary-table {
+    width: 100%;
+
+    td.id {
+        width: 13%;
+    }
+    td.count {
+        width: 17%;
+    }
+    tbody {
+        td.count {
+            .webfont-demi;
+            color: @redorange;
+        }
+    }
+}
 
 // Utility classes
 .visually-hidden {

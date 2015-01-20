@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name hmdaPilotApp.controller:AboutCtrl
+ * @name hmdaPilotApp.controller:SummaryMSAIRSCtrl
  * @description
- * # AboutCtrl
+ * # SummaryMSAIRSCtrl
  * Controller of the hmdaPilotApp
  */
-module.exports = function ($scope) {
+module.exports = /*@ngInject*/ function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',

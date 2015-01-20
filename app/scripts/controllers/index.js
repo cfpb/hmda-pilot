@@ -3,8 +3,17 @@
 require('angular');
 var app = angular.module('hmdaPilotApp');
 
-var AboutCtrl = require('./about');
 var SelectFileCtrl = require('./selectFile');
-
-app.controller('AboutCtrl', AboutCtrl);
 app.controller('SelectFileCtrl', SelectFileCtrl);
+
+var SummarySyntacticalValidityCtrl = require('./summarySyntacticalValidity');
+app.controller('SummarySyntacticalValidityCtrl', SummarySyntacticalValidityCtrl);
+
+var SummaryQualityMacroCtrlCtrl = require('./summaryQualityMacro');
+app.controller('SummaryQualityMacroCtrl', SummaryQualityMacroCtrlCtrl);
+
+var SummaryMSAIRSCtrl = require('./summaryMSA-IRS');
+app.controller('SummaryMSAIRSCtrl', SummaryMSAIRSCtrl);
+
+var SubmitCtrl = require('./submit');
+app.controller('SubmitCtrl', SubmitCtrl);

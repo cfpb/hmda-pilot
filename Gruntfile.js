@@ -160,15 +160,15 @@ module.exports = function (grunt) {
     // All of the cf-framework LESS files have been added to styles.css.
     less: {
       options: {
-        paths: ['app/styles'],
+        paths: ['<%= yeoman.app %>/styles'],
         compress: false,
         sourceMap: true,
-        sourceMapFilename: 'dist/css/<%= pkg.name %>_sourcemap.css.map',
+        sourceMapFilename: '<%= yeoman.dist %>/css/<%= pkg.name %>_sourcemap.css.map',
         sourceMapURL: '/static/css/<%= pkg.name %>_sourcemap.css.map'
       },
       server: {
         files: {
-          '.tmp/styles/<%= pkg.name %>.css': ['app/styles/<%= pkg.name %>.less']
+          '.tmp/styles/<%= pkg.name %>.css': ['<%= yeoman.app %>/styles/<%= pkg.name %>.less']
         }
       },
       dist: {
@@ -177,7 +177,7 @@ module.exports = function (grunt) {
           sourceMap: false
         },
         files: {
-          'dist/css/<%= pkg.name %>.css': ['app/styles/<%= pkg.name %>.less']
+          '<%= yeoman.dist %>/styles/<%= pkg.name %>.css': ['<%= yeoman.app %>/styles/<%= pkg.name %>.less']
         }
       }
     },
@@ -189,7 +189,7 @@ module.exports = function (grunt) {
           '<%= yeoman.dist %>/scripts/{,*/}*.js',
           '<%= yeoman.dist %>/styles/{,*/}*.css',
           '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-          '<%= yeoman.dist %>/styles/fonts/*'
+          '<%= yeoman.dist %>/fonts/*'
         ]
       }
     },
@@ -282,7 +282,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.dist %>',
-          src: ['*.html', 'views/{,*/}*.html'],
+          src: ['*.html', 'views/{,*/}*.html', 'partials/{,*/}*.html'],
           dest: '<%= yeoman.dist %>'
         }]
       }
@@ -301,6 +301,7 @@ module.exports = function (grunt) {
             '.htaccess',
             '*.html',
             'views/{,*/}*.html',
+            'partials/{,*/}*.html',
             'images/{,*/}*.{webp}',
             'fonts/{,*/}*.*'
           ]
@@ -309,6 +310,11 @@ module.exports = function (grunt) {
           cwd: '.tmp/images',
           dest: '<%= yeoman.dist %>/images',
           src: ['generated/*']
+        }, {
+          expand: true,
+          cwd: '<%= yeoman.modules %>/cf-icons/src/fonts',
+          dest: '<%= yeoman.dist %>/fonts',
+          src: '{,*/}*.{eot,svg,ttf,woff}'
         }]
       },
       styles: {
@@ -364,9 +370,63 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
+    },
+
+    compress: {
+      'hmda-pilot': {
+        options: {
+          archive: './dist/hmda-pilot.zip',
+          mode: 'zip',  //zip | gzip | deflate | tgz
+          pretty: true
+        },
+        files: [
+          {
+            expand: true,
+            dot: true,
+            cwd: './dist',
+
+            //zip dist directory
+            src: ['**', '!hmda-pilot.zip']
+          }
+        ]
+      },
+      'codedeploy': {
+        options: {
+          archive: './dist/hmda-pilot-codedeploy.zip',
+          mode: 'zip',  //zip | gzip | deflate | tgz
+          pretty: true
+        },
+        files: [
+          {
+            expand: true,
+            dot: true,
+            cwd: './',
+
+            //zip dist directory
+            src: ['dist/hmda-pilot.zip', 'scripts/*', 'appspec.yml']
+          }
+        ]
+      }
+    },
+
+    ngAnnotate: {
+      options: {
+        singleQuotes: true
+      },
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>/bundle',
+          src: '{,*/}*.js',
+          dest: '<%= yeoman.app %>/bundle'
+        }]
+      }
+
     }
   });
 
+  grunt.loadNpmTasks('grunt-contrib-compress');
+  grunt.loadNpmTasks('grunt-ng-annotate');
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
@@ -401,6 +461,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'browserify:dist',
+    'ngAnnotate:dist',
     'less:dist',
     'useminPrepare',
     'concurrent:dist',
@@ -411,6 +472,14 @@ module.exports = function (grunt) {
     'filerev',
     'usemin',
     'htmlmin'
+  ]);
+
+  grunt.registerTask('zip', [
+    'compress:hmda-pilot'
+  ]);
+
+  grunt.registerTask('codedeploy', [
+    'compress:codedeploy'
   ]);
 
   grunt.registerTask('default', [

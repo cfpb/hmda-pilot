@@ -18,9 +18,16 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'node_modules/jquery/dist/jquery.js',
       'app/bundle/bundle.js',
       //'test/mock/**/*.js',
-      'test/spec/**/*.js'
+      'test/spec/**/*.js',
+      {
+        pattern: 'app/partials/**/*.html',
+        watched: true,
+        included: false,
+        served: true
+      }
     ],
 
     // list of files / patterns to exclude
@@ -45,7 +52,8 @@ module.exports = function(config) {
     plugins: [
       'karma-browserify',
       'karma-phantomjs-launcher',
-      'karma-jasmine'
+      'karma-jasmine',
+      'karma-coverage'
     ],
 
     // Continuous Integration mode
@@ -68,9 +76,22 @@ module.exports = function(config) {
     // Browserify config
     browserify: {
       watch: true,
+      transform: ['browserify-istanbul']
     },
 
-    // Add browserify to preprocessors
-    preprocessors: {'test/**/*.js': ['browserify']}
+    // Reporters
+    reporters: ['progress', 'coverage'],
+
+    // Coverage reporter configuration
+    coverageReporter : {
+      type: 'html',
+      dir: 'coverage/'
+    },
+
+    // Preproccessors
+    preprocessors: {
+      'app/scripts/**/*.js': 'coverage',
+      'test/**/*.js': ['browserify']
+    }
   });
 };
