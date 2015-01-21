@@ -7,3 +7,4 @@ var app = angular.module('hmdaPilotApp');
 app.directive('ngFileSelect', require('./fileSelector'));
 app.directive('errorSummary', require('./errorSummary'));
 app.directive('fileMetadata', require('./fileMetadata'));
+app.directive('wizardNav',    require('./wizardNav'));
