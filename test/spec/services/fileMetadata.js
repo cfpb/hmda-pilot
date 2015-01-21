@@ -24,12 +24,12 @@ describe('Service: FileMetadata', function () {
         HMDAEngine = _HMDAEngine_;
     }));
 
-    describe('getFileMetadata', function (){
+    describe('refresh()', function (){
         describe('when the rule-engine has processed the file', function() {
             beforeEach(function() {
                 HMDAEngine.setHmdaJson(mockHmdaFile);
                 service.setFilename('test.dat');
-                service.refreshFileMetadata();
+                service.refresh();
             });
 
             it('should return a metadata object', function (){
@@ -44,13 +44,22 @@ describe('Service: FileMetadata', function () {
         describe('when the rule-engine has not processed the file', function() {
             beforeEach(function() {
                 HMDAEngine.setHmdaJson({});
-                service.refreshFileMetadata();
             });
 
             it('should return an empty object', function (){
-                var metadata = service.fileMetadata;
-                expect(metadata).toEqual({});
+                expect(service.refresh()).toEqual({});
             });
+        });
+    });
+
+    describe('clear()', function() {
+        beforeEach(function() {
+            HMDAEngine.setHmdaJson(mockHmdaFile);
+            service.setFilename('test.dat');
+        });
+
+        it('should return an empty object', function (){
+            expect(service.clear()).toEqual({});
         });
     });
 });

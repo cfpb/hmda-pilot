@@ -13,6 +13,7 @@ module.exports = /*@ngInject*/ function (HMDAEngine) {
 
     /**
      * Relevent metadata associated with the HMDA Data file
+     *
      * @type {Object}
      */
     this.fileMetadata = fileMetadata;
@@ -27,12 +28,22 @@ module.exports = /*@ngInject*/ function (HMDAEngine) {
     };
 
     /**
+     * Reset the current file metadata
+     *
+     * @return {Object} file metadata
+     */
+    this.clear = function() {
+        fileMetadata = {};
+        return fileMetadata;
+    };
+
+    /**
      * Refresh the relevent metadata associated with the HMDA data file
      * Note: Most of the metadata is pulled in directly from the HMDA Rule Engine
      *
      * @return {Object} file metadata
      */
-    this.refreshFileMetadata = function() {
+    this.refresh = function() {
         var hmdaFileObj;
 
         hmdaFileObj = HMDAEngine.getHmdaJson();
