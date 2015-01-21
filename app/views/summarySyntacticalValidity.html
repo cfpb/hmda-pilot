@@ -4,5 +4,5 @@
 <h2>Validity Edit Report</h2>
 <error-summary errors="validityErrors"></error-summary>
 
-<button class="btn" ng-click="next()" ng-if="hasNext()">Continue</button>
 <button class="btn btn__secondary" ng-click="previous()">Back</button>
+<button class="btn" ng-click="next()" ng-disabled="!hasNext()" ng-class="{btn__disabled: !hasNext()}">Continue</button>
