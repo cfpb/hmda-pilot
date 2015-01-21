@@ -8,6 +8,7 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
     var scope,
         location,
         controller,
+        Wizard,
         mockEngine,
         mockErrors = {
             syntactical: {},
@@ -16,19 +17,22 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function ($rootScope, $location, $controller) {
+    beforeEach(inject(function ($rootScope, $location, $controller, _Wizard_) {
         scope = $rootScope.$new();
         location = $location;
         controller = $controller;
+        Wizard = _Wizard_;
         mockEngine = {
             getErrors: function() {
                 return mockErrors;
             }
         };
+        Wizard.initSteps();
         $controller('SummarySyntacticalValidityCtrl', {
             $scope: scope,
             $location: location,
-            HMDAEngine: mockEngine
+            HMDAEngine: mockEngine,
+            Wizard: _Wizard_
         });
     }));
 
@@ -85,9 +89,18 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
     });
 
     describe('next()', function() {
-        it('should direct the user to the /summaryQualityMacro page', function () {
+        beforeEach(function() {
             scope.next();
             scope.$digest();
+        });
+
+        it('should mark the current step in the wizard as complete', function () {
+            var steps = Wizard.getSteps();
+            expect(steps[0].isActive).toBeFalsy();
+            expect(steps[0].status).toBe('complete');
+        });
+
+        it('should direct the user to the /summaryQualityMacro page', function () {
             expect(location.path()).toBe('/summaryQualityMacro');
         });
     });

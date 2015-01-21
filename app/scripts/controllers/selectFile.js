@@ -49,6 +49,9 @@ module.exports = /*@ngInject*/ function ($scope, $location, FileReader, FileMeta
             // Refresh the file metadata
             FileMetadata.refreshFileMetadata();
 
+            // Complete the current step in the wizard
+            $scope.wizardSteps = Wizard.completeStep();
+
             // And go the summary page
             $location.path('/summarySyntacticalValidity');
             $scope.$apply(); // Force the angular to update the $scope since we're technically in a callback func

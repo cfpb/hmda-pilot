@@ -1,19 +1,34 @@
 'use strict';
 
-var SubmitCtrl = require('../../../app/scripts/controllers/submit');
+require('angular');
+require('angular-mocks');
 
 describe('Controller: SubmitCtrl', function () {
 
-    var ctrl,
-        scope;
+    var scope,
+        location;
 
-    // Initialize the controller and a mock scope
-    beforeEach(function () {
-        scope = {};
-        ctrl = new SubmitCtrl(scope);
+    beforeEach(angular.mock.module('hmdaPilotApp'));
+
+    beforeEach(inject(function ($rootScope, $location, $controller) {
+        scope = $rootScope.$new();
+        location = $location;
+
+        $controller('SubmitCtrl', {
+            $scope: scope,
+            $location: location
+        });
+    }));
+
+    describe('previous()', function() {
+        // TODO: Stubbing out for now
     });
 
-    it('should attach a list of awesomeThings to the scope', function () {
-        expect(scope.awesomeThings.length).toBe(3);
+    describe('canSubmit()', function() {
+        // TODO: Stubbing out for now
+    });
+
+    describe('submit()', function() {
+        // TODO: Stubbing out for now
     });
 });
