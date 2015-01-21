@@ -4,7 +4,5 @@ require('angular');
 
 var app = angular.module('hmdaPilotApp');
 
-var RuleEngine = require('./ruleEngine');
-
-app.service('RuleEngine', RuleEngine);
+app.service('FileMetadata', require('./fileMetadata'));
 app.factory('FileReader', require('./fileReader'));

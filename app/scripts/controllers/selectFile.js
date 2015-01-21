@@ -7,7 +7,7 @@
  * # Select File
  * Controller for selecting a HMDA file and Reporting Year for verification.
  */
-module.exports = /*@ngInject*/ function ($scope, $location, FileReader, RuleEngine, HMDAEngine) {
+module.exports = /*@ngInject*/ function ($scope, $location, FileReader, FileMetadata, HMDAEngine) {
     var fiscalYears = HMDAEngine.getValidYears();
 
     // Populate the $scope
@@ -29,7 +29,7 @@ module.exports = /*@ngInject*/ function ($scope, $location, FileReader, RuleEngi
         });
 
         // Set the filename so that we can use it when displaying the metadata
-        RuleEngine.setFilename($scope.file.name);
+        FileMetadata.setFilename($scope.file.name);
     };
 
     // Process the form submission
@@ -45,6 +45,9 @@ module.exports = /*@ngInject*/ function ($scope, $location, FileReader, RuleEngi
             // Run the first set of validations
             HMDAEngine.runSyntactical(hmdaData.year);
             HMDAEngine.runValidity(hmdaData.year);
+
+            // Refresh the file metadata
+            FileMetadata.refreshFileMetadata();
 
             // And go the summary page
             $location.path('/summarySyntacticalValidity');
