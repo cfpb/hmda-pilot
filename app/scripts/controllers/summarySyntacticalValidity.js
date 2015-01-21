@@ -22,4 +22,8 @@ module.exports = /*@ngInject*/ function ($scope, $location, HMDAEngine) {
     $scope.next = function() {
         $location.path('/summaryQualityMacro');
     };
+
+    $scope.previous = function() {
+        $location.path('/');
+    };
 };
