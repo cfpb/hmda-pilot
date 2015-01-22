@@ -1,19 +1,34 @@
 'use strict';
 
-var SummaryQualityMacroCtrl = require('../../../app/scripts/controllers/summaryQualityMacro');
+require('angular');
+require('angular-mocks');
 
 describe('Controller: SummaryQualityMacroCtrl', function () {
 
-    var ctrl,
-        scope;
+    var scope,
+        location;
 
-    // Initialize the controller and a mock scope
-    beforeEach(function () {
-        scope = {};
-        ctrl = new SummaryQualityMacroCtrl(scope);
+    beforeEach(angular.mock.module('hmdaPilotApp'));
+
+    beforeEach(inject(function ($rootScope, $location, $controller) {
+        scope = $rootScope.$new();
+        location = $location;
+
+        $controller('SummaryQualityMacroCtrl', {
+            $scope: scope,
+            $location: location
+        });
+    }));
+
+    describe('previous()', function() {
+        // TODO: Stubbing out for now
     });
 
-    it('should attach a list of awesomeThings to the scope', function () {
-        expect(scope.awesomeThings.length).toBe(3);
+    describe('hasNext()', function() {
+        // TODO: Stubbing out for now
+    });
+
+    describe('next()', function() {
+        // TODO: Stubbing out for now
     });
 });

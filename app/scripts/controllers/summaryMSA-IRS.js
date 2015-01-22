@@ -7,10 +7,22 @@
  * # SummaryMSAIRSCtrl
  * Controller of the hmdaPilotApp
  */
-module.exports = /*@ngInject*/ function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+module.exports = /*@ngInject*/ function ($scope, $location, Wizard) {
+
+    $scope.previous = function () {
+        $location.path('/summaryQualityMacro');
+    };
+
+    $scope.hasNext = function() {
+        // TODO: Determine what is required to pass in order for the user to go to the next page
+        return true;
+    };
+
+    $scope.next = function() {
+        // Complete the current step
+        $scope.wizardSteps = Wizard.completeStep();
+
+        // Go to the next page
+        $location.path('/submit');
+    };
 };
