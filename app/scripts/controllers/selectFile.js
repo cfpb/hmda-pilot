@@ -12,6 +12,7 @@ module.exports = /*@ngInject*/ function ($scope, $location, FileReader, FileMeta
 
     // Set/Reset the state of different objects on load
     HMDAEngine.clearHmdaJson();
+    HMDAEngine.clearErrors();
     $scope.wizardSteps = Wizard.initSteps();
     $scope.metadata = FileMetadata.clear();
 
