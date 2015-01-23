@@ -12,11 +12,13 @@ module.exports = /*@ngInject*/ function (HMDAEngine) {
     var fileMetadata = {};
 
     /**
-     * Relevent metadata associated with the HMDA Data file
+     * Get the metadata associated with the HMDA Data file
      *
      * @type {Object}
      */
-    this.fileMetadata = fileMetadata;
+    this.get = function() {
+        return fileMetadata;
+    };
 
     /**
      * Store the HMDA Data file's filename for the metadata

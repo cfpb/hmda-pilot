@@ -33,7 +33,7 @@ describe('Service: FileMetadata', function () {
             });
 
             it('should return a metadata object', function (){
-                var metadata = service.fileMetadata;
+                var metadata = service.get();
                 expect(metadata.filename).toBe('test.dat');
                 expect(metadata.activityYear).toBe('2015');
                 expect(metadata.respondentID).toBe('1234567890');

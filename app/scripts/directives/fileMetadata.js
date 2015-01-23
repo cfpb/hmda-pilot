@@ -19,13 +19,13 @@ module.exports = /*@ngInject*/ function () {
 
             // Refresh the fileMetadata if it changes (usually only once on page load)
             $scope.$watch(function() {
-                return FileMetadata.fileMetadata;
+                return FileMetadata.get();
             }, function() {
-                angular.copy(FileMetadata.fileMetadata, $scope.metadata);
+                angular.copy(FileMetadata.get(), $scope.metadata);
 
                 // Check to see if some of the data from the parsed file is available since
                 // this information may not be immediately available like the filename
-                if (FileMetadata.fileMetadata.activityYear) {
+                if (FileMetadata.get().activityYear) {
                     $scope.showMetadata = true;
                 }
             }, true);
