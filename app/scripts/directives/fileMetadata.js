@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc directive
- * @name hmdaPilotApp.direcive:FileMetadata
+ * @name hmdaPilotApp.directive:FileMetadata
  * @description
  * # File Metadata directive
  * Directive for displaying metadata relevent to the current HMDA data file
