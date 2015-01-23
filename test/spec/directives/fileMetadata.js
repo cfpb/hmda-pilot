@@ -18,7 +18,7 @@ describe('Directive: FileMetadata', function () {
             totalLineEntries: '42'
         },
         mockFileMetadataService = {
-            fileMetadata: mockMetadata
+            get: function() { return mockMetadata; }
         };
 
     beforeEach(function () {

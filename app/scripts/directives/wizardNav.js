@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc directive
- * @name hmdaPilotApp.direcive:WizardNav
+ * @name hmdaPilotApp.directive:WizardNav
  * @description
  * # Wizard Nav directive
  * Directive for displaying the wizard navigation.
