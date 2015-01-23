@@ -12,7 +12,7 @@ module.exports = /*@ngInject*/ function () {
     return {
         restrict: 'E',
         templateUrl: 'partials/fileMetadata.html',
-        controller: function($scope, FileMetadata) {
+        controller: /*@ngInject*/ function ($scope, FileMetadata) {
             // Initialize $scope variables
             $scope.metadata = {};
             $scope.showMetadata = false;
