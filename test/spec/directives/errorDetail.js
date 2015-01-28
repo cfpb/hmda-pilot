@@ -9,6 +9,10 @@ describe('Directive: ErrorDetail', function () {
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
+    beforeEach(angular.mock.module(function($provide){
+        $provide.value('hmdaLabelFilter', function(input, scope){ return input + ' label'; });
+    }));
+
     var element,
         scope,
         mockErrors = {"S270": {"scope": "ts", "explanation": "Century and/or year for action taken date does not match activity century/year.", "description": "Century (CC) and Year (YY) of action taken date must = activity century/year (CCYY) for period being processed.", "errors": [{"lineNumber": "1", "properties": {"actionDate": "2013", "transmittalSheet.activityYear": "2012"} },{"lineNumber": "1", "properties": {"actionDate": "2013", "transmittalSheet.activityYear": "2012"} }], "action": "Correct Entry and Resubmit"}, //jshint ignore:line

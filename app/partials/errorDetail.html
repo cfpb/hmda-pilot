@@ -11,7 +11,7 @@
     <tbody ng-repeat="item in error.errors">
         <tr ng-repeat="(key, value) in item.properties">
             <th class="id" scope="row" rowspan="{{item.properties | keyLength}}" ng-if="$first">{{item.loanNumber || item.lineNumber}}</th>
-            <td class="description">{{key}}</td>
+            <td class="description">{{key | hmdaLabel:error.scope}}</td>
             <td class="value">{{value}}</td>
             <td class="action" rowspan="{{item.properties | keyLength}}" ng-if="$first">Correct Entry and Resubmit</td>
         </tr>
