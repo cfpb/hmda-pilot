@@ -1,0 +1,20 @@
+<table class="detail-table" ng-if="error">
+    <thead>
+        <tr>
+            <th class="id" scope="col">Loan/Application Number</th>
+            <th class="description" scope="col">Field</th>
+            <th class="value" scope="col">Submitted Value</th>
+            <th class="action" scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody ng-repeat="item in error.errors">
+        <tr ng-repeat="(key, value) in item.properties">
+            <td class="id" rowspan="{{item.properties | keyLength}}" ng-if="$first">{{item.loanNumber || item.lineNumber}}</td>
+            <td class="description">{{key}}</td>
+            <td class="value">{{value}}</td>
+            <td class="action" rowspan="{{item.properties | keyLength}}" ng-if="$first">Correct Entry and Resubmit</td>
+        </tr>
+    </tbody>
+</table>
+
+<p ng-if="!error">No errors found.</p>
