@@ -8,6 +8,7 @@ require('angular-resource');
 require('angular-route');
 require('angular-sanitize');
 require('angular-touch');
+require('./modules/config');
 require('./modules/HMDAEngine');
 
 /**
@@ -27,6 +28,7 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
+    'services.config',
     'HMDAEngine'
   ])
   .config(function ($routeProvider) {
@@ -54,6 +56,10 @@ angular
       .otherwise({
         redirectTo: '/'
       });
+  })
+  .run(function (Configuration, HMDAEngine) {
+    // Set the location of the HMDA Engine API
+    HMDAEngine.setAPIURL(Configuration.apiUrl);
   });
 
 require('./services');
