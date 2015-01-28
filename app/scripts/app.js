@@ -10,6 +10,7 @@ require('angular-sanitize');
 require('angular-touch');
 require('./modules/config');
 require('./modules/HMDAEngine');
+require('./modules/hmdaFilters');
 
 /**
  * @ngdoc overview
@@ -30,6 +31,7 @@ angular
     'ngTouch',
     'services.config',
     'HMDAEngine'
+    'hmdaFilters'
   ])
   .config(function ($routeProvider) {
     $routeProvider
