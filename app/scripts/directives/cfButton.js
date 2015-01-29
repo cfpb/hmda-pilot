@@ -109,6 +109,6 @@ module.exports = /*@ngInject*/ function () {
             iconPosition: '='
         },
         link: link,
-        controller: controller
+        controller: /*@ngInject*/ controller
     };
 };
