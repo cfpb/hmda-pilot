@@ -138,7 +138,8 @@ module.exports = function (grunt) {
           ]
         }]
       },
-      server: '.tmp'
+      server: '.tmp',
+      coverage: ['coverage/*']
     },
 
     // Add vendor prefixed styles
@@ -479,6 +480,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('test', [
+    'clean:coverage',
     'clean:server',
     'concurrent:test',
     'autoprefixer',
