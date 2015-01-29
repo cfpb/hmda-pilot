@@ -56,7 +56,7 @@ angular
         controller: 'SubmitCtrl'
       })
       .when('/detail/:EditType/:EditId', {
-        templateUrl: 'views/ErrorDetail.html',
+        templateUrl: 'views/errorDetail.html',
         controller: 'ErrorDetailCtrl'
       })
       .otherwise({
