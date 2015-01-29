@@ -473,6 +473,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
+      'jshint',
       'browserify:dev',
       'less:server',
       'concurrent:server',
@@ -491,6 +492,7 @@ module.exports = function (grunt) {
   grunt.registerTask('test', [
     'clean:coverage',
     'clean:server',
+    'jshint:test',
     'concurrent:test',
     'autoprefixer',
     'connect:test',

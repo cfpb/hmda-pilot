@@ -14,9 +14,7 @@ describe('Filters: hmdaFilters', function() {
     });
 
     describe('hmdaLabel', function() {
-        var FileMetadata,
-            HMDAEngine,
-            mockHmdaFile = {
+        var mockHmdaFile = {
                 hmdaFile: {
                     transmittalSheet: {
                         activityYear: '2015',
@@ -51,8 +49,8 @@ describe('Filters: hmdaFilters', function() {
         beforeEach(angular.mock.module(function($provide) {
             $provide.value('FileMetadata', mockFileMetadataService);
             $provide.value('HMDAEngine', {
-                getFileSpec: function(year) { return mockFileSpec; },
-                getHmdaJson: function() { return mockHmdaFile }
+                getFileSpec: function() { return mockFileSpec; },
+                getHmdaJson: function() { return mockHmdaFile; }
             });
         }));
 

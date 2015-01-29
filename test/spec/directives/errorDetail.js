@@ -10,7 +10,7 @@ describe('Directive: ErrorDetail', function () {
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
     beforeEach(angular.mock.module(function($provide){
-        $provide.value('hmdaLabelFilter', function(input, scope){ return input + ' label'; });
+        $provide.value('hmdaLabelFilter', function(input){ return input + ' label'; });
     }));
 
     var element,
@@ -36,7 +36,7 @@ describe('Directive: ErrorDetail', function () {
 
         beforeEach(inject(function ($rootScope, $compile) {
             scope = $rootScope.$new();
-            scope.errorId = "S270";
+            scope.errorId = 'S270';
             scope.error = mockErrors[scope.errorId];
             element = angular.element('<error-detail error="error"></error-detail>');
             element = $compile(element)(scope);
@@ -52,7 +52,7 @@ describe('Directive: ErrorDetail', function () {
         describe('table', function() {
             it('should display column headers including Loan/Application Number when scope is \'lar\'', inject(function ($rootScope, $compile) {
                 scope = $rootScope.$new();
-                scope.errorId = "S271";
+                scope.errorId = 'S271';
                 scope.error = mockErrors[scope.errorId];
                 element = angular.element('<error-detail error="error"></error-detail>');
                 element = $compile(element)(scope);
