@@ -15,6 +15,15 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  grunt.registerTask('open_coverage', 'open coverage report in default browser', function() {
+    var exec = require('child_process').exec;
+    var cb = this.async();
+    exec('open coverage/html-report/index.html', {cwd: './'}, function(err, stdout) {
+      console.log(stdout);
+      cb();
+    });
+  });
+
   // Configurable paths for the application
   var appConfig = {
     app: 'app',
@@ -138,7 +147,8 @@ module.exports = function (grunt) {
           ]
         }]
       },
-      server: '.tmp'
+      server: '.tmp',
+      coverage: ['coverage/*']
     },
 
     // Add vendor prefixed styles
@@ -479,11 +489,17 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('test', [
+    'clean:coverage',
     'clean:server',
     'concurrent:test',
     'autoprefixer',
     'connect:test',
     'karma'
+  ]);
+
+  grunt.registerTask('coverage', [
+    'test',
+    'open_coverage'
   ]);
 
   grunt.registerTask('build', function (env) {
