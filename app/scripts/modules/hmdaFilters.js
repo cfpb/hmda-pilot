@@ -20,4 +20,9 @@ angular.module('hmdaFilters', [])
         return function (input) {
             return input.charAt(0).toUpperCase() + input.slice(1);
         };
+    })
+    .filter('paginate', function() {
+        return function(input, start, end) {
+            return input.slice(start-1, end);
+        };
     });

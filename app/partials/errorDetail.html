@@ -12,7 +12,7 @@
             <th class="action" scope="col">Action</th>
         </tr>
     </thead>
-    <tbody ng-repeat="item in error.errors">
+    <tbody ng-repeat="item in error.errors | paginate:start():end()">
         <tr ng-repeat="(key, value) in item.properties">
             <th class="id" scope="row" rowspan="{{item.properties | keyLength}}" ng-if="$first">{{item.loanNumber || item.lineNumber}}</th>
             <td class="description">{{key | hmdaLabel:error.scope}}</td>
