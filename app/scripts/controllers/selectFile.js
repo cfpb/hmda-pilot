@@ -54,22 +54,31 @@ module.exports = /*@ngInject*/ function ($scope, $location, $timeout, FileReader
                 return;
             }
 
-            // Run the first set of validations
-            HMDAEngine.runSyntactical(hmdaData.year);
-            HMDAEngine.runValidity(hmdaData.year);
+            try {
+                // Run the first set of validations
+                HMDAEngine.runSyntactical(hmdaData.year);
+                HMDAEngine.runValidity(hmdaData.year);
 
-            // Refresh the file metadata
-            FileMetadata.refresh();
+                // Refresh the file metadata
+                FileMetadata.refresh();
 
-            // Complete the current step in the wizard
-            $scope.wizardSteps = Wizard.completeStep();
+                // Complete the current step in the wizard
+                $scope.wizardSteps = Wizard.completeStep();
+
+                // And go the summary page
+                $location.path('/summarySyntacticalValidity');
+                $scope.$apply(); // Force the angular to update the $scope since we're technically in a callback func
+            } catch (err) {
+                console.log(err);
+                if (err.name === 'NetworkError') {
+                    $scope.errors.global = 'There was a problem connecting to the HMDA server. Please check your connection or try again later.';
+                } else {
+                    $scope.errors.global = 'There was a problem validating the HMDA File. Please check your file and try again.';
+                }
+            }
 
             // Toggle processing flag off
             $scope.isProcessing = false;
-
-            // And go the summary page
-            $location.path('/summarySyntacticalValidity');
-            $scope.$apply(); // Force the angular to update the $scope since we're technically in a callback func
         });
     };
 };
