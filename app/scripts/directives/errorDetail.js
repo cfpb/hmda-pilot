@@ -16,7 +16,7 @@ module.exports = /*@ngInject*/ function () {
             error: '='
         },
         link: function(scope) {
-            scope.pageSize = scope.pageSize || 1;
+            scope.pageSize = scope.pageSize || 10;
             scope.currentPage = scope.currentPage || 1;
 
             if (angular.equals({}, scope.error)) {
