@@ -1,0 +1,21 @@
+<table class="detail-table" ng-if="error">
+    <thead>
+        <tr>
+            <th class="id" scope="col" ng-if="error.scope === 'lar'">Loan/Application Number</th>
+            <th class="id" scope="col" ng-if="error.scope !== 'lar'">Line Number</th>
+            <th class="description" scope="col">Field</th>
+            <th class="value" scope="col">Submitted Value</th>
+            <th class="action" scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody ng-repeat="item in error.errors">
+        <tr ng-repeat="(key, value) in item.properties">
+            <th class="id" scope="row" rowspan="{{item.properties | keyLength}}" ng-if="$first">{{item.loanNumber || item.lineNumber}}</th>
+            <td class="description">{{key | hmdaLabel:error.scope}}</td>
+            <td class="value">{{value}}</td>
+            <td class="action" rowspan="{{item.properties | keyLength}}" ng-if="$first">Correct Entry and Resubmit</td>
+        </tr>
+    </tbody>
+</table>
+
+<p ng-if="!error">No errors found.</p>
