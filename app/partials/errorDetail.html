@@ -1,5 +1,5 @@
 <div class="page-size" ng-if="error">Showing {{start()}} - {{end()}} of {{total()}} &nbsp|&nbsp <label for="page-size" class="pagination_label">View</label>
-    <select id="page-size" ng-model="pageSize" ng-options="size as size for size in [10, 20, 30]"></select>
+    <select id="page-size" ng-model="pageSize" ng-options="size as size for size in [10, 20, 50, 100]"></select>
 </div>
 
 <table class="detail-table" ng-if="error">
