@@ -7,7 +7,7 @@
  * # Select File
  * Controller for selecting a HMDA file and Reporting Year for verification.
  */
-module.exports = /*@ngInject*/ function ($scope, $location, FileReader, FileMetadata, HMDAEngine, Wizard) {
+module.exports = /*@ngInject*/ function ($scope, $location, $timeout, FileReader, FileMetadata, HMDAEngine, Wizard) {
     var fiscalYears = HMDAEngine.getValidYears();
 
     // Set/Reset the state of different objects on load
@@ -18,6 +18,7 @@ module.exports = /*@ngInject*/ function ($scope, $location, FileReader, FileMeta
 
     // Populate the $scope
     $scope.reportingYears = fiscalYears;
+    $scope.isProcessing = false;
 
     // Initialize the errors for the form fields
     $scope.errors = {};
@@ -40,6 +41,11 @@ module.exports = /*@ngInject*/ function ($scope, $location, FileReader, FileMeta
 
     // Process the form submission
     $scope.submit = function(hmdaData) {
+        // Toggle processing flag on so that we can notify the user
+        $scope.isProcessing = true;
+
+        $timeout(function() { return; }, 250); // Pause before starting the conversion so that the DOM can update
+
         // Convert the file to JSON
         HMDAEngine.fileToJson(hmdaData.file, hmdaData.year, function(err) {
             if (err) {
@@ -57,6 +63,9 @@ module.exports = /*@ngInject*/ function ($scope, $location, FileReader, FileMeta
 
             // Complete the current step in the wizard
             $scope.wizardSteps = Wizard.completeStep();
+
+            // Toggle processing flag off
+            $scope.isProcessing = false;
 
             // And go the summary page
             $location.path('/summarySyntacticalValidity');
