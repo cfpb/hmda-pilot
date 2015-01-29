@@ -60,4 +60,10 @@ describe('Filters: hmdaFilters', function() {
             expect(hmdaLabelFilter('recordID', 'lar')).toBe('Record Identifier');
         }));
     });
+
+    describe('capitalize', function() {
+        it('should capitalize the first letter of the word', angular.mock.inject(function(capitalizeFilter) {
+            expect(capitalizeFilter('test')).toBe('Test');
+        }));
+    });
 });
