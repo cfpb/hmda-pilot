@@ -87,8 +87,10 @@ module.exports = function(config) {
 
     // Coverage reporter configuration
     coverageReporter : {
-      type: 'html',
-      dir: 'coverage/'
+      dir: 'coverage/',
+      reporters: [
+        { type: 'html', subdir: 'html-report' }
+      ]
     },
 
     // Preproccessors
