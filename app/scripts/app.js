@@ -30,7 +30,7 @@ angular
     'ngSanitize',
     'ngTouch',
     'services.config',
-    'HMDAEngine'
+    'HMDAEngine',
     'hmdaFilters'
   ])
   .config(function ($routeProvider) {
