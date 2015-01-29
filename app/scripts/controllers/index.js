@@ -9,3 +9,4 @@ app.controller('SummarySyntacticalValidityCtrl', require('./summarySyntacticalVa
 app.controller('SummaryQualityMacroCtrl', require('./summaryQualityMacro'));
 app.controller('SummaryMSAIRSCtrl', require('./summaryMSA-IRS'));
 app.controller('SubmitCtrl', require('./submit'));
+app.controller('ErrorDetailCtrl', require('./errorDetail'));

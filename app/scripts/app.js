@@ -55,6 +55,10 @@ angular
         templateUrl: 'views/submit.html',
         controller: 'SubmitCtrl'
       })
+      .when('/detail/:EditType/:EditId', {
+        templateUrl: 'views/ErrorDetail.html',
+        controller: 'ErrorDetailCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
