@@ -13,6 +13,7 @@ module.exports = /*@ngInject*/ function () {
         restrict: 'E',
         templateUrl: 'partials/errorSummary.html',
         scope: {
+            editType: '@type',
             errors: '='
         },
         link: function(scope) {

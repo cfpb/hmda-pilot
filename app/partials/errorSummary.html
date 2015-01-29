@@ -8,7 +8,7 @@
     </thead>
     <tbody>
         <tr ng-repeat="(key, value) in errors">
-            <td class="id"><a ng-href="detailSyntactical/{{key}}">{{key}}</a></td>
+            <td class="id"><a ng-href="#/detail/{{editType}}/{{key}}">{{key}}</a></td>
             <td class="description">{{value.explanation}}</td>
             <td class="count">{{value.errors.length}}</td>
         </tr>
