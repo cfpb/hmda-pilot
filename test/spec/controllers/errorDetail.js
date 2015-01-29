@@ -9,9 +9,9 @@ describe('Controller: ErrorDetailCtrl', function () {
         location,
         controller,
         HMDAEngine,
-        editType = 'test',
-        editId = 1,
-        mockErrors = {'test': {'1':'errors for 1'} }; //jshint ignore:line
+        editType = 'syntactical',
+        editId = 'S100',
+        mockErrors = {'syntactical': {'S100':'errors for S100'} }; //jshint ignore:line
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
@@ -33,12 +33,16 @@ describe('Controller: ErrorDetailCtrl', function () {
     }));
 
     describe('Initial scope', function() {
+        it('should set the editType to the value from $routeParams', function() {
+            expect(scope.editType).toBe(editType);
+        });
+
         it('should set the editId to the value from $routeParams', function() {
             expect(scope.editId).toBe(editId);
         });
 
         it('should set the editError for the editType and editId', function() {
-            expect(scope.editError).toBe('errors for 1');
+            expect(scope.editError).toBe('errors for S100');
         });
 
         it('should set the editError to an empty object if editType is not found', function() {
@@ -46,7 +50,7 @@ describe('Controller: ErrorDetailCtrl', function () {
                 $scope: scope,
                 $routeParams: {
                     EditType: 'fail',
-                    EditId: 1
+                    EditId: 'S100'
                 },
                 HMDAEngine: HMDAEngine
             });
@@ -57,12 +61,38 @@ describe('Controller: ErrorDetailCtrl', function () {
             controller('ErrorDetailCtrl', {
                 $scope: scope,
                 $routeParams: {
-                    EditType: 'test',
-                    EditId: 999
+                    EditType: 'syntactical',
+                    EditId: 'S999'
                 },
                 HMDAEngine: HMDAEngine
             });
             expect(scope.editError).toEqual({});
+        });
+    });
+
+    describe('backToSummary()', function() {
+        describe('when editType is "syntactical" or "validity"', function() {
+            it('should direct the user to the summarySyntacticalValidity page', function() {
+                scope.backToSummary();
+                scope.$digest();
+                expect(location.path()).toBe('/summarySyntacticalValidity');
+            });
+        });
+        describe('when editType is "syntactical" or "validity"', function() {
+            it('should direct the user to the summarySyntacticalValidity page', function() {
+                controller('ErrorDetailCtrl', {
+                    $scope: scope,
+                    $routeParams: {
+                        EditType: 'validity',
+                        EditId: 'S999'
+                    },
+                    HMDAEngine: HMDAEngine
+                });
+
+                scope.backToSummary();
+                scope.$digest();
+                expect(location.path()).toBe('/summarySyntacticalValidity');
+            });
         });
     });
 });

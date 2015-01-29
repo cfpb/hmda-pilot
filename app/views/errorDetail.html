@@ -1,4 +1,8 @@
-<h2>{{editId}}</h2>
+<h2>{{editType | capitalize}} Edit ID: {{editId}}</h2>
 <p>{{editError.explanation}}</p>
 
+<p>Please review and correct all of the errors listed below in your system of record. Once corrected, re-select the updated file to validate the data.</p>
+
 <error-detail error="editError"></error-detail>
+
+<button class="btn btn__secondary" ng-click="backToSummary()">Back to summary</button>
