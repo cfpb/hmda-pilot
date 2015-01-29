@@ -14,9 +14,7 @@ describe('Filters: hmdaFilters', function() {
     });
 
     describe('hmdaLabel', function() {
-        var FileMetadata,
-            HMDAEngine,
-            mockHmdaFile = {
+        var mockHmdaFile = {
                 hmdaFile: {
                     transmittalSheet: {
                         activityYear: '2015',
@@ -51,13 +49,19 @@ describe('Filters: hmdaFilters', function() {
         beforeEach(angular.mock.module(function($provide) {
             $provide.value('FileMetadata', mockFileMetadataService);
             $provide.value('HMDAEngine', {
-                getFileSpec: function(year) { return mockFileSpec; },
-                getHmdaJson: function() { return mockHmdaFile }
+                getFileSpec: function() { return mockFileSpec; },
+                getHmdaJson: function() { return mockHmdaFile; }
             });
         }));
 
         it('should return the length of the input object\'s keys', angular.mock.inject(function(hmdaLabelFilter) {
             expect(hmdaLabelFilter('recordID', 'lar')).toBe('Record Identifier');
+        }));
+    });
+
+    describe('capitalize', function() {
+        it('should capitalize the first letter of the word', angular.mock.inject(function(capitalizeFilter) {
+            expect(capitalizeFilter('test')).toBe('Test');
         }));
     });
 });
