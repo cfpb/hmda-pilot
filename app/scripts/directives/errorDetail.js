@@ -55,6 +55,10 @@ module.exports = /*@ngInject*/ function () {
             scope.onNext = function() {
                 scope.currentPage++;
             };
+
+            scope.setCurrentPage = function(page) {
+                scope.currentPage = page;
+            };
         }
     };
 };
