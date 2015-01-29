@@ -360,14 +360,18 @@ module.exports = function (grunt) {
     browserify: {
       dev: {
         options: {
-          debug: true,
+          browserifyOptions: {
+            debug: true
+          }
         },
         src: '<%= yeoman.app %>/scripts/app.js',
         dest: '<%= yeoman.app %>/bundle/bundle.js'
       },
       dist: {
         options: {
-          debug: false,
+          browserifyOptions: {
+            debug: false
+          }
         },
         src: '<%= yeoman.app %>/scripts/app.js',
         dest: '<%= yeoman.app %>/bundle/bundle.js'
