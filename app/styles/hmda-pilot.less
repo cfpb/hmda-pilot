@@ -2,7 +2,7 @@
 @import (less) "../../node_modules/normalize-css/normalize.css";
 @import (less) "../../node_modules/normalize-legacy-addon/normalize-legacy-addon.css";
 
-// Import Capital Framework compoents
+// Import Capital Framework components
 @import (less) "../../node_modules/cf-core/src/cf-brand-colors.less";
 @import (less) "../../node_modules/cf-core/src/cf-vars.less";
 @import (less) "../../node_modules/cf-core/src/cf-media-queries.less";
@@ -12,6 +12,7 @@
 @import (less) "../../node_modules/cf-buttons/src/cf-buttons.less";
 @import (less) "../../node_modules/cf-forms/src/cf-forms.less";
 @import (less) "../../node_modules/cf-icons/src/less/icons.less";
+@import (less) "../../node_modules/cf-pagination/src/cf-pagination.less";
 
 @import (less) "cf-enhancements.less";
 
@@ -32,6 +33,10 @@ body {
 }
 footer {
     margin-top: 2em;
+}
+
+.bold {
+    font-weight: bold;
 }
 
 // Icons
@@ -156,6 +161,14 @@ table.detail-table {
             padding: .25em .625em;
         }
     }
+}
+
+@pagination-text:               @gray;
+@pagination-bg:                 @gray-20;
+@pagination-font-size:          10px;
+
+div.page-size {
+    margin-bottom: 5px;
 }
 
 // Utility classes
