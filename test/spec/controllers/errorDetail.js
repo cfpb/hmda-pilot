@@ -71,14 +71,15 @@ describe('Controller: ErrorDetailCtrl', function () {
     });
 
     describe('backToSummary()', function() {
-        describe('when editType is "syntactical" or "validity"', function() {
+        describe('when editType is "syntactical"', function() {
             it('should direct the user to the summarySyntacticalValidity page', function() {
                 scope.backToSummary();
                 scope.$digest();
                 expect(location.path()).toBe('/summarySyntacticalValidity');
             });
         });
-        describe('when editType is "syntactical" or "validity"', function() {
+
+        describe('when editType is "validity"', function() {
             it('should direct the user to the summarySyntacticalValidity page', function() {
                 controller('ErrorDetailCtrl', {
                     $scope: scope,
@@ -93,6 +94,32 @@ describe('Controller: ErrorDetailCtrl', function () {
                 scope.$digest();
                 expect(location.path()).toBe('/summarySyntacticalValidity');
             });
+        });
+
+        describe('when editType doesn\'t match a known type', function() {
+            it('should direct the user to the home(/) page', function() {
+                controller('ErrorDetailCtrl', {
+                    $scope: scope,
+                    $routeParams: {
+                        EditType: 'test',
+                        EditId: 'S999'
+                    },
+                    HMDAEngine: HMDAEngine
+                });
+
+                scope.backToSummary();
+                scope.$digest();
+                expect(location.path()).toBe('/');
+            });
+        });
+    });
+
+    describe('goToEditDetail()', function() {
+        it('should redirect the user to a specific error detail page', function() {
+            scope.selectedEditId = 'V100';
+            scope.goToEditDetail();
+            scope.$digest();
+            expect(location.path()).toBe('/detail/syntactical/V100');
         });
     });
 });
