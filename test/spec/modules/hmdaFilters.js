@@ -64,4 +64,12 @@ describe('Filters: hmdaFilters', function() {
             expect(capitalizeFilter('test')).toBe('Test');
         }));
     });
+
+    describe('paginate', function() {
+        it('should paginate the input', angular.mock.inject(function(paginateFilter) {
+            expect(paginateFilter([1, 2, 3], 1, 1)).toEqual([1]);
+            expect(paginateFilter([1, 2, 3], 1, 3)).toEqual([1, 2, 3]);
+            expect(paginateFilter([1, 2, 3], 2, 3)).toEqual([2, 3]);
+        }));
+    });
 });
