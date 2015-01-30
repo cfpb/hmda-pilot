@@ -63,9 +63,19 @@ angular
         redirectTo: '/'
       });
   })
-  .run(function (Configuration, HMDAEngine) {
+  .run(function ($rootScope, $location, Configuration, HMDAEngine) {
     // Set the location of the HMDA Engine API
     HMDAEngine.setAPIURL(Configuration.apiUrl);
+
+    // Watch the value of the HMDA JSON
+    // and redirect to the home page if it gets cleared out
+    $rootScope.$watch(function() {
+        return HMDAEngine.getHmdaJson();
+    }, function(newVal) {
+        if (angular.equals({}, newVal)) {
+            $location.path('/');
+        }
+    });
   });
 
 require('./services');
