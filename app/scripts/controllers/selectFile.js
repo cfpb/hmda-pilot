@@ -47,35 +47,39 @@ module.exports = /*@ngInject*/ function ($scope, $location, $timeout, FileReader
         $timeout(function() { return; }, 250); // Pause before starting the conversion so that the DOM can update
 
         // Convert the file to JSON
-        HMDAEngine.fileToJson(hmdaData.file, hmdaData.year, function(err) {
-            if (err) {
-                $scope.errors.global = err;
+        HMDAEngine.fileToJson(hmdaData.file, hmdaData.year, function(fileErr) {
+            if (fileErr) {
+                $scope.errors.global = fileErr;
                 $scope.$apply();
                 return;
             }
 
-            try {
-                // Run the first set of validations
-                HMDAEngine.runSyntactical(hmdaData.year);
-                HMDAEngine.runValidity(hmdaData.year);
-
-                // Refresh the file metadata
-                FileMetadata.refresh();
-
-                // Complete the current step in the wizard
-                $scope.wizardSteps = Wizard.completeStep();
-
-                // And go the summary page
-                $location.path('/summarySyntacticalValidity');
-                $scope.$apply(); // Force the angular to update the $scope since we're technically in a callback func
-            } catch (err) {
-                console.log(err);
-                if (err.name === 'NetworkError') {
-                    $scope.errors.global = 'There was a problem connecting to the HMDA server. Please check your connection or try again later.';
-                } else {
-                    $scope.errors.global = 'There was a problem validating the HMDA File. Please check your file and try again.';
+            // Run the first set of validations
+            HMDAEngine.runSyntactical(hmdaData.year, function(synErr) {
+                if (synErr) {
+                    $scope.errors.global = synErr;
+                    $scope.$apply();
+                    return;
                 }
-            }
+
+                HMDAEngine.runValidity(hmdaData.year, function(valErr) {
+                    if (valErr) {
+                        $scope.errors.global = valErr;
+                        $scope.$apply();
+                        return;
+                    }
+
+                    // Refresh the file metadata
+                    FileMetadata.refresh();
+
+                    // Complete the current step in the wizard
+                    $scope.wizardSteps = Wizard.completeStep();
+
+                    // And go the summary page
+                    $location.path('/summarySyntacticalValidity');
+                    $scope.$apply(); // Force the angular to update the $scope since we're technically in a callback func
+                });
+            });
 
             // Toggle processing flag off
             $scope.isProcessing = false;
