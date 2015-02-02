@@ -42,9 +42,17 @@ describe('Controller: SelectFileCtrl', function () {
             expect(scope.errors).toBeDefined();
             expect(scope.errors).toEqual({});
         });
+
+        it('should set the isProcessing flag to false', function () {
+            expect(scope.isProcessing).toBeFalsy();
+        });
     });
 
-    describe('Form Submission', function() {
+    describe('getFile()', function() {
+
+    });
+
+    describe('submit()', function() {
         // Nothing really to test yet...
     });
 });

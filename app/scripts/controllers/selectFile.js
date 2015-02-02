@@ -31,7 +31,7 @@ module.exports = /*@ngInject*/ function ($scope, $location, $timeout, FileReader
 
     $scope.getFile = function() {
         // Read the contents of the file and set a value in the scope when its complete
-        FileReader.readFile($scope.file, $scope).then(function(result) {
+        FileReader.readAsText($scope.file, 'utf-8', $scope).then(function(result) {
             $scope.hmdaData.file = result;
         });
 
