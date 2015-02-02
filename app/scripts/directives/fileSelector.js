@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc directive
- * @name hmdaPilotApp.direcive:FileSelector
+ * @name hmdaPilotApp.directive:FileSelector
  * @description
  * # File Selector directive
  * Directive for selecting the HMDA Data file

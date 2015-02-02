@@ -2,7 +2,7 @@
 @import (less) "../../node_modules/normalize-css/normalize.css";
 @import (less) "../../node_modules/normalize-legacy-addon/normalize-legacy-addon.css";
 
-// Import Capital Framework compoents
+// Import Capital Framework components
 @import (less) "../../node_modules/cf-core/src/cf-brand-colors.less";
 @import (less) "../../node_modules/cf-core/src/cf-vars.less";
 @import (less) "../../node_modules/cf-core/src/cf-media-queries.less";
@@ -12,11 +12,16 @@
 @import (less) "../../node_modules/cf-buttons/src/cf-buttons.less";
 @import (less) "../../node_modules/cf-forms/src/cf-forms.less";
 @import (less) "../../node_modules/cf-icons/src/less/icons.less";
+@import (less) "../../node_modules/cf-pagination/src/cf-pagination.less";
 
 @import (less) "cf-enhancements.less";
 
 @import (less) "header.less";
 @import (less) "footer.less";
+
+// HMDA Pilot components
+@import (less) "utils.less";
+@import (less) "wizard.less";
 
 // Layouts
 .wrapper, .wrap {
@@ -30,6 +35,31 @@ footer {
     margin-top: 2em;
 }
 
+// Icons
+.cf-spin {
+  -webkit-animation: cf-spin 2s infinite linear;
+  animation: cf-spin 2s infinite linear;
+}
+@-webkit-keyframes cf-spin {
+  0% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+  100% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+}
+@keyframes cf-spin {
+  0% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+  100% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+}
 
 // Forms
 .form-well {
@@ -83,7 +113,7 @@ footer {
 
 // File Metadata
 .file-metadata {
-    padding: 2em 0;
+    padding: 0 0 2em 0;
 
     dt, dd {
         display: inline;
@@ -113,6 +143,27 @@ table.summary-table {
             color: @redorange;
         }
     }
+}
+
+// Detail tables
+table.detail-table {
+    width: 100%;
+
+    tbody {
+        tr {
+            border-bottom: 0;
+        }
+        th, td {
+            padding: .25em .625em;
+        }
+    }
+}
+
+@pagination-text:               @gray;
+@pagination-bg:                 @gray-20;
+
+div.page-size {
+    margin-bottom: 5px;
 }
 
 // Utility classes

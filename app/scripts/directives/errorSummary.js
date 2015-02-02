@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc directive
- * @name hmdaPilotApp.direcive:ErrorSummary
+ * @name hmdaPilotApp.directive:ErrorSummary
  * @description
  * # Error Summary directive
  * Directive for displaying a summary of edit errors
@@ -13,6 +13,7 @@ module.exports = /*@ngInject*/ function () {
         restrict: 'E',
         templateUrl: 'partials/errorSummary.html',
         scope: {
+            editType: '@type',
             errors: '='
         },
         link: function(scope) {

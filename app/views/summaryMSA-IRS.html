@@ -1,3 +1,8 @@
+<file-metadata></file-metadata>
+
 <h2>MSA Report</h2>
 
 <h2>IRS Report</h2>
+
+<button class="btn btn__secondary" ng-click="previous()"><span class="btn_icon__left cf-icon cf-icon-left"></span> Back</button>
+<button class="btn" ng-click="next()" ng-disabled="!hasNext()" ng-class="{btn__disabled: !hasNext()}">Continue <span class="btn_icon__right cf-icon cf-icon-right"></span></button>

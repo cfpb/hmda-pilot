@@ -15,6 +15,15 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  grunt.registerTask('open_coverage', 'open coverage report in default browser', function() {
+    var exec = require('child_process').exec;
+    var cb = this.async();
+    exec('open coverage/html-report/index.html', {cwd: './'}, function(err, stdout) {
+      console.log(stdout);
+      cb();
+    });
+  });
+
   // Configurable paths for the application
   var appConfig = {
     app: 'app',
@@ -138,7 +147,8 @@ module.exports = function (grunt) {
           ]
         }]
       },
-      server: '.tmp'
+      server: '.tmp',
+      coverage: ['coverage/*']
     },
 
     // Add vendor prefixed styles
@@ -350,14 +360,18 @@ module.exports = function (grunt) {
     browserify: {
       dev: {
         options: {
-          debug: true,
+          browserifyOptions: {
+            debug: true
+          }
         },
         src: '<%= yeoman.app %>/scripts/app.js',
         dest: '<%= yeoman.app %>/bundle/bundle.js'
       },
       dist: {
         options: {
-          debug: false,
+          browserifyOptions: {
+            debug: false
+          }
         },
         src: '<%= yeoman.app %>/scripts/app.js',
         dest: '<%= yeoman.app %>/bundle/bundle.js'
@@ -421,24 +435,54 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.app %>/bundle'
         }]
       }
-
+    },
+    replace: {
+      local: {
+        options: {
+          patterns: [{
+            json: grunt.file.readJSON('./config/environments/local.json')
+          }]
+        },
+        files: [{
+          expand: true,
+          flatten: true,
+          src: ['./config/config.js'],
+          dest: '<%= yeoman.app %>/scripts/modules/'
+        }]
+      },
+      development: {
+        options: {
+          patterns: [{
+            json: grunt.file.readJSON('./config/environments/development.json')
+          }]
+        },
+        files: [{
+          expand: true,
+          flatten: true,
+          src: ['./config/config.js'],
+          dest: '<%= yeoman.app %>/scripts/modules/'
+        }]
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-ng-annotate');
+  grunt.loadNpmTasks('grunt-replace');
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
-      return grunt.task.run(['build', 'connect:dist:keepalive']);
+      return grunt.task.run(['build:local', 'connect:dist:keepalive']);
     }
 
     grunt.task.run([
       'clean:server',
+      'jshint',
       'browserify:dev',
       'less:server',
       'concurrent:server',
       'autoprefixer',
+      'replace:local',
       'connect:livereload',
       'watch'
     ]);
@@ -450,29 +494,40 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('test', [
+    'clean:coverage',
     'clean:server',
-    'browserify:dev',
+    'jshint:test',
     'concurrent:test',
     'autoprefixer',
     'connect:test',
     'karma'
   ]);
 
-  grunt.registerTask('build', [
-    'clean:dist',
-    'browserify:dist',
-    'ngAnnotate:dist',
-    'less:dist',
-    'useminPrepare',
-    'concurrent:dist',
-    'autoprefixer',
-    'copy:dist',
-    'cssmin',
-    'uglify',
-    'filerev',
-    'usemin',
-    'htmlmin'
+  grunt.registerTask('coverage', [
+    'test',
+    'open_coverage'
   ]);
+
+  grunt.registerTask('build', function (env) {
+    env = env || 'development'; // default the build env to 'development', if not specified
+
+    grunt.task.run([
+      'clean:dist',
+      'replace:' + env,
+      'browserify:dist',
+      'ngAnnotate:dist',
+      'less:dist',
+      'useminPrepare',
+      'concurrent:dist',
+      'autoprefixer',
+      'copy:dist',
+      'cssmin',
+      'uglify',
+      'filerev',
+      'usemin',
+      'htmlmin'
+    ]);
+  });
 
   grunt.registerTask('zip', [
     'compress:hmda-pilot'
@@ -485,6 +540,6 @@ module.exports = function (grunt) {
   grunt.registerTask('default', [
     'newer:jshint',
     'test',
-    'build'
+    'build:development'
   ]);
 };

@@ -1,19 +1,34 @@
 'use strict';
 
-var SummaryMSAIRSCtrl = require('../../../app/scripts/controllers/summaryMSA-IRS');
+require('angular');
+require('angular-mocks');
 
 describe('Controller: SummaryMSAIRSCtrl', function () {
 
-    var ctrl,
-        scope;
+    var scope,
+        location;
 
-    // Initialize the controller and a mock scope
-    beforeEach(function () {
-        scope = {};
-        ctrl = new SummaryMSAIRSCtrl(scope);
+    beforeEach(angular.mock.module('hmdaPilotApp'));
+
+    beforeEach(inject(function ($rootScope, $location, $controller) {
+        scope = $rootScope.$new();
+        location = $location;
+
+        $controller('SummaryMSAIRSCtrl', {
+            $scope: scope,
+            $location: location
+        });
+    }));
+
+    describe('previous()', function() {
+        // TODO: Stubbing out for now
     });
 
-    it('should attach a list of awesomeThings to the scope', function () {
-        expect(scope.awesomeThings.length).toBe(3);
+    describe('hasNext()', function() {
+        // TODO: Stubbing out for now
+    });
+
+    describe('next()', function() {
+        // TODO: Stubbing out for now
     });
 });
