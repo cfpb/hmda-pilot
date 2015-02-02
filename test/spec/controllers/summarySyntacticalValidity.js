@@ -104,4 +104,15 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
             expect(location.path()).toBe('/summaryQualityMacro');
         });
     });
+
+    describe('previous()', function () {
+        beforeEach(function() {
+            scope.previous();
+            scope.$digest();
+        });
+
+        it('should direct the user to the home (/) page', function () {
+            expect(location.path()).toBe('/');
+        });
+    });
 });

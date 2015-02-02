@@ -18,14 +18,14 @@ describe('Service: Wizard', function () {
         steps = service.initSteps();
     }));
 
-    describe('initSteps', function() {
+    describe('initSteps()', function() {
 
         it('should set the first step to active', function () {
             expect(steps[0].isActive).toBeTruthy();
         });
     });
 
-    describe('getSteps', function() {
+    describe('getSteps()', function() {
 
         beforeEach(function() {
             steps = service.getSteps();
@@ -36,6 +36,17 @@ describe('Service: Wizard', function () {
             expect(steps[0].isActive).toBeTruthy();
             expect(steps[1].status).toBe(StepStatus.incomplete);
             expect(steps[2].status).toBe(StepStatus.incomplete);
+        });
+    });
+
+    describe('getCurrentStep()', function () {
+
+        it('should return the current step', function () {
+            var step = service.getCurrentStep();
+            expect(step.title).toBe('Select file & upload');
+            expect(step.view).toBe('selectFile');
+            expect(step.status).toBe(StepStatus.incomplete);
+            expect(step.isActive).toBeTruthy();
         });
     });
 });
