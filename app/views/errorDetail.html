@@ -1,4 +1,4 @@
-<h2><label for="editId">{{editType | capitalize}} Edit ID:</label> <select id="editId" ng-model="selectedEditId" ng-change="goToEditDetail()"><option ng-repeat="id in siblingEdits" value="{{id}}" ng-selected="{{editId === id}}">{{id}}</option></select></h2>
+<h2><label for="editId">{{editType | capitalize}} Edit ID:</label> <select id="editId" ng-model="selectedEditId" ng-change="goToEditDetail()" ng-options="id for id in siblingEdits"></select></h2>
 <p>{{editError.explanation}}</p>
 
 <p>Please review and correct all of the errors listed below in your system of record. Once corrected, re-select the updated file to validate the data.</p>
