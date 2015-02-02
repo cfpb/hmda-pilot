@@ -37,7 +37,7 @@ module.exports = /*@ngInject*/ function () {
             };
 
             scope.totalPages = function() {
-                return parseInt(scope.total() / scope.pageSize) || 1;
+                return Math.ceil(scope.total() / scope.pageSize);
             };
 
             scope.hasPrev = function() {

@@ -20,7 +20,8 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, HMDAEn
 
     if (editErrors[editType] && editErrors[editType][editId]) {
         $scope.editError = editErrors[editType][editId];
-        $scope.siblingEdits = Object.keys(editErrors[editType]);
+        $scope.siblingEdits = Object.keys(editErrors[editType]).sort();
+        $scope.selectedEditId = editId;
     } else {
         $scope.editError = {};
     }
