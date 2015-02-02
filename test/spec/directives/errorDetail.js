@@ -108,10 +108,12 @@ describe('Directive: ErrorDetail', function () {
             it('should have a reset to the first page when switching the page size', function() {
                 var $currentPage = jQuery('#pagination_current-page', $pagination);
                 var $nextButton = jQuery('button.pagination_next', $pagination);
+                var $pageSizeSelect = jQuery('select', $pageSize);
                 $nextButton.click();
                 expect($currentPage.val()).toBe('2');
-                jQuery('select', $pageSize).val('50');
-                expect(jQuery('option:selected', $pageSize).text()).toBe('50');
+                $pageSizeSelect.val('2');
+                $pageSizeSelect.trigger('change');
+                expect(jQuery('option:selected', $pageSizeSelect).text()).toBe('50');
                 expect($currentPage.val()).toBe('1');
             });
 
