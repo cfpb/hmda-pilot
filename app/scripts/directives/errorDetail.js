@@ -59,6 +59,11 @@ module.exports = /*@ngInject*/ function () {
             scope.setCurrentPage = function(page) {
                 scope.currentPage = page;
             };
+
+            scope.setPageSize = function(pageSize) {
+                scope.pageSize = pageSize;
+                scope.currentPage = 1;
+            };
         }
     };
 };

@@ -105,6 +105,16 @@ describe('Directive: ErrorDetail', function () {
                 expect(jQuery('option:selected', $pageSize).text()).toBe('10');
             });
 
+            it('should have a reset to the first page when switching the page size', function() {
+                var $currentPage = jQuery('#pagination_current-page', $pagination);
+                var $nextButton = jQuery('button.pagination_next', $pagination);
+                $nextButton.click();
+                expect($currentPage.val()).toBe('2');
+                jQuery('select', $pageSize).val('50');
+                expect(jQuery('option:selected', $pageSize).text()).toBe('50');
+                expect($currentPage.val()).toBe('1');
+            });
+
             it('should have previous and next buttons', function() {
                 expect($pagination).toBeDefined();
                 expect(jQuery('button.pagination_prev', $pagination)).toBeDefined();
