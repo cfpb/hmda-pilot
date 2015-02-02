@@ -1,5 +1,8 @@
 # HMDA Pilot
 
+[![Stories in Ready](https://badge.waffle.io/cfpb/hmda-pilot.png?label=ready&title=Ready)](https://waffle.io/cfpb/hmda-pilot)
+[![Build Status](https://travis-ci.org/cfpb/hmda-pilot.svg?branch=milestone4)](https://travis-ci.org/cfpb/hmda-pilot)
+
 ## This project is a work in progress
 Nothing presented in the issues or in this repo is a final product unless it is marked as such.
 

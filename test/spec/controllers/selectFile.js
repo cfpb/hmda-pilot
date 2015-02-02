@@ -7,23 +7,23 @@ describe('Controller: SelectFileCtrl', function () {
 
     var scope,
         location,
-        RuleEngine,
+        FileMetadata,
         FileReader,
         HMDAEngine;
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function ($rootScope, $location, $controller, _RuleEngine_, _FileReader_, _HMDAEngine_) {
+    beforeEach(inject(function ($rootScope, $location, $controller, _FileMetadata_, _FileReader_, _HMDAEngine_) {
         scope = $rootScope.$new();
         location = $location;
-        RuleEngine = _RuleEngine_;
+        FileMetadata = _FileMetadata_;
         FileReader = _FileReader_;
         HMDAEngine = _HMDAEngine_;
 
         $controller('SelectFileCtrl', {
             $scope: scope,
             $location: location,
-            RuleEngine: _RuleEngine_,
+            FileMetadata: _FileMetadata_,
             FileReader: _FileReader_,
             HMDAEngine: _HMDAEngine_
         });

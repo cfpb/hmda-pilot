@@ -19,7 +19,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'node_modules/jquery/dist/jquery.js',
-      'app/bundle/bundle.js',
+      'app/**/*.js',
       //'test/mock/**/*.js',
       'test/spec/**/*.js',
       {
@@ -31,7 +31,9 @@ module.exports = function(config) {
     ],
 
     // list of files / patterns to exclude
-    exclude: [],
+    exclude: [
+      '**/bundle.js'
+    ],
 
     // web server port
     port: 8080,
@@ -76,6 +78,7 @@ module.exports = function(config) {
     // Browserify config
     browserify: {
       watch: true,
+      debug: true,
       transform: ['browserify-istanbul']
     },
 
@@ -84,13 +87,16 @@ module.exports = function(config) {
 
     // Coverage reporter configuration
     coverageReporter : {
-      type: 'html',
-      dir: 'coverage/'
+      dir: 'coverage/',
+      reporters: [
+        { type: 'html', subdir: 'html-report' },
+        { type: 'text-summary' }
+      ]
     },
 
     // Preproccessors
     preprocessors: {
-      'app/scripts/**/*.js': 'coverage',
+      'app/**/*.js': ['coverage', 'browserify'],
       'test/**/*.js': ['browserify']
     }
   });

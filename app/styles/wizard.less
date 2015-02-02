@@ -1,0 +1,103 @@
+// Wizard Navigation
+.nav-wizard {
+    .grid_wrapper();
+    .webfont-regular;
+    width: 100%;
+    margin-bottom: 2em;
+
+    ol {
+        list-style-type: none;
+        margin: 0; padding: 0;
+        overflow: hidden;
+        width: 100%;
+
+        .step {
+            position: relative;
+            float: left;
+            width: 17%;
+            min-height: 50px;
+            height: 50px;
+            margin-right: 1.5%;
+            margin-bottom: 0;
+            padding-bottom: 4px;
+            background-color: @gray-5;
+            border-bottom: 5px solid @darkgray;
+            list-style: none;
+
+            // Wizard states
+            &.error {
+                @a11y-color: tint(@redorange, 90%);
+
+                border-color: @redorange;
+                background-color: @a11y-color;
+
+                .step-badge {
+                    color: @a11y-color;
+                    background-color: @redorange;
+                }
+            }
+            &.complete {
+                @a11y-color: shade(@green, 27%);
+
+                border-color: @a11y-color;
+                background-color: @green-tint;
+
+                .step-badge {
+                    color: @green-tint;
+                    background-color: @a11y-color;
+                }
+            }
+            &.incomplete {
+                border-color: @darkgray;
+                background-color: @gray-5;
+
+                .step-badge {
+                    color: @gray-5;
+                    background-color: @darkgray;
+                }
+            }
+            &.active,
+            &.focusable:hover,
+            &.focusable:focus {
+                @a11y-color: tint(@teal, 8%);
+
+                border-color: @a11y-color;
+                background-color: @teal-20;
+
+                .step-badge {
+                    color: @teal-20;
+                    background-color: @a11y-color;
+                }
+            }
+
+            a { outline: 0; }
+
+            .step-title {
+                .vertical-align(55%);
+                display: block;
+                float: left;
+                width: 80%;
+                color: @black;
+            }
+
+            .step-badge {
+                .vertical-align(55%);
+                display: block;
+                float: left;
+                margin: 0 .5em;
+            }
+
+            .badge-num {
+                .webfont-demi;
+                font-size: .8em;
+                border-radius: 50%;
+                padding: .2em .55em;
+            }
+
+            .cf-icon {
+                border-radius: 50%;
+                padding: .1em .2em;
+            }
+        }
+    }
+}

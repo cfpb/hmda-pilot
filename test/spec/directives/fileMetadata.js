@@ -17,15 +17,13 @@ describe('Directive: FileMetadata', function () {
             respondentID: '1234567890',
             totalLineEntries: '42'
         },
-        mockRuleEngine = {
-            getFileMetadata: function() {
-                return mockMetadata;
-            }
+        mockFileMetadataService = {
+            get: function() { return mockMetadata; }
         };
 
     beforeEach(function () {
         angular.mock.module(function ($provide) {
-            $provide.value('RuleEngine', mockRuleEngine);
+            $provide.value('FileMetadata', mockFileMetadataService);
         });
     });
 

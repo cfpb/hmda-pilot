@@ -1,0 +1,8 @@
+<h2><label for="editId">{{editType | capitalize}} Edit ID:</label> <select id="editId" ng-model="selectedEditId" ng-change="goToEditDetail()"><option ng-repeat="id in siblingEdits" value="{{id}}" ng-selected="{{editId === id}}">{{id}}</option></select></h2>
+<p>{{editError.explanation}}</p>
+
+<p>Please review and correct all of the errors listed below in your system of record. Once corrected, re-select the updated file to validate the data.</p>
+
+<error-detail error="editError"></error-detail>
+
+<button class="btn btn__secondary u-mt5" ng-click="backToSummary()">Back to summary</button>
