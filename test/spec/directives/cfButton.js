@@ -134,6 +134,20 @@ describe('Directive: cfButton', function () {
         });
     });
 
+    describe('when isDisabled evals to true', function() {
+        beforeEach(inject(function ($compile) {
+            scope.hasNext = function() { return true; };
+            element = angular.element('<cf-button is-disabled="hasNext()">A Button</cf-button>');
+            element = $compile(element)(scope);
+            scope.$digest();
+        }));
+
+        it('should disable the button', function() {
+            expect(element.prop('disabled')).toBeTruthy();
+            expect(element.hasClass('btn__disabled')).toBeTruthy();
+        });
+    });
+
     describe('when the button has type="submit"', function() {
         beforeEach(inject(function ($compile) {
             element = angular.element('<cf-button type="submit">A Button</cf-button>');

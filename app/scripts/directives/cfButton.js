@@ -88,18 +88,23 @@ module.exports = /*@ngInject*/ function () {
         if (scope.processing) {
             showProcessing(element);
         }
+
+        if (scope.isDisabled) {
+            disable(element);
+        }
     }
 
     function controller($scope, $element, $attrs) {
-
-        // Watch to see if the value of processing changes
-        $scope.$watch('processing', function(newVal) {
-            if (newVal) {
-                showProcessing($element);
-            } else {
-                hideProcessing($element, $attrs.iconClass, origBtnText);
-            }
-        });
+        if (!$scope.isDisabled) { // If the disabled state isn't being set 'manually'
+            // Watch to see if the value of processing changes
+            $scope.$watch('processing', function(newVal) {
+                if (newVal) {
+                    showProcessing($element);
+                } else {
+                    hideProcessing($element, $attrs.iconClass, origBtnText);
+                }
+            });
+        }
     }
 
     return {
@@ -109,6 +114,7 @@ module.exports = /*@ngInject*/ function () {
         template: '<button class="btn"><span class="text" ng-transclude>{{text}}</span></button>',
         scope: {
             processing: '=',
+            isDisabled: '=',
             iconClass: '=',
             iconPosition: '='
         },
