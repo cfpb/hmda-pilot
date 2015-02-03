@@ -9,7 +9,6 @@ describe('Controller: SummaryQualityMacroCtrl', function () {
         location,
         controller,
         Wizard,
-        Session,
         mockEngine,
         mockErrors = {
             quality: {},
@@ -18,12 +17,11 @@ describe('Controller: SummaryQualityMacroCtrl', function () {
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function ($rootScope, $location, $controller, _Wizard_, _Session_) {
+    beforeEach(inject(function ($rootScope, $location, $controller, _Wizard_) {
         scope = $rootScope.$new();
         location = $location;
         controller = $controller;
         Wizard = _Wizard_;
-        Session = _Session_;
         mockEngine = {
             getErrors: function() {
                 return mockErrors;
@@ -33,7 +31,6 @@ describe('Controller: SummaryQualityMacroCtrl', function () {
         $controller('SummaryQualityMacroCtrl', {
             $scope: scope,
             $location: location,
-            Session : _Session_,
             HMDAEngine: mockEngine,
             Wizard: _Wizard_
         });
