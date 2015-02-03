@@ -96,6 +96,40 @@ describe('Controller: ErrorDetailCtrl', function () {
             });
         });
 
+        describe('when editType is "quality"', function() {
+            it('should direct the user to the summaryQualityMacro page', function() {
+                controller('ErrorDetailCtrl', {
+                    $scope: scope,
+                    $routeParams: {
+                        EditType: 'quality',
+                        EditId: 'S999'
+                    },
+                    HMDAEngine: HMDAEngine
+                });
+
+                scope.backToSummary();
+                scope.$digest();
+                expect(location.path()).toBe('/summaryQualityMacro');
+            });
+        });
+
+        describe('when editType is "macro"', function() {
+            it('should direct the user to the summaryQualityMacro page', function() {
+                controller('ErrorDetailCtrl', {
+                    $scope: scope,
+                    $routeParams: {
+                        EditType: 'macro',
+                        EditId: 'S999'
+                    },
+                    HMDAEngine: HMDAEngine
+                });
+
+                scope.backToSummary();
+                scope.$digest();
+                expect(location.path()).toBe('/summaryQualityMacro');
+            });
+        });
+
         describe('when editType doesn\'t match a known type', function() {
             it('should direct the user to the home(/) page', function() {
                 controller('ErrorDetailCtrl', {
