@@ -23,7 +23,8 @@ describe('Directive: cfButton', function () {
             scope.$digest();
         }));
 
-        it('should be type="submit"', function() {
+        it('should have type="submit", if not specified', function() {
+            expect(element.attr('type')).toBeDefined();
             expect(element.attr('type')).toBe('submit');
         });
 
@@ -130,6 +131,50 @@ describe('Directive: cfButton', function () {
             expect(el.hasClass('cf-icon-test')).toBeTruthy();
             expect(el.hasClass('cf-icon-update')).toBeFalsy();
             expect(el.hasClass('cf-spin')).toBeFalsy();
+        });
+    });
+
+    describe('when isDisabled evals to true', function() {
+        beforeEach(inject(function ($compile) {
+            scope.hasNext = function() { return true; };
+            element = angular.element('<cf-button is-disabled="hasNext()">A Button</cf-button>');
+            element = $compile(element)(scope);
+            scope.$digest();
+        }));
+
+        it('should disable the button', function() {
+            expect(element.prop('disabled')).toBeTruthy();
+            expect(element.hasClass('btn__disabled')).toBeTruthy();
+        });
+    });
+
+    describe('when the button has type="submit"', function() {
+        beforeEach(inject(function ($compile) {
+            element = angular.element('<cf-button type="submit">A Button</cf-button>');
+            element = $compile(element)(scope);
+            scope.$digest();
+        }));
+
+        it('should pass through type="submit"', function() {
+            expect(element.attr('type')).toBeDefined();
+            expect(element.attr('type')).toBe('submit');
+        });
+    });
+
+    describe('when the button has ngClick', function() {
+        beforeEach(inject(function ($compile) {
+            element = angular.element('<cf-button ng-click="action()">A Button</cf-button>');
+            element = $compile(element)(scope);
+            scope.$digest();
+        }));
+
+        it('should pass through the ngClick attr', function() {
+            expect(element.attr('ng-click')).toBeDefined();
+            expect(element.attr('ng-click')).toBe('action()');
+        });
+
+        it('should not include type="submit"', function() {
+            expect(element.attr('type')).toBeUndefined();
         });
     });
 });

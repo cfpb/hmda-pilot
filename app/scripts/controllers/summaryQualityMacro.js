@@ -5,9 +5,15 @@
  * @name hmdaPilotApp.controller:SummaryQualityMacroCtrl
  * @description
  * # SummaryQualityMacroCtrl
- * Controller of the hmdaPilotApp
+ * Controller for the Syntactical and Validity Summary view
  */
-module.exports = /*@ngInject*/ function ($scope, $location, Wizard) {
+module.exports = /*@ngInject*/ function ($scope, $location, HMDAEngine, Wizard) {
+
+    // Get the list of errors from the HMDAEngine
+    var editErrors = HMDAEngine.getErrors();
+
+    $scope.qualityErrors = editErrors.quality || {};
+    $scope.macroErrors = editErrors.macro || {};
 
     $scope.previous = function () {
         $location.path('/summarySyntacticalValidity');

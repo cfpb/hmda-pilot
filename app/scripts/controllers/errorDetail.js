@@ -29,6 +29,8 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, HMDAEn
     $scope.backToSummary = function() {
         if (editType === 'syntactical' || editType === 'validity') {
             $location.path('/summarySyntacticalValidity');
+        } else if (editType === 'quality' || editType === 'macro') {
+            $location.path('/summaryQualityMacro');
         } else { // Go back to the start if nothing matches
             $location.path('/');
         }

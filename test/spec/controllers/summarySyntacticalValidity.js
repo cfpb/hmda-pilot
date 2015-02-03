@@ -9,10 +9,15 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
         location,
         controller,
         Wizard,
-        mockEngine,
         mockErrors = {
             syntactical: {},
             validity: {}
+        },
+        mockEngine = {
+            getErrors: function() { return mockErrors; },
+            getRuleYear: function() { return '2015'; },
+            runQuality: function(year, next) { return next(null); },
+            runMacro: function(year, next) { return next(null); }
         };
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
@@ -22,11 +27,6 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
         location = $location;
         controller = $controller;
         Wizard = _Wizard_;
-        mockEngine = {
-            getErrors: function() {
-                return mockErrors;
-            }
-        };
         Wizard.initSteps();
         $controller('SummarySyntacticalValidityCtrl', {
             $scope: scope,
@@ -89,19 +89,60 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
     });
 
     describe('next()', function() {
-        beforeEach(function() {
-            scope.next();
-            scope.$digest();
+        describe('when runQuality has a runtime error', function() {
+            it('should display a global error', function() {
+                mockEngine.runQuality = function(year, next) { return next('error'); };
+                mockEngine.runMacro = function(year, next) { return next(null); };
+                controller('SummarySyntacticalValidityCtrl', {
+                    $scope: scope,
+                    $location: location,
+                    HMDAEngine: mockEngine
+                });
+                scope.next();
+                scope.$digest();
+
+                expect(scope.errors.global).toBe('error');
+            });
         });
 
-        it('should mark the current step in the wizard as complete', function () {
-            var steps = Wizard.getSteps();
-            expect(steps[0].isActive).toBeFalsy();
-            expect(steps[0].status).toBe('complete');
+        describe('when runMacro has a runtime error', function() {
+            it('should display a global error', function() {
+                mockEngine.runQuality = function(year, next) { return next(null); };
+                mockEngine.runMacro = function(year, next) { return next('error'); };
+                controller('SummarySyntacticalValidityCtrl', {
+                    $scope: scope,
+                    $location: location,
+                    HMDAEngine: mockEngine
+                });
+                scope.next();
+                scope.$digest();
+
+                expect(scope.errors.global).toBe('error');
+            });
         });
 
-        it('should direct the user to the /summaryQualityMacro page', function () {
-            expect(location.path()).toBe('/summaryQualityMacro');
+        describe('when runQuality and runMacro have no runtime errors', function() {
+            beforeEach(function() {
+                mockEngine.runQuality = function(year, next) { return next(null); };
+                mockEngine.runMacro = function(year, next) { return next(null); };
+                controller('SummarySyntacticalValidityCtrl', {
+                    $scope: scope,
+                    $location: location,
+                    HMDAEngine: mockEngine
+                });
+                scope.next();
+                scope.$digest();
+            });
+
+            it('should mark the current step in the wizard as complete', function () {
+                var steps = Wizard.getSteps();
+                expect(steps[0].isActive).toBeFalsy();
+                expect(steps[0].status).toBe('complete');
+            });
+
+            it('should direct the user to the /summaryQualityMacro page', function () {
+                expect(location.path()).toBe('/summaryQualityMacro');
+            });
         });
     });
 

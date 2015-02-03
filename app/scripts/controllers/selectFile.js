@@ -77,7 +77,6 @@ module.exports = /*@ngInject*/ function ($scope, $location, $timeout, FileReader
 
                     // And go the summary page
                     $location.path('/summarySyntacticalValidity');
-                    $scope.$apply(); // Force the angular to update the $scope since we're technically in a callback func
                 });
             });
 

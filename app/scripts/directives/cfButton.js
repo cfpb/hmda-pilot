@@ -77,6 +77,10 @@ module.exports = /*@ngInject*/ function () {
     function link(scope, element, attrs) {
         origBtnText = element.text();
 
+        if (!attrs.ngClick) {
+            element.attr('type', 'submit');
+        }
+
         if (attrs.iconClass) {
             displayIcon(element, attrs.iconClass, attrs.iconPosition);
         }
@@ -84,27 +88,33 @@ module.exports = /*@ngInject*/ function () {
         if (scope.processing) {
             showProcessing(element);
         }
+
+        if (scope.isDisabled) {
+            disable(element);
+        }
     }
 
     function controller($scope, $element, $attrs) {
-
-        // Watch to see if the value of processing changes
-        $scope.$watch('processing', function(newVal) {
-            if (newVal) {
-                showProcessing($element);
-            } else {
-                hideProcessing($element, $attrs.iconClass, origBtnText);
-            }
-        });
+        if (!$scope.isDisabled) { // If the disabled state isn't being set 'manually'
+            // Watch to see if the value of processing changes
+            $scope.$watch('processing', function(newVal) {
+                if (newVal) {
+                    showProcessing($element);
+                } else {
+                    hideProcessing($element, $attrs.iconClass, origBtnText);
+                }
+            });
+        }
     }
 
     return {
         restrict: 'E',
         replace: true,
         transclude: true,
-        template: '<button type="submit" class="btn"><span class="text" ng-transclude>{{text}}</span></button>',
+        template: '<button class="btn"><span class="text" ng-transclude>{{text}}</span></button>',
         scope: {
             processing: '=',
+            isDisabled: '=',
             iconClass: '=',
             iconPosition: '='
         },
