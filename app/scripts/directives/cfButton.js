@@ -77,6 +77,10 @@ module.exports = /*@ngInject*/ function () {
     function link(scope, element, attrs) {
         origBtnText = element.text();
 
+        if (!attrs.ngClick) {
+            element.attr('type', 'submit');
+        }
+
         if (attrs.iconClass) {
             displayIcon(element, attrs.iconClass, attrs.iconPosition);
         }
@@ -102,7 +106,7 @@ module.exports = /*@ngInject*/ function () {
         restrict: 'E',
         replace: true,
         transclude: true,
-        template: '<button type="submit" class="btn"><span class="text" ng-transclude>{{text}}</span></button>',
+        template: '<button class="btn"><span class="text" ng-transclude>{{text}}</span></button>',
         scope: {
             processing: '=',
             iconClass: '=',
