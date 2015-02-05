@@ -7,7 +7,7 @@
  * # SummarySyntacticalValidityCtrl
  * Controller for the Syntactical and Validity Summary view
  */
-module.exports = /*@ngInject*/ function ($scope, $location, $timeout, HMDAEngine, Wizard) {
+module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEngine, Wizard) {
 
     // Populate the $scope
     $scope.errors = {};
@@ -35,26 +35,19 @@ module.exports = /*@ngInject*/ function ($scope, $location, $timeout, HMDAEngine
 
         // Run the second set of validations
         var ruleYear = HMDAEngine.getRuleYear();
-        HMDAEngine.runQuality(ruleYear, function(qualityErr) {
-            if (qualityErr) {
-                $scope.errors.global = qualityErr;
-                $scope.$apply();
-                return;
-            }
+        $q.all([HMDAEngine.runQuality(ruleYear), HMDAEngine.runMacro(ruleYear)])
+        .then(function() {
 
-            HMDAEngine.runMacro(ruleYear, function(macroErr) {
-                if (macroErr) {
-                    $scope.errors.global = macroErr;
-                    $scope.$apply();
-                    return;
-                }
+            // Complete the current step in the wizard
+            $scope.wizardSteps = Wizard.completeStep();
 
-                // Complete the current step in the wizard
-                $scope.wizardSteps = Wizard.completeStep();
+            // And go the next summary page
+            $location.path('/summaryQualityMacro');
 
-                // And go the next summary page
-                $location.path('/summaryQualityMacro');
-            });
+        })
+        .catch(function(err) {
+            $scope.errors.global = err.message;
+            return;
         });
 
         // Toggle processing flag off
