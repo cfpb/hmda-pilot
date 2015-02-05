@@ -8,6 +8,7 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
     var scope,
         location,
         controller,
+        Q,
         Wizard,
         mockErrors = {
             syntactical: {},
@@ -22,10 +23,11 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function ($rootScope, $location, $controller, _Wizard_) {
+    beforeEach(inject(function ($rootScope, $location, $controller, $q, _Wizard_) {
         scope = $rootScope.$new();
         location = $location;
         controller = $controller;
+        Q = $q;
         Wizard = _Wizard_;
         Wizard.initSteps();
         $controller('SummarySyntacticalValidityCtrl', {
@@ -91,11 +93,12 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
     describe('next()', function() {
         describe('when runQuality has a runtime error', function() {
             it('should display a global error', function() {
-                mockEngine.runQuality = function(year, next) { return next('error'); };
-                mockEngine.runMacro = function(year, next) { return next(null); };
+                mockEngine.runQuality = function() { return Q.reject(new Error('error')); };
+                mockEngine.runMacro = function() { return; };
                 controller('SummarySyntacticalValidityCtrl', {
                     $scope: scope,
                     $location: location,
+                    $q: Q,
                     HMDAEngine: mockEngine
                 });
                 scope.next();
@@ -107,11 +110,12 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
 
         describe('when runMacro has a runtime error', function() {
             it('should display a global error', function() {
-                mockEngine.runQuality = function(year, next) { return next(null); };
-                mockEngine.runMacro = function(year, next) { return next('error'); };
+                mockEngine.runQuality = function() { return; };
+                mockEngine.runMacro = function() { return Q.reject(new Error('error')); };
                 controller('SummarySyntacticalValidityCtrl', {
                     $scope: scope,
                     $location: location,
+                    $q: Q,
                     HMDAEngine: mockEngine
                 });
                 scope.next();
@@ -123,11 +127,12 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
 
         describe('when runQuality and runMacro have no runtime errors', function() {
             beforeEach(function() {
-                mockEngine.runQuality = function(year, next) { return next(null); };
-                mockEngine.runMacro = function(year, next) { return next(null); };
+                mockEngine.runQuality = function() { return; };
+                mockEngine.runMacro = function() { return; };
                 controller('SummarySyntacticalValidityCtrl', {
                     $scope: scope,
                     $location: location,
+                    $q: Q,
                     HMDAEngine: mockEngine
                 });
                 scope.next();

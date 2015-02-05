@@ -8,6 +8,7 @@ describe('Controller: SelectFileCtrl', function () {
     var controller,
         scope,
         location,
+        Q,
         Wizard,
         FileMetadata,
         FileReader,
@@ -17,17 +18,18 @@ describe('Controller: SelectFileCtrl', function () {
             clearHmdaJson: function () { return {}; },
             clearErrors: function () { return {}; },
             fileToJson: function(file, year, next) { return next(null); },
-            runSyntactical: function(year, next) { return next(null); },
-            runValidity: function(year, next) { return next(null); }
+            runSyntactical: function() { return; },
+            runValidity: function() { return; }
         };
 
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function ($rootScope, $location, $controller, _Wizard_, _FileMetadata_, _FileReader_) {
+    beforeEach(inject(function ($rootScope, $location, $controller, $q, _Wizard_, _FileMetadata_, _FileReader_) {
         scope = $rootScope.$new();
         controller = $controller;
         location = $location;
+        Q = $q;
         Wizard = _Wizard_;
         FileMetadata = _FileMetadata_;
         FileReader = _FileReader_;
@@ -36,6 +38,7 @@ describe('Controller: SelectFileCtrl', function () {
         controller('SelectFileCtrl', {
             $scope: scope,
             $location: location,
+            $q: Q,
             Wizard: _Wizard_,
             FileMetadata: _FileMetadata_,
             FileReader: _FileReader_,
@@ -87,11 +90,12 @@ describe('Controller: SelectFileCtrl', function () {
         describe('when fileToJson has a runtime error', function() {
             it('should display a global error', function() {
                 mockEngine.fileToJson = function(file, year, next) { return next('error'); };
-                mockEngine.runSyntactical = function(year, next) { return next(null); };
-                mockEngine.runValidity = function(year, next) { return next(null); };
+                mockEngine.runSyntactical = function() { return; };
+                mockEngine.runValidity = function() { return; };
                 controller('SelectFileCtrl', {
                     $scope: scope,
                     $location: location,
+                    $q: Q,
                     HMDAEngine: mockEngine
                 });
                 scope.submit(hmdaData);
@@ -104,11 +108,12 @@ describe('Controller: SelectFileCtrl', function () {
         describe('when runSyntactical has a runtime error', function() {
             it('should display a global error', function() {
                 mockEngine.fileToJson = function(file, year, next) { return next(null); };
-                mockEngine.runSyntactical = function(year, next) { return next('error'); };
-                mockEngine.runValidity = function(year, next) { return next(null); };
+                mockEngine.runSyntactical = function() { return Q.reject(new Error('error')); };
+                mockEngine.runValidity = function() { return; };
                 controller('SelectFileCtrl', {
                     $scope: scope,
                     $location: location,
+                    $q: Q,
                     HMDAEngine: mockEngine
                 });
                 scope.submit(hmdaData);
@@ -121,11 +126,12 @@ describe('Controller: SelectFileCtrl', function () {
         describe('when runValidity has a runtime error', function() {
             it('should display a global error', function() {
                 mockEngine.fileToJson = function(file, year, next) { return next(null); };
-                mockEngine.runSyntactical = function(year, next) { return next(null); };
-                mockEngine.runValidity = function(year, next) { return next('error'); };
+                mockEngine.runSyntactical = function() { return; };
+                mockEngine.runValidity = function() { return Q.reject(new Error('error')); };
                 controller('SelectFileCtrl', {
                     $scope: scope,
                     $location: location,
+                    $q: Q,
                     HMDAEngine: mockEngine
                 });
                 scope.submit(hmdaData);
@@ -137,11 +143,12 @@ describe('Controller: SelectFileCtrl', function () {
 
         describe('when runSyntactical and runValidity have no runtime errors', function() {
             beforeEach(function() {
-                mockEngine.runSyntactical = function(year, next) { return next(null); };
-                mockEngine.runValidity = function(year, next) { return next(null); };
+                mockEngine.runSyntactical = function() { return; };
+                mockEngine.runValidity = function() { return; };
                 controller('SelectFileCtrl', {
                     $scope: scope,
                     $location: location,
+                    $q: Q,
                     HMDAEngine: mockEngine
                 });
                 scope.submit(hmdaData);

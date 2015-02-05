@@ -7,7 +7,7 @@
  * # Select File
  * Controller for selecting a HMDA file and Reporting Year for verification.
  */
-module.exports = /*@ngInject*/ function ($scope, $location, $timeout, FileReader, FileMetadata, HMDAEngine, Wizard) {
+module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileReader, FileMetadata, HMDAEngine, Wizard) {
     var fiscalYears = HMDAEngine.getValidYears();
 
     // Set/Reset the state of different objects on load
@@ -54,30 +54,21 @@ module.exports = /*@ngInject*/ function ($scope, $location, $timeout, FileReader
                 return;
             }
 
-            // Run the first set of validations
-            HMDAEngine.runSyntactical(hmdaData.year, function(synErr) {
-                if (synErr) {
-                    $scope.errors.global = synErr;
-                    $scope.$apply();
-                    return;
-                }
+            $q.all([HMDAEngine.runSyntactical(hmdaData.year), HMDAEngine.runValidity(hmdaData.year)])
+            .then(function() {
+                // Refresh the file metadata
+                FileMetadata.refresh();
 
-                HMDAEngine.runValidity(hmdaData.year, function(valErr) {
-                    if (valErr) {
-                        $scope.errors.global = valErr;
-                        $scope.$apply();
-                        return;
-                    }
+                // Complete the current step in the wizard
+                $scope.wizardSteps = Wizard.completeStep();
 
-                    // Refresh the file metadata
-                    FileMetadata.refresh();
+                // And go the summary page
+                $location.path('/summarySyntacticalValidity');
 
-                    // Complete the current step in the wizard
-                    $scope.wizardSteps = Wizard.completeStep();
-
-                    // And go the summary page
-                    $location.path('/summarySyntacticalValidity');
-                });
+            })
+            .catch(function(err) {
+                $scope.errors.global = err.message;
+                return;
             });
 
             // Toggle processing flag off
