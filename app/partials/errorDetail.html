@@ -14,8 +14,8 @@
     </thead>
     <tbody ng-repeat="item in error.errors | paginate:start():end()">
         <tr ng-repeat="(key, value) in item.properties">
-            <th class="id" scope="row" rowspan="{{item.properties | keyLength}}" ng-if="$first">{{item.loanNumber || item.lineNumber}}</th>
-            <td class="description">{{key | hmdaLabel:error.scope}}</td>
+            <td class="id" scope="row" rowspan="{{item.properties | keyLength}}" ng-if="$first">{{item.loanNumber || item.lineNumber}}</td>
+            <td class="description">{{ {'property':key, 'lineNumber':item.lineNumber} | hmdaLabel:error.scope}}</td>
             <td class="value">{{value}}</td>
             <td class="action" rowspan="{{item.properties | keyLength}}" ng-if="$first">Correct and revalidate</td>
         </tr>
