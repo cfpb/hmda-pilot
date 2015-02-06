@@ -33,8 +33,13 @@ describe('Filters: hmdaFilters', function() {
                 get: function() { return mockMetadata; }
             },
             mockFileSpec = {
+                transmittalSheet: {
+                    activityYear: {
+                           label: 'Activity Year',
+                    }
+                },
                 loanApplicationRegister: {
-                    recordID:{
+                    recordID: {
                         element: '01',
                         label: 'Record Identifier',
                         start: '1',
@@ -54,8 +59,20 @@ describe('Filters: hmdaFilters', function() {
             });
         }));
 
-        it('should return the length of the input object\'s keys', angular.mock.inject(function(hmdaLabelFilter) {
-            expect(hmdaLabelFilter('recordID', 'lar')).toBe('Record Identifier');
+        it('should return the length of the input object\'s keys for lar', angular.mock.inject(function(hmdaLabelFilter) {
+            expect(hmdaLabelFilter({'property':'recordID', 'lineNumber':'2'}, 'lar')).toBe('Record Identifier');
+        }));
+
+        it('should return the length of the input object\'s keys for ts', angular.mock.inject(function(hmdaLabelFilter) {
+            expect(hmdaLabelFilter({'property':'activityYear', 'lineNumber':'1'}, 'ts')).toBe('Activity Year');
+        }));
+
+        it('should return the length of the input object\'s keys for hmda and line 1', angular.mock.inject(function(hmdaLabelFilter) {
+            expect(hmdaLabelFilter({'property':'activityYear', 'lineNumber':'1'}, 'hmda')).toBe('Activity Year');
+        }));
+
+        it('should return the length of the input object\'s keys for hmda and line != 1', angular.mock.inject(function(hmdaLabelFilter) {
+            expect(hmdaLabelFilter({'property':'recordID', 'lineNumber':'x'}, 'hmda')).toBe('Record Identifier');
         }));
     });
 
