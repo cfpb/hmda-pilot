@@ -3,14 +3,16 @@
         <tr>
             <th class="id" scope="col">Edit Identifier</th>
             <th class="description" scope="col">Error Explanation</th>
-            <th class="count" scope="col">Number of Errors</th>
+            <th class="count" scope="col" ng-if="showErrorCount()">Number of Errors</th>
+            <th class="verified" scope="col" ng-if="!showErrorCount()">Verification</th>
         </tr>
     </thead>
     <tbody>
         <tr ng-repeat="(key, value) in errors">
             <td class="id"><a ng-href="#/detail/{{editType}}/{{key}}">{{key}}</a></td>
             <td class="description">{{value.explanation}}</td>
-            <td class="count">{{value.errors.length}}</td>
+            <td class="count" ng-if="showErrorCount()">{{value.errors.length}}</td>
+            <td class="verified" ng-if="!showErrorCount()">{{isVerified(key) ? 'Verified' : 'Not verified'}}</td>
         </tr>
     </tbody>
 </table>

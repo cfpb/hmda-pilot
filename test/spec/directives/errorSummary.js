@@ -25,14 +25,13 @@ describe('Directive: ErrorSummary', function () {
         $templateCache.put(templateId, directiveTemplate);
     }));
 
-    describe('when there are errors', function() {
-
+    describe('when there are Syntactical or Validity errors', function() {
         var table;
 
         beforeEach(inject(function ($rootScope, $compile) {
             scope = $rootScope.$new();
             scope.errors = mockErrors;
-            element = angular.element('<error-summary errors="errors"></error-summary>');
+            element = angular.element('<error-summary type="syntactical" errors="errors"></error-summary>');
             element = $compile(element)(scope);
             scope.$digest();
             table = jQuery('table', element);
@@ -52,6 +51,37 @@ describe('Directive: ErrorSummary', function () {
                 expect(jQuery('thead th:eq(1)', table).attr('scope')).toBe('col');
 
                 expect(jQuery('thead th:eq(2)', table).text()).toBe('Number of Errors');
+                expect(jQuery('thead th:eq(2)', table).attr('scope')).toBe('col');
+            });
+        });
+    });
+
+    describe('when there are Quality or Macro errors', function() {
+        var table;
+
+        beforeEach(inject(function ($rootScope, $compile) {
+            scope = $rootScope.$new();
+            scope.errors = mockErrors;
+            element = angular.element('<error-summary type="quality" errors="errors"></error-summary>');
+            element = $compile(element)(scope);
+            scope.$digest();
+            table = jQuery('table', element);
+        }));
+
+        it('should display a table of errors', function () {
+            expect(table).toBeDefined();
+            expect(table.hasClass('summary-table')).toBeTruthy();
+        });
+
+        describe('table', function() {
+            it('should display column headers', function() {
+                expect(jQuery('thead th:eq(0)', table).text()).toBe('Edit Identifier');
+                expect(jQuery('thead th:eq(0)', table).attr('scope')).toBe('col');
+
+                expect(jQuery('thead th:eq(1)', table).text()).toBe('Error Explanation');
+                expect(jQuery('thead th:eq(1)', table).attr('scope')).toBe('col');
+
+                expect(jQuery('thead th:eq(2)', table).text()).toBe('Verification');
                 expect(jQuery('thead th:eq(2)', table).attr('scope')).toBe('col');
             });
         });
