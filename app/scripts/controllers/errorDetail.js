@@ -7,7 +7,7 @@
  * # ErrorDetailCtrl
  * Controller of the hmdaPilotApp
  */
-module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, HMDAEngine) {
+module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http, HMDAEngine, Session) {
 
     // Get the list of errors from the HMDAEngine
     var editType = $routeParams.EditType,
@@ -26,6 +26,13 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, HMDAEn
         $scope.editError = {};
     }
 
+    if (editType === 'macro') {
+        $scope.comments = [];
+        $http.get('data/macro-comments.json').success(function(data) {
+            $scope.comments = data[editId];
+        });
+    }
+
     $scope.backToSummary = function() {
         if (editType === 'syntactical' || editType === 'validity') {
             $location.path('/summarySyntacticalValidity');
@@ -38,5 +45,19 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, HMDAEn
 
     $scope.goToEditDetail = function() {
         $location.path('/detail/' + editType + '/' + $scope.selectedEditId);
+    };
+
+    $scope.saveQualityVerification = function(response) {
+        if (response.verified) {
+            Session.addToVerifiedQualityEdits(editId);
+        }
+        $location.path('/summaryQualityMacro');
+    };
+
+    $scope.saveMacroVerification = function(response) {
+        if (response.verified && response.reason) {
+            Session.addToVerifiedMacroEdits(editId, response.reason);
+        }
+        $location.path('/summaryQualityMacro');
     };
 };

@@ -7,20 +7,27 @@ describe('Controller: ErrorDetailCtrl', function () {
 
     var scope,
         location,
+        httpBackend,
         controller,
         HMDAEngine,
+        Session,
         editType = 'syntactical',
         editId = 'S100',
         mockErrors = {'syntactical': {'S100':'errors for S100'} }; //jshint ignore:line
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function ($controller, $rootScope, $location, _HMDAEngine_) {
+    beforeEach(inject(function ($controller, $rootScope, $location, $httpBackend, _HMDAEngine_, _Session_) {
         controller = $controller;
         scope = $rootScope.$new();
+        httpBackend = $httpBackend;
         location = $location;
         HMDAEngine = _HMDAEngine_;
+        Session = _Session_;
         HMDAEngine.getErrors = function() { return mockErrors; };
+        $httpBackend
+            .whenGET('data/macro-comments.json')
+            .respond({'Q100': ['Reason A', 'Reason B'], 'Q200': ['Reason C', 'Reason D']});
 
         controller('ErrorDetailCtrl', {
             $scope: scope,
@@ -28,7 +35,8 @@ describe('Controller: ErrorDetailCtrl', function () {
                 EditType: editType,
                 EditId: editId
             },
-            HMDAEngine: HMDAEngine
+            HMDAEngine: HMDAEngine,
+            Session: Session
         });
     }));
 
@@ -67,6 +75,21 @@ describe('Controller: ErrorDetailCtrl', function () {
                 HMDAEngine: HMDAEngine
             });
             expect(scope.editError).toEqual({});
+        });
+
+        describe('when editType is "macro"', function() {
+            it('should define a list of comments for the current Edit ID', function() {
+                controller('ErrorDetailCtrl', {
+                    $scope: scope,
+                    $routeParams: {
+                        EditType: 'macro',
+                        EditId: 'Q100'
+                    },
+                    HMDAEngine: HMDAEngine
+                });
+                httpBackend.flush();
+                expect(scope.comments).toEqual(['Reason A', 'Reason B']);
+            });
         });
     });
 
@@ -154,6 +177,85 @@ describe('Controller: ErrorDetailCtrl', function () {
             scope.goToEditDetail();
             scope.$digest();
             expect(location.path()).toBe('/detail/syntactical/V100');
+        });
+    });
+
+    describe('saveQualityVerification()', function() {
+        describe('when edit has been verified', function() {
+            beforeEach(function() {
+                scope.saveQualityVerification({verified: true});
+                scope.$digest();
+            });
+
+            it('should save the Edit ID to the session', function() {
+                expect(Session.getVerifiedQualityEditIds()).toContain('S100');
+            });
+
+            it('should go to the next error in the list', function() {
+                expect(location.path()).toBe('/summaryQualityMacro');
+            });
+        });
+
+        describe('when edit is not verified', function() {
+            beforeEach(function() {
+                scope.saveQualityVerification({verified: false});
+                scope.$digest();
+            });
+
+            it('should save the Edit ID to the session', function() {
+                expect(Session.getVerifiedQualityEditIds()).not.toContain('S100');
+            });
+
+            it('should go to the next error in the list', function() {
+                expect(location.path()).toBe('/summaryQualityMacro');
+            });
+        });
+    });
+
+    describe('saveMacroVerification()', function() {
+        describe('when edit has been verified and a reason given', function() {
+            beforeEach(function() {
+                scope.saveMacroVerification({verified: true, reason: 'test'});
+                scope.$digest();
+            });
+
+            it('should save the Edit ID and reason to the session', function() {
+                expect(Session.getVerifiedMacroEditIds()).toContain('S100');
+            });
+
+            it('should go to the next error in the list', function() {
+                expect(location.path()).toBe('/summaryQualityMacro');
+            });
+        });
+
+        describe('when edit has been verified but no reason given', function() {
+            beforeEach(function() {
+                scope.saveMacroVerification({verified: true, reason: ''});
+                scope.$digest();
+            });
+
+            it('should save the Edit ID and reason to the session', function() {
+                expect(Session.getVerifiedMacroEditIds()).not.toContain('S100');
+            });
+
+            it('should go to the next error in the list', function() {
+                expect(location.path()).toBe('/summaryQualityMacro');
+            });
+        });
+
+        describe('when edit is not verified', function() {
+            beforeEach(function() {
+                scope.saveMacroVerification({verified: false, reason: ''});
+                scope.$digest();
+            });
+
+            it('should save the Edit ID and reason to the session', function() {
+                expect(Session.getVerifiedMacroEditIds()).not.toContain('S100');
+            });
+
+            it('should go to the next error in the list', function() {
+                expect(location.path()).toBe('/summaryQualityMacro');
+            });
         });
     });
 });
