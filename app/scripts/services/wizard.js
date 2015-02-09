@@ -19,7 +19,7 @@ module.exports = /*@ngInject*/ function (StepFactory) {
      */
     this.initSteps = function() {
         steps = [
-            new StepFactory('Select file & upload', 'selectFile'),
+            new StepFactory('Select file & validate', 'selectFile'),
             new StepFactory('Syntactical & validity edit reports', 'summarySyntacticalValidity'),
             new StepFactory('Quality & macro edit reports', 'summaryQualityMacro'),
             new StepFactory('MSA and IRS reports', 'summaryMSA-IRS'),
