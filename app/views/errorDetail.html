@@ -5,19 +5,28 @@
 
 <error-detail error="editError"></error-detail>
 
-<form ng-if="editType === 'quality'" ng-submit="saveQualityVerification(response)">
-    <p><label for="verify"><input type="checkbox" id="verify" ng-model="response.verified"> I have verified that all of the submitted data is correct and agree with the accuracy of the values listed.</label></p>
+<form class="form-verify form-well" ng-if="editType === 'quality'" ng-submit="saveQualityVerification(response)">
+    <div class="form-group_item">
+        <label for="verify"><input type="checkbox" id="verify" ng-model="response.verified"> I have verified that all of the submitted data is correct and agree with the accuracy of the values listed.</label>
+    </div>
 
-    <button type="submit" class="btn">Save and continue</button>
-    <button class="btn btn__secondary u-mt5" ng-click="backToSummary()">Back to summary</button>
+    <div class="form-buttons">
+        <button type="submit" class="btn">Save and continue</button>
+        <button class="btn btn__secondary u-mt5" ng-click="backToSummary()">Back to summary</button>
+    </div>
 </form>
 
-<form ng-if="editType === 'macro'" ng-submit="saveMacroVerification(response)">
-    <p><label for="verify"><input type="checkbox" id="verify" ng-model="response.verified"> I have verified that all of the submitted data is correct and agree with the accuracy of the values listed.</label></p>
+<form class="form-verify form-well" ng-if="editType === 'macro'" ng-submit="saveMacroVerification(response)">
+    <div class="form-group_item">
+        <label for="verify"><input type="checkbox" id="verify" ng-model="response.verified"> I have verified that all of the submitted data is correct and agree with the accuracy of the values listed.</label>
+        <div class="form-group_item">
+            <label class="form-label-header" for="reason">Reason:</label>
+            <select id="reason" ng-model="response.reason" ng-options="item for item in comments"></select>
+        </div>
+    </div>
 
-    <label for="reason">Reason:</label>
-    <select id="reason" ng-model="response.reason" ng-options="item for item in comments"></select>
-
-    <button type="submit" class="btn">Save and continue</button>
-    <button class="btn btn__secondary u-mt5" ng-click="backToSummary()">Back to summary</button>
+    <div class="form-buttons">
+        <button type="submit" class="btn">Save and continue</button>
+        <button class="btn btn__secondary u-mt5" ng-click="backToSummary()">Back to summary</button>
+    </div>
 </form>
