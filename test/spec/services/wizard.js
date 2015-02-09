@@ -43,7 +43,7 @@ describe('Service: Wizard', function () {
 
         it('should return the current step', function () {
             var step = service.getCurrentStep();
-            expect(step.title).toBe('Select file & upload');
+            expect(step.title).toBe('Select file & validate');
             expect(step.view).toBe('selectFile');
             expect(step.status).toBe(StepStatus.incomplete);
             expect(step.isActive).toBeTruthy();
