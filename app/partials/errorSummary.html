@@ -4,7 +4,7 @@
             <th class="id" scope="col">Edit Identifier</th>
             <th class="description" scope="col">Error Explanation</th>
             <th class="count" scope="col" ng-if="showErrorCount()">Number of Errors</th>
-            <th class="verified" scope="col" ng-if="!showErrorCount()">Verification</th>
+            <th class="verification" scope="col" ng-if="!showErrorCount()">Verification</th>
         </tr>
     </thead>
     <tbody>
@@ -12,7 +12,7 @@
             <td class="id"><a ng-href="#/detail/{{editType}}/{{key}}">{{key}}</a></td>
             <td class="description">{{value.explanation}}</td>
             <td class="count" ng-if="showErrorCount()">{{value.errors.length}}</td>
-            <td class="verified" ng-if="!showErrorCount()">{{isVerified(key) ? 'Verified' : 'Not verified'}}</td>
+            <td class="verification" ng-if="!showErrorCount()" ng-class="isVerified(key) ? 'verified' : 'not-verified'">{{isVerified(key) ? 'Verified' : 'Not verified'}}</td>
         </tr>
     </tbody>
 </table>

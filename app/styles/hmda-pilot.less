@@ -153,13 +153,18 @@ table.summary-table {
     td.id {
         width: 13%;
     }
-    td.count {
+    td.count,
+    td.verification {
         width: 17%;
     }
     tbody {
-        td.count {
+        td.count,
+        td.not-verified {
             .webfont-demi;
             color: @redorange;
+        }
+        td.verified {
+            color: @green
         }
     }
 }
