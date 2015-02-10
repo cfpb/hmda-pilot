@@ -78,7 +78,7 @@ describe('Controller: ErrorDetailCtrl', function () {
         });
 
         describe('when editType is "macro"', function() {
-            it('should define a list of comments for the current Edit ID', function() {
+            it('should define a list of reasons for the current Edit ID', function() {
                 controller('ErrorDetailCtrl', {
                     $scope: scope,
                     $routeParams: {
@@ -88,7 +88,7 @@ describe('Controller: ErrorDetailCtrl', function () {
                     HMDAEngine: HMDAEngine
                 });
                 httpBackend.flush();
-                expect(scope.comments).toEqual(['Reason A', 'Reason B']);
+                expect(scope.reasonList).toEqual(['Reason A', 'Reason B']);
             });
         });
     });

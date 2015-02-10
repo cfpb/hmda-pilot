@@ -36,11 +36,17 @@ describe('Service: Session', function () {
         it('should return true if an Edit ID was saved as a Macro Edit ID', function() {
             service.addToVerifiedMacroEdits('V100', 'test');
             expect(service.isVerified('V100')).toBeTruthy();
-
         });
 
         it('should return false if the Edit ID was not found', function() {
             expect(service.isVerified('V999')).toBeFalsy();
+        });
+    });
+
+    describe('getVerifiedReasonByEditId()', function() {
+        it('should return a reason an edit was verified', function() {
+            service.addToVerifiedMacroEdits('V100', 'test');
+            expect(service.getVerifiedReasonByEditId('V100')).toBe('test');
         });
     });
 

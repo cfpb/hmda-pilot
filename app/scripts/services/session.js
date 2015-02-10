@@ -69,10 +69,20 @@ module.exports = /*@ngInject*/ function () {
     };
 
     /**
-     * Add an editId to a list of verified Quality edits
+     * Get the verification reason for a specific Macro edit by Id
      *
      * @param {String} editId
-     * @return {Array} verified items
+     * @retrun {String} reason
+     */
+    this.getVerifiedReasonByEditId = function(editId) {
+        return session.verifiedMacroEdits[editId];
+    };
+
+    /**
+     * Add an editId to a list of verified Quality edits
+     *
+     * @param {String} editId to be added
+     * @return {Array} verified quality edits
      */
     this.addToVerifiedQualityEdits = function (editId) {
         session.verifiedQualityEdits.push(editId);

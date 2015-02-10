@@ -5,9 +5,9 @@
 
 <error-detail error="editError"></error-detail>
 
-<form class="form-verify form-well" ng-if="editType === 'quality'" ng-submit="saveQualityVerification(response)">
+<form novalidate class="form-verify form-well" ng-if="editType === 'quality'" ng-submit="saveQualityVerification(response)">
     <div class="form-group_item">
-        <label for="verify"><input type="checkbox" id="verify" ng-model="response.verified"> I have verified that all of the submitted data is correct and agree with the accuracy of the values listed.</label>
+        <label for="verify"><input type="checkbox" id="verify" ng-model="response.verified" ng-checked="verified"> I have verified that all of the submitted data is correct and agree with the accuracy of the values listed.</label>
     </div>
 
     <div class="form-buttons">
@@ -16,12 +16,14 @@
     </div>
 </form>
 
-<form class="form-verify form-well" ng-if="editType === 'macro'" ng-submit="saveMacroVerification(response)">
+<form novalidate class="form-verify form-well" ng-if="editType === 'macro'" ng-submit="saveMacroVerification(response)">
     <div class="form-group_item">
-        <label for="verify"><input type="checkbox" id="verify" ng-model="response.verified"> I have verified that all of the submitted data is correct and agree with the accuracy of the values listed.</label>
+        <label for="verify"><input type="checkbox" id="verify" ng-model="response.verified" ng-checked="verified"> I have verified that all of the submitted data is correct and agree with the accuracy of the values listed.</label>
         <div class="form-group_item">
             <label class="form-label-header" for="reason">Reason:</label>
-            <select id="reason" ng-model="response.reason" ng-options="item for item in comments"></select>
+            <select id="reason" ng-model="response.reason">
+                <option ng-repeat="reason in reasonList" value="{{reason}}" ng-selected="{{selectedReason === reason}}">{{reason}}</option>
+            </select>
         </div>
     </div>
 

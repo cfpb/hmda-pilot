@@ -26,11 +26,16 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
         $scope.editError = {};
     }
 
-    if (editType === 'macro') {
-        $scope.comments = [];
+    if (editType === 'quality') {
+        $scope.verified = Session.isVerified(editId);
+    } else if (editType === 'macro') {
+        $scope.reasonList = [];
         $http.get('data/macro-comments.json').success(function(data) {
-            $scope.comments = data[editId];
+            $scope.reasonList = data[editId];
         });
+
+        $scope.verified = Session.isVerified(editId);
+        $scope.selectedReason = Session.getVerifiedReasonByEditId(editId);
     }
 
     $scope.backToSummary = function() {
