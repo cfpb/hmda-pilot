@@ -86,6 +86,22 @@ footer {
     padding: 1.5em;
 }
 
+.form-verify {
+    margin-top: 2.5em;
+
+    .form-group_item > .form-group_item {
+        margin-left: 1.5em;
+
+        .form-label-header {
+            display: inline-block;
+        }
+    }
+
+    .form-buttons {
+        margin-top: 1.5em;
+    }
+}
+
 .form-group-horizontal {
     .form-group_item {
         .grid_column(6, 12);
@@ -103,6 +119,10 @@ footer {
         margin-top: 1.5em;
         border: 0;
     }
+}
+
+.form-group_item__disabled {
+    color: @gray;
 }
 
 .page-errors {
@@ -153,13 +173,18 @@ table.summary-table {
     td.id {
         width: 13%;
     }
-    td.count {
+    td.count,
+    td.verification {
         width: 17%;
     }
     tbody {
-        td.count {
+        td.count,
+        td.not-verified {
             .webfont-demi;
             color: @redorange;
+        }
+        td.verified {
+            color: @green
         }
     }
 }

@@ -7,10 +7,11 @@
  * # Select File
  * Controller for selecting a HMDA file and Reporting Year for verification.
  */
-module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileReader, FileMetadata, HMDAEngine, Wizard) {
+module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileReader, FileMetadata, HMDAEngine, Wizard, Session) {
     var fiscalYears = HMDAEngine.getValidYears();
 
     // Set/Reset the state of different objects on load
+    Session.reset();
     HMDAEngine.clearHmdaJson();
     HMDAEngine.clearErrors();
     $scope.metadata = FileMetadata.clear();
