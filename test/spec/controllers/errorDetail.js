@@ -13,7 +13,7 @@ describe('Controller: ErrorDetailCtrl', function () {
         Session,
         editType = 'syntactical',
         editId = 'S100',
-        mockErrors = {'syntactical': {'S100':'errors for S100'} }; //jshint ignore:line
+        mockErrors = {'syntactical': {'S100':'errors for S100', 'S200':'errors for S200'} }; //jshint ignore:line
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
@@ -192,7 +192,7 @@ describe('Controller: ErrorDetailCtrl', function () {
             });
 
             it('should go to the next error in the list', function() {
-                expect(location.path()).toBe('/summaryQualityMacro');
+                expect(location.path()).toBe('/detail/syntactical/S200');
             });
         });
 
@@ -207,7 +207,7 @@ describe('Controller: ErrorDetailCtrl', function () {
             });
 
             it('should go to the next error in the list', function() {
-                expect(location.path()).toBe('/summaryQualityMacro');
+                expect(location.path()).toBe('/detail/syntactical/S200');
             });
         });
     });
@@ -224,7 +224,7 @@ describe('Controller: ErrorDetailCtrl', function () {
             });
 
             it('should go to the next error in the list', function() {
-                expect(location.path()).toBe('/summaryQualityMacro');
+                expect(location.path()).toBe('/detail/syntactical/S200');
             });
         });
 
@@ -239,7 +239,7 @@ describe('Controller: ErrorDetailCtrl', function () {
             });
 
             it('should go to the next error in the list', function() {
-                expect(location.path()).toBe('/summaryQualityMacro');
+                expect(location.path()).toBe('/detail/syntactical/S200');
             });
         });
 
@@ -254,7 +254,7 @@ describe('Controller: ErrorDetailCtrl', function () {
             });
 
             it('should go to the next error in the list', function() {
-                expect(location.path()).toBe('/summaryQualityMacro');
+                expect(location.path()).toBe('/detail/syntactical/S200');
             });
         });
     });

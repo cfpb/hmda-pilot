@@ -58,7 +58,7 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
         } else {
             Session.removeVerifiedQualityEdit(editId);
         }
-        $location.path('/summaryQualityMacro');
+        nextEdit();
     };
 
     $scope.saveMacroVerification = function(response) {
@@ -67,6 +67,17 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
         } else {
             Session.removeVerifiedMacroEdit(editId);
         }
-        $location.path('/summaryQualityMacro');
+        nextEdit();
     };
+
+    // Go to the next edit in the list for the current edit type
+    // or go back to the summary page if we reach the end
+    function nextEdit() {
+        var path = '/summaryQualityMacro',
+            currentIdx = $scope.siblingEdits.indexOf(editId);
+        if (currentIdx !== ($scope.siblingEdits.length - 1)) {
+            path = '/detail/' + editType + '/' + $scope.siblingEdits[currentIdx+1];
+        }
+        $location.path(path);
+    }
 };
