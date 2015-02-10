@@ -90,14 +90,37 @@ module.exports = /*@ngInject*/ function () {
     };
 
     /**
+     * Remove a specified Quality edit from the list of verified
+     *
+     * @param {String} editId to be removed
+     * @return {Array} verified quality edits
+     */
+    this.removeVerifiedQualityEdit = function (editId) {
+        var currIdx = session.verifiedQualityEdits.indexOf(editId);
+        session.verifiedQualityEdits.splice(currIdx, 1);
+        return session.verifiedQualityEdits;
+    };
+
+    /**
      * Add an editId to a list of verified Macro edits
      *
-     * @param {String} editId
+     * @param {String} editId to be added
      * @param {String} reason
-     * @return {Array} verified items
+     * @return {Array} verified macro edits
      */
     this.addToVerifiedMacroEdits = function (editId, reason) {
         session.verifiedMacroEdits[editId] = reason;
-        return session.verifiedMacroEdits;
+        return this.getVerifiedMacroEditIds();
+    };
+
+    /**
+     * Remove a specified Macro edit from the list of verified
+     *
+     * @param {String} editId to be removed
+     * @return {Array} verified macro edits
+     */
+    this.removeVerifiedMacroEdit = function (editId) {
+        delete session.verifiedMacroEdits[editId];
+        return this.getVerifiedMacroEditIds();
     };
 };

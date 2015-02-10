@@ -27,6 +27,20 @@ describe('Service: Session', function () {
         });
     });
 
+    describe('removeVerifiedQualityEdit()', function() {
+        it('should remove the id from the array of validated Quality Edit IDs', function() {
+            service.addToVerifiedQualityEdits('V100');
+            expect(service.removeVerifiedQualityEdit('V100')).not.toContain('V100');
+        });
+    });
+
+    describe('removeVerifiedMacroEdit()', function() {
+        it('should remove the id from the array of validated Macro Edit IDs', function() {
+            service.addToVerifiedQualityEdits('V100');
+            expect(service.removeVerifiedMacroEdit('V100')).not.toContain('V100');
+        });
+    });
+
     describe('isVerified()', function() {
         it('should return true if an Edit ID was saved as a Quality Edit ID', function() {
             service.addToVerifiedQualityEdits('V100');

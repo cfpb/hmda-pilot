@@ -53,15 +53,19 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
     };
 
     $scope.saveQualityVerification = function(response) {
-        if (response.verified) {
+        if (response && response.verified) {
             Session.addToVerifiedQualityEdits(editId);
+        } else {
+            Session.removeVerifiedQualityEdit(editId);
         }
         $location.path('/summaryQualityMacro');
     };
 
     $scope.saveMacroVerification = function(response) {
-        if (response.verified && response.reason) {
+        if (response && response.verified && response.reason) {
             Session.addToVerifiedMacroEdits(editId, response.reason);
+        } else {
+            Session.removeVerifiedMacroEdit(editId);
         }
         $location.path('/summaryQualityMacro');
     };
