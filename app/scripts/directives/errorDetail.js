@@ -23,6 +23,14 @@ module.exports = /*@ngInject*/ function () {
                 scope.error = null;
             }
 
+            scope.$watch(function() {
+                return scope.isLastPage();
+            }, function(isLastPage) {
+                if (isLastPage) {
+                    scope.$parent.canVerify = true;
+                }
+            });
+
             scope.start = function() {
                 return (scope.currentPage-1) * scope.pageSize + 1;
             };
@@ -54,6 +62,10 @@ module.exports = /*@ngInject*/ function () {
 
             scope.onNext = function() {
                 scope.currentPage++;
+            };
+
+            scope.isLastPage = function() {
+                return scope.currentPage === scope.totalPages();
             };
 
             scope.setCurrentPage = function(page) {
