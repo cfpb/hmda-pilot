@@ -11,7 +11,7 @@ module.exports = /*@ngInject*/ function () {
 
     return {
         restrict: 'E',
-        templateUrl: 'partials/errorDetail.html',
+        template: '<div ng-include="getTemplateUrl()"></div>',
         scope: {
             error: '=',
             editType: '@type'
@@ -76,6 +76,14 @@ module.exports = /*@ngInject*/ function () {
             scope.setPageSize = function(pageSize) {
                 scope.pageSize = pageSize;
                 scope.currentPage = 1;
+            };
+
+            scope.getTemplateUrl = function() {
+                if (scope.editType === 'macro') {
+                    return 'partials/errorDetail-macro.html';
+                } else {
+                    return 'partials/errorDetail.html';
+                }
             };
         }
     };
