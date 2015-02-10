@@ -41,7 +41,7 @@ module.exports = /*@ngInject*/ function () {
             };
 
             scope.total = function() {
-                return scope.error.errors.length;
+                return (scope.error && scope.error.errors) ? scope.error.errors.length : 0;
             };
 
             scope.totalPages = function() {
