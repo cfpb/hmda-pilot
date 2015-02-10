@@ -4,7 +4,7 @@
 <p ng-if="['syntactical', 'validity', 'macro'].indexOf(editType) !== -1">Please review and correct all of the errors listed below in your system of record. Once corrected, re-select the updated file to validate the data.</p>
 <p ng-if="editType === 'quality'">Please review all of the data listed below. You must review the entire list <em>({{editError.errors.length}} entries)</em> and verify that all of the data is correct before proceeding. If any of the data is incorrect, please correct the errors in your system of record and resubmit the file.</p>
 
-<error-detail error="editError"></error-detail>
+<error-detail type="{{editType}}" error="editError"></error-detail>
 
 <form novalidate class="form-verify form-well" ng-if="editType === 'quality'" ng-submit="saveQualityVerification(response)">
     <div class="form-group_item" ng-class="{'form-group_item__disabled': !canVerify}">

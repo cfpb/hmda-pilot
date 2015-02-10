@@ -13,7 +13,8 @@ module.exports = /*@ngInject*/ function () {
         restrict: 'E',
         templateUrl: 'partials/errorDetail.html',
         scope: {
-            error: '='
+            error: '=',
+            editType: '@type'
         },
         link: function(scope) {
             scope.pageSize = scope.pageSize || 10;
