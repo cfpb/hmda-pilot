@@ -74,6 +74,14 @@ describe('Filters: hmdaFilters', function() {
         it('should return the length of the input object\'s keys for hmda and line != 1', angular.mock.inject(function(hmdaLabelFilter) {
             expect(hmdaLabelFilter({'property':'recordID', 'lineNumber':'x'}, 'hmda')).toBe('Record Identifier');
         }));
+
+        it('should return the property as label when property can\'t be found and line 1', angular.mock.inject(function(hmdaLabelFilter) {
+            expect(hmdaLabelFilter({'property':'Foo Bar', 'lineNumber':'1'}, 'hmda')).toBe('Foo Bar');
+        }));
+
+        it('should return the property as label when property can\'t be found and line != 1', angular.mock.inject(function(hmdaLabelFilter) {
+            expect(hmdaLabelFilter({'property':'Bar Foo', 'lineNumber':'x'}, 'hmda')).toBe('Bar Foo');
+        }));
     });
 
     describe('capitalize', function() {
