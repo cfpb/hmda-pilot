@@ -15,7 +15,11 @@ angular.module('hmdaFilters', [])
                 }
             }
             var fileSpec = HMDAEngine.getFileSpec(FileMetadata.get().activityYear);
-            return fileSpec[scopes[scope]][input.property].label;
+            var property = fileSpec[scopes[scope]][input.property];
+            if (property !== undefined && property.hasOwnProperty('label')) {
+                return property.label;
+            }
+            return input.property;
         };
     }])
     .filter('keyLength', function() {
