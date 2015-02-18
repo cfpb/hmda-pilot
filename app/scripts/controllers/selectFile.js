@@ -42,14 +42,22 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileRe
 
     // Process the form submission
     $scope.submit = function(hmdaData) {
+        // Clear out any existing errors
+        $scope.errors.global = null;
         // Toggle processing flag on so that we can notify the user
         $scope.isProcessing = true;
 
-        $timeout(function() { return; }, 250); // Pause before starting the conversion so that the DOM can update
+        $timeout(function() { $scope.process(hmdaData); }, 100); // Pause before starting the conversion so that the DOM can update
 
+    };
+
+    $scope.process = function(hmdaData) {
         // Convert the file to JSON
         HMDAEngine.fileToJson(hmdaData.file, hmdaData.year, function(fileErr) {
             if (fileErr) {
+                // Toggle processing flag off
+                $scope.isProcessing = false;
+
                 $scope.errors.global = fileErr;
                 $scope.$apply();
                 return;
@@ -66,14 +74,17 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileRe
                 // And go the summary page
                 $location.path('/summarySyntacticalValidity');
 
+                // Toggle processing flag off
+                $scope.isProcessing = false;
             })
             .catch(function(err) {
+                // Toggle processing flag off
+                $scope.isProcessing = false;
+
                 $scope.errors.global = err.message;
                 return;
             });
 
-            // Toggle processing flag off
-            $scope.isProcessing = false;
         });
     };
 };

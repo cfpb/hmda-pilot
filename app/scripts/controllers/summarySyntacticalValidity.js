@@ -31,8 +31,10 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
         // Toggle processing flag on so that we can notify the user
         $scope.isProcessing = true;
 
-        $timeout(function() { return; }, 250); // Pause before starting the validation so that the DOM can update
+        $timeout(function() { $scope.process(); }, 100); // Pause before starting the validation so that the DOM can update
+    };
 
+    $scope.process = function() {
         // Run the second set of validations
         var ruleYear = HMDAEngine.getRuleYear();
         $q.all([HMDAEngine.runQuality(ruleYear), HMDAEngine.runMacro(ruleYear)])
@@ -44,13 +46,15 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
             // And go the next summary page
             $location.path('/summaryQualityMacro');
 
+            // Toggle processing flag off
+            $scope.isProcessing = false;
         })
         .catch(function(err) {
+            // Toggle processing flag off
+            $scope.isProcessing = false;
+
             $scope.errors.global = err.message;
             return;
         });
-
-        // Toggle processing flag off
-        $scope.isProcessing = false;
     };
 };
