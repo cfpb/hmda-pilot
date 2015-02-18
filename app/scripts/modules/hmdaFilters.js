@@ -7,8 +7,19 @@ angular.module('hmdaFilters', [])
                 'lar': 'loanApplicationRegister',
                 'ts': 'transmittalSheet'
             };
+            // Set proper scope for properties of hmda file elements
+            if (scope === 'hmda') {
+                scope = 'lar';
+                if (input.lineNumber === '1') {
+                    scope = 'ts';
+                }
+            }
             var fileSpec = HMDAEngine.getFileSpec(FileMetadata.get().activityYear);
-            return fileSpec[scopes[scope]][input].label;
+            var property = fileSpec[scopes[scope]][input.property];
+            if (property !== undefined && property.hasOwnProperty('label')) {
+                return property.label;
+            }
+            return input.property;
         };
     }])
     .filter('keyLength', function() {

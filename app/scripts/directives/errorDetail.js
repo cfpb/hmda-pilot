@@ -11,9 +11,10 @@ module.exports = /*@ngInject*/ function () {
 
     return {
         restrict: 'E',
-        templateUrl: 'partials/errorDetail.html',
+        template: '<div ng-include="getTemplateUrl()"></div>',
         scope: {
-            error: '='
+            error: '=',
+            editType: '@type'
         },
         link: function(scope) {
             scope.pageSize = scope.pageSize || 10;
@@ -22,6 +23,14 @@ module.exports = /*@ngInject*/ function () {
             if (angular.equals({}, scope.error)) {
                 scope.error = null;
             }
+
+            scope.$watch(function() {
+                return scope.isLastPage();
+            }, function(isLastPage) {
+                if (isLastPage) {
+                    scope.$parent.canVerify = true;
+                }
+            });
 
             scope.start = function() {
                 return (scope.currentPage-1) * scope.pageSize + 1;
@@ -33,11 +42,11 @@ module.exports = /*@ngInject*/ function () {
             };
 
             scope.total = function() {
-                return scope.error.errors.length;
+                return (scope.error && scope.error.errors) ? scope.error.errors.length : 0;
             };
 
             scope.totalPages = function() {
-                return parseInt(scope.total() / scope.pageSize) || 1;
+                return Math.ceil(scope.total() / scope.pageSize);
             };
 
             scope.hasPrev = function() {
@@ -56,8 +65,25 @@ module.exports = /*@ngInject*/ function () {
                 scope.currentPage++;
             };
 
+            scope.isLastPage = function() {
+                return scope.currentPage === scope.totalPages();
+            };
+
             scope.setCurrentPage = function(page) {
                 scope.currentPage = page;
+            };
+
+            scope.setPageSize = function(pageSize) {
+                scope.pageSize = pageSize;
+                scope.currentPage = 1;
+            };
+
+            scope.getTemplateUrl = function() {
+                if (scope.editType === 'macro') {
+                    return 'partials/errorDetail-macro.html';
+                } else {
+                    return 'partials/errorDetail.html';
+                }
             };
         }
     };

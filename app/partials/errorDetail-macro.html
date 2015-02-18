@@ -1,0 +1,10 @@
+<table class="macro-detail-table" ng-if="error">
+    <tbody ng-repeat="item in error.errors">
+        <tr ng-repeat="(key, value) in item.properties">
+            <th class="property" scope="row">{{key}}</th>
+            <td class="value">{{value}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<p ng-if="!error">No errors found.</p>

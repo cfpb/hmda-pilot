@@ -7,10 +7,11 @@
  * # Select File
  * Controller for selecting a HMDA file and Reporting Year for verification.
  */
-module.exports = /*@ngInject*/ function ($scope, $location, $timeout, FileReader, FileMetadata, HMDAEngine, Wizard) {
+module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileReader, FileMetadata, HMDAEngine, Wizard, Session) {
     var fiscalYears = HMDAEngine.getValidYears();
 
     // Set/Reset the state of different objects on load
+    Session.reset();
     HMDAEngine.clearHmdaJson();
     HMDAEngine.clearErrors();
     $scope.metadata = FileMetadata.clear();
@@ -31,7 +32,7 @@ module.exports = /*@ngInject*/ function ($scope, $location, $timeout, FileReader
 
     $scope.getFile = function() {
         // Read the contents of the file and set a value in the scope when its complete
-        FileReader.readFile($scope.file, $scope).then(function(result) {
+        FileReader.readAsText($scope.file, 'utf-8', $scope).then(function(result) {
             $scope.hmdaData.file = result;
         });
 
@@ -41,48 +42,49 @@ module.exports = /*@ngInject*/ function ($scope, $location, $timeout, FileReader
 
     // Process the form submission
     $scope.submit = function(hmdaData) {
+        // Clear out any existing errors
+        $scope.errors.global = null;
         // Toggle processing flag on so that we can notify the user
         $scope.isProcessing = true;
 
-        $timeout(function() { return; }, 250); // Pause before starting the conversion so that the DOM can update
+        $timeout(function() { $scope.process(hmdaData); }, 100); // Pause before starting the conversion so that the DOM can update
 
+    };
+
+    $scope.process = function(hmdaData) {
         // Convert the file to JSON
         HMDAEngine.fileToJson(hmdaData.file, hmdaData.year, function(fileErr) {
             if (fileErr) {
+                // Toggle processing flag off
+                $scope.isProcessing = false;
+
                 $scope.errors.global = fileErr;
                 $scope.$apply();
                 return;
             }
 
-            // Run the first set of validations
-            HMDAEngine.runSyntactical(hmdaData.year, function(synErr) {
-                if (synErr) {
-                    $scope.errors.global = synErr;
-                    $scope.$apply();
-                    return;
-                }
+            $q.all([HMDAEngine.runSyntactical(hmdaData.year), HMDAEngine.runValidity(hmdaData.year)])
+            .then(function() {
+                // Refresh the file metadata
+                FileMetadata.refresh();
 
-                HMDAEngine.runValidity(hmdaData.year, function(valErr) {
-                    if (valErr) {
-                        $scope.errors.global = valErr;
-                        $scope.$apply();
-                        return;
-                    }
+                // Complete the current step in the wizard
+                $scope.wizardSteps = Wizard.completeStep();
 
-                    // Refresh the file metadata
-                    FileMetadata.refresh();
+                // And go the summary page
+                $location.path('/summarySyntacticalValidity');
 
-                    // Complete the current step in the wizard
-                    $scope.wizardSteps = Wizard.completeStep();
+                // Toggle processing flag off
+                $scope.isProcessing = false;
+            })
+            .catch(function(err) {
+                // Toggle processing flag off
+                $scope.isProcessing = false;
 
-                    // And go the summary page
-                    $location.path('/summarySyntacticalValidity');
-                    $scope.$apply(); // Force the angular to update the $scope since we're technically in a callback func
-                });
+                $scope.errors.global = err.message;
+                return;
             });
 
-            // Toggle processing flag off
-            $scope.isProcessing = false;
         });
     };
 };

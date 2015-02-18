@@ -9,6 +9,22 @@
  */
 module.exports = /*@ngInject*/ function () {
 
+    function link(scope) {
+        if (angular.equals({}, scope.errors)) {
+            scope.errors = null;
+        }
+    }
+
+    function controller($scope, Session) {
+        $scope.showErrorCount = function() {
+            return ['syntactical', 'validity'].indexOf($scope.editType) !== -1;
+        };
+
+        $scope.isVerified = function(id) {
+            return Session.isVerified(id);
+        };
+    }
+
     return {
         restrict: 'E',
         templateUrl: 'partials/errorSummary.html',
@@ -16,10 +32,7 @@ module.exports = /*@ngInject*/ function () {
             editType: '@type',
             errors: '='
         },
-        link: function(scope) {
-            if (angular.equals({}, scope.errors)) {
-                scope.errors = null;
-            }
-        }
+        link: link,
+        controller: /*@ngInject*/ controller
     };
 };

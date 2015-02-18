@@ -55,7 +55,8 @@ module.exports = function(config) {
       'karma-browserify',
       'karma-phantomjs-launcher',
       'karma-jasmine',
-      'karma-coverage'
+      'karma-coverage',
+      'karma-mocha-reporter'
     ],
 
     // Continuous Integration mode
@@ -83,7 +84,7 @@ module.exports = function(config) {
     },
 
     // Reporters
-    reporters: ['progress', 'coverage'],
+    reporters: ['mocha', 'coverage'],
 
     // Coverage reporter configuration
     coverageReporter : {

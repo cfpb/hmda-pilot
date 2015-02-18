@@ -1,8 +1,39 @@
-<h2><label for="editId">{{editType | capitalize}} Edit ID:</label> <select id="editId" ng-model="selectedEditId" ng-change="goToEditDetail()"><option ng-repeat="id in siblingEdits" value="{{id}}" ng-selected="{{editId === id}}">{{id}}</option></select></h2>
+<h2><label for="editId">{{editType | capitalize}} Edit ID:</label> <select id="editId" ng-model="selectedEditId" ng-change="goToEditDetail()" ng-options="id for id in siblingEdits"></select></h2>
 <p>{{editError.explanation}}</p>
 
-<p>Please review and correct all of the errors listed below in your system of record. Once corrected, re-select the updated file to validate the data.</p>
+<p ng-if="['syntactical', 'validity', 'macro'].indexOf(editType) !== -1">Please review and correct all of the errors listed below in your system of record. Once corrected, re-select the updated file to validate the data.</p>
+<p ng-if="editType === 'quality'">Please review all of the data listed below. You must review the entire list <em>({{editError.errors.length}} entries)</em> and verify that all of the data is correct before proceeding. If any of the data is incorrect, please correct the errors in your system of record and resubmit the file.</p>
 
-<error-detail error="editError"></error-detail>
+<error-detail type="{{editType}}" error="editError"></error-detail>
 
-<button class="btn btn__secondary u-mt5" ng-click="backToSummary()">Back to summary</button>
+<div class="form-buttons" ng-if="['syntactical', 'validity'].indexOf(editType) !== -1">
+    <button class="btn btn__secondary u-mt5" ng-click="backToSummary()">Back to summary</button>
+</div>
+
+<form novalidate class="form-verify form-well" ng-if="editType === 'quality'" ng-submit="saveQualityVerification(response)">
+    <div class="form-group_item" ng-class="{'form-group_item__disabled': !canVerify}">
+        <label for="verify"><input type="checkbox" id="verify" ng-model="response.verified" ng-disabled="!canVerify" ng-checked="verified"> I have verified that all of the submitted data is correct and agree with the accuracy of the values listed.</label>
+    </div>
+
+    <div class="form-buttons">
+        <button type="submit" class="btn" ng-class="{'btn__disabled': !canVerify}">Save and continue</button>
+        <button class="btn btn__secondary u-mt5" ng-click="backToSummary()">Back to summary</button>
+    </div>
+</form>
+
+<form novalidate class="form-verify form-well" ng-if="editType === 'macro'" ng-submit="saveMacroVerification(response)">
+    <div class="form-group_item">
+        <label for="verify"><input type="checkbox" id="verify" ng-model="response.verified" ng-checked="verified"> I have verified that all of the submitted data is correct and agree with the accuracy of the values listed.</label>
+        <div class="form-group_item">
+            <label class="form-label-header" for="reason">Reason:</label>
+            <select id="reason" ng-model="response.reason">
+                <option ng-repeat="reason in reasonList" value="{{reason}}" ng-selected="{{selectedReason === reason}}">{{reason}}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-buttons">
+        <button type="submit" class="btn">Save and continue</button>
+        <button class="btn btn__secondary u-mt5" ng-click="backToSummary()">Back to summary</button>
+    </div>
+</form>

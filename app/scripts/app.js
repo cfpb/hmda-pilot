@@ -8,6 +8,7 @@ require('angular-resource');
 require('angular-route');
 require('angular-sanitize');
 require('angular-touch');
+require('angular-fileupload');
 require('./modules/config');
 require('./modules/HMDAEngine');
 require('./modules/hmdaFilters');
@@ -30,6 +31,7 @@ angular
     'ngSanitize',
     'ngTouch',
     'services.config',
+    'filereader',
     'HMDAEngine',
     'hmdaFilters'
   ])
