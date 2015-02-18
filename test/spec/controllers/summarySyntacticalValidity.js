@@ -90,7 +90,7 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
         });
     });
 
-    describe('next()', function() {
+    describe('process()', function() {
         describe('when runQuality has a runtime error', function() {
             it('should display a global error', function() {
                 mockEngine.runQuality = function() { return Q.reject(new Error('error')); };
@@ -101,7 +101,7 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
                     $q: Q,
                     HMDAEngine: mockEngine
                 });
-                scope.next();
+                scope.process();
                 scope.$digest();
 
                 expect(scope.errors.global).toBe('error');
@@ -118,7 +118,7 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
                     $q: Q,
                     HMDAEngine: mockEngine
                 });
-                scope.next();
+                scope.process();
                 scope.$digest();
 
                 expect(scope.errors.global).toBe('error');
@@ -135,7 +135,7 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
                     $q: Q,
                     HMDAEngine: mockEngine
                 });
-                scope.next();
+                scope.process();
                 scope.$digest();
             });
 

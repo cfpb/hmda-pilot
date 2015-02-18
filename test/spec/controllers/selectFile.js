@@ -80,7 +80,7 @@ describe('Controller: SelectFileCtrl', function () {
         });
     });
 
-    describe('submit()', function() {
+    describe('process()', function() {
 
         var hmdaData = {
             file: 'test.dat',
@@ -98,7 +98,7 @@ describe('Controller: SelectFileCtrl', function () {
                     $q: Q,
                     HMDAEngine: mockEngine
                 });
-                scope.submit(hmdaData);
+                scope.process(hmdaData);
                 scope.$digest();
 
                 expect(scope.errors.global).toBe('error');
@@ -116,7 +116,7 @@ describe('Controller: SelectFileCtrl', function () {
                     $q: Q,
                     HMDAEngine: mockEngine
                 });
-                scope.submit(hmdaData);
+                scope.process(hmdaData);
                 scope.$digest();
 
                 expect(scope.errors.global).toBe('error');
@@ -134,7 +134,7 @@ describe('Controller: SelectFileCtrl', function () {
                     $q: Q,
                     HMDAEngine: mockEngine
                 });
-                scope.submit(hmdaData);
+                scope.process(hmdaData);
                 scope.$digest();
 
                 expect(scope.errors.global).toBe('error');
@@ -151,7 +151,7 @@ describe('Controller: SelectFileCtrl', function () {
                     $q: Q,
                     HMDAEngine: mockEngine
                 });
-                scope.submit(hmdaData);
+                scope.process(hmdaData);
                 scope.$digest();
             });
 
