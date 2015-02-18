@@ -15,7 +15,19 @@ describe('Directive: ErrorSummary', function () {
 
     beforeEach(inject(function($templateCache) {
         var directiveTemplate = null;
-        var templateId = 'partials/errorSummary.html';
+        var templateId = 'partials/errorSummary-count.html';
+        var req = new XMLHttpRequest();
+        req.onload = function() {
+            directiveTemplate = this.responseText;
+        };
+        req.open('get', '/base/app/'+templateId, false);
+        req.send();
+        $templateCache.put(templateId, directiveTemplate);
+    }));
+
+    beforeEach(inject(function($templateCache) {
+        var directiveTemplate = null;
+        var templateId = 'partials/errorSummary-verify.html';
         var req = new XMLHttpRequest();
         req.onload = function() {
             directiveTemplate = this.responseText;

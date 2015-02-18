@@ -13,6 +13,14 @@ module.exports = /*@ngInject*/ function () {
         if (angular.equals({}, scope.errors)) {
             scope.errors = null;
         }
+
+        scope.getTemplateUrl = function() {
+            if (['quality', 'macro'].indexOf(scope.editType) !== -1) {
+                return 'partials/errorSummary-verify.html';
+            } else {
+                return 'partials/errorSummary-count.html';
+            }
+        };
     }
 
     function controller($scope, Session) {
@@ -27,7 +35,7 @@ module.exports = /*@ngInject*/ function () {
 
     return {
         restrict: 'E',
-        templateUrl: 'partials/errorSummary.html',
+        template: '<div ng-include="getTemplateUrl()"></div>',
         scope: {
             editType: '@type',
             errors: '='
