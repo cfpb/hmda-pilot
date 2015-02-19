@@ -13,6 +13,7 @@
 @import (less) "../../node_modules/cf-forms/src/cf-forms.less";
 @import (less) "../../node_modules/cf-icons/src/less/icons.less";
 @import (less) "../../node_modules/cf-pagination/src/cf-pagination.less";
+@import (less) "../../node_modules/cf-layout/src/cf-layout.less";
 
 @import (less) "cf-enhancements.less";
 
@@ -81,7 +82,7 @@ footer {
 }
 
 // Forms
-.form-well {
+.form-well, .well {
     background-color: @gray-5;
     padding: 1.5em;
 }
@@ -211,6 +212,7 @@ table.detail-table {
     }
 }
 
+// Pagination
 @pagination-text:               @gray;
 @pagination-bg:                 @gray-20;
 
@@ -220,6 +222,48 @@ input[type="number"].pagination_current-page {
 
 div.page-size {
     margin-bottom: 5px;
+}
+
+.dl-horizontal {
+    dt {
+        float: left;
+        width: 160px;
+        overflow: hidden;
+        clear: left;
+        text-align: right;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    dd {
+        margin-left: 180px;
+    }
+}
+
+.respondent-info {
+    border-right: @gray-5;
+
+    dl { margin-bottom: 0; }
+    dt {
+        .webfont-demi;
+        width: 120px;
+    }
+    dd {
+        margin-left: 140px;
+    }
+    dt.contactName,
+    dd.contactName {
+        margin-top: 2em;
+    }
+}
+.file-info {
+    dl { margin-bottom: 0; }
+    dt {
+        .webfont-demi;
+        width: 190px;
+    }
+    dd {
+        margin-left: 210px;
+    }
 }
 
 // Utility classes
