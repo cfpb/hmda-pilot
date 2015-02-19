@@ -97,4 +97,19 @@ describe('Filters: hmdaFilters', function() {
             expect(paginateFilter([1, 2, 3], 2, 3)).toEqual([2, 3]);
         }));
     });
+
+    describe('agency', function() {
+        it('should return the the agency name matching the code', angular.mock.inject(function(agencyFilter) {
+            expect(agencyFilter('1')).toBe('OCC');
+            expect(agencyFilter('2')).toBe('FRS');
+            expect(agencyFilter('3')).toBe('FDIC');
+            expect(agencyFilter('5')).toBe('NCUA');
+            expect(agencyFilter('7')).toBe('HUD');
+            expect(agencyFilter('9')).toBe('CFPB');
+        }));
+
+        it('should return and empty string if the agencyCode is not found', angular.mock.inject(function(agencyFilter) {
+            expect(agencyFilter('100')).toBe('');
+        }));
+    });
 });
