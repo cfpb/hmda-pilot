@@ -23,6 +23,6 @@ module.exports = /*@ngInject*/ function ($scope, $location, Wizard) {
         $scope.wizardSteps = Wizard.completeStep();
 
         // Go to the next page
-        $location.path('/submit');
+        $location.path('/validationSummary');
     };
 };

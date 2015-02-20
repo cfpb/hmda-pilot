@@ -8,5 +8,5 @@ app.controller('SelectFileCtrl', require('./selectFile'));
 app.controller('SummarySyntacticalValidityCtrl', require('./summarySyntacticalValidity'));
 app.controller('SummaryQualityMacroCtrl', require('./summaryQualityMacro'));
 app.controller('SummaryMSAIRSCtrl', require('./summaryMSA-IRS'));
-app.controller('SubmitCtrl', require('./submit'));
+app.controller('ValidationSummaryCtrl', require('./validationSummary'));
 app.controller('ErrorDetailCtrl', require('./errorDetail'));

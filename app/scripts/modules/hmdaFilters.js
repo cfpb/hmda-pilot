@@ -32,6 +32,19 @@ angular.module('hmdaFilters', [])
             return input.charAt(0).toUpperCase() + input.slice(1);
         };
     })
+    .filter('agency', function() {
+        return function (agencyCode) {
+            var codes = {
+                1: 'OCC',
+                2: 'FRS',
+                3: 'FDIC',
+                5: 'NCUA',
+                7: 'HUD',
+                9: 'CFPB'
+            };
+            return codes[agencyCode] || '';
+        };
+    })
     .filter('paginate', function() {
         return function(input, start, end) {
             return input.slice(start-1, end);
