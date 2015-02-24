@@ -231,6 +231,11 @@ table.detail-table {
         }
         th, td {
             padding: .25em .625em;
+            background: @td-bg;
+        }
+        &:nth-child(even) th,
+        &:nth-child(even) td {
+            background: @td-bg-alt;
         }
     }
 }
