@@ -186,6 +186,17 @@ table.summary-table {
     width: 100%;
     margin-bottom: 40px;
 
+    a {
+        color: @pacific;
+    }
+
+    tbody {
+        tr:hover td,
+        tr:hover th {
+            background-color: tint(@teal, 80%);;
+        }
+    }
+
     td.id {
         width: 13%;
     }
