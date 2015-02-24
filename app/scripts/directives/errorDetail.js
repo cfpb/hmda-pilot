@@ -78,6 +78,10 @@ module.exports = /*@ngInject*/ function () {
                 scope.currentPage = 1;
             };
 
+            scope.showPagination = function() {
+                return scope.totalPages() !== 1;
+            };
+
             scope.getTemplateUrl = function() {
                 if (scope.editType === 'macro') {
                     return 'partials/errorDetail-macro.html';

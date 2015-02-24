@@ -3,7 +3,6 @@
 @import (less) "../../node_modules/normalize-legacy-addon/normalize-legacy-addon.css";
 
 // Import Capital Framework components
-@import (less) "../../node_modules/cf-core/src/cf-brand-colors.less";
 @import (less) "../../node_modules/cf-core/src/cf-vars.less";
 @import (less) "../../node_modules/cf-core/src/cf-media-queries.less";
 @import (less) "../../node_modules/cf-core/src/cf-utilities.less";
@@ -20,6 +19,9 @@
 @import (less) "header.less";
 @import (less) "footer.less";
 
+@import (less) "brand-palette.less";
+@import (less) "cf-theme-overrides.less";
+
 // HMDA Pilot components
 @import (less) "utils.less";
 @import (less) "wizard.less";
@@ -33,7 +35,7 @@ body {
     .webfont-regular;
 }
 footer {
-    margin-top: 2em;
+    margin-top: 3em;
 }
 
 // Disclaimer
@@ -179,9 +181,25 @@ h2 label { display: inline; }
     font-size: 1.3em;
 }
 
+.instructions {
+    width: 40em;
+}
+
 // Summary tables
 table.summary-table {
     width: 100%;
+    margin-bottom: 40px;
+
+    a {
+        color: @pacific;
+    }
+
+    tbody {
+        tr:hover td,
+        tr:hover th {
+            background-color: tint(@teal, 80%);;
+        }
+    }
 
     td.id {
         width: 13%;
@@ -205,6 +223,7 @@ table.summary-table {
 // Detail tables
 table.detail-table {
     width: 100%;
+    margin-bottom: 20px;
 
     tbody {
         tr {
@@ -212,6 +231,11 @@ table.detail-table {
         }
         th, td {
             padding: .25em .625em;
+            background: @td-bg;
+        }
+        &:nth-child(even) th,
+        &:nth-child(even) td {
+            background: @td-bg-alt;
         }
     }
 }
@@ -219,6 +243,10 @@ table.detail-table {
 // Pagination
 @pagination-text:               @gray;
 @pagination-bg:                 @gray-20;
+
+.pagination {
+    margin-bottom: 20px;
+}
 
 input[type="number"].pagination_current-page {
     padding: 0;

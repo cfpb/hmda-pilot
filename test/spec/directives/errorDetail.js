@@ -154,9 +154,9 @@ describe('Directive: ErrorDetail', function () {
                 var $pageSizeSelect = jQuery('select', $pageSize);
                 $nextButton.click();
                 expect($currentPage.val()).toBe('2');
-                $pageSizeSelect.val('2');
+                $pageSizeSelect.val('1');
                 $pageSizeSelect.trigger('change');
-                expect(jQuery('option:selected', $pageSizeSelect).text()).toBe('50');
+                expect(jQuery('option:selected', $pageSizeSelect).text()).toBe('20');
                 expect($currentPage.val()).toBe('1');
             });
 
