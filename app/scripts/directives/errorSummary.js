@@ -17,6 +17,8 @@ module.exports = /*@ngInject*/ function () {
         scope.getTemplateUrl = function() {
             if (['quality', 'macro'].indexOf(scope.editType) !== -1) {
                 return 'partials/errorSummary-verify.html';
+            } else if (scope.editType === 'special') {
+                return 'partials/errorSummary-special.html';
             } else {
                 return 'partials/errorSummary-count.html';
             }
