@@ -8,9 +8,14 @@ describe('Controller: SummaryQualityMacroCtrl', function () {
     var scope,
         location,
         controller,
+        Q,
         Wizard,
         Session,
-        mockEngine,
+        mockEngine = {
+            getErrors: function() { return mockErrors; },
+            getRuleYear: function() { return '2015'; },
+            runSpecial: function(year, next) { return next(null); }
+        },
         mockErrors = {
             quality: {},
             macro: {}
@@ -18,17 +23,13 @@ describe('Controller: SummaryQualityMacroCtrl', function () {
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function ($rootScope, $location, $controller, _Wizard_, _Session_) {
+    beforeEach(inject(function ($rootScope, $location, $controller, $q, _Wizard_, _Session_) {
         scope = $rootScope.$new();
         location = $location;
         controller = $controller;
+        Q = $q;
         Wizard = _Wizard_;
         Session = _Session_;
-        mockEngine = {
-            getErrors: function() {
-                return mockErrors;
-            }
-        };
         Wizard.initSteps();
         $controller('SummaryQualityMacroCtrl', {
             $scope: scope,
@@ -93,20 +94,45 @@ describe('Controller: SummaryQualityMacroCtrl', function () {
         });
     });
 
-    describe('next()', function() {
-        beforeEach(function() {
-            scope.next();
-            scope.$digest();
+    describe('process()', function() {
+        describe('when runSpecial has a runtime error', function() {
+            it('should display a global error', function() {
+                mockEngine.runSpecial = function() { return Q.reject(new Error('error')); };
+                controller('SummaryQualityMacroCtrl', {
+                    $scope: scope,
+                    $location: location,
+                    $q: Q,
+                    HMDAEngine: mockEngine
+                });
+                scope.process();
+                scope.$digest();
+
+                expect(scope.errors.global).toBe('error');
+            });
         });
 
-        it('should mark the current step in the wizard as complete', function () {
-            var steps = Wizard.getSteps();
-            expect(steps[0].isActive).toBeFalsy();
-            expect(steps[0].status).toBe('complete');
-        });
+        describe('when runSpecial has no runtime errors', function() {
+            beforeEach(function() {
+                mockEngine.runSpecial = function() { return; };
+                controller('SummaryQualityMacroCtrl', {
+                    $scope: scope,
+                    $location: location,
+                    $q: Q,
+                    HMDAEngine: mockEngine
+                });
+                scope.process();
+                scope.$digest();
+            });
 
-        it('should direct the user to the /summaryMSA-IRS page', function () {
-            expect(location.path()).toBe('/summaryMSA-IRS');
+            it('should mark the current step in the wizard as complete', function () {
+                var steps = Wizard.getSteps();
+                expect(steps[0].isActive).toBeFalsy();
+                expect(steps[0].status).toBe('complete');
+            });
+
+            it('should direct the user to the /summaryMSA-IRS page', function () {
+                expect(location.path()).toBe('/summaryMSA-IRS');
+            });
         });
     });
 
