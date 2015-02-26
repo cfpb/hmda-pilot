@@ -61,6 +61,10 @@ angular
         templateUrl: 'views/errorDetail.html',
         controller: 'ErrorDetailCtrl'
       })
+      .when('/report/IRS', {
+        templateUrl: 'views/reportIRS.html',
+        controller: 'IRSReportCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
