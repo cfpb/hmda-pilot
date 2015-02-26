@@ -51,6 +51,8 @@ module.exports = /*@ngInject*/ function () {
             return true;
         } else if (session.verifiedSpecialEdits.indexOf(editId) !== -1) {
             return true;
+        } else if (editId === 'IRS') {
+            return this.hasVerifiedIRSReport();
         } else {
             return false;
         }

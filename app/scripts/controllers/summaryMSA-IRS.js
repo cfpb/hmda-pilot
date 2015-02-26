@@ -29,6 +29,10 @@ module.exports = /*@ngInject*/ function ($scope, $location, Wizard, HMDAEngine, 
         return !hasUnverifiedSpecialErrors();
     };
 
+    $scope.isIRSVerified = function() {
+        return Session.hasVerifiedIRSReport();
+    };
+
     $scope.previous = function () {
         $location.path('/summaryQualityMacro');
     };

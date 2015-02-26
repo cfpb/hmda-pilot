@@ -18,7 +18,7 @@
         <tr>
             <td class="id"><a ng-href="#/report/IRS">IRS</a></td>
             <td class="description">Summary of all MSA/MD's where your institution has a home or branch office</td>
-            <td class="verification" ng-class="isVerified(key) ? 'verified' : 'not-verified'">{{isVerified(key) ? 'Verified' : 'Not verified'}}</td>
+            <td class="verification" ng-class="isIRSVerified() ? 'verified' : 'not-verified'">{{isIRSVerified() ? 'Verified' : 'Not verified'}}</td>
         </tr>
     </tbody>
 </table>
