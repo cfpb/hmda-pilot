@@ -272,16 +272,29 @@ div.page-size {
     }
 }
 
-.respondent-info {
-    border-right: @gray-5;
+.respondent-info,
+.file-info {
+    dl {
+        margin-bottom: 0;
+    }
 
-    dl { margin-bottom: 0; }
     dt {
         .webfont-demi;
-        width: 120px;
+
+        &:after {
+            content: ":";
+        }
+    }
+}
+
+.respondent-info {
+    @width: 120px;
+
+    dt {
+        width: @width;
     }
     dd {
-        margin-left: 140px;
+        margin-left: @width + 20px;
     }
     dt.contactName,
     dd.contactName {
@@ -289,13 +302,13 @@ div.page-size {
     }
 }
 .file-info {
-    dl { margin-bottom: 0; }
+    @width: 190px;
+
     dt {
-        .webfont-demi;
-        width: 190px;
+        width: @width;
     }
     dd {
-        margin-left: 210px;
+        margin-left: @width + 20px;
     }
 }
 
