@@ -15,8 +15,8 @@ describe('Directive: ErrorDetail', function () {
 
     var element,
         scope,
-        mockErrors = {"S270": {"scope": "ts", "explanation": "Century and/or year for action taken date does not match activity century/year.", "description": "Century (CC) and Year (YY) of action taken date must = activity century/year (CCYY) for period being processed.", "errors": [], "action": "Correct Entry and Resubmit"}, //jshint ignore:line
-            "S271": {"scope": "lar", "explanation": "Century and/or year for action taken date does not match activity century/year.", "description": "Century (CC) and Year (YY) of action taken date must = activity century/year (CCYY) for period being processed.", "errors": [{"lineNumber": "1", "properties": {"actionDate": "2013", "transmittalSheet.activityYear": "2012"} },{"lineNumber": "1", "properties": {"actionDate": "2013", "transmittalSheet.activityYear": "2012"} }], "action": "Correct Entry and Resubmit"}}; //jshint ignore:line
+        mockErrors = {"S270": {"scope": "ts", "explanation": "Century and/or year for action taken date does not match activity century/year.", "description": "Century (CC) and Year (YY) of action taken date must = activity century/year (CCYY) for period being processed.", "errors": [], "action": "Correct Entry and Revalidate"}, //jshint ignore:line
+            "S271": {"scope": "lar", "explanation": "Century and/or year for action taken date does not match activity century/year.", "description": "Century (CC) and Year (YY) of action taken date must = activity century/year (CCYY) for period being processed.", "errors": [{"lineNumber": "1", "properties": {"actionDate": "2013", "transmittalSheet.activityYear": "2012"} },{"lineNumber": "1", "properties": {"actionDate": "2013", "transmittalSheet.activityYear": "2012"} }], "action": "Correct Entry and Revalidate"}}; //jshint ignore:line
 
     for (var i = 0; i < 20; i++) {
         mockErrors.S270.errors.push({'lineNumber': '1', 'properties': {'actionDate': '2013', 'transmittalSheet.activityYear': '2012'} },{'lineNumber': '1', 'properties': {'actionDate': '2013', 'transmittalSheet.activityYear': '2012'} });
@@ -154,9 +154,9 @@ describe('Directive: ErrorDetail', function () {
                 var $pageSizeSelect = jQuery('select', $pageSize);
                 $nextButton.click();
                 expect($currentPage.val()).toBe('2');
-                $pageSizeSelect.val('2');
+                $pageSizeSelect.val('1');
                 $pageSizeSelect.trigger('change');
-                expect(jQuery('option:selected', $pageSizeSelect).text()).toBe('50');
+                expect(jQuery('option:selected', $pageSizeSelect).text()).toBe('20');
                 expect($currentPage.val()).toBe('1');
             });
 

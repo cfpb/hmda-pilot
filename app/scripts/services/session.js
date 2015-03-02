@@ -11,7 +11,9 @@ module.exports = /*@ngInject*/ function () {
 
     var session = {
         verifiedQualityEdits: [],
-        verifiedMacroEdits: {}
+        verifiedMacroEdits: {},
+        verifiedSpecialEdits: [],
+        verifiedIRSReport: false
     };
 
     /**
@@ -31,6 +33,8 @@ module.exports = /*@ngInject*/ function () {
     this.reset = function() {
         session.verifiedQualityEdits = [];
         session.verifiedMacroEdits = {};
+        session.verifiedSpecialEdits = [];
+        session.verifiedIRSReport = false;
         return session;
     };
 
@@ -45,10 +49,16 @@ module.exports = /*@ngInject*/ function () {
             return true;
         } else if (session.verifiedMacroEdits[editId] !== undefined) {
             return true;
+        } else if (session.verifiedSpecialEdits.indexOf(editId) !== -1) {
+            return true;
+        } else if (editId === 'IRS') {
+            return this.hasVerifiedIRSReport();
         } else {
             return false;
         }
     };
+
+    // ## Quality Edits
 
     /**
      * Get the list of verified Quality Edit IDs
@@ -57,25 +67,6 @@ module.exports = /*@ngInject*/ function () {
      */
     this.getVerifiedQualityEditIds = function() {
         return session.verifiedQualityEdits;
-    };
-
-    /**
-    * Get the list of verified Macro Edit IDs
-     *
-     * @return {Array} edit ids
-     */
-    this.getVerifiedMacroEditIds = function() {
-        return Object.keys(session.verifiedMacroEdits);
-    };
-
-    /**
-     * Get the verification reason for a specific Macro edit by Id
-     *
-     * @param {String} editId
-     * @retrun {String} reason
-     */
-    this.getVerifiedReasonByEditId = function(editId) {
-        return session.verifiedMacroEdits[editId];
     };
 
     /**
@@ -101,6 +92,17 @@ module.exports = /*@ngInject*/ function () {
         return session.verifiedQualityEdits;
     };
 
+    // ## Macro Edits
+
+    /**
+    * Get the list of verified Macro Edit IDs
+     *
+     * @return {Array} edit ids
+     */
+    this.getVerifiedMacroEditIds = function() {
+        return Object.keys(session.verifiedMacroEdits);
+    };
+
     /**
      * Add an editId to a list of verified Macro edits
      *
@@ -122,5 +124,80 @@ module.exports = /*@ngInject*/ function () {
     this.removeVerifiedMacroEdit = function (editId) {
         delete session.verifiedMacroEdits[editId];
         return this.getVerifiedMacroEditIds();
+    };
+
+    /**
+     * Get the verification reason for a specific Macro edit by Id
+     *
+     * @param {String} editId
+     * @retrun {String} reason
+     */
+    this.getVerifiedReasonByEditId = function(editId) {
+        return session.verifiedMacroEdits[editId];
+    };
+
+    // ## Special Edits
+
+    /**
+     * Get the list of verified Special Edit IDs
+     *
+     * @return {Array} edit ids
+     */
+    this.getVerifiedSpecialEditIds = function() {
+        return session.verifiedSpecialEdits;
+    };
+
+    /**
+     * Add an editId to a list of verified Special edits
+     *
+     * @param {String} editId to be added
+     * @return {Array} verified special edits
+     */
+    this.addToVerifiedSpecialEdits = function (editId) {
+        session.verifiedSpecialEdits.push(editId);
+        return session.verifiedSpecialEdits;
+    };
+
+    /**
+     * Remove a specified Special edit from the list of verified
+     *
+     * @param {String} editId to be removed
+     * @return {Array} verified special edits
+     */
+    this.removeVerifiedSpecialEdit = function (editId) {
+        var currIdx = session.verifiedSpecialEdits.indexOf(editId);
+        session.verifiedSpecialEdits.splice(currIdx, 1);
+        return session.verifiedSpecialEdits;
+    };
+
+    // ## IRS Report
+
+    /**
+     * Has the IRS Report been verified?
+     *
+     * @return {Boolean}
+     */
+    this.hasVerifiedIRSReport = function() {
+        return session.verifiedIRSReport;
+    };
+
+    /**
+     * Mark the IRS Report as verified
+     *
+     * @return {Boolean}
+     */
+    this.verifyIRSReport = function() {
+        session.verifiedIRSReport = true;
+        return session.verifiedIRSReport;
+    };
+
+    /**
+     * Mark the IRS Report as unverified
+     *
+     * @return {Boolean}
+     */
+    this.unverifyIRSReport = function() {
+        session.verifiedIRSReport = false;
+        return session.verifiedIRSReport;
     };
 };

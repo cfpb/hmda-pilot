@@ -1,0 +1,76 @@
+<h2>HMDA Institution Register Summary (IRS)</h2>
+<p class="instructions">All MSA/MDs where my institution has a home or branch office (and took loan/applications in that office) are listed on the IRS. Each MSA/MD listed is an MSA/MD in which we have a home or branch office. Nondepository institutions, including mortgage subsidiaries, are considered to have a branch office in any MSA/MD where they have acted on five or more loan/applications--whether or not they had a physical office there. Therefore, nondepository institutions need only confirm the TOTAL statistics on the IRS. MSA/MD listings are populated automatically based on your lending activity but may currently show MSA/MD not available.</p>
+<p class="instructions">Please review all the MSA/MDs listed below. If you disagree with any of the MSA/MDs, please correct the data in your system of record. Once corrected, re-select the updated file to validate the data.</p>
+
+<div class="page-size" ng-if="reportData">Showing {{start()}} - {{end()}} of {{total()}} | <label for="page-size" class="pagination_label">View</label>
+    <select id="page-size" ng-model="pageSize" ng-options="size as size for size in [10, 20, 50, 100]" ng-change="setPageSize(pageSize)"></select>
+</div>
+
+<table class="irs-detail-table" ng-if="reportData">
+    <thead>
+        <tr>
+            <td colspan="4"></td>
+            <th scope="col" colspan="4">Loan Type</th>
+            <th scope="col" colspan="3">Property Type</th>
+            <th scope="col" colspan="3">Loan Purpose</th>
+        </tr>
+        <tr>
+            <th scope="col" class="id">MSA/MD</th>
+            <th scope="col" class="name">MSA/MD Name</th>
+            <th scope="col" class="count">Total LARS</th>
+            <th scope="col" class="count">Total Amt.</th>
+            <th scope="col" class="count">CONV</th>
+            <th scope="col" class="count">FHA</th>
+            <th scope="col" class="count">VA</th>
+            <th scope="col" class="count">FSA/RHS</th>
+            <th scope="col" class="count">1-4 Family</th>
+            <th scope="col" class="count"><abbr title="Manufactured">MFD</abbr></th>
+            <th scope="col" class="count">Multi-family</th>
+            <th scope="col" class="count">Home Purchase</th>
+            <th scope="col" class="count">Home Improvement</th>
+            <th scope="col" class="count">Refinance</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in reportData | paginate:start():end()">
+            <th scope="row" class="id">{{item.msaCode}}</th>
+            <td class="name">{{item.msaName}}</td>
+            <td class="count">{{item.totalLAR}}</td>
+            <td class="count">{{item.totalLoanAmount}}</td>
+            <td class="count">{{item.totalConventional}}</td>
+            <td class="count">{{item.totalFHA}}</td>
+            <td class="count">{{item.totalVA}}</td>
+            <td class="count">{{item.totalFSA}}</td>
+            <td class="count">{{item.total1To4Family}}</td>
+            <td class="count">{{item.totalMFD}}</td>
+            <td class="count">{{item.totalMultifamily}}</td>
+            <td class="count">{{item.totalHomePurchase}}</td>
+            <td class="count">{{item.totalHomeImprovement}}</td>
+            <td class="count">{{item.totalRefinance}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<nav class="pagination" ng-if="reportData && showPagination()">
+    <button class="btn btn__secondary pagination_prev" ng-class="{btn__disabled: !hasPrev()}" ng-disabled="!hasPrev()" ng-click="onPrev()"><span class="btn_icon__left cf-icon cf-icon-left"></span> Previous</button>
+    <button class="btn btn__secondary pagination_next" ng-class="{btn__disabled: !hasNext()}" ng-disabled="!hasNext()" ng-click="onNext()">Next <span class="btn_icon__right cf-icon cf-icon-right"></span></button>
+    <div class="pagination_form">
+        <label class="pagination_label" for="pagination_current-page">Page <span class="u-visually-hidden"> number out of {{totalPages()}} total pages</span></label>
+        <input class="pagination_current-page" id="pagination_current-page" name="pagination_current-page" type="number" min="1" max="{{totalPages()}}" ng-model="currentPage">
+        <span class="pagination_label"><span aria-hidden="true">of {{totalPages()}}</span></span>
+        <button class="btn btn__link pagination_submit" id="pagination_submit" ng-click="setCurrentPage(currentPage)">Go</button>
+    </div>
+</nav>
+
+<p ng-if="!reportData">No errors found.</p>
+
+<form novalidate class="form-verify form-well" ng-submit="saveIRSVerification(response)">
+    <div class="form-group_item" ng-class="{'form-group_item__disabled': !canVerify}">
+        <label for="verify"><input type="checkbox" id="verify" ng-model="response.verified" ng-disabled="!canVerify" ng-checked="verified"> I have verified that all MSA/MDs where my institution has a home or branch office (and took loan/applications in that office) are listed on the Institution Register Summary and agree with the accuracy of the MSA/MDs listed.</label>
+    </div>
+
+    <div class="form-buttons">
+        <button class="btn btn__secondary u-mt5" ng-click="backToSummary()"><span class="btn_icon__left cf-icon cf-icon-left"></span> Back to summary</button>
+        <button type="submit" class="btn" ng-class="{'btn__disabled': !canVerify}">Save and continue <span class="btn_icon__right cf-icon cf-icon-right"></span></button>
+    </div>
+</form>

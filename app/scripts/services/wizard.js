@@ -23,7 +23,7 @@ module.exports = /*@ngInject*/ function (StepFactory) {
             new StepFactory('Syntactical & validity edit reports', 'summarySyntacticalValidity'),
             new StepFactory('Quality & macro edit reports', 'summaryQualityMacro'),
             new StepFactory('MSA and IRS reports', 'summaryMSA-IRS'),
-            new StepFactory('Submit', 'submit')
+            new StepFactory('Validation summary', 'validationSummary')
         ];
 
         // Make the first step active

@@ -1,13 +1,13 @@
 <dl class="file-metadata wrap" ng-if="showMetadata">
-    <dt>File</dt>
-    <dd>{{metadata.filename}}</dd>
+    <dt class="filename">File</dt>
+    <dd class="filename" title="{{metadata.filename}}">{{metadata.filename}}</dd>
 
-    <dt>Reporting Year</dt>
-    <dd>{{metadata.activityYear}}</dd>
+    <dt class="activityYear">Reporting Year</dt>
+    <dd class="activityYear">{{metadata.activityYear}}</dd>
 
-    <dt>Respondent ID</dt>
-    <dd>{{metadata.respondentID}}</dd>
+    <dt class="respondentID">Respondent ID</dt>
+    <dd class="respondentID">{{metadata.respondentID}}</dd>
 
-    <dt>Total Number of Loans/Applications</dt>
-    <dd>{{metadata.totalLineEntries | number}}</dd>
+    <dt class="totalLineEntries">Total Number of Loans/Applications</dt>
+    <dd class="totalLineEntries">{{metadata.totalLineEntries | number}}</dd>
 </dl>

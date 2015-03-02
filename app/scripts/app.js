@@ -53,13 +53,17 @@ angular
         templateUrl: 'views/summaryMSA-IRS.html',
         controller: 'SummaryMSAIRSCtrl'
       })
-      .when('/submit', {
-        templateUrl: 'views/submit.html',
-        controller: 'SubmitCtrl'
+      .when('/validationSummary', {
+        templateUrl: 'views/validationSummary.html',
+        controller: 'ValidationSummaryCtrl'
       })
       .when('/detail/:EditType/:EditId', {
         templateUrl: 'views/errorDetail.html',
         controller: 'ErrorDetailCtrl'
+      })
+      .when('/report/IRS', {
+        templateUrl: 'views/reportIRS.html',
+        controller: 'IRSReportCtrl'
       })
       .otherwise({
         redirectTo: '/'

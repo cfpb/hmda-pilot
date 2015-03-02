@@ -3,7 +3,6 @@
 @import (less) "../../node_modules/normalize-legacy-addon/normalize-legacy-addon.css";
 
 // Import Capital Framework components
-@import (less) "../../node_modules/cf-core/src/cf-brand-colors.less";
 @import (less) "../../node_modules/cf-core/src/cf-vars.less";
 @import (less) "../../node_modules/cf-core/src/cf-media-queries.less";
 @import (less) "../../node_modules/cf-core/src/cf-utilities.less";
@@ -13,11 +12,15 @@
 @import (less) "../../node_modules/cf-forms/src/cf-forms.less";
 @import (less) "../../node_modules/cf-icons/src/less/icons.less";
 @import (less) "../../node_modules/cf-pagination/src/cf-pagination.less";
+@import (less) "../../node_modules/cf-layout/src/cf-layout.less";
 
 @import (less) "cf-enhancements.less";
 
 @import (less) "header.less";
 @import (less) "footer.less";
+
+@import (less) "brand-palette.less";
+@import (less) "cf-theme-overrides.less";
 
 // HMDA Pilot components
 @import (less) "utils.less";
@@ -32,12 +35,11 @@ body {
     .webfont-regular;
 }
 footer {
-    margin-top: 2em;
+    margin-top: 3em;
 }
 
 // Disclaimer
 .disclaimer {
-    width: 100%;
     padding: 30px 30px 30px 0;
     background-color: @gold-20;
 
@@ -81,7 +83,7 @@ footer {
 }
 
 // Forms
-.form-well {
+.form-well, .well {
     background-color: @gray-5;
     padding: 1.5em;
 }
@@ -163,12 +165,41 @@ footer {
     dd {
         .webfont-demi;
         margin: 0 2em 0 0;
+
+        &.filename {
+            display: inline-block;
+            max-width: 15em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            vertical-align: bottom;
+        }
     }
+}
+
+h2 label { display: inline; }
+.edit-explanation {
+    font-size: 1.3em;
+}
+
+.instructions {
+    width: 40em;
 }
 
 // Summary tables
 table.summary-table {
     width: 100%;
+    margin-bottom: 40px;
+
+    a {
+        color: @pacific;
+    }
+
+    tbody {
+        tr:hover td,
+        tr:hover th {
+            background-color: tint(@teal, 80%);;
+        }
+    }
 
     td.id {
         width: 13%;
@@ -184,6 +215,7 @@ table.summary-table {
             color: @redorange;
         }
         td.verified {
+            .webfont-demi;
             color: @green
         }
     }
@@ -192,6 +224,7 @@ table.summary-table {
 // Detail tables
 table.detail-table {
     width: 100%;
+    margin-bottom: 20px;
 
     tbody {
         tr {
@@ -199,12 +232,27 @@ table.detail-table {
         }
         th, td {
             padding: .25em .625em;
+            background: @td-bg;
         }
+        &:nth-child(even) th,
+        &:nth-child(even) td {
+            background: @td-bg-alt;
+        }
+    }
+
+    td.check {
+        width: 6em;
+        text-align: center;
     }
 }
 
+// Pagination
 @pagination-text:               @gray;
 @pagination-bg:                 @gray-20;
+
+.pagination {
+    margin-bottom: 20px;
+}
 
 input[type="number"].pagination_current-page {
     padding: 0;
@@ -212,6 +260,61 @@ input[type="number"].pagination_current-page {
 
 div.page-size {
     margin-bottom: 5px;
+}
+
+.dl-horizontal {
+    dt {
+        float: left;
+        width: 160px;
+        overflow: hidden;
+        clear: left;
+        text-align: right;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    dd {
+        margin-left: 180px;
+    }
+}
+
+.respondent-info,
+.file-info {
+    dl {
+        margin-bottom: 0;
+    }
+
+    dt {
+        .webfont-demi;
+
+        &:after {
+            content: ":";
+        }
+    }
+}
+
+.respondent-info {
+    @width: 120px;
+
+    dt {
+        width: @width;
+    }
+    dd {
+        margin-left: @width + 20px;
+    }
+    dt.contactName,
+    dd.contactName {
+        margin-top: 2em;
+    }
+}
+.file-info {
+    @width: 190px;
+
+    dt {
+        width: @width;
+    }
+    dd {
+        margin-left: @width + 20px;
+    }
 }
 
 // Utility classes

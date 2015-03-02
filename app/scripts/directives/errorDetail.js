@@ -78,9 +78,17 @@ module.exports = /*@ngInject*/ function () {
                 scope.currentPage = 1;
             };
 
+            scope.showPagination = function() {
+                return scope.totalPages() !== 1;
+            };
+
             scope.getTemplateUrl = function() {
                 if (scope.editType === 'macro') {
                     return 'partials/errorDetail-macro.html';
+                } else if (scope.editType === 'Q029') {
+                    return 'partials/errorDetail-Q029.html';
+                } else if (scope.editType === 'Q595') {
+                    return 'partials/errorDetail-Q595.html';
                 } else {
                     return 'partials/errorDetail.html';
                 }

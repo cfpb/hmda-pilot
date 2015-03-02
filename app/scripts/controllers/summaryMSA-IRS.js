@@ -7,15 +7,41 @@
  * # SummaryMSAIRSCtrl
  * Controller of the hmdaPilotApp
  */
-module.exports = /*@ngInject*/ function ($scope, $location, Wizard) {
+module.exports = /*@ngInject*/ function ($scope, $location, Wizard, HMDAEngine, Session) {
+
+    Array.prototype.diff = function(a) {
+        return this.filter(function(i) { return a.indexOf(i) < 0; });
+    };
+
+    function hasUnverifiedSpecialErrors() {
+        var editIds = Object.keys($scope.specialErrors),
+            verifiedIds = Session.getVerifiedSpecialEditIds(),
+            diff = editIds.diff(verifiedIds);
+        return diff.length > 0;
+    }
+
+    // Get the list of errors from the HMDAEngine
+    var editErrors = HMDAEngine.getErrors();
+
+    $scope.specialErrors = editErrors.special || {};
+
+    $scope.showIRSReport = function() {
+        // TODO: remove this hack that was inserted for the demo so that
+        // we can show the IRS report
+        return true;
+        // return !hasUnverifiedSpecialErrors();
+    };
+
+    $scope.isIRSVerified = function() {
+        return Session.hasVerifiedIRSReport();
+    };
 
     $scope.previous = function () {
         $location.path('/summaryQualityMacro');
     };
 
     $scope.hasNext = function() {
-        // TODO: Determine what is required to pass in order for the user to go to the next page
-        return true;
+        return !hasUnverifiedSpecialErrors() && Session.hasVerifiedIRSReport();
     };
 
     $scope.next = function() {
@@ -23,6 +49,6 @@ module.exports = /*@ngInject*/ function ($scope, $location, Wizard) {
         $scope.wizardSteps = Wizard.completeStep();
 
         // Go to the next page
-        $location.path('/submit');
+        $location.path('/validationSummary');
     };
 };
