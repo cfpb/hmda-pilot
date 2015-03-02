@@ -14,7 +14,8 @@ describe('Controller: SummaryQualityMacroCtrl', function () {
         mockEngine = {
             getErrors: function() { return mockErrors; },
             getRuleYear: function() { return '2015'; },
-            runSpecial: function(year, next) { return next(null); }
+            runSpecial: function(year, next) { return next(null); },
+            getDebug: function() { return false; }
         },
         mockErrors = {
             quality: {},
