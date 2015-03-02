@@ -62,9 +62,15 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileRe
                 $scope.$apply();
                 return;
             }
-
+            if (HMDAEngine.getDebug()) {
+                console.time('total time for syntactical and validity edits');
+            }
             $q.all([HMDAEngine.runSyntactical(hmdaData.year), HMDAEngine.runValidity(hmdaData.year)])
             .then(function() {
+                if (HMDAEngine.getDebug()) {
+                    console.timeEnd('total time for syntactical and validity edits');
+                }
+
                 // Refresh the file metadata
                 FileMetadata.refresh();
 
