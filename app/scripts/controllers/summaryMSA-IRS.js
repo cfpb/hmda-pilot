@@ -26,7 +26,10 @@ module.exports = /*@ngInject*/ function ($scope, $location, Wizard, HMDAEngine, 
     $scope.specialErrors = editErrors.special || {};
 
     $scope.showIRSReport = function() {
-        return !hasUnverifiedSpecialErrors();
+        // TODO: remove this hack that was inserted for the demo so that
+        // we can show the IRS report
+        return true;
+        // return !hasUnverifiedSpecialErrors();
     };
 
     $scope.isIRSVerified = function() {
