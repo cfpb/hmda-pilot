@@ -55,8 +55,13 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
     $scope.process = function() {
         // Run the second set of validations
         var ruleYear = HMDAEngine.getRuleYear();
+        if (HMDAEngine.getDebug()) {
+            console.time('total time for special edits');
+        }
         $q.all([HMDAEngine.runSpecial(ruleYear)]).then(function() {
-
+            if (HMDAEngine.getDebug()) {
+                console.timeEnd('total time for special edits');
+            }
             // Complete the current step in the wizard
             $scope.wizardSteps = Wizard.completeStep();
 
