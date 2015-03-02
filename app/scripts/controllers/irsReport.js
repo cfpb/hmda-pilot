@@ -7,12 +7,15 @@
  * # IRSReportCtrl
  * Controller of the hmdaPilotApp
  */
-module.exports = /*@ngInject*/ function ($scope, $location, HMDAEngine, Session) {
+module.exports = /*@ngInject*/ function ($scope, $location, $q, HMDAEngine, Session) {
 
     var LARs = HMDAEngine.getHmdaJson().hmdaFile.loanApplicationRegisters;
 
     // Initialize scope
-    $scope.reportData = HMDAEngine.getTotalsByMSA(LARs);
+    HMDAEngine.getTotalsByMSA(LARs).then(function(response) {
+        $scope.reportData = response;
+        $scope.$apply();
+    });
     $scope.verified = Session.hasVerifiedIRSReport();
     $scope.canVerify = $scope.verified;
 
