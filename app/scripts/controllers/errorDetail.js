@@ -38,7 +38,7 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
         $scope.verified = Session.isVerified(editId);
         $scope.selectedReason = Session.getVerifiedReasonByEditId(editId);
     } else if (editType === 'special') {
-        $scope.editType = editId;
+        //$scope.editType = editId;
     }
 
     $scope.backToSummary = function() {
@@ -71,6 +71,17 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
             Session.addToVerifiedMacroEdits(editId, response.reason);
         } else {
             Session.removeVerifiedMacroEdit(editId);
+        }
+        nextEdit();
+    };
+
+    $scope.saveSpecialVerification = function(response) {
+        if (response && response.verified && response.reason) {
+            console.log('add to verified ' + editId + ' reason ' + response.reason);
+            Session.addToVerifiedSpecialEdits(editId, response.reason);
+        } else {
+            console.log('remove from verified ' + editId);
+            Session.removeVerifiedSpecialEdit(editId);
         }
         nextEdit();
     };

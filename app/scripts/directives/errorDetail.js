@@ -14,7 +14,8 @@ module.exports = /*@ngInject*/ function () {
         template: '<div ng-include="getTemplateUrl()"></div>',
         scope: {
             error: '=',
-            editType: '@type'
+            editType: '@type',
+            editId: '@id'
         },
         link: function(scope) {
             scope.pageSize = scope.pageSize || 10;
@@ -85,9 +86,9 @@ module.exports = /*@ngInject*/ function () {
             scope.getTemplateUrl = function() {
                 if (scope.editType === 'macro') {
                     return 'partials/errorDetail-macro.html';
-                } else if (scope.editType === 'Q029') {
+                } else if (scope.editId === 'Q029') {
                     return 'partials/errorDetail-Q029.html';
-                } else if (scope.editType === 'Q595') {
+                } else if (scope.editId === 'Q595') {
                     return 'partials/errorDetail-Q595.html';
                 } else {
                     return 'partials/errorDetail.html';
