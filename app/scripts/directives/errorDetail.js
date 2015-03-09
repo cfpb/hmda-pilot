@@ -15,7 +15,7 @@ module.exports = /*@ngInject*/ function () {
         scope: {
             error: '=',
             editType: '@type',
-            editId: '@id'
+            editId: '@edit'
         },
         link: function(scope) {
             scope.pageSize = scope.pageSize || 10;
@@ -23,6 +23,13 @@ module.exports = /*@ngInject*/ function () {
 
             if (angular.equals({}, scope.error)) {
                 scope.error = null;
+            }
+
+            if (scope.editId === 'Q595') {
+                scope.checkboxes = [];
+                for (var i = 1; i <= scope.error.errors.length; i++) {
+                    scope.checkboxes[i] = false;
+                }
             }
 
             scope.$watch(function() {
@@ -93,6 +100,27 @@ module.exports = /*@ngInject*/ function () {
                 } else {
                     return 'partials/errorDetail.html';
                 }
+            };
+
+            scope.selectAll = function() {
+                if (scope.allSelected()) {
+                    for (var i = scope.start(); i <= scope.end(); i++) {
+                        scope.checkboxes[i] = false;
+                    }
+                } else {
+                    for (var j = scope.start(); j <= scope.end(); j++) {
+                        scope.checkboxes[j] = true;
+                    }
+                }
+            };
+
+            scope.allSelected = function() {
+                for (var i = scope.start(); i <= scope.end(); i++) {
+                    if (scope.checkboxes[i] === false) {
+                        return false;
+                    }
+                }
+                return true;
             };
         }
     };

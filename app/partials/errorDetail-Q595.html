@@ -8,7 +8,7 @@
     <table id="Q595" class="error-detail" ng-if="error">
         <thead>
             <tr>
-                <td class="check"><label for="selectAll"><input type="checkbox" id="selectAll"> Select All</label></td>
+                <td class="check"><label for="selectAll"><input type="checkbox" id="selectAll" ng-click="selectAll()" ng-checked="allSelected()"> Select All</label></td>
                 <th scope="col" class="id">MSA/MD</th>
                 <th scope="col" class="name">MSA/MD Name</th>
                 <th scope="col" class="count">MSA/MD LAR Count</th>
@@ -16,7 +16,7 @@
         </thead>
         <tbody>
             <tr ng-repeat="item in error.errors | paginate:start():end()">
-                <td class="check"><input type="checkbox" id="msa-{{$index}}"></td>
+                <td class="check"><input type="checkbox" id="msa-{{$index}}" ng-model="checkboxes[start()+$index]"></td>
                 <th scope="row" class="id"><label for="msa-{{item.properties['MSA/MD']}}">{{item.properties['MSA/MD']}}</label></th>
                 <td class="name">{{item.properties['MSA/MD name']}}</td>
                 <td class="count">{{item.properties['LAR Count']}}</td>

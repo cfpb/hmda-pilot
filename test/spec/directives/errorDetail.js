@@ -16,16 +16,29 @@ describe('Directive: ErrorDetail', function () {
     var element,
         scope,
         mockErrors = {"S270": {"scope": "ts", "explanation": "Century and/or year for action taken date does not match activity century/year.", "description": "Century (CC) and Year (YY) of action taken date must = activity century/year (CCYY) for period being processed.", "errors": [], "action": "Correct Entry and Revalidate"}, //jshint ignore:line
-            "S271": {"scope": "lar", "explanation": "Century and/or year for action taken date does not match activity century/year.", "description": "Century (CC) and Year (YY) of action taken date must = activity century/year (CCYY) for period being processed.", "errors": [{"lineNumber": "1", "properties": {"actionDate": "2013", "transmittalSheet.activityYear": "2012"} },{"lineNumber": "1", "properties": {"actionDate": "2013", "transmittalSheet.activityYear": "2012"} }], "action": "Correct Entry and Revalidate"}}; //jshint ignore:line
+            "S271": {"scope": "lar", "explanation": "Century and/or year for action taken date does not match activity century/year.", "description": "Century (CC) and Year (YY) of action taken date must = activity century/year (CCYY) for period being processed.", "errors": [{"lineNumber": "1", "properties": {"actionDate": "2013", "transmittalSheet.activityYear": "2012"} },{"lineNumber": "1", "properties": {"actionDate": "2013", "transmittalSheet.activityYear": "2012"} }], "action": "Correct Entry and Revalidate"}, //jshint ignore:line
+            "Q595": {"scope": "hmda", "explanation": "Q595 explanation", "description": "Q595 description", "errors": [], "action": "Verify"}}; //jshint ignore:line
 
     for (var i = 0; i < 20; i++) {
         mockErrors.S270.errors.push({'lineNumber': '1', 'properties': {'actionDate': '2013', 'transmittalSheet.activityYear': '2012'} },{'lineNumber': '1', 'properties': {'actionDate': '2013', 'transmittalSheet.activityYear': '2012'} });
+    }
+
+    for (i = 0; i < 10; i++) {
+        mockErrors.Q595.errors.push({'LAR Count': 2, 'MSA/MD': '1000' + i, 'MSA/MD name': 'metro area'});
     }
 
     beforeEach(inject(function($templateCache) {
         var directiveTemplate = null;
         var templateId = 'partials/errorDetail.html';
         var req = new XMLHttpRequest();
+        req.onload = function() {
+            directiveTemplate = this.responseText;
+        };
+        req.open('get', '/base/app/'+templateId, false);
+        req.send();
+        $templateCache.put(templateId, directiveTemplate);
+        templateId = 'partials/errorDetail-Q595.html';
+        req = new XMLHttpRequest();
         req.onload = function() {
             directiveTemplate = this.responseText;
         };
@@ -195,6 +208,62 @@ describe('Directive: ErrorDetail', function () {
                 $currentPage = 2;
                 $go.click();
                 expect($currentPage).toBe(2);
+            });
+        });
+
+        describe('selecting all checkboxes on Q595', function() {
+            beforeEach(inject(function ($rootScope, $compile) {
+                scope = $rootScope.$new();
+                scope.editId = 'Q595';
+                scope.error = mockErrors[scope.editId];
+                scope.editType = 'special';
+                element = angular.element('<error-detail type="{{editType}}" error="error" edit="{{editId}}"></error-detail>');
+                element = $compile(element)(scope);
+                scope.$digest();
+            }));
+
+            it('should select all checkboxes when clicking Select All', function() {
+                var $selectAll = jQuery('#selectAll', element);
+                expect($selectAll.prop('checked')).toBeFalsy();
+                for (var i = 0; i < 10; i++) {
+                    expect(jQuery('#msa-' + i, element).attr('aria-checked')).toBe('false');
+                }
+
+                $selectAll.click();
+                expect($selectAll.prop('checked')).toBeTruthy();
+                for (i = 0; i < 10; i++) {
+                    expect(jQuery('#msa-' + i, element).attr('aria-checked')).toBe('true');
+                }
+            });
+
+            it('should select all checkboxes when clicking Select All if some are already checked', function() {
+                var $selectAll = jQuery('#selectAll', element);
+                expect($selectAll.prop('checked')).toBeFalsy();
+                for (var i = 3; i < 7; i++) {
+                    jQuery('#msa-' + i, element).click();
+                }
+                expect($selectAll.prop('checked')).toBeFalsy();
+                $selectAll.click();
+
+                expect($selectAll.prop('checked')).toBeTruthy();
+                for (i = 0; i < 10; i++) {
+                    expect(jQuery('#msa-' + i, element).attr('aria-checked')).toBe('true');
+                }
+            });
+
+            it('should de-select all checkboxes when clicking Select All and all checkboxes are already checked', function() {
+                var $selectAll = jQuery('#selectAll', element);
+                expect($selectAll.prop('checked')).toBeFalsy();
+                for (var i = 0; i < 10; i++) {
+                    jQuery('#msa-' + i, element).click();
+                }
+                expect($selectAll.prop('checked')).toBeTruthy();
+
+                $selectAll.click();
+                expect($selectAll.prop('checked')).toBeFalsy();
+                for (i = 0; i < 10; i++) {
+                    expect(jQuery('#msa-' + i, element).attr('aria-checked')).toBe('false');
+                }
             });
         });
     });
