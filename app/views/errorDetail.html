@@ -1,13 +1,11 @@
 <h2 ng-if="['syntactical', 'validity', 'quality', 'macro'].indexOf(editType) !== -1"><label for="editId">{{editType | capitalize}} Edit ID:</label> <select id="editId" ng-model="selectedEditId" ng-change="goToEditDetail()" ng-options="id for id in siblingEdits"></select></h2>
-<h2 ng-if="editId === 'Q029'">Q029 MSA/MD Verification Report</h2>
-<h2 ng-if="editId === 'Q595'">Q595 MSA/MD Verification Report</h2>
 
 <p class="edit-explanation">{{editError.explanation}}</p>
 
 <p class="instructions" ng-if="['syntactical', 'validity', 'macro'].indexOf(editType) !== -1">Please review and correct all errors listed below <em>{{editError.errors.length | entries}}</em> in your system of record. Once corrected, re-select the updated file to validate the data.</p>
 <p class="instructions" ng-if="editType === 'quality'">Please review all of the data listed below. You must review the entire list <em>{{editError.errors.length | entries}}</em> and verify that all of the data is correct before proceeding. If any of the data is incorrect, please correct the errors in your system of record and revalidate the file.</p>
 
-<error-detail type="{{editType}}" error="editError" edit="{{editId}}"></error-detail>
+<error-detail type="{{editType}}" error="editError"></error-detail>
 
 <div class="form-buttons" ng-if="['syntactical', 'validity'].indexOf(editType) !== -1">
     <button class="btn btn__secondary" ng-click="backToSummary()"><span class="btn_icon__left cf-icon cf-icon-left"></span> Back to summary</button>
@@ -49,11 +47,3 @@
     </div>
 </form>
 
-<div class="form-buttons content-l" ng-if="editType === 'special'">
-    <div class="content-l_col content-l_col-1-2">
-        <button class="btn btn__secondary" ng-click="backToSummary()"><span class="btn_icon__left cf-icon cf-icon-left"></span> Back to summary</button>
-    </div>
-    <div class="content-l_col content-l_col-1-2">
-        <button type="submit" class="btn" ng-class="{'btn__disabled': !canVerify}" ng-disabled="!canVerify">Save and continue <span class="btn_icon__right cf-icon cf-icon-right"></span></button>
-    </div>
-</div>

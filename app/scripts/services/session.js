@@ -12,7 +12,7 @@ module.exports = /*@ngInject*/ function () {
     var session = {
         verifiedQualityEdits: [],
         verifiedMacroEdits: {},
-        verifiedSpecialEdits: [],
+        verifiedSpecialEdits: {},
         verifiedIRSReport: false
     };
 
@@ -33,7 +33,7 @@ module.exports = /*@ngInject*/ function () {
     this.reset = function() {
         session.verifiedQualityEdits = [];
         session.verifiedMacroEdits = {};
-        session.verifiedSpecialEdits = [];
+        session.verifiedSpecialEdits = {};
         session.verifiedIRSReport = false;
         return session;
     };
@@ -49,7 +49,7 @@ module.exports = /*@ngInject*/ function () {
             return true;
         } else if (session.verifiedMacroEdits[editId] !== undefined) {
             return true;
-        } else if (session.verifiedSpecialEdits.indexOf(editId) !== -1) {
+        } else if (session.verifiedSpecialEdits[editId] !== undefined) {
             return true;
         } else if (editId === 'IRS') {
             return this.hasVerifiedIRSReport();
@@ -144,17 +144,18 @@ module.exports = /*@ngInject*/ function () {
      * @return {Array} edit ids
      */
     this.getVerifiedSpecialEditIds = function() {
-        return session.verifiedSpecialEdits;
+        return Object.keys(session.verifiedSpecialEdits);
     };
 
     /**
      * Add an editId to a list of verified Special edits
      *
      * @param {String} editId to be added
-     * @return {Array} verified special edits
+     * @param {Array} selected options
+     * @return {Object} verified special edits
      */
-    this.addToVerifiedSpecialEdits = function (editId) {
-        session.verifiedSpecialEdits.push(editId);
+    this.addToVerifiedSpecialEdits = function (editId, selected) {
+        session.verifiedSpecialEdits[editId] = selected;
         return session.verifiedSpecialEdits;
     };
 
@@ -162,11 +163,10 @@ module.exports = /*@ngInject*/ function () {
      * Remove a specified Special edit from the list of verified
      *
      * @param {String} editId to be removed
-     * @return {Array} verified special edits
+     * @return {Object} verified special edits
      */
     this.removeVerifiedSpecialEdit = function (editId) {
-        var currIdx = session.verifiedSpecialEdits.indexOf(editId);
-        session.verifiedSpecialEdits.splice(currIdx, 1);
+        delete session.verifiedSpecialEdits[editId];
         return session.verifiedSpecialEdits;
     };
 
