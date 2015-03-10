@@ -33,6 +33,14 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
         }
     }
 
+    $scope.$watch(function() {
+        return $scope.isLastPage();
+    }, function(isLastPage) {
+        if (isLastPage) {
+            $scope.canVerify = true;
+        }
+    });
+
     $scope.pageSize = $scope.pageSize || 10;
     $scope.currentPage = $scope.currentPage || 1;
 
