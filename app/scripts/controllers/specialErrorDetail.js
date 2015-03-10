@@ -27,9 +27,15 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
     }
 
     if (editId === 'Q595') {
-        $scope.checkboxes = [];
-        for (var i = 1; i <= $scope.editError.errors.length; i++) {
-            $scope.checkboxes[i] = false;
+        if (Session.isVerified(editId)) {
+            console.log('is verified');
+            $scope.checkboxes = Session.getVerifiedSpecialEdit(editId);
+        } else {
+            console.log('not verified');
+            $scope.checkboxes = [];
+            for (var i = 1; i <= $scope.editError.errors.length; i++) {
+                $scope.checkboxes[i] = false;
+            }
         }
     }
 
@@ -102,14 +108,10 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
         $location.path('/detail/' + editType + '/' + $scope.selectedEditId);
     };
 
-    $scope.saveSpecialVerification = function(response) {
-        console.log(response);
-        if (response && response.selected) {
-            console.log('add to verified ' + editId + ' reason ' + response.selected);
-            Session.addToVerifiedSpecialEdits(editId, response.selected);
-        } else {
-            console.log('remove from verified ' + editId);
-            Session.removeVerifiedSpecialEdit(editId);
+    $scope.saveSpecialVerification = function() {
+        if (editId === 'Q595') {
+            console.log('add to verified ' + editId + ' reason ' + $scope.checkboxes);
+            Session.addToVerifiedSpecialEdits(editId, $scope.checkboxes);
         }
         nextEdit();
     };

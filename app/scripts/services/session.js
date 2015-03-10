@@ -130,7 +130,7 @@ module.exports = /*@ngInject*/ function () {
      * Get the verification reason for a specific Macro edit by Id
      *
      * @param {String} editId
-     * @retrun {String} reason
+     * @return {String} reason
      */
     this.getVerifiedReasonByEditId = function(editId) {
         return session.verifiedMacroEdits[editId];
@@ -168,6 +168,16 @@ module.exports = /*@ngInject*/ function () {
     this.removeVerifiedSpecialEdit = function (editId) {
         delete session.verifiedSpecialEdits[editId];
         return session.verifiedSpecialEdits;
+    };
+
+    /**
+     * Get the reasons for a specified Special edit from the list of verified
+     *
+     * @param {String} editId to get
+     * @return {Object} verified special reasons
+     */
+    this.getVerifiedSpecialEdit = function(editId) {
+        return session.verifiedSpecialEdits[editId];
     };
 
     // ## IRS Report
