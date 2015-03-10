@@ -3,7 +3,7 @@
 <p class="edit-explanation">{{editError.explanation}}</p>
 
 <form novalidate class="form-verify form-well" ng-submit="saveSpecialVerification(response)">
-    <div ng-include="partials/errorDetail-{{editId}}.html"></div>
+    <div ng-include="'partials/errorDetail-' + editId + '.html'"></div>
 
     <div class="form-buttons content-l">
         <div class="content-l_col content-l_col-1-2">

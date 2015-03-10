@@ -2,15 +2,15 @@
 
 /**
  * @ngdoc function
- * @name hmdaPilotApp.controller:ErrorDetailCtrl
+ * @name hmdaPilotApp.controller:SpecialErrorDetailCtrl
  * @description
- * # ErrorDetailCtrl
+ * # SpecialErrorDetailCtrl
  * Controller of the hmdaPilotApp
  */
 module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http, HMDAEngine, Session) {
 
     // Get the list of errors from the HMDAEngine
-    var editType = $routeParams.EditType,
+    var editType = 'special',
         editId = $routeParams.EditId,
         editErrors = HMDAEngine.getErrors();
 
@@ -26,12 +26,15 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
         $scope.editError = {};
     }
 
-    if ($scope.editId === 'Q595') {
+    if (editId === 'Q595') {
         $scope.checkboxes = [];
-        for (var i = 1; i <= $scope.error.errors.length; i++) {
+        for (var i = 1; i <= $scope.editError.errors.length; i++) {
             $scope.checkboxes[i] = false;
         }
     }
+
+    $scope.pageSize = $scope.pageSize || 10;
+    $scope.currentPage = $scope.currentPage || 1;
 
     $scope.start = function() {
         return ($scope.currentPage-1) * $scope.pageSize + 1;
@@ -43,7 +46,7 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
     };
 
     $scope.total = function() {
-        return $scope.reportData ? $scope.reportData.length : 0;
+        return ($scope.editError && $scope.editError.errors) ? $scope.editError.errors.length : 0;
     };
 
     $scope.totalPages = function() {
@@ -115,7 +118,7 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
     }
 
     $scope.selectAll = function() {
-        if (allSelected()) {
+        if ($scope.allSelected()) {
             for (var i = $scope.start(); i <= $scope.end(); i++) {
                 $scope.checkboxes[i] = false;
             }
@@ -126,12 +129,12 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
         }
     };
 
-    function allSelected() {
+    $scope.allSelected = function() {
         for (var i = $scope.start(); i <= $scope.end(); i++) {
             if ($scope.checkboxes[i] === false) {
                 return false;
             }
         }
         return true;
-    }
+    };
 };

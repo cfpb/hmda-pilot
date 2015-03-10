@@ -57,7 +57,7 @@ angular
         templateUrl: 'views/validationSummary.html',
         controller: 'ValidationSummaryCtrl'
       })
-      .when('detail/special/:EditId', {
+      .when('/detail/special/:EditId', {
           templateUrl: 'views/specialErrorDetail.html',
           controller: 'SpecialErrorDetailCtrl'
       })
