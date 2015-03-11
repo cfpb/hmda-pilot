@@ -53,7 +53,7 @@ describe('Service: Session', function () {
         });
 
         it('should return true if an Edit ID was saved as a Special Edit ID', function() {
-            service.addToVerifiedSpecialEdits('V100');
+            service.addToVerifiedSpecialEdits('V100', [true, true, false]);
             expect(service.isVerified('V100')).toBeTruthy();
         });
 

@@ -37,8 +37,6 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
 
         $scope.verified = Session.isVerified(editId);
         $scope.selectedReason = Session.getVerifiedReasonByEditId(editId);
-    } else if (editType === 'special') {
-        $scope.editType = editId;
     }
 
     $scope.backToSummary = function() {
@@ -46,8 +44,6 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
             $location.path('/summarySyntacticalValidity');
         } else if (editType === 'quality' || editType === 'macro') {
             $location.path('/summaryQualityMacro');
-        } else if (editType === 'special') {
-            $location.path('/summaryMSA-IRS');
         } else { // Go back to the start if nothing matches
             $location.path('/');
         }

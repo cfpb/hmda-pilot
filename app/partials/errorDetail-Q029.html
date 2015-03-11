@@ -1,43 +1,41 @@
-<p class="instructions">The LAR's listed below <em>{{error.errors.length | entries}}</em> were reported with NA in the MSA/MD's field. Please verify if these should be automatically updated. Please revalidate if the MSA/MD's listed is incorrect.</p>
+<p class="instructions">The LARs listed below <em>{{editError.errors.length | entries}}</em> were reported with NA in the MSA/MD's field. Please verify if these should be automatically updated. Please revalidate if the MSA/MD's listed is incorrect.</p>
 
-<div class="page-size" ng-if="error">Showing {{start()}} - {{end()}} of {{total()}} | <label for="page-size" class="pagination_label">View</label>
+<div class="page-size" ng-if="editError">Showing {{start()}} - {{end()}} of {{total()}} | <label for="page-size" class="pagination_label">View</label>
     <select id="page-size" ng-model="pageSize" ng-options="size as size for size in [10, 20, 50, 100]" ng-change="setPageSize(pageSize)"></select>
 </div>
 
-<form novalidate ng-submit="saveQ595Verification(response)">
-    <table id="Q029" class="error-detail" ng-if="error">
-        <thead>
-            <tr>
-                <th scope="col" class="id">LAR Number</th>
-                <th scope="col" class="state_code">Reported State Code</th>
-                <th scope="col" class="county_code">Reported County Code</th>
-                <th scope="col" class="census_tract">Reported Census Tract</th>
-                <th scope="col" class="recommended">Recommended MSA/MD</th>
-                <td><select ng-model="selectAll"><option>Select...</option><option>All of the listed MSA/MD's should be updated</option><option>None of the listed MSA/MD's should be updated</option></select></td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="item in error.errors | paginate:start():end()">
-                <th scope="row" class="id"><label for="lar-{{item.properties['LAR number']}}">{{item.properties['LAR number']}}</label></th>
-                <td class="state_code">{{item.properties['Reported State Code']}}</td>
-                <td class="county_code">{{item.properties['Reported County Code']}}</td>
-                <td class="census_tract">{{item.properties['Reported Census Tract']}}</td>
-                <td class="recommended">{{item.properties['Recommended MSA/MD']}}</td>
-                <td><select id="lar-{{item.loanNumber}}"><option>Select...</option><option>Yes, the listed MSA/MD should be updated</option><option>No, the listed MSA/MD should not be updated</option></select></td>
-            </tr>
-        </tbody>
-    </table>
+<table id="Q029" class="error-detail" ng-if="editError">
+    <thead>
+        <tr>
+            <th scope="col" class="id">LAR Number</th>
+            <th scope="col" class="state_code">Reported State Code</th>
+            <th scope="col" class="county_code">Reported County Code</th>
+            <th scope="col" class="census_tract">Reported Census Tract</th>
+            <th scope="col" class="recommended">Recommended MSA/MD</th>
+            <td><label for="selectAll" class="u-visually-hidden">Verify all MSA/MDs as</label><select id="selectAll" ng-model="selectedAnswer" ng-change="selectAll(selectedAnswer)"><option value="0">Select...</option><option value="1">All of the listed MSA/MDs should be updated</option><option value="2">None of the listed MSA/MDs should be updated</option></select></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in editError.errors | paginate:start():end()">
+            <th scope="row" class="id">{{item.properties['LAR number']}}</th>
+            <td class="state_code">{{item.properties['Reported State Code']}}</td>
+            <td class="county_code">{{item.properties['Reported County Code']}}</td>
+            <td class="census_tract">{{item.properties['Reported Census Tract']}}</td>
+            <td class="recommended"><label for="lar-{{$index}}">{{item.properties['Recommended MSA/MD']}}</label></td>
+            <td><select id="lar-{{$index}}" ng-model="selects[start()+$index]"><option value="0">Select...</option><option value="1">Yes, the listed MSA/MD should be updated</option><option value="2">No, the listed MSA/MD should not be updated</option></select></td>
+        </tr>
+    </tbody>
+</table>
 
-    <nav class="pagination" ng-if="error && showPagination()">
-        <button class="btn btn__secondary pagination_prev" ng-class="{btn__disabled: !hasPrev()}" ng-disabled="!hasPrev()" ng-click="onPrev()"><span class="btn_icon__left cf-icon cf-icon-left"></span> Previous</button>
-        <button class="btn btn__secondary pagination_next" ng-class="{btn__disabled: !hasNext()}" ng-disabled="!hasNext()" ng-click="onNext()">Next <span class="btn_icon__right cf-icon cf-icon-right"></span></button>
-        <div class="pagination_form">
-            <label class="pagination_label" for="pagination_current-page">Page <span class="u-visually-hidden"> number out of {{totalPages()}} total pages</span></label>
-            <input class="pagination_current-page" id="pagination_current-page" name="pagination_current-page" type="number" min="1" max="{{totalPages()}}" ng-model="currentPage">
-            <span class="pagination_label"><span aria-hidden="true">of {{totalPages()}}</span></span>
-            <button class="btn btn__link pagination_submit" id="pagination_submit" ng-click="setCurrentPage(currentPage)">Go</button>
-        </div>
-    </nav>
+<nav class="pagination" ng-if="editError && showPagination()">
+    <button class="btn btn__secondary pagination_prev" ng-class="{btn__disabled: !hasPrev()}" ng-disabled="!hasPrev()" ng-click="onPrev()"><span class="btn_icon__left cf-icon cf-icon-left"></span> Previous</button>
+    <button class="btn btn__secondary pagination_next" ng-class="{btn__disabled: !hasNext()}" ng-disabled="!hasNext()" ng-click="onNext()">Next <span class="btn_icon__right cf-icon cf-icon-right"></span></button>
+    <div class="pagination_form">
+        <label class="pagination_label" for="pagination_current-page">Page <span class="u-visually-hidden"> number out of {{totalPages()}} total pages</span></label>
+        <input class="pagination_current-page" id="pagination_current-page" name="pagination_current-page" type="number" min="1" max="{{totalPages()}}" ng-model="currentPage">
+        <span class="pagination_label"><span aria-hidden="true">of {{totalPages()}}</span></span>
+        <button class="btn btn__link pagination_submit" id="pagination_submit" ng-click="setCurrentPage(currentPage)">Go</button>
+    </div>
+</nav>
 
-    <p ng-if="!error">No errors found.</p>
-</form>
+<p ng-if="!editError">No errors found.</p>
