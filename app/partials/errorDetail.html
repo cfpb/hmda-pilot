@@ -2,11 +2,11 @@
     <select id="page-size" ng-model="pageSize" ng-options="size as size for size in [10, 20, 50, 100]" ng-change="setPageSize(pageSize)"></select>
 </div>
 
-<table class="detail-table" ng-if="error">
+<table id="{{editType}}" class="error-detail grouped-rows" ng-if="error">
     <thead>
         <tr>
-            <th class="id" scope="col" ng-if="error.scope === 'lar'">Loan/Application Number</th>
-            <th class="id" scope="col" ng-if="error.scope !== 'lar'">Line Number</th>
+            <th class="loan-number" scope="col" ng-if="error.scope === 'lar'">Loan/Application Number</th>
+            <th class="line-number" scope="col" ng-if="error.scope !== 'lar'">Line Number</th>
             <th class="description" scope="col">Field</th>
             <th class="value" scope="col">Submitted Value</th>
             <th class="action" scope="col" ng-if="editType !== 'quality'">Action</th>
@@ -14,7 +14,7 @@
     </thead>
     <tbody ng-repeat="item in error.errors | paginate:start():end()">
         <tr ng-repeat="(key, value) in item.properties">
-            <th class="id" scope="row" rowspan="{{item.properties | keyLength}}" ng-if="$first">{{item.loanNumber || item.lineNumber}}</th>
+            <th class="{{error.scope === 'lar' ? 'loan-number':'line-number'}}" scope="row" rowspan="{{item.properties | keyLength}}" ng-if="$first">{{item.loanNumber || item.lineNumber}}</th>
             <td class="description">{{ {'property':key, 'lineNumber':item.lineNumber} | hmdaLabel:error.scope}}</td>
             <td class="value">{{value}}</td>
             <td class="action" rowspan="{{item.properties | keyLength}}" ng-if="$first && editType !== 'quality'">Correct and revalidate</td>

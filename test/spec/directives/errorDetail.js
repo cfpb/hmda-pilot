@@ -63,7 +63,7 @@ describe('Directive: ErrorDetail', function () {
 
         it('should display a table of errors', function () {
             expect($table).toBeDefined();
-            expect($table.hasClass('detail-table')).toBeTruthy();
+            expect($table.hasClass('error-detail')).toBeTruthy();
         });
 
         describe('table for syntactical, validity or quality errors', function() {
@@ -116,7 +116,7 @@ describe('Directive: ErrorDetail', function () {
                 scope.$digest();
                 $table = jQuery('table', element);
 
-                expect($table.hasClass('macro-detail-table')).toBeTruthy();
+                expect($table.hasClass('macro-detail')).toBeTruthy();
 
                 expect(jQuery('tbody th:eq(0)', $table).text()).toBe('actionDate');
                 expect(jQuery('tbody th:eq(0)', $table).attr('scope')).toBe('row');

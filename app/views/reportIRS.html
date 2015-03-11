@@ -6,27 +6,27 @@
     <select id="page-size" ng-model="pageSize" ng-options="size as size for size in [10, 20, 50, 100]" ng-change="setPageSize(pageSize)"></select>
 </div>
 
-<table class="irs-detail-table" ng-if="reportData">
+<table id="IRS" class="report-detail" ng-if="reportData">
     <thead>
         <tr>
-            <td colspan="4"></td>
-            <th scope="col" colspan="4">Loan Type</th>
-            <th scope="col" colspan="3">Property Type</th>
-            <th scope="col" colspan="3">Loan Purpose</th>
+            <td colspan="4" class=""></td>
+            <th scope="col" colspan="4" class="col-group-header">Loan Type</th>
+            <th scope="col" colspan="3" class="col-group-header">Property Type</th>
+            <th scope="col" colspan="3" class="col-group-header">Loan Purpose</th>
         </tr>
         <tr>
             <th scope="col" class="id">MSA/MD</th>
             <th scope="col" class="name">MSA/MD Name</th>
             <th scope="col" class="count">Total LARS</th>
-            <th scope="col" class="count">Total Amt.</th>
-            <th scope="col" class="count">CONV</th>
+            <th scope="col" class="count">Total <abbr title="Amount">Amt.</abbr> <small>(in thousands)</small></th>
+            <th scope="col" class="count col-group-first">CONV</th>
             <th scope="col" class="count">FHA</th>
             <th scope="col" class="count">VA</th>
-            <th scope="col" class="count">FSA/RHS</th>
-            <th scope="col" class="count">1-4 Family</th>
+            <th scope="col" class="count">FSA/ RHS</th>
+            <th scope="col" class="count col-group-first">1-4 Family</th>
             <th scope="col" class="count"><abbr title="Manufactured">MFD</abbr></th>
             <th scope="col" class="count">Multi-family</th>
-            <th scope="col" class="count">Home Purchase</th>
+            <th scope="col" class="count col-group-first">Home Purchase</th>
             <th scope="col" class="count">Home Improvement</th>
             <th scope="col" class="count">Refinance</th>
         </tr>
@@ -36,15 +36,15 @@
             <th scope="row" class="id">{{item.msaCode}}</th>
             <td class="name">{{item.msaName}}</td>
             <td class="count">{{item.totalLAR}}</td>
-            <td class="count">{{item.totalLoanAmount}}</td>
-            <td class="count">{{item.totalConventional}}</td>
+            <td class="dollar">{{item.totalLoanAmount | currency:"$":0}}</td>
+            <td class="count col-group-first">{{item.totalConventional}}</td>
             <td class="count">{{item.totalFHA}}</td>
             <td class="count">{{item.totalVA}}</td>
             <td class="count">{{item.totalFSA}}</td>
-            <td class="count">{{item.total1To4Family}}</td>
+            <td class="count col-group-first">{{item.total1To4Family}}</td>
             <td class="count">{{item.totalMFD}}</td>
             <td class="count">{{item.totalMultifamily}}</td>
-            <td class="count">{{item.totalHomePurchase}}</td>
+            <td class="count col-group-first">{{item.totalHomePurchase}}</td>
             <td class="count">{{item.totalHomeImprovement}}</td>
             <td class="count">{{item.totalRefinance}}</td>
         </tr>

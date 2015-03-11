@@ -63,7 +63,7 @@ describe('Directive: ErrorSummary', function () {
 
         it('should display a table of errors', function () {
             expect(table).toBeDefined();
-            expect(table.hasClass('summary-table')).toBeTruthy();
+            expect(table.hasClass('error-summary')).toBeTruthy();
         });
 
         describe('table', function() {
@@ -94,7 +94,7 @@ describe('Directive: ErrorSummary', function () {
 
         it('should display a table of errors', function () {
             expect(table).toBeDefined();
-            expect(table.hasClass('summary-table')).toBeTruthy();
+            expect(table.hasClass('error-summary')).toBeTruthy();
         });
 
         describe('table', function() {
@@ -125,7 +125,7 @@ describe('Directive: ErrorSummary', function () {
 
         it('should display a table of errors', function () {
             expect(table).toBeDefined();
-            expect(table.hasClass('summary-table')).toBeTruthy();
+            expect(table.hasClass('error-summary')).toBeTruthy();
         });
 
         describe('table', function() {

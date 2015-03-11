@@ -1,4 +1,4 @@
-<table class="macro-detail-table" ng-if="error">
+<table id="{{editType}}" class="macro-detail" ng-if="error">
     <tbody ng-repeat="item in error.errors">
         <tr ng-repeat="(key, value) in item.properties">
             <th class="property" scope="row">{{key}}</th>
