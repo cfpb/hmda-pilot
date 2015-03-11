@@ -36,12 +36,13 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
             }
         }
     } else if (editId === 'Q029') {
+        $scope.selectedAnswer = $scope.selectedAnswer || '0';
         if (Session.isVerified(editId)) {
             $scope.selects = Session.getVerifiedSpecialEdit(editId);
         } else {
             $scope.selects = [];
-            for (i = 1; i <= $scope.editError.errors.length; i++) {
-                $scope.selects[i] = '';
+            for (var j = 1; j <= $scope.editError.errors.length; j++) {
+                $scope.selects[j] = '0';
             }
         }
     }
@@ -135,8 +136,14 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
         $location.path(path);
     }
 
-    $scope.selectAll = function() {
-        if ($scope.allSelected()) {
+    $scope.selectAll = function(selectedAnswer) {
+        for (var i = $scope.start(); i <= $scope.end(); i++) {
+            $scope.selects[i] = selectedAnswer;
+        }
+    };
+
+    $scope.checkAll = function() {
+        if ($scope.allChecked()) {
             for (var i = $scope.start(); i <= $scope.end(); i++) {
                 $scope.checkboxes[i] = false;
             }
@@ -147,7 +154,7 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
         }
     };
 
-    $scope.allSelected = function() {
+    $scope.allChecked = function() {
         for (var i = $scope.start(); i <= $scope.end(); i++) {
             if ($scope.checkboxes[i] === false) {
                 return false;

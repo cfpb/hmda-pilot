@@ -12,7 +12,7 @@
             <th scope="col" class="county_code">Reported County Code</th>
             <th scope="col" class="census_tract">Reported Census Tract</th>
             <th scope="col" class="recommended">Recommended MSA/MD</th>
-            <td><select ng-model="selectAll"><option>Select...</option><option>All of the listed MSA/MD's should be updated</option><option>None of the listed MSA/MD's should be updated</option></select></td>
+            <td><select ng-model="selectedAnswer" ng-change="selectAll(selectedAnswer)"><option value="0">Select...</option><option value="1">All of the listed MSA/MD's should be updated</option><option value="2">None of the listed MSA/MD's should be updated</option></select></td>
         </tr>
     </thead>
     <tbody>
@@ -22,7 +22,7 @@
             <td class="county_code">{{item.properties['Reported County Code']}}</td>
             <td class="census_tract">{{item.properties['Reported Census Tract']}}</td>
             <td class="recommended">{{item.properties['Recommended MSA/MD']}}</td>
-            <td><select id="lar-{{item.loanNumber}}"><option>Select...</option><option>Yes, the listed MSA/MD should be updated</option><option>No, the listed MSA/MD should not be updated</option></select></td>
+            <td><select id="lar-{{$index}}" ng-model="selects[start()+$index]"><option value="0">Select...</option><option value="1">Yes, the listed MSA/MD should be updated</option><option value="2">No, the listed MSA/MD should not be updated</option></select></td>
         </tr>
     </tbody>
 </table>
