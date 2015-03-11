@@ -10,7 +10,7 @@
 <error-detail type="{{editType}}" error="editError"></error-detail>
 
 <div class="form-buttons" ng-if="['syntactical', 'validity'].indexOf(editType) !== -1">
-    <button class="btn btn__secondary u-mt5" ng-click="backToSummary()"><span class="btn_icon__left cf-icon cf-icon-left"></span> Back to summary</button>
+    <button class="btn btn__secondary" ng-click="backToSummary()"><span class="btn_icon__left cf-icon cf-icon-left"></span> Back to summary</button>
 </div>
 
 <form novalidate class="form-verify form-well" ng-if="editType === 'quality'" ng-submit="saveQualityVerification(response)">
@@ -19,7 +19,7 @@
     </div>
 
     <div class="form-buttons">
-        <button class="btn btn__secondary u-mt5" ng-click="backToSummary()"><span class="btn_icon__left cf-icon cf-icon-left"></span> Back to summary</button>
+        <button class="btn btn__secondary" ng-click="backToSummary()"><span class="btn_icon__left cf-icon cf-icon-left"></span> Back to summary</button>
         <button type="submit" class="btn" ng-class="{'btn__disabled': !canVerify}">Save and continue <span class="btn_icon__right cf-icon cf-icon-right"></span></button>
     </div>
 </form>
@@ -36,12 +36,12 @@
     </div>
 
     <div class="form-buttons">
-        <button class="btn btn__secondary u-mt5" ng-click="backToSummary()"><span class="btn_icon__left cf-icon cf-icon-left"></span> Back to summary</button>
+        <button class="btn btn__secondary" ng-click="backToSummary()"><span class="btn_icon__left cf-icon cf-icon-left"></span> Back to summary</button>
         <button type="submit" class="btn">Save and continue <span class="btn_icon__right cf-icon cf-icon-right"></span></button>
     </div>
 </form>
 
 <div class="form-buttons" ng-if="editType === 'special'">
-    <button class="btn btn__secondary u-mt5" ng-click="backToSummary()"><span class="btn_icon__left cf-icon cf-icon-left"></span> Back to summary</button>
+    <button class="btn btn__secondary" ng-click="backToSummary()"><span class="btn_icon__left cf-icon cf-icon-left"></span> Back to summary</button>
     <button type="submit" class="btn" ng-class="{'btn__disabled': !canVerify}">Save and continue <span class="btn_icon__right cf-icon cf-icon-right"></span></button>
 </div>
