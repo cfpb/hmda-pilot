@@ -27,11 +27,20 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
         return angular.equals({}, $scope.syntacticalErrors) && angular.equals({}, $scope.validityErrors);
     };
 
-    $scope.next = function() {
-        // Toggle processing flag on so that we can notify the user
-        $scope.isProcessing = true;
+    function hasErrors(obj) {
+        return Object.keys(obj).length > 0;
+    }
 
-        $timeout(function() { $scope.process(); }, 100); // Pause before starting the validation so that the DOM can update
+    $scope.next = function() {
+        if (hasErrors(editErrors.quality) || hasErrors(editErrors.macro)) {
+            $location.path('/summaryQualityMacro');
+        } else{
+            // Toggle processing flag on so that we can notify the user
+            $scope.isProcessing = true;
+
+            // Pause before starting the validation so that the DOM can update
+            $timeout(function() { $scope.process(); }, 100);
+        }
     };
 
     $scope.process = function() {
