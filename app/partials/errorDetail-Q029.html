@@ -12,16 +12,16 @@
             <th scope="col" class="county_code">Reported County Code</th>
             <th scope="col" class="census_tract">Reported Census Tract</th>
             <th scope="col" class="recommended">Recommended MSA/MD</th>
-            <td><label for="selectAll" class="u-visually-hidden">Verify all MSA/MDs as</label><select id="selectAll" ng-model="selectedAnswer" ng-change="selectAll(selectedAnswer)"><option value="0">Select...</option><option value="1">All of the listed MSA/MD's should be updated</option><option value="2">None of the listed MSA/MD's should be updated</option></select></td>
+            <td><label for="selectAll" class="u-visually-hidden">Verify all MSA/MDs as</label><select id="selectAll" ng-model="selectedAnswer" ng-change="selectAll(selectedAnswer)"><option value="0">Select...</option><option value="1">All of the listed MSA/MDs should be updated</option><option value="2">None of the listed MSA/MDs should be updated</option></select></td>
         </tr>
     </thead>
     <tbody>
         <tr ng-repeat="item in editError.errors | paginate:start():end()">
-            <th scope="row" class="id"><label for="lar-{{$index}}">{{item.properties['LAR number']}}</label></th>
+            <th scope="row" class="id">{{item.properties['LAR number']}}</th>
             <td class="state_code">{{item.properties['Reported State Code']}}</td>
             <td class="county_code">{{item.properties['Reported County Code']}}</td>
             <td class="census_tract">{{item.properties['Reported Census Tract']}}</td>
-            <td class="recommended">{{item.properties['Recommended MSA/MD']}}</td>
+            <td class="recommended"><label for="lar-{{$index}}">{{item.properties['Recommended MSA/MD']}}</label></td>
             <td><select id="lar-{{$index}}" ng-model="selects[start()+$index]"><option value="0">Select...</option><option value="1">Yes, the listed MSA/MD should be updated</option><option value="2">No, the listed MSA/MD should not be updated</option></select></td>
         </tr>
     </tbody>
