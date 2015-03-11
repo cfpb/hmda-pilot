@@ -45,6 +45,15 @@ angular.module('hmdaFilters', [])
             return codes[agencyCode] || '';
         };
     })
+    .filter('entries', function() {
+        return function(val) {
+            if (val === 1) {
+                return '(' + val + ' entry)';
+            } else {
+                return '(' + val + ' entries)';
+            }
+        };
+    })
     .filter('paginate', function() {
         return function(input, start, end) {
             return input.slice(start-1, end);

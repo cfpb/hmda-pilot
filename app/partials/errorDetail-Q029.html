@@ -1,11 +1,11 @@
-<p class="instructions">The LAR's listed below were reported with NA in the MSA/MD's field. Please verify if these should be automatically updated. Please revalidate if the MSA/MD's listed is incorrect.</p>
+<p class="instructions">The LAR's listed below <em>{{error.errors.length | entries}}</em> were reported with NA in the MSA/MD's field. Please verify if these should be automatically updated. Please revalidate if the MSA/MD's listed is incorrect.</p>
 
 <div class="page-size" ng-if="error">Showing {{start()}} - {{end()}} of {{total()}} | <label for="page-size" class="pagination_label">View</label>
     <select id="page-size" ng-model="pageSize" ng-options="size as size for size in [10, 20, 50, 100]" ng-change="setPageSize(pageSize)"></select>
 </div>
 
 <form novalidate ng-submit="saveQ595Verification(response)">
-    <table class="detail-table" ng-if="error">
+    <table id="Q029" class="error-detail" ng-if="error">
         <thead>
             <tr>
                 <th scope="col" class="id">LAR Number</th>
