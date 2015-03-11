@@ -64,8 +64,32 @@ describe('Controller: SummaryMSAIRSCtrl', function () {
                     Session: Session
                 });
 
-                // expect(scope.showIRSReport()).toBeFalsy();
+                expect(scope.showIRSReport()).toBeFalsy();
             });
+        });
+    });
+
+    describe('isIRSVerified()', function() {
+        it('where the IRS report has been verified', function() {
+            Session.verifyIRSReport();
+            controller('SummaryMSAIRSCtrl', {
+                $scope: scope,
+                $location: location,
+                HMDAEngine: mockEngine,
+                Session: Session
+            });
+            expect(scope.isIRSVerified()).toBeTruthy();
+        });
+
+        it('where the IRS report has not been verified', function() {
+            Session.unverifyIRSReport();
+            controller('SummaryMSAIRSCtrl', {
+                $scope: scope,
+                $location: location,
+                HMDAEngine: mockEngine,
+                Session: Session
+            });
+            expect(scope.isIRSVerified()).toBeFalsy();
         });
     });
 
