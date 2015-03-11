@@ -18,9 +18,13 @@
         <label for="verify"><input type="checkbox" id="verify" ng-model="response.verified" ng-disabled="!canVerify" ng-checked="verified"> I have verified that all of the submitted data is correct and agree with the accuracy of the values listed.</label>
     </div>
 
-    <div class="form-buttons">
-        <button class="btn btn__secondary" ng-click="backToSummary()"><span class="btn_icon__left cf-icon cf-icon-left"></span> Back to summary</button>
-        <button type="submit" class="btn" ng-class="{'btn__disabled': !canVerify}">Save and continue <span class="btn_icon__right cf-icon cf-icon-right"></span></button>
+    <div class="form-buttons content-l">
+        <div class="content-l_col content-l_col-1-2">
+            <button class="btn btn__secondary" ng-click="backToSummary()"><span class="btn_icon__left cf-icon cf-icon-left"></span> Back to summary</button>
+        </div>
+        <div class="content-l_col content-l_col-1-2">
+            <button type="submit" class="btn" ng-class="{'btn__disabled': !canVerify}">Save and continue <span class="btn_icon__right cf-icon cf-icon-right"></span></button>
+        </div>
     </div>
 </form>
 
@@ -35,13 +39,21 @@
         </div>
     </div>
 
-    <div class="form-buttons">
-        <button class="btn btn__secondary" ng-click="backToSummary()"><span class="btn_icon__left cf-icon cf-icon-left"></span> Back to summary</button>
-        <button type="submit" class="btn">Save and continue <span class="btn_icon__right cf-icon cf-icon-right"></span></button>
+    <div class="form-buttons content-l">
+        <div class="content-l_col content-l_col-1-2">
+            <button class="btn btn__secondary" ng-click="backToSummary()"><span class="btn_icon__left cf-icon cf-icon-left"></span> Back to summary</button>
+        </div>
+        <div class="content-l_col content-l_col-1-2">
+            <button type="submit" class="btn">Save and continue <span class="btn_icon__right cf-icon cf-icon-right"></span></button>
+        </div>
     </div>
 </form>
 
-<div class="form-buttons" ng-if="editType === 'special'">
-    <button class="btn btn__secondary" ng-click="backToSummary()"><span class="btn_icon__left cf-icon cf-icon-left"></span> Back to summary</button>
-    <button type="submit" class="btn" ng-class="{'btn__disabled': !canVerify}">Save and continue <span class="btn_icon__right cf-icon cf-icon-right"></span></button>
+<div class="form-buttons content-l" ng-if="editType === 'special'">
+    <div class="content-l_col content-l_col-1-2">
+        <button class="btn btn__secondary" ng-click="backToSummary()"><span class="btn_icon__left cf-icon cf-icon-left"></span> Back to summary</button>
+    </div>
+    <div class="content-l_col content-l_col-1-2">
+        <button type="submit" class="btn" ng-class="{'btn__disabled': !canVerify}">Save and continue <span class="btn_icon__right cf-icon cf-icon-right"></span></button>
+    </div>
 </div>
