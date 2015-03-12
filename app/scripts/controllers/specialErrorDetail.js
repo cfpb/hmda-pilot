@@ -28,7 +28,7 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
 
     if (editId === 'Q595') {
         if (Session.isVerified(editId)) {
-            $scope.checkboxes = Session.getVerifiedSpecialEdit(editId);
+            $scope.checkboxes = angular.copy(Session.getVerifiedSpecialEdit(editId));
         } else {
             $scope.checkboxes = [];
             for (var i = 1; i <= $scope.editError.errors.length; i++) {
@@ -38,7 +38,7 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
     } else if (editId === 'Q029') {
         $scope.selectedAnswer = $scope.selectedAnswer || '0';
         if (Session.isVerified(editId)) {
-            $scope.selects = Session.getVerifiedSpecialEdit(editId);
+            $scope.selects = angular.copy(Session.getVerifiedSpecialEdit(editId));
         } else {
             $scope.selects = [];
             for (var j = 1; j <= $scope.editError.errors.length; j++) {
