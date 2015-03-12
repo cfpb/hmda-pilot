@@ -75,9 +75,18 @@ describe('Service: Session', function () {
     });
 
     describe('getVerifiedReasonByEditId()', function() {
-        it('should return a reason an edit was verified', function() {
+        it('should return a reason an edit was verified for a macro edit', function() {
             service.addToVerifiedMacroEdits('V100', 'test');
             expect(service.getVerifiedReasonByEditId('V100')).toBe('test');
+        });
+
+        it('should return a reason an edit was verified for a special edit', function() {
+            service.addToVerifiedSpecialEdits('V100', ['foo', 'bar']);
+            expect(service.getVerifiedReasonByEditId('V100')).toEqual(['foo', 'bar']);
+        });
+
+        it('should return undefined if an edit has not been verified', function() {
+            expect(service.getVerifiedReasonByEditId('V100')).toBeUndefined();
         });
     });
 

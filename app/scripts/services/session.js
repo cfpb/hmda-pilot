@@ -131,13 +131,18 @@ module.exports = /*@ngInject*/ function () {
     };
 
     /**
-     * Get the verification reason for a specific Macro edit by Id
+     * Get the verification reason for a specific Macro or Special edit by Id
      *
      * @param {String} editId
-     * @return {String} reason
+     * @return {String|Object} reason
      */
     this.getVerifiedReasonByEditId = function(editId) {
-        return session.verifiedMacroEdits[editId];
+        if (session.verifiedMacroEdits[editId] !== undefined) {
+            return session.verifiedMacroEdits[editId];
+        } else if (session.verifiedSpecialEdits[editId] !== undefined) {
+            return angular.copy(session.verifiedSpecialEdits[editId]);
+        }
+        return undefined;
     };
 
     // ## Special Edits
@@ -172,16 +177,6 @@ module.exports = /*@ngInject*/ function () {
     this.removeVerifiedSpecialEdit = function (editId) {
         delete session.verifiedSpecialEdits[editId];
         return session.verifiedSpecialEdits;
-    };
-
-    /**
-     * Get the reasons for a specified Special edit from the list of verified
-     *
-     * @param {String} editId to get
-     * @return {Object} verified special reasons
-     */
-    this.getVerifiedSpecialEdit = function(editId) {
-        return session.verifiedSpecialEdits[editId];
     };
 
     // ## IRS Report
