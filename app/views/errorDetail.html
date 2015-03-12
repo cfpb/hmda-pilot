@@ -26,7 +26,7 @@
     </div>
 </form>
 
-<form novalidate class="form-verify form-well" ng-if="editType === 'macro'" ng-submit="saveMacroVerification(response)">
+<form novalidate class="form-verify form-well" ng-if="editType === 'macro'" ng-submit="saveMacroVerification()">
     <div class="form-group_item">
         <label for="verify"><input type="checkbox" id="verify" ng-model="response.verified" ng-checked="verified"> I have verified that all of the submitted data is correct and agree with the accuracy of the values listed.</label>
         <div class="form-group_item">
