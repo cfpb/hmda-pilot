@@ -38,7 +38,7 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
         $scope.verified = Session.isVerified(editId);
         $scope.selectedReason = Session.getVerifiedReasonByEditId(editId);
     }
-    $scope.response = $scope.response || {};
+    $scope.response = {};
     $scope.response.verified = $scope.verified;
     $scope.response.reason = $scope.selectedReason;
 
