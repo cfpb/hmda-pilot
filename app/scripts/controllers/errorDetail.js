@@ -38,6 +38,8 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
         $scope.verified = Session.isVerified(editId);
         $scope.selectedReason = Session.getVerifiedReasonByEditId(editId);
     }
+    $scope.response = $scope.response || {};
+    $scope.response.verified = $scope.verified;
 
     $scope.backToSummary = function() {
         if (editType === 'syntactical' || editType === 'validity') {
@@ -53,8 +55,8 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
         $location.path('/detail/' + editType + '/' + $scope.selectedEditId);
     };
 
-    $scope.saveQualityVerification = function(response) {
-        if (response && response.verified) {
+    $scope.saveQualityVerification = function() {
+        if ($scope.response.verified) {
             Session.addToVerifiedQualityEdits(editId);
         } else {
             Session.removeVerifiedQualityEdit(editId);

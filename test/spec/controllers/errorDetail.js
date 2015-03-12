@@ -183,8 +183,8 @@ describe('Controller: ErrorDetailCtrl', function () {
     describe('saveQualityVerification()', function() {
         describe('when edit has been verified', function() {
             beforeEach(function() {
-                scope.saveQualityVerification({verified: true});
-                scope.$digest();
+                scope.response.verified = true;
+                scope.saveQualityVerification();
             });
 
             it('should save the Edit ID to the session', function() {
@@ -198,8 +198,8 @@ describe('Controller: ErrorDetailCtrl', function () {
 
         describe('when edit is not verified', function() {
             beforeEach(function() {
-                scope.saveQualityVerification({verified: false});
-                scope.$digest();
+                scope.response.verified = false;
+                scope.saveQualityVerification();
             });
 
             it('should save the Edit ID to the session', function() {
