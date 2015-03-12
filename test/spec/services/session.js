@@ -18,12 +18,24 @@ describe('Service: Session', function () {
             service.addToVerifiedQualityEdits('V100');
             expect(service.getVerifiedQualityEditIds()).toContain('V100');
         });
+
+        it('should only add the same string to the array of validated Quality Edit IDs once', function() {
+            service.addToVerifiedQualityEdits('V100');
+            service.addToVerifiedQualityEdits('V100');
+            expect(service.getVerifiedQualityEditIds()).toContain('V100');
+            expect(service.getVerifiedQualityEditIds().length).toBe(1);
+        });
     });
 
     describe('addToVerifiedMacroEdits()', function() {
-        it('should add a string to the array of validated Macro Edit IDs', function() {
-            service.addToVerifiedMacroEdits('V100');
+        it('should add a key value pair for edit id and reason to the object of validated Macro Edit IDs', function() {
+            service.addToVerifiedMacroEdits('V100', 'reason');
             expect(service.getVerifiedMacroEditIds()).toContain('V100');
+        });
+
+        it('should not add a key value pair with an undefined value to the object of validated Macro Edit IDs', function() {
+            service.addToVerifiedMacroEdits('V100');
+            expect(service.getVerifiedMacroEditIds()).not.toContain('V100');
         });
     });
 

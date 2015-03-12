@@ -76,7 +76,9 @@ module.exports = /*@ngInject*/ function () {
      * @return {Array} verified quality edits
      */
     this.addToVerifiedQualityEdits = function (editId) {
-        session.verifiedQualityEdits.push(editId);
+        if (session.verifiedQualityEdits.indexOf(editId) === -1) {
+            session.verifiedQualityEdits.push(editId);
+        }
         return session.verifiedQualityEdits;
     };
 
@@ -111,7 +113,9 @@ module.exports = /*@ngInject*/ function () {
      * @return {Array} verified macro edits
      */
     this.addToVerifiedMacroEdits = function (editId, reason) {
-        session.verifiedMacroEdits[editId] = reason;
+        if (reason !== undefined) {
+            session.verifiedMacroEdits[editId] = reason;
+        }
         return this.getVerifiedMacroEditIds();
     };
 

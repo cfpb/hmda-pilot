@@ -183,8 +183,8 @@ describe('Controller: ErrorDetailCtrl', function () {
     describe('saveQualityVerification()', function() {
         describe('when edit has been verified', function() {
             beforeEach(function() {
-                scope.saveQualityVerification({verified: true});
-                scope.$digest();
+                scope.response.verified = true;
+                scope.saveQualityVerification();
             });
 
             it('should save the Edit ID to the session', function() {
@@ -198,8 +198,8 @@ describe('Controller: ErrorDetailCtrl', function () {
 
         describe('when edit is not verified', function() {
             beforeEach(function() {
-                scope.saveQualityVerification({verified: false});
-                scope.$digest();
+                scope.response.verified = false;
+                scope.saveQualityVerification();
             });
 
             it('should save the Edit ID to the session', function() {
@@ -215,8 +215,11 @@ describe('Controller: ErrorDetailCtrl', function () {
     describe('saveMacroVerification()', function() {
         describe('when edit has been verified and a reason given', function() {
             beforeEach(function() {
-                scope.saveMacroVerification({verified: true, reason: 'test'});
-                scope.$digest();
+                scope.response = {
+                    verified: true,
+                    reason: 'test'
+                };
+                scope.saveMacroVerification();
             });
 
             it('should save the Edit ID and reason to the session', function() {
@@ -230,8 +233,11 @@ describe('Controller: ErrorDetailCtrl', function () {
 
         describe('when edit has been verified but no reason given', function() {
             beforeEach(function() {
-                scope.saveMacroVerification({verified: true, reason: ''});
-                scope.$digest();
+                scope.response = {
+                    verified: true,
+                    reason: ''
+                };
+                scope.saveMacroVerification();
             });
 
             it('should save the Edit ID and reason to the session', function() {
@@ -245,8 +251,11 @@ describe('Controller: ErrorDetailCtrl', function () {
 
         describe('when edit is not verified', function() {
             beforeEach(function() {
-                scope.saveMacroVerification({verified: false, reason: ''});
-                scope.$digest();
+                scope.response = {
+                    verified: false,
+                    reason: ''
+                };
+                scope.saveMacroVerification();
             });
 
             it('should save the Edit ID and reason to the session', function() {
