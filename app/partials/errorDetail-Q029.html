@@ -1,4 +1,4 @@
-<p class="instructions">The LARs listed below <em>{{editError.errors.length | entries}}</em> were reported with NA in the MSA/MD's field. Please verify if these should be automatically updated. Please revalidate if the MSA/MD's listed is incorrect.</p>
+<p class="instructions">Please review all of the data listed below. You must review the entire list <em>{{editError.errors.length | entries}}</em> and verify if these should be updated automatically. If any of the data is incorrect, please correct the errors in your system of record and revalidate the file.</p>
 
 <div class="page-size" ng-if="editError">Showing {{start()}} - {{end()}} of {{total()}} | <label for="page-size" class="pagination_label">View</label>
     <select id="page-size" ng-model="pageSize" ng-options="size as size for size in [10, 20, 50, 100]" ng-change="setPageSize(pageSize)"></select>
@@ -7,12 +7,17 @@
 <table id="Q029" class="error-detail" ng-if="editError">
     <thead>
         <tr>
+            <th scope="col" colspan="4" class="col-group-header">Reported</th>
+            <th scope="col" class="col-group-header">Recommended</th>
+            <td class="col-group-first" aria-hidden="true">&nbsp;</td>
+        </tr>
+        <tr>
             <th scope="col" class="id">LAR Number</th>
-            <th scope="col" class="state_code">Reported State Code</th>
-            <th scope="col" class="county_code">Reported County Code</th>
-            <th scope="col" class="census_tract">Reported Census Tract</th>
-            <th scope="col" class="recommended">Recommended MSA/MD</th>
-            <td><label for="selectAll" class="u-visually-hidden">Verify all MSA/MDs as</label><select id="selectAll" ng-model="selectedAnswer" ng-change="selectAll(selectedAnswer)"><option value="0">Select...</option><option value="1">All of the listed MSA/MDs should be updated</option><option value="2">None of the listed MSA/MDs should be updated</option></select></td>
+            <th scope="col" class="state_code">State Code</th>
+            <th scope="col" class="county_code">County Code</th>
+            <th scope="col" class="census_tract">Census Tract</th>
+            <th scope="col" class="recommended col-group-first">MSA/MD</th>
+            <td class="col-group-first"><label for="selectAll" class="u-visually-hidden">Verify all MSA/MDs as</label><select id="selectAll" ng-model="selectedAnswer" ng-change="selectAll(selectedAnswer)"><option value="0">Select...</option><option value="1">All of the listed MSA/MDs should be updated</option><option value="2">None of the listed MSA/MDs should be updated</option></select></td>
         </tr>
     </thead>
     <tbody>
@@ -21,8 +26,8 @@
             <td class="state_code">{{item.properties['Reported State Code']}}</td>
             <td class="county_code">{{item.properties['Reported County Code']}}</td>
             <td class="census_tract">{{item.properties['Reported Census Tract']}}</td>
-            <td class="recommended"><label for="lar-{{$index}}">{{item.properties['Recommended MSA/MD']}}</label></td>
-            <td><select id="lar-{{$index}}" ng-model="selects[start()+$index]"><option value="0">Select...</option><option value="1">Yes, the listed MSA/MD should be updated</option><option value="2">No, the listed MSA/MD should not be updated</option></select></td>
+            <td class="recommended col-group-first"><label for="lar-{{$index}}">{{item.properties['Recommended MSA/MD']}}</label></td>
+            <td class="col-group-first"><select id="lar-{{$index}}" ng-model="selects[start()+$index]"><option value="0">Select...</option><option value="1">Yes, the listed MSA/MD should be updated</option><option value="2">No, the listed MSA/MD should not be updated</option></select></td>
         </tr>
     </tbody>
 </table>
