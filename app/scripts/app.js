@@ -12,6 +12,7 @@ require('angular-fileupload');
 require('./modules/config');
 require('./modules/HMDAEngine');
 require('./modules/hmdaFilters');
+require('ng-dialog');
 
 /**
  * @ngdoc overview
@@ -30,6 +31,7 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
+    'ngDialog',
     'services.config',
     'filereader',
     'HMDAEngine',
