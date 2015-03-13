@@ -7,7 +7,7 @@
  * # ValidationSummaryCtrl
  * Controller of the hmdaPilotApp
  */
-module.exports = /*@ngInject*/ function ($scope, $location, FileMetadata, HMDAEngine) {
+module.exports = /*@ngInject*/ function ($scope, $location, FileMetadata, HMDAEngine, ngDialog) {
 
     $scope.fileMetadata = FileMetadata.get();
     $scope.transmittalSheet = HMDAEngine.getHmdaJson().hmdaFile.transmittalSheet;
@@ -17,7 +17,12 @@ module.exports = /*@ngInject*/ function ($scope, $location, FileMetadata, HMDAEn
     };
 
     $scope.startOver = function() {
-        // Go to the next page
-        $location.path('/selectFile');
+        ngDialog.openConfirm({
+            template: 'partials/confirmSessionReset.html'
+        }).then(function (value) {
+            if (value === 'reset') {
+                $location.path('/selectFile');
+            }
+		});
     };
 };
