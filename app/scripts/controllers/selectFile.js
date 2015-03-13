@@ -53,6 +53,9 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileRe
 
     $scope.process = function(hmdaData) {
         // Convert the file to JSON
+        if (HMDAEngine.getDebug()) {
+            console.time('time to process hmda json');
+        }
         HMDAEngine.fileToJson(hmdaData.file, hmdaData.year, function(fileErr) {
             if (fileErr) {
                 // Toggle processing flag off
@@ -63,6 +66,7 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileRe
                 return;
             }
             if (HMDAEngine.getDebug()) {
+                console.timeEnd('time to process hmda json');
                 console.time('total time for syntactical and validity edits');
             }
             $q.all([HMDAEngine.runSyntactical(hmdaData.year), HMDAEngine.runValidity(hmdaData.year)])
