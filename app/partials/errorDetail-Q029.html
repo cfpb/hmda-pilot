@@ -4,7 +4,7 @@
     <select id="page-size" ng-model="pageSize" ng-options="size as size for size in [10, 20, 50, 100]" ng-change="setPageSize(pageSize)"></select>
 </div>
 
-<table id="Q029" class="error-detail" ng-if="editError">
+<table id="Q029" class="error-detail row-hover" ng-if="editError">
     <thead>
         <tr>
             <th scope="col" colspan="4" class="col-group-header">Reported</th>
