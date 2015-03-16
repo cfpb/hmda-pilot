@@ -1,7 +1,7 @@
 # HMDA Pilot
 
-[![Stories in Ready](https://badge.waffle.io/cfpb/hmda-pilot.png?label=ready&title=Ready)](https://waffle.io/cfpb/hmda-pilot)
-[![Build Status](https://travis-ci.org/cfpb/hmda-pilot.svg?branch=milestone7)](https://travis-ci.org/cfpb/hmda-pilot)
+[![Build Status](https://travis-ci.org/cfpb/hmda-pilot.svg)](https://travis-ci.org/cfpb/hmda-pilot)
+[![Coverage Status](https://coveralls.io/repos/cfpb/hmda-pilot/badge.svg)](https://coveralls.io/r/cfpb/hmda-pilot)
 
 ## This project is a work in progress
 Nothing presented in the issues or in this repo is a final product unless it is marked as such.
