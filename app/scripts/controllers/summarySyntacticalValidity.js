@@ -27,19 +27,33 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
         return angular.equals({}, $scope.syntacticalErrors) && angular.equals({}, $scope.validityErrors);
     };
 
-    $scope.next = function() {
-        // Toggle processing flag on so that we can notify the user
-        $scope.isProcessing = true;
+    function hasErrors(obj) {
+        return Object.keys(obj).length > 0;
+    }
 
-        $timeout(function() { $scope.process(); }, 100); // Pause before starting the validation so that the DOM can update
+    $scope.next = function() {
+        if (hasErrors(editErrors.quality) || hasErrors(editErrors.macro)) {
+            $location.path('/summaryQualityMacro');
+        } else{
+            // Toggle processing flag on so that we can notify the user
+            $scope.isProcessing = true;
+
+            // Pause before starting the validation so that the DOM can update
+            $timeout(function() { $scope.process(); }, 100);
+        }
     };
 
     $scope.process = function() {
         // Run the second set of validations
         var ruleYear = HMDAEngine.getRuleYear();
+        if (HMDAEngine.getDebug()) {
+            console.time('total time for quality and macro edits');
+        }
         $q.all([HMDAEngine.runQuality(ruleYear), HMDAEngine.runMacro(ruleYear)])
         .then(function() {
-
+            if (HMDAEngine.getDebug()) {
+                console.timeEnd('total time for quality and macro edits');
+            }
             // Complete the current step in the wizard
             $scope.wizardSteps = Wizard.completeStep();
 

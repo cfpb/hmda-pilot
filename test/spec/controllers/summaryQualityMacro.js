@@ -8,25 +8,29 @@ describe('Controller: SummaryQualityMacroCtrl', function () {
     var scope,
         location,
         controller,
+        timeout,
         Q,
         Wizard,
         Session,
+        mockErrors = {
+            quality: {},
+            macro: {},
+            special: {}
+        },
         mockEngine = {
             getErrors: function() { return mockErrors; },
             getRuleYear: function() { return '2015'; },
-            runSpecial: function(year, next) { return next(null); }
-        },
-        mockErrors = {
-            quality: {},
-            macro: {}
+            runSpecial: function(year, next) { return next(null); },
+            getDebug: function() { return false; }
         };
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function ($rootScope, $location, $controller, $q, _Wizard_, _Session_) {
+    beforeEach(inject(function ($rootScope, $location, $controller, $q, $timeout, _Wizard_, _Session_) {
         scope = $rootScope.$new();
         location = $location;
         controller = $controller;
+        timeout = $timeout;
         Q = $q;
         Wizard = _Wizard_;
         Session = _Session_;
@@ -34,6 +38,7 @@ describe('Controller: SummaryQualityMacroCtrl', function () {
         $controller('SummaryQualityMacroCtrl', {
             $scope: scope,
             $location: location,
+            $timeout: timeout,
             HMDAEngine: mockEngine,
             Wizard: _Wizard_,
             Session: _Session_
@@ -90,6 +95,54 @@ describe('Controller: SummaryQualityMacroCtrl', function () {
                 });
 
                 expect(scope.hasNext()).toBeFalsy();
+            });
+        });
+    });
+
+    describe('next()', function() {
+        describe('when special edit checks have already been run', function() {
+            beforeEach(function() {
+                mockErrors.special = {Q029: 'test'};
+                controller('SummaryQualityMacroCtrl', {
+                    $scope: scope,
+                    $location: location,
+                    HMDAEngine: mockEngine,
+                    Session: Session
+                });
+            });
+
+            it('should not re-run the process() function', function() {
+                spyOn(scope, 'process');
+                scope.next();
+                scope.$digest();
+                expect(scope.process).not.toHaveBeenCalled();
+            });
+
+            it('should direct the user to the /summaryMSA-IRS page', function () {
+                scope.next();
+                scope.$digest();
+                expect(location.path()).toBe('/summaryMSA-IRS');
+            });
+        });
+
+        describe('when special edit checks have not been run', function() {
+            beforeEach(function() {
+                mockErrors.special = {};
+                controller('SummaryQualityMacroCtrl', {
+                    $scope: scope,
+                    $location: location,
+                    $timeout: timeout,
+                    HMDAEngine: mockEngine,
+                    Session: Session
+                });
+            });
+
+            it('should run the process() function', function() {
+                spyOn(scope, 'process');
+                scope.next();
+                scope.$digest();
+                timeout.flush();
+                expect(scope.process).toHaveBeenCalled();
             });
         });
     });

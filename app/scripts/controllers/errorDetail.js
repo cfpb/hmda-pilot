@@ -37,17 +37,16 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
 
         $scope.verified = Session.isVerified(editId);
         $scope.selectedReason = Session.getVerifiedReasonByEditId(editId);
-    } else if (editType === 'special') {
-        $scope.editType = editId;
     }
+    $scope.response = {};
+    $scope.response.verified = $scope.verified;
+    $scope.response.reason = $scope.selectedReason;
 
     $scope.backToSummary = function() {
         if (editType === 'syntactical' || editType === 'validity') {
             $location.path('/summarySyntacticalValidity');
         } else if (editType === 'quality' || editType === 'macro') {
             $location.path('/summaryQualityMacro');
-        } else if (editType === 'special') {
-            $location.path('/summaryMSA-IRS');
         } else { // Go back to the start if nothing matches
             $location.path('/');
         }
@@ -57,8 +56,8 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
         $location.path('/detail/' + editType + '/' + $scope.selectedEditId);
     };
 
-    $scope.saveQualityVerification = function(response) {
-        if (response && response.verified) {
+    $scope.saveQualityVerification = function() {
+        if ($scope.response.verified) {
             Session.addToVerifiedQualityEdits(editId);
         } else {
             Session.removeVerifiedQualityEdit(editId);
@@ -66,9 +65,9 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
         nextEdit();
     };
 
-    $scope.saveMacroVerification = function(response) {
-        if (response && response.verified && response.reason) {
-            Session.addToVerifiedMacroEdits(editId, response.reason);
+    $scope.saveMacroVerification = function() {
+        if ($scope.response.verified && $scope.response.reason) {
+            Session.addToVerifiedMacroEdits(editId, $scope.response.reason);
         } else {
             Session.removeVerifiedMacroEdit(editId);
         }

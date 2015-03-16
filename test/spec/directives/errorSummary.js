@@ -63,7 +63,7 @@ describe('Directive: ErrorSummary', function () {
 
         it('should display a table of errors', function () {
             expect(table).toBeDefined();
-            expect(table.hasClass('summary-table')).toBeTruthy();
+            expect(table.hasClass('error-summary')).toBeTruthy();
         });
 
         describe('table', function() {
@@ -94,7 +94,7 @@ describe('Directive: ErrorSummary', function () {
 
         it('should display a table of errors', function () {
             expect(table).toBeDefined();
-            expect(table.hasClass('summary-table')).toBeTruthy();
+            expect(table.hasClass('error-summary')).toBeTruthy();
         });
 
         describe('table', function() {
@@ -125,7 +125,7 @@ describe('Directive: ErrorSummary', function () {
 
         it('should display a table of errors', function () {
             expect(table).toBeDefined();
-            expect(table.hasClass('summary-table')).toBeTruthy();
+            expect(table.hasClass('error-summary')).toBeTruthy();
         });
 
         describe('table', function() {
@@ -146,13 +146,13 @@ describe('Directive: ErrorSummary', function () {
         beforeEach(inject(function ($rootScope, $compile) {
             scope = $rootScope.$new();
             scope.errors = {};
-            element = angular.element('<error-summary errors="errors"></error-summary>');
+            element = angular.element('<error-summary type="test" errors="errors"></error-summary>');
             element = $compile(element)(scope);
             scope.$digest();
         }));
 
         it('should display a helpful message', function() {
-            expect(jQuery('p', element).text()).toBe('No errors found.');
+            expect(jQuery('p', element).text()).toBe('No test errors found.');
         });
     });
 });

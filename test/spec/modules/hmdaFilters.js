@@ -112,4 +112,14 @@ describe('Filters: hmdaFilters', function() {
             expect(agencyFilter('100')).toBe('');
         }));
     });
+
+    describe('entries', function() {
+        it('should format a single entry', angular.mock.inject(function(entriesFilter) {
+            expect(entriesFilter(1)).toBe('(1 entry)');
+        }));
+
+        it('should format a multiple entries', angular.mock.inject(function(entriesFilter) {
+            expect(entriesFilter(2)).toBe('(2 entries)');
+        }));
+    });
 });

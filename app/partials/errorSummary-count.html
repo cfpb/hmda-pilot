@@ -1,4 +1,4 @@
-<table class="summary-table" ng-if="errors">
+<table id="{{editType}}" class="error-summary" ng-if="errors">
     <thead>
         <tr>
             <th class="id" scope="col">Edit Identifier</th>
@@ -15,4 +15,4 @@
     </tbody>
 </table>
 
-<p ng-if="!errors">No errors found.</p>
+<p ng-if="!errors">No {{editType}} errors found.</p>

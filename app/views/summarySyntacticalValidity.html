@@ -1,10 +1,18 @@
 <file-metadata></file-metadata>
 
+<p>The file must pass all Syntactical and Validity edits before running the Quality and Macro Quality edits.</p>
+
 <h2>Syntactical Edit Report</h2>
 <error-summary type="syntactical" errors="syntacticalErrors"></error-summary>
 
 <h2>Validity Edit Report</h2>
 <error-summary type="validity" errors="validityErrors"></error-summary>
 
-<button class="btn btn__secondary" ng-click="previous()"><span class="btn_icon__left cf-icon cf-icon-left"></span> Back</button>
-<cf-button icon-class="right" is-disabled="!hasNext()" ng-click="next()" processing="isProcessing">Continue</cf-button>
+<div class="nav-buttons content-l">
+    <div class="content-l_col content-l_col-1-2">
+        <button class="btn btn__secondary" ng-click="previous()"><span class="btn_icon__left cf-icon cf-icon-left"></span> Back</button>
+    </div>
+    <div class="content-l_col content-l_col-1-2">
+        <cf-button icon-class="right" is-disabled="!hasNext()" ng-click="next()" processing="isProcessing">Continue</cf-button>
+    </div>
+</div>

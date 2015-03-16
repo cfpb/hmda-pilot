@@ -10,9 +10,14 @@
 module.exports = /*@ngInject*/ function ($scope, $location, $q, HMDAEngine, Session) {
 
     var LARs = HMDAEngine.getHmdaJson().hmdaFile.loanApplicationRegisters;
-
+    if (HMDAEngine.getDebug()) {
+        console.time('total time for IRS report');
+    }
     // Initialize scope
     HMDAEngine.getTotalsByMSA(LARs).then(function(response) {
+        if (HMDAEngine.getDebug()) {
+            console.timeEnd('total time for IRS report');
+        }
         $scope.reportData = response;
         $scope.$apply();
     });

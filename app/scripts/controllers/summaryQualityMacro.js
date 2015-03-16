@@ -27,6 +27,10 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
         return diff.length > 0;
     }
 
+    function hasErrors(obj) {
+        return Object.keys(obj).length > 0;
+    }
+
     // Populate the $scope
     $scope.errors = {};
     $scope.isProcessing = false;
@@ -46,17 +50,27 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
     };
 
     $scope.next = function() {
-        // Toggle processing flag on so that we can notify the user
-        $scope.isProcessing = true;
+        if (hasErrors(editErrors.special)) {
+            $location.path('/summaryMSA-IRS');
+        } else {
+            // Toggle processing flag on so that we can notify the user
+            $scope.isProcessing = true;
 
-        $timeout(function() { $scope.process(); }, 100); // Pause before starting the validation so that the DOM can update
+            // Pause before starting the validation so that the DOM can update
+            $timeout(function() { $scope.process(); }, 100);
+        }
     };
 
     $scope.process = function() {
         // Run the second set of validations
         var ruleYear = HMDAEngine.getRuleYear();
+        if (HMDAEngine.getDebug()) {
+            console.time('total time for special edits');
+        }
         $q.all([HMDAEngine.runSpecial(ruleYear)]).then(function() {
-
+            if (HMDAEngine.getDebug()) {
+                console.timeEnd('total time for special edits');
+            }
             // Complete the current step in the wizard
             $scope.wizardSteps = Wizard.completeStep();
 

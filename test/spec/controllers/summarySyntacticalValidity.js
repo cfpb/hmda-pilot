@@ -8,31 +8,37 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
     var scope,
         location,
         controller,
+        timeout,
         Q,
         Wizard,
         mockErrors = {
             syntactical: {},
-            validity: {}
+            validity: {},
+            quality: {},
+            macro: {}
         },
         mockEngine = {
             getErrors: function() { return mockErrors; },
             getRuleYear: function() { return '2015'; },
             runQuality: function(year, next) { return next(null); },
-            runMacro: function(year, next) { return next(null); }
+            runMacro: function(year, next) { return next(null); },
+            getDebug: function() { return false; }
         };
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function ($rootScope, $location, $controller, $q, _Wizard_) {
+    beforeEach(inject(function ($rootScope, $location, $controller, $q, $timeout, _Wizard_) {
         scope = $rootScope.$new();
         location = $location;
         controller = $controller;
+        timeout = $timeout;
         Q = $q;
         Wizard = _Wizard_;
         Wizard.initSteps();
         $controller('SummarySyntacticalValidityCtrl', {
             $scope: scope,
             $location: location,
+            $timeout: timeout,
             HMDAEngine: mockEngine,
             Wizard: _Wizard_
         });
@@ -86,6 +92,53 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
                 });
 
                 expect(scope.hasNext()).toBeFalsy();
+            });
+        });
+    });
+
+    describe('next()', function() {
+        describe('when quality or macro edit checks have already been run', function() {
+            beforeEach(function() {
+                mockErrors.quality = {Q001: 'test'};
+                controller('SummarySyntacticalValidityCtrl', {
+                    $scope: scope,
+                    $location: location,
+                    HMDAEngine: mockEngine
+                });
+            });
+
+            it('should not re-run the process() function', function() {
+                spyOn(scope, 'process');
+                scope.next();
+                scope.$digest();
+                expect(scope.process).not.toHaveBeenCalled();
+            });
+
+            it('should direct the user to the /summaryMSA-IRS page', function () {
+                scope.next();
+                scope.$digest();
+                expect(location.path()).toBe('/summaryQualityMacro');
+            });
+        });
+
+        describe('when special edit checks have not been run', function() {
+            beforeEach(function() {
+                mockErrors.quality = {};
+                mockErrors.macro = {};
+                controller('SummarySyntacticalValidityCtrl', {
+                    $scope: scope,
+                    $location: location,
+                    $timeout: timeout,
+                    HMDAEngine: mockEngine
+                });
+            });
+
+            it('should run the process() function', function() {
+                spyOn(scope, 'process');
+                scope.next();
+                scope.$digest();
+                timeout.flush();
+                expect(scope.process).toHaveBeenCalled();
             });
         });
     });

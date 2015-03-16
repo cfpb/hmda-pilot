@@ -19,7 +19,8 @@ describe('Controller: SelectFileCtrl', function () {
             clearErrors: function () { return {}; },
             fileToJson: function(file, year, next) { return next(null); },
             runSyntactical: function() { return; },
-            runValidity: function() { return; }
+            runValidity: function() { return; },
+            getDebug: function() { return false; }
         };
 
 

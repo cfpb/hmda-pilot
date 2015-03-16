@@ -101,6 +101,10 @@ footer {
 
     .form-buttons {
         margin-top: 1.5em;
+
+        div:nth-child(2) {
+            text-align: right;
+        }
     }
 }
 
@@ -178,37 +182,58 @@ footer {
 
 h2 label { display: inline; }
 .edit-explanation {
-    font-size: 1.3em;
+    .h3;
+    .u-w80pct;
 }
 
 .instructions {
     width: 40em;
 }
 
-// Summary tables
-table.summary-table {
+table {
     width: 100%;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 
-    a {
-        color: @pacific;
+    a { .u-link__colors(@pacific); }
+
+    thead {
+        th {
+            small {
+                font-size: .7em;
+                white-space: nowrap;
+            }
+        }
     }
 
+    // Style for grouped columns of data
+    .col-group-header {
+        text-align: center;
+    }
+    .col-group-header,
+    .col-group-first {
+        border-left: 1px solid @gray;
+    }
+
+    // Format specific data types
+    td.count,
+    td.dollar,
+    td.percent {
+        text-align: right;
+    }
+    td.boolean {
+        text-align: center;
+    }
+}
+
+table.error-summary,
+table.report-summary {
     tbody {
+        // Highlight the row on hover
         tr:hover td,
         tr:hover th {
             background-color: tint(@teal, 80%);;
         }
-    }
 
-    td.id {
-        width: 13%;
-    }
-    td.count,
-    td.verification {
-        width: 17%;
-    }
-    tbody {
         td.count,
         td.not-verified {
             .webfont-demi;
@@ -219,12 +244,19 @@ table.summary-table {
             color: @green
         }
     }
+
+    // Column widths
+    td.id { width: 13%; }
+    td.count,
+    td.verification { width: 15%; }
 }
 
-// Detail tables
-table.detail-table {
-    width: 100%;
-    margin-bottom: 20px;
+table.error-detail {
+    thead th {
+        &.count {
+            text-align: center;
+        }
+    }
 
     tbody {
         tr {
@@ -232,8 +264,25 @@ table.detail-table {
         }
         th, td {
             padding: .25em .625em;
+        }
+
+        th.loan-number,
+        th.line-number,
+        td.action {
+            vertical-align: top;
+        }
+
+        // Column width
+        th.loan-number { width: 26%; }
+        th.line-number { width: 20%; }
+        td.action { width: 17%; }
+    }
+
+    &.grouped-rows tbody {
+        th, td {
             background: @td-bg;
         }
+
         &:nth-child(even) th,
         &:nth-child(even) td {
             background: @td-bg-alt;
@@ -243,6 +292,32 @@ table.detail-table {
     td.check {
         width: 6em;
         text-align: center;
+    }
+}
+
+table.macro-detail {
+    width: 50%;
+}
+
+table.report-detail {
+    th, td {
+        padding: .75em;
+    }
+
+    thead {
+        th {
+            vertical-align: bottom;
+        }
+        th.count {
+            text-align: left;
+        }
+    }
+}
+
+table.row-hover {
+    tr:hover td,
+    tr:hover th {
+        background-color: tint(@teal, 80%);;
     }
 }
 
@@ -307,13 +382,23 @@ div.page-size {
     }
 }
 .file-info {
-    @width: 190px;
+    @width: 200px;
 
     dt {
         width: @width;
     }
     dd {
         margin-left: @width + 20px;
+    }
+}
+
+.nav-buttons {
+    margin-top: 20px;
+    border-top: 1px solid @gray-20;
+    padding-top: 20px;
+
+    div:nth-child(2) {
+        text-align: right;
     }
 }
 
