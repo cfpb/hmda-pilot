@@ -1,6 +1,6 @@
 <p class="instructions">According to our records, the following MSA/MDs <em>{{editError.errors.length | entries}}</em> are not in a location where your institution has a branch. If any of the data is incorrect, please correct the errors in your system of record and revalidate the file. Please review the list below and select the MSA/MDs where your institution has a branch/office.</p>
 
-<div class="page-size" ng-if="error">Showing {{start()}} - {{end()}} of {{total()}} | <label for="page-size" class="pagination_label">View</label>
+<div class="page-size" ng-if="editError">Showing {{start()}} - {{end()}} of {{total()}} | <label for="page-size" class="pagination_label">View</label>
     <select id="page-size" ng-model="pageSize" ng-options="size as size for size in [10, 20, 50, 100]" ng-change="setPageSize(pageSize)"></select>
 </div>
 
@@ -16,7 +16,7 @@
     <tbody>
         <tr ng-repeat="item in editError.errors | paginate:start():end()">
             <td class="check"><input type="checkbox" id="msa-{{$index}}" ng-model="checkboxes[start()+$index]"></td>
-            <th scope="row" class="id"><label for="msa-{{item.properties['MSA/MD']}}">{{item.properties['MSA/MD']}}</label></th>
+            <th scope="row" class="id"><label for="msa-{{$index}}">{{item.properties['MSA/MD']}}</label></th>
             <td class="name">{{item.properties['MSA/MD name']}}</td>
             <td class="count">{{item.properties['LAR Count']}}</td>
         </tr>
