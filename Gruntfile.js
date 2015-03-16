@@ -386,6 +386,14 @@ module.exports = function (grunt) {
       }
     },
 
+    coveralls: {
+      options: {
+        debug: true,
+        force: true,
+        coverageDir: 'coverage/coveralls'
+      }
+    },
+
     compress: {
       'hmda-pilot': {
         options: {
@@ -469,6 +477,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-ng-annotate');
   grunt.loadNpmTasks('grunt-replace');
+  grunt.loadNpmTasks('grunt-karma-coveralls');
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
@@ -501,6 +510,11 @@ module.exports = function (grunt) {
     'autoprefixer',
     'connect:test',
     'karma'
+  ]);
+
+  grunt.registerTask('travis-coveralls', [
+    'test',
+    'coveralls'
   ]);
 
   grunt.registerTask('coverage', [
