@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * @ngdoc factory
+ * @ngdoc interface
  * @name hmdaPilotApp.factory:step
  * @description
  * # Step Factory
