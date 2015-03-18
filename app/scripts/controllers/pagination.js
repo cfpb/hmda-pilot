@@ -11,6 +11,14 @@ module.exports = /*@ngInject*/ function ($scope) {
     $scope.currentPage = 1;
     $scope.pageSize = 10;
 
+    $scope.$watch(function() {
+        return $scope.isLastPage();
+    }, function(isLastPage) {
+        if (isLastPage) {
+            $scope.$parent.$parent.canVerify = true;
+        }
+    });
+
     $scope.start = function() {
         return ($scope.currentPage-1) * $scope.pageSize + 1;
     };
