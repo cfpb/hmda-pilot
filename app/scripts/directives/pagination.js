@@ -13,11 +13,6 @@ module.exports = /*@ngInject*/ function () {
         restrict: 'E',
         template: '<div ng-transclude></div>',
         transclude: true,
-        controller: 'PaginationCtrl',
-        link: function(scope) {
-            if (angular.equals({}, scope.error)) {
-                scope.error = null;
-            }
-        }
+        controller: 'PaginationCtrl'
     };
 };
