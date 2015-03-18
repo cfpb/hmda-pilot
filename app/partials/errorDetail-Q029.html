@@ -1,10 +1,9 @@
-<p class="instructions">Please review all of the data listed below. You must review the entire list <em>{{editError.errors.length | entries}}</em> and verify if these should be updated automatically. If any of the data is incorrect, please correct the errors in your system of record and revalidate the file.</p>
+<p class="instructions">Please review all of the data listed below. You must review the entire list <em>{{error.errors.length | entries}}</em> and verify if these should be updated automatically. If any of the data is incorrect, please correct the errors in your system of record and revalidate the file.</p>
 
-<div class="page-size" ng-if="editError">Showing {{start()}} - {{end()}} of {{total()}} | <label for="page-size" class="pagination_label">View</label>
-    <select id="page-size" ng-model="pageSize" ng-options="size as size for size in [10, 20, 50, 100]" ng-change="setPageSize(pageSize)"></select>
-</div>
+<pagination>
+<pagination-size></pagination-size>
 
-<table id="Q029" class="error-detail row-hover" ng-if="editError">
+<table id="Q029" class="error-detail row-hover" ng-if="error">
     <thead>
         <tr>
             <th scope="col" colspan="4" class="col-group-header">Reported</th>
@@ -21,7 +20,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="item in editError.errors | paginate:start():end()">
+        <tr ng-repeat="item in error.errors | paginate:start():end()">
             <th scope="row" class="id">{{item.properties['LAR number']}}</th>
             <td class="state_code">{{item.properties['Reported State Code']}}</td>
             <td class="county_code">{{item.properties['Reported County Code']}}</td>
@@ -32,15 +31,7 @@
     </tbody>
 </table>
 
-<nav class="pagination" ng-if="editError && showPagination()">
-    <button class="btn btn__secondary pagination_prev" ng-class="{btn__disabled: !hasPrev()}" ng-disabled="!hasPrev()" ng-click="onPrev()"><span class="btn_icon__left cf-icon cf-icon-left"></span> Previous</button>
-    <button class="btn btn__secondary pagination_next" ng-class="{btn__disabled: !hasNext()}" ng-disabled="!hasNext()" ng-click="onNext()">Next <span class="btn_icon__right cf-icon cf-icon-right"></span></button>
-    <div class="pagination_form">
-        <label class="pagination_label" for="pagination_current-page">Page <span class="u-visually-hidden"> number out of {{totalPages()}} total pages</span></label>
-        <input class="pagination_current-page" id="pagination_current-page" name="pagination_current-page" type="number" min="1" max="{{totalPages()}}" ng-model="currentPage">
-        <span class="pagination_label"><span aria-hidden="true">of {{totalPages()}}</span></span>
-        <button class="btn btn__link pagination_submit" id="pagination_submit" ng-click="setCurrentPage(currentPage)">Go</button>
-    </div>
-</nav>
+<pagination-nav></pagination-nav>
+</pagination>
 
-<p ng-if="!editError">No errors found.</p>
+<p ng-if="!error">No errors found.</p>

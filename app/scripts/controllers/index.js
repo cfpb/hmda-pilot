@@ -12,3 +12,4 @@ app.controller('ValidationSummaryCtrl', require('./validationSummary'));
 app.controller('ErrorDetailCtrl', require('./errorDetail'));
 app.controller('SpecialErrorDetailCtrl', require('./specialErrorDetail'));
 app.controller('IRSReportCtrl', require('./irsReport'));
+app.controller('PaginationCtrl', require('./pagination'));

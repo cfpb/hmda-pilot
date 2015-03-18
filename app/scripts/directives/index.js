@@ -11,3 +11,6 @@ app.directive('fileMetadata', require('./fileMetadata'));
 app.directive('wizardNav',    require('./wizardNav'));
 app.directive('cfButton',     require('./cfButton'));
 app.directive('disclaimer',   require('./disclaimer'));
+app.directive('paginationSize',   require('./paginationSize'));
+app.directive('paginationNav',   require('./paginationNav'));
+app.directive('pagination',   require('./pagination'));
