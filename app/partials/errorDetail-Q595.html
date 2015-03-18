@@ -1,7 +1,7 @@
 <p class="instructions">According to our records, the following MSA/MDs <em>{{error.errors.length | entries}}</em> are not in a location where your institution has a branch. If any of the data is incorrect, please correct the errors in your system of record and revalidate the file. Please review the list below and select the MSA/MDs where your institution has a branch/office.</p>
 
 <pagination>
-<pagination-header></pagination-header>
+<pagination-size></pagination-size>
 
 <table id="Q595" class="error-detail row-hover" ng-if="error">
     <thead>
@@ -22,7 +22,7 @@
     </tbody>
 </table>
 
-<pagination-footer></pagination-footer>
+<pagination-nav></pagination-nav>
 </pagination>
 
 <p ng-if="!error">No errors found.</p>

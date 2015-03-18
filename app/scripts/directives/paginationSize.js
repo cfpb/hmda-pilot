@@ -12,6 +12,6 @@ module.exports = /*@ngInject*/ function () {
     return {
         restrict: 'E',
         require: '^pagination',
-        templateUrl: 'partials/pagination-header.html'
+        templateUrl: 'partials/pagination-size.html'
     };
 };

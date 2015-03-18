@@ -24,7 +24,7 @@ describe('Directive: ErrorDetail', function () {
 
     beforeEach(inject(function($templateCache) {
         var templates = ['partials/errorDetail.html', 'partials/errorDetail-macro.html',
-            'partials/pagination-header.html', 'partials/pagination-footer.html'];
+            'partials/pagination-size.html', 'partials/pagination-nav.html'];
 
         angular.forEach(templates, function(templateId) {
             var directiveTemplate = null;

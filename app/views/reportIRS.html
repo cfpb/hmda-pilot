@@ -3,7 +3,7 @@
 <p class="instructions">Please review each of the MSA/MDs listed below <em>{{error.errors.length | entries}}</em>. If you disagree with any of the MSA/MDs, please correct the data in your system of record. Once corrected, re-select the updated file to validate the data.</p>
 
 <pagination>
-<pagination-header></pagination-header>
+<pagination-size></pagination-size>
 
 <table id="IRS" class="report-detail" ng-if="error.errors">
     <thead>
@@ -50,7 +50,7 @@
     </tbody>
 </table>
 
-<pagination-footer></pagination-footer>
+<pagination-nav></pagination-nav>
 </pagination>
 
 <p ng-if="!error.errors">No errors found.</p>
