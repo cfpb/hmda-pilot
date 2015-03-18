@@ -15,7 +15,12 @@ module.exports = /*@ngInject*/ function ($scope) {
         return $scope.isLastPage();
     }, function(isLastPage) {
         if (isLastPage) {
-            $scope.$parent.$parent.canVerify = true;
+            // Tragic but each of the different places this is used is in a different scope...
+            $scope.canVerify = true;
+            $scope.$parent.canVerify = true;
+            if ($scope.$parent.$parent) {
+                $scope.$parent.$parent.canVerify = true;
+            }
         }
     });
 
