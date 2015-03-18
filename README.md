@@ -54,6 +54,14 @@ grunt build
 
 Copy the files in `dist` to your web server root
 
+### Viewing the documentation
+To generate the documentation, via ngDoc:
+
+```shell
+grunt generate-docs
+```
+
+
 ## Getting involved
 
 For details on how to get involved, please first read our [CONTRIBUTING](CONTRIBUTING.md) guidelines.

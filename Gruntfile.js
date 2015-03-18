@@ -112,6 +112,14 @@ module.exports = function (grunt) {
           open: true,
           base: '<%= yeoman.dist %>'
         }
+      },
+      docs: {
+        options: {
+          port: 9002,
+          open: true,
+          base: 'docs',
+          keepalive: true
+        }
       }
     },
 
@@ -148,7 +156,8 @@ module.exports = function (grunt) {
         }]
       },
       server: '.tmp',
-      coverage: ['coverage/*']
+      coverage: ['coverage/*'],
+      docs: ['docs/*']
     },
 
     // Add vendor prefixed styles
@@ -471,6 +480,9 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.app %>/scripts/modules/'
         }]
       }
+    },
+    ngdocs: {
+      all: ['<%= yeoman.app %>/scripts/{,*/}*.js']
     }
   });
 
@@ -555,5 +567,11 @@ module.exports = function (grunt) {
     'newer:jshint',
     'test',
     'build:development'
+  ]);
+
+  grunt.registerTask('generate-docs', [
+      'clean:docs',
+      'ngdocs',
+      'connect:docs'
   ]);
 };
