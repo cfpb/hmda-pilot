@@ -155,5 +155,57 @@ describe('Controller: PaginationCtrl', function () {
             expect(scope.showPagination()).toBe(false);
         });
     });
+
+    describe('checkAll()', function() {
+        beforeEach(function() {
+            scope.checkboxes = [];
+            for (var i = 1; i <= scope.error.errors.length; i++) {
+                scope.checkboxes[i] = false;
+            }
+        });
+
+        it('should check all checkboxes when none are checked', function() {
+            expect(scope.allChecked()).toBeFalsy();
+            scope.checkAll();
+            expect(scope.allChecked()).toBeTruthy();
+        });
+
+        it('should uncheck all checkboxes when all checkboxes are already checked', function() {
+            for (var i = 1; i <= 10; i++) {
+                scope.checkboxes[i] = true;
+            }
+            expect(scope.allChecked()).toBeTruthy();
+            scope.checkAll();
+            expect(scope.allChecked()).toBeFalsy();
+        });
+
+        it('should check the rest of the checkboxes when some are already checked', function() {
+            for (var i = 3; i <= 6; i++) {
+                scope.checkboxes[i] = true;
+            }
+            expect(scope.allChecked()).toBeFalsy();
+            scope.checkAll();
+            expect(scope.allChecked()).toBeTruthy();
+        });
+    });
+
+    describe('selectAll()', function() {
+        beforeEach(function() {
+            scope.selects = [];
+            for (var j = 1; j <= scope.error.errors.length; j++) {
+                scope.selects[j] = '0';
+            }
+        });
+
+        it('should select all the selects when changed', function() {
+            for (var i = 1; i <= 10; i++) {
+                expect(scope.selects[i]).toBe('0');
+            }
+            scope.selectAll('1');
+            for (i = 1; i <= 10; i++) {
+                expect(scope.selects[i]).toBe('1');
+            }
+        });
+    });
 });
 

@@ -19,6 +19,33 @@ module.exports = /*@ngInject*/ function ($scope) {
         }
     });
 
+    $scope.selectAll = function(selectedAnswer) {
+        for (var i = $scope.start(); i <= $scope.end(); i++) {
+            $scope.selects[i] = selectedAnswer;
+        }
+    };
+
+    $scope.checkAll = function() {
+        if ($scope.allChecked()) {
+            for (var i = $scope.start(); i <= $scope.end(); i++) {
+                $scope.checkboxes[i] = false;
+            }
+        } else {
+            for (var j = $scope.start(); j <= $scope.end(); j++) {
+                $scope.checkboxes[j] = true;
+            }
+        }
+    };
+
+    $scope.allChecked = function() {
+        for (var i = $scope.start(); i <= $scope.end(); i++) {
+            if ($scope.checkboxes[i] === false) {
+                return false;
+            }
+        }
+        return true;
+    };
+
     $scope.start = function() {
         return ($scope.currentPage-1) * $scope.pageSize + 1;
     };
