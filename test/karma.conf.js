@@ -50,6 +50,10 @@ module.exports = function(config) {
       'PhantomJS'
     ],
 
+    // Set browser activity timeout to give CI server time to build
+    // browserify bundle for tests after starting the browser
+    browserNoActivityTimeout: 20000,
+
     // Which plugins to enable
     plugins: [
       'karma-browserify',
