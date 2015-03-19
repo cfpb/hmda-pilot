@@ -11,8 +11,10 @@ describe('Directive: WizardNav', function () {
 
     var element,
         scope,
+        location,
         StepFactory,
-        Wizard;
+        Wizard,
+        ngDialog;
 
     beforeEach(inject(function ($templateCache) {
         var templateUrl = 'partials/wizardNav.html';
@@ -26,11 +28,32 @@ describe('Directive: WizardNav', function () {
         req.send();
     }));
 
-    beforeEach(inject(function ($rootScope, $compile, _StepFactory_, _Wizard_) {
+    beforeEach(inject(function ($templateCache) {
+        var templateUrl = 'partials/confirmSessionReset.html';
+        var asynchronous = false;
+
+        var req = new XMLHttpRequest();
+        req.onload = function () {
+            $templateCache.put(templateUrl, this.responseText);
+        };
+        req.open('get', '/base/app/' + templateUrl, asynchronous);
+        req.send();
+    }));
+
+    beforeEach(inject(function ($rootScope, $location, $compile, _StepFactory_, _Wizard_, _ngDialog_) {
         StepFactory = _StepFactory_;
         Wizard = _Wizard_;
+        ngDialog = _ngDialog_;
+
+        var mockNgDialogPromise = {
+            then: function(callback) {
+                callback('reset');
+            }
+        };
+        spyOn(ngDialog, 'openConfirm').and.returnValue(mockNgDialogPromise);
 
         scope = $rootScope.$new();
+        location = $location;
 
         var stepData = [
             new StepFactory('Step 1', 'step1'),
@@ -65,5 +88,22 @@ describe('Directive: WizardNav', function () {
 
     it('should allow a completed step to be focusable', function () {
         expect(jQuery('li.complete', element).hasClass('focusable')).toBeTruthy();
+    });
+
+    describe('when the navigating to /selectFile', function() {
+        it('should display a confirmation dialog', function() {
+            scope.$broadcast('$locationChangeStart', '#/selectFile');
+            scope.$digest();
+            expect(ngDialog.openConfirm).toHaveBeenCalled();
+            expect(location.path()).toBe('/');
+        });
+    });
+
+    describe('when the navigating anywhere else', function() {
+        it('should not display the confirmation dialog', function() {
+            scope.$broadcast('$locationChangeStart', '#/test');
+            scope.$digest();
+            expect(ngDialog.openConfirm).not.toHaveBeenCalled();
+        });
     });
 });

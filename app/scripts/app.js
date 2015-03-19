@@ -12,6 +12,7 @@ require('angular-fileupload');
 require('./modules/config');
 require('./modules/HMDAEngine');
 require('./modules/hmdaFilters');
+require('ng-dialog');
 
 /**
  * @ngdoc overview
@@ -30,6 +31,7 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
+    'ngDialog',
     'services.config',
     'filereader',
     'HMDAEngine',
@@ -73,7 +75,7 @@ angular
         redirectTo: '/'
       });
   })
-  .run(function ($rootScope, $location, Configuration, HMDAEngine) {
+  .run(function ($rootScope, $window, $location, Configuration, HMDAEngine) {
     // Set the location of the HMDA Engine API
     HMDAEngine.setAPIURL(Configuration.apiUrl);
 
@@ -86,6 +88,11 @@ angular
             $location.path('/');
         }
     });
+
+    // Warn the user on browser refresh that they are about to destroy their session
+    $window.onbeforeunload = function() {
+        return 'You are about to reset your session.\n\nDoing so will return you to the Select File and Validate page and you will need to resubmit your HMDA File for validation.';
+    };
   });
 
 require('./services');

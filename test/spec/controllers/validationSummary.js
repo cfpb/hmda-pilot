@@ -7,24 +7,48 @@ describe('Controller: ValidationSummaryCtrl', function () {
 
     var scope,
         location,
+        mockNgDialog,
         mockEngine = {
             getHmdaJson: function() { return {hmdaFile: { transmittalSheet: {}}}; }
         };
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function ($rootScope, $location, $controller, _FileMetadata_) {
+    beforeEach(inject(function ($rootScope, $q, $location, $controller, _FileMetadata_) {
         scope = $rootScope.$new();
         location = $location;
         var FileMetadata = _FileMetadata_;
         FileMetadata.setFilename('test.foo');
 
+        var mockNgDialogPromise = {
+            then: function(callback) {
+                callback('reset');
+            }
+        };
+        mockNgDialog = {
+            openConfirm: function() { }
+        };
+        spyOn(mockNgDialog, 'openConfirm').and.returnValue(mockNgDialogPromise);
+
         $controller('ValidationSummaryCtrl', {
             $scope: scope,
             $location: location,
             FileMetadata: _FileMetadata_,
-            HMDAEngine: mockEngine
+            HMDAEngine: mockEngine,
+            ngDialog: mockNgDialog
         });
+    }));
+
+    beforeEach(inject(function ($templateCache) {
+        var templateUrl = 'partials/confirmSessionReset.html';
+        var asynchronous = false;
+
+        var req = new XMLHttpRequest();
+        req.onload = function () {
+            $templateCache.put(templateUrl, this.responseText);
+        };
+        req.open('get', '/base/app/' + templateUrl, asynchronous);
+        req.send();
     }));
 
     describe('initial scope', function() {
@@ -46,9 +70,9 @@ describe('Controller: ValidationSummaryCtrl', function () {
     });
 
     describe('startOver()', function() {
-        it('should direct the user to the /selectFile page', function () {
+        it('should display the confirmation dialog', function () {
             scope.startOver();
-            scope.$digest();
+            expect(mockNgDialog.openConfirm).toHaveBeenCalled();
             expect(location.path()).toBe('/selectFile');
         });
     });

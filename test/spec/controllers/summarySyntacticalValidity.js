@@ -11,6 +11,7 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
         timeout,
         Q,
         Wizard,
+        mockNgDialog,
         mockErrors = {
             syntactical: {},
             validity: {},
@@ -32,6 +33,17 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
         location = $location;
         controller = $controller;
         timeout = $timeout;
+
+        var mockNgDialogPromise = {
+            then: function(callback) {
+                callback('reset');
+            }
+        };
+        mockNgDialog = {
+            openConfirm: function() { }
+        };
+        spyOn(mockNgDialog, 'openConfirm').and.returnValue(mockNgDialogPromise);
+
         Q = $q;
         Wizard = _Wizard_;
         Wizard.initSteps();
@@ -40,8 +52,21 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
             $location: location,
             $timeout: timeout,
             HMDAEngine: mockEngine,
-            Wizard: _Wizard_
+            Wizard: _Wizard_,
+            ngDialog: mockNgDialog
         });
+    }));
+
+    beforeEach(inject(function ($templateCache) {
+        var templateUrl = 'partials/confirmSessionReset.html';
+        var asynchronous = false;
+
+        var req = new XMLHttpRequest();
+        req.onload = function () {
+            $templateCache.put(templateUrl, this.responseText);
+        };
+        req.open('get', '/base/app/' + templateUrl, asynchronous);
+        req.send();
     }));
 
     it('should include the syntactical errors in the scope', function () {
@@ -210,7 +235,8 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
             scope.$digest();
         });
 
-        it('should direct the user to the home (/) page', function () {
+        it('should display the confirmation dialog', function () {
+            expect(mockNgDialog.openConfirm).toHaveBeenCalled();
             expect(location.path()).toBe('/');
         });
     });

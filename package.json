@@ -24,6 +24,7 @@
     "angular-sanitize": "1.3.13",
     "angular-touch": "1.3.13",
     "hmda-rule-engine": "cfpb/hmda-rule-engine#milestone8",
+    "ng-dialog": "^0.3.12",
     "normalize-css": "^2.3.1"
   },
   "napa": {
@@ -39,6 +40,7 @@
   "devDependencies": {
     "angular-mocks": "1.3.13",
     "browserify-istanbul": "^0.1.2",
+    "browserify-shim": "^3.8.3",
     "grunt": "^0.4.1",
     "grunt-autoprefixer": "^0.7.3",
     "grunt-browserify": "^3.2.1",
@@ -85,5 +87,14 @@
   "scripts": {
     "test": "grunt travis-coveralls",
     "install": "napa"
+  },
+  "browserify": {
+    "transform": [ "browserify-shim" ]
+  },
+  "browser": {
+    "angular": "./node_modules/angular/angular.js"
+  },
+  "browserify-shim": {
+    "angular": "angular"
   }
 }

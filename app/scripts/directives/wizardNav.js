@@ -7,7 +7,7 @@
  * # Wizard Nav directive
  * Directive for displaying the wizard navigation.
  */
-module.exports = /*@ngInject*/ function (StepFactory, Wizard) {
+module.exports = /*@ngInject*/ function ($location, StepFactory, Wizard, ngDialog) {
 
     function getStepClass(step) {
         if (step.isActive) {
@@ -33,6 +33,23 @@ module.exports = /*@ngInject*/ function (StepFactory, Wizard) {
         }
 
         return step;
+    }
+
+    function controller($scope) {
+        $scope.$on('$locationChangeStart', function(event, newUrl) {
+            if (newUrl.indexOf('#/selectFile') !== -1 ) {
+                ngDialog.openConfirm({
+                    template: 'partials/confirmSessionReset.html'
+                }).then(function (value) {
+                    if (value === 'reset') {
+                        $location.path('/');
+                    }
+			});
+                event.preventDefault();
+            }
+
+            return;
+        });
     }
 
     return {
@@ -64,6 +81,7 @@ module.exports = /*@ngInject*/ function (StepFactory, Wizard) {
                     scope.steps = Wizard.getSteps();
                 }
             });
-        }
+        },
+        controller: /*@ngInject*/ controller
     };
 };
