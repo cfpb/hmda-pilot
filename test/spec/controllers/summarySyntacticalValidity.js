@@ -36,7 +36,7 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
 
         var mockNgDialogPromise = {
             then: function(callback) {
-                callback('test');
+                callback('reset');
             }
         };
         mockNgDialog = {
@@ -237,6 +237,7 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
 
         it('should display the confirmation dialog', function () {
             expect(mockNgDialog.openConfirm).toHaveBeenCalled();
+            expect(location.path()).toBe('/');
         });
     });
 });

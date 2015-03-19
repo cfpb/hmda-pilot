@@ -42,7 +42,7 @@ module.exports = /*@ngInject*/ function ($location, StepFactory, Wizard, ngDialo
                     template: 'partials/confirmSessionReset.html'
                 }).then(function (value) {
                     if (value === 'reset') {
-                        $location.path(newUrl);
+                        $location.path('/');
                     }
 			});
                 event.preventDefault();

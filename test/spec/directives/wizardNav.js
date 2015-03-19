@@ -11,6 +11,7 @@ describe('Directive: WizardNav', function () {
 
     var element,
         scope,
+        location,
         StepFactory,
         Wizard,
         ngDialog;
@@ -39,19 +40,20 @@ describe('Directive: WizardNav', function () {
         req.send();
     }));
 
-    beforeEach(inject(function ($rootScope, $compile, _StepFactory_, _Wizard_, _ngDialog_) {
+    beforeEach(inject(function ($rootScope, $location, $compile, _StepFactory_, _Wizard_, _ngDialog_) {
         StepFactory = _StepFactory_;
         Wizard = _Wizard_;
         ngDialog = _ngDialog_;
 
         var mockNgDialogPromise = {
             then: function(callback) {
-                callback('test');
+                callback('reset');
             }
         };
         spyOn(ngDialog, 'openConfirm').and.returnValue(mockNgDialogPromise);
 
         scope = $rootScope.$new();
+        location = $location;
 
         var stepData = [
             new StepFactory('Step 1', 'step1'),
@@ -93,6 +95,7 @@ describe('Directive: WizardNav', function () {
             scope.$broadcast('$locationChangeStart', '#/selectFile');
             scope.$digest();
             expect(ngDialog.openConfirm).toHaveBeenCalled();
+            expect(location.path()).toBe('/');
         });
     });
 

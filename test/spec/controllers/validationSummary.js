@@ -22,7 +22,7 @@ describe('Controller: ValidationSummaryCtrl', function () {
 
         var mockNgDialogPromise = {
             then: function(callback) {
-                callback('test');
+                callback('reset');
             }
         };
         mockNgDialog = {
@@ -73,6 +73,7 @@ describe('Controller: ValidationSummaryCtrl', function () {
         it('should display the confirmation dialog', function () {
             scope.startOver();
             expect(mockNgDialog.openConfirm).toHaveBeenCalled();
+            expect(location.path()).toBe('/selectFile');
         });
     });
 });
