@@ -8,8 +8,10 @@
  * Controller for pagination
  */
 module.exports = /*@ngInject*/ function ($scope) {
-    $scope.currentPage = 1;
-    $scope.pageSize = 10;
+    $scope.paginate = {
+        currentPage: 1,
+        pageSize: 10
+    };
 
     $scope.$watch(function() {
         return $scope.isLastPage();
@@ -52,11 +54,11 @@ module.exports = /*@ngInject*/ function ($scope) {
     };
 
     $scope.start = function() {
-        return ($scope.currentPage-1) * $scope.pageSize + 1;
+        return ($scope.paginate.currentPage-1) * $scope.paginate.pageSize + 1;
     };
 
     $scope.end = function() {
-        var end = $scope.currentPage * $scope.pageSize;
+        var end = $scope.paginate.currentPage * $scope.paginate.pageSize;
         return end > $scope.total() ? $scope.total() : end;
     };
 
@@ -65,36 +67,41 @@ module.exports = /*@ngInject*/ function ($scope) {
     };
 
     $scope.totalPages = function() {
-        return Math.ceil($scope.total() / $scope.pageSize);
+        return Math.ceil($scope.total() / $scope.paginate.pageSize);
     };
 
     $scope.hasPrev = function() {
-        return $scope.currentPage > 1;
+        return $scope.paginate.currentPage > 1;
     };
 
     $scope.onPrev = function() {
-        $scope.currentPage--;
+        $scope.paginate.currentPage--;
     };
 
     $scope.hasNext = function() {
-        return $scope.currentPage < $scope.totalPages();
+        return $scope.paginate.currentPage < $scope.totalPages();
     };
 
     $scope.onNext = function() {
-        $scope.currentPage++;
+        $scope.paginate.currentPage++;
     };
 
     $scope.isLastPage = function() {
-        return $scope.currentPage === $scope.totalPages();
+        return $scope.paginate.currentPage === $scope.totalPages();
     };
 
-    $scope.setCurrentPage = function(page) {
-        $scope.currentPage = page;
+    $scope.currentPage = function(page) {
+        if (angular.isDefined(page)) {
+            $scope.paginate.currentPage = page > $scope.totalPages() ? $scope.totalPages() : page;
+        } else {
+            return $scope.paginate.currentPage;
+        }
     };
 
     $scope.setPageSize = function(size) {
-        $scope.pageSize = size;
-        $scope.currentPage = 1;
+        console.log(size);
+        $scope.paginate.pageSize = size;
+        $scope.paginate.currentPage = 1;
     };
 
     $scope.showPagination = function() {
