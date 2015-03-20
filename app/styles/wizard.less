@@ -25,17 +25,6 @@
             list-style: none;
 
             // Wizard states
-            &.error {
-                @a11y-color: tint(@redorange, 90%);
-
-                border-color: @redorange;
-                background-color: @a11y-color;
-
-                .step-badge {
-                    color: @a11y-color;
-                    background-color: @redorange;
-                }
-            }
             &.complete {
                 @a11y-color: shade(@green, 27%);
 
@@ -56,9 +45,7 @@
                     background-color: @darkgray;
                 }
             }
-            &.active,
-            &.focusable:hover,
-            &.focusable:focus {
+            &.active {
                 @a11y-color: tint(@teal, 8%);
 
                 border-color: @a11y-color;
@@ -67,6 +54,19 @@
                 .step-badge {
                     color: @teal-20;
                     background-color: @a11y-color;
+                }
+            }
+            &.focusable:hover,
+            &.focusable:focus,
+            &.is_focused {
+                @a11y-color: tint(@gold, 90%);
+
+                border-color: @gold;
+                background-color: @a11y-color;
+
+                .step-badge {
+                    color: @a11y-color;
+                    background-color: @gold;
                 }
             }
 
