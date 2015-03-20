@@ -173,8 +173,7 @@ describe('Controller: ErrorDetailCtrl', function () {
 
     describe('goToEditDetail()', function() {
         it('should redirect the user to a specific error detail page', function() {
-            scope.selectedEditId = 'V100';
-            scope.goToEditDetail();
+            scope.goToEditDetail('V100');
             scope.$digest();
             expect(location.path()).toBe('/detail/syntactical/V100');
         });

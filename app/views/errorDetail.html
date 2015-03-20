@@ -1,4 +1,4 @@
-<h2 ng-if="['syntactical', 'validity', 'quality', 'macro'].indexOf(editType) !== -1"><label for="editId">{{editType | capitalize}} Edit ID:</label> <select id="editId" ng-model="selectedEditId" ng-change="goToEditDetail()" ng-options="id for id in siblingEdits"></select></h2>
+<h2 ng-if="['syntactical', 'validity', 'quality', 'macro'].indexOf(editType) !== -1"><label for="editId">{{editType | capitalize}} Edit ID:</label> <select id="editId" ng-model="selectedEditId" ng-change="goToEditDetail(selectedEditId)" ng-options="id for id in siblingEdits"></select></h2>
 
 <p class="edit-explanation">{{editError.explanation}}</p>
 
@@ -46,4 +46,3 @@
         </div>
     </div>
 </form>
-
