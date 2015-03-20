@@ -7,11 +7,17 @@
  * # PaginationCtrl
  * Controller for pagination
  */
-module.exports = /*@ngInject*/ function ($scope) {
+module.exports = /*@ngInject*/ function ($scope, $element, $timeout) {
     $scope.paginate = {
         currentPage: 1,
         pageSize: 10
     };
+
+    var $table = null;
+    $timeout(function() {
+        $table = $element.find('table');
+        $table.attr('tabindex', '-1');
+    }, 200);
 
     $scope.$watch(function() {
         return $scope.isLastPage();
@@ -76,6 +82,7 @@ module.exports = /*@ngInject*/ function ($scope) {
 
     $scope.onPrev = function() {
         $scope.paginate.currentPage--;
+        $table[0].focus();
     };
 
     $scope.hasNext = function() {
@@ -84,6 +91,7 @@ module.exports = /*@ngInject*/ function ($scope) {
 
     $scope.onNext = function() {
         $scope.paginate.currentPage++;
+        $table[0].focus();
     };
 
     $scope.isLastPage = function() {

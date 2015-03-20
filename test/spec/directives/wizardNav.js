@@ -40,7 +40,7 @@ describe('Directive: WizardNav', function () {
         req.send();
     }));
 
-    beforeEach(inject(function ($rootScope, $location, $compile, _StepFactory_, _Wizard_, _ngDialog_) {
+    beforeEach(inject(function ($rootScope, $timeout, $location, $compile, _StepFactory_, _Wizard_, _ngDialog_) {
         StepFactory = _StepFactory_;
         Wizard = _Wizard_;
         ngDialog = _ngDialog_;
@@ -67,6 +67,7 @@ describe('Directive: WizardNav', function () {
         var html = '<wizard-nav steps="steps"></wizard-nav>';
         element = $compile(html)(scope);
         scope.$digest();
+        $timeout.flush(200);
     }));
 
     it('should display a link for the currently active step ', function () {
@@ -88,6 +89,15 @@ describe('Directive: WizardNav', function () {
 
     it('should allow a completed step to be focusable', function () {
         expect(jQuery('li.complete', element).hasClass('focusable')).toBeTruthy();
+    });
+
+    it('should toggle "is_focused" class on the parent step when using the keyboard', function() {
+        var step = jQuery('li.complete', element);
+        jQuery('a', step).triggerHandler('focus');
+        expect(step.hasClass('is_focused')).toBeTruthy();
+
+        jQuery('a', step).triggerHandler('blur');
+        expect(step.hasClass('is_focused')).toBeFalsy();
     });
 
     describe('when the navigating to /selectFile', function() {

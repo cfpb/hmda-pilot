@@ -52,14 +52,20 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
     $scope.process = function() {
         // Run the second set of validations
         var ruleYear = HMDAEngine.getRuleYear();
+
+        /* istanbul ignore if debug */
         if (HMDAEngine.getDebug()) {
             console.time('total time for quality and macro edits');
         }
+
         $q.all([HMDAEngine.runQuality(ruleYear), HMDAEngine.runMacro(ruleYear)])
         .then(function() {
+
+            /* istanbul ignore if debug */
             if (HMDAEngine.getDebug()) {
                 console.timeEnd('total time for quality and macro edits');
             }
+
             // Complete the current step in the wizard
             $scope.wizardSteps = Wizard.completeStep();
 

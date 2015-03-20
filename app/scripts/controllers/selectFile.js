@@ -54,10 +54,13 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileRe
 
     $scope.process = function(hmdaData) {
         HMDAEngine.setUseLocalDB(hmdaData.local);
-        // Convert the file to JSON
+
+        /* istanbul ignore if debug */
         if (HMDAEngine.getDebug()) {
             console.time('time to process hmda json');
         }
+
+        // Convert the file to JSON
         HMDAEngine.fileToJson(hmdaData.file, hmdaData.year, function(fileErr) {
             if (fileErr) {
                 // Toggle processing flag off
@@ -67,12 +70,17 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileRe
                 $scope.$apply();
                 return;
             }
+
+            /* istanbul ignore if debug */
             if (HMDAEngine.getDebug()) {
                 console.timeEnd('time to process hmda json');
                 console.time('total time for syntactical and validity edits');
             }
+
             $q.all([HMDAEngine.runSyntactical(hmdaData.year), HMDAEngine.runValidity(hmdaData.year)])
             .then(function() {
+
+                /* istanbul ignore if debug */
                 if (HMDAEngine.getDebug()) {
                     console.timeEnd('total time for syntactical and validity edits');
                 }

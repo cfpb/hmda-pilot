@@ -9,7 +9,7 @@ describe('Controller: PaginationCtrl', function () {
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function ($controller, $rootScope) {
+    beforeEach(inject(function ($controller, $rootScope, $timeout) {
         scope = $rootScope.$new();
         scope.error = {
             errors: []
@@ -19,8 +19,11 @@ describe('Controller: PaginationCtrl', function () {
         }
 
         $controller('PaginationCtrl', {
-            $scope: scope
+            $scope: scope,
+            $element: angular.element('<pagination><table></table></pagination>')
         });
+
+        $timeout.flush();
     }));
 
     describe('Initial scope', function() {
