@@ -27,7 +27,8 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileRe
     // Set default values for any form fields
     $scope.hmdaData = {
         year: fiscalYears[fiscalYears.length-2], // 2 because of 0 indexes
-        file: ''
+        file: '',
+        local: false
     };
 
     $scope.getFile = function() {
@@ -52,6 +53,7 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileRe
     };
 
     $scope.process = function(hmdaData) {
+        HMDAEngine.setUseLocalDB(hmdaData.local);
         // Convert the file to JSON
         if (HMDAEngine.getDebug()) {
             console.time('time to process hmda json');
