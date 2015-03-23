@@ -46,11 +46,11 @@ describe('Controller: SummaryQualityMacroCtrl', function () {
     }));
 
     it('should include the quality errors in the scope', function () {
-        expect(scope.qualityErrors).toEqual({});
+        expect(scope.data.qualityErrors).toEqual({});
     });
 
     it('should include the macro errors in the scope', function () {
-        expect(scope.macroErrors).toEqual({});
+        expect(scope.data.macroErrors).toEqual({});
     });
 
     describe('hasNext()', function() {

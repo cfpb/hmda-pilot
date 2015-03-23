@@ -14,18 +14,22 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
     };
 
     function hasUnverifiedQualityErrors() {
-        console.log($scope.data.qualityErrors);
-        console.log($scope);
-        var editIds = Object.keys($scope.data.qualityErrors),
-            verifiedIds = Session.getVerifiedQualityEditIds(),
-            diff = editIds.diff(verifiedIds);
+        var editIds = [],
+            verifiedIds = Session.getVerifiedQualityEditIds();
+        if ($scope.data.qualityErrors) {
+            editIds = Object.keys($scope.data.qualityErrors);
+        }
+        var diff = editIds.diff(verifiedIds);
         return diff.length > 0;
     }
 
     function hasUnverifiedMacroErrors() {
-        var editIds = Object.keys($scope.data.macroErrors),
-            verifiedIds = Session.getVerifiedMacroEditIds(),
-            diff = editIds.diff(verifiedIds);
+        var editIds = [],
+            verifiedIds = Session.getVerifiedMacroEditIds();
+        if ($scope.data.macroErrors) {
+            editIds = Object.keys($scope.data.macroErrors);
+        }
+        var diff = editIds.diff(verifiedIds);
         return diff.length > 0;
     }
 
@@ -41,8 +45,8 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
     var editErrors = HMDAEngine.getErrors();
 
     $scope.data = {
-        qualityErrors: editErrors.quality || {},
-        macroErrors: editErrors.macro || {}
+        qualityErrors: editErrors.quality,
+        macroErrors: editErrors.macro
     };
 
     $scope.previous = function () {

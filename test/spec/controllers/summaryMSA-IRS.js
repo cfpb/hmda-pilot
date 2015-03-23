@@ -37,7 +37,7 @@ describe('Controller: SummaryMSAIRSCtrl', function () {
     }));
 
     it('should include the special errors in the scope', function () {
-        expect(scope.specialErrors).toEqual({});
+        expect(scope.data.specialErrors).toEqual({});
     });
 
     describe('showIRSReport()', function() {
