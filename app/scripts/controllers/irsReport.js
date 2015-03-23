@@ -9,7 +9,7 @@
  */
 module.exports = /*@ngInject*/ function ($scope, $location, $q, HMDAEngine, Session) {
 
-    var LARs = HMDAEngine.getHmdaJson().hmdaFile.loanApplicationRegisters;
+    var hmdaFile = HMDAEngine.getHmdaJson().hmdaFile;
 
     /* istanbul ignore if debug */
     if (HMDAEngine.getDebug()) {
@@ -17,7 +17,7 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, HMDAEngine, Sess
     }
 
     // Initialize scope
-    HMDAEngine.getTotalsByMSA(LARs).then(function(response) {
+    HMDAEngine.getTotalsByMSA(hmdaFile).then(function(response) {
 
         /* istanbul ignore if debug */
         if (HMDAEngine.getDebug()) {
