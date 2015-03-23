@@ -14,14 +14,16 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
     };
 
     function hasUnverifiedQualityErrors() {
-        var editIds = Object.keys($scope.qualityErrors),
+        console.log($scope.data.qualityErrors);
+        console.log($scope);
+        var editIds = Object.keys($scope.data.qualityErrors),
             verifiedIds = Session.getVerifiedQualityEditIds(),
             diff = editIds.diff(verifiedIds);
         return diff.length > 0;
     }
 
     function hasUnverifiedMacroErrors() {
-        var editIds = Object.keys($scope.macroErrors),
+        var editIds = Object.keys($scope.data.macroErrors),
             verifiedIds = Session.getVerifiedMacroEditIds(),
             diff = editIds.diff(verifiedIds);
         return diff.length > 0;
@@ -38,8 +40,10 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
     // Get the list of errors from the HMDAEngine
     var editErrors = HMDAEngine.getErrors();
 
-    $scope.qualityErrors = editErrors.quality || {};
-    $scope.macroErrors = editErrors.macro || {};
+    $scope.data = {
+        qualityErrors: editErrors.quality || {},
+        macroErrors: editErrors.macro || {}
+    };
 
     $scope.previous = function () {
         $location.path('/summarySyntacticalValidity');
