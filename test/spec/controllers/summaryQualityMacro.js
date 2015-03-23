@@ -97,6 +97,12 @@ describe('Controller: SummaryQualityMacroCtrl', function () {
                 expect(scope.hasNext()).toBeFalsy();
             });
         });
+
+        it('should return true if both quality and macro errors are null', function() {
+            scope.data.qualityErrors = null;
+            scope.data.macroErrors = null;
+            expect(scope.hasNext()).toBeTruthy();
+        });
     });
 
     describe('next()', function() {
