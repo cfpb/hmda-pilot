@@ -50,4 +50,66 @@ describe('Controller: SpecialErrorDetailCtrl', function () {
             expect(location.path()).toBe('/detail/special/Q595');
         });
     });
+
+    describe('initialization', function() {
+        it('should set $scope.checkboxes based on the session if Q595 is already verified', inject(function($controller) {
+            Session.addToVerifiedSpecialEdits('Q595', [1, 2, 3]);
+            $controller('SpecialErrorDetailCtrl', {
+                $scope: scope,
+                $routeParams: { EditId: 'Q595' },
+                HMDAEngine: mockEngine,
+                Session: Session
+            });
+
+            expect(scope.checkboxes).toEqual([1, 2, 3]);
+        }));
+
+        it('should set $scope.checkboxes to false if Q595 is not verified', inject(function($controller) {
+            $controller('SpecialErrorDetailCtrl', {
+                $scope: scope,
+                $routeParams: { EditId: 'Q595' },
+                HMDAEngine: mockEngine,
+                Session: Session
+            });
+
+            for (var i = 1; i < scope.checkboxes.length; i++) {
+                expect(scope.checkboxes[i]).toBeFalsy();
+            }
+        }));
+
+        it('should set $scope.selects based on the session if Q029 is already verified', inject(function($controller) {
+            Session.addToVerifiedSpecialEdits('Q029', ['1', '0', '1']);
+            $controller('SpecialErrorDetailCtrl', {
+                $scope: scope,
+                $routeParams: { EditId: 'Q029' },
+                HMDAEngine: mockEngine,
+                Session: Session
+            });
+
+            expect(scope.selects).toEqual(['1', '0', '1']);
+        }));
+
+        it('should set $scope.selects to \'0\' if Q029 is not verified', inject(function($controller) {
+            $controller('SpecialErrorDetailCtrl', {
+                $scope: scope,
+                $routeParams: { EditId: 'Q029' },
+                HMDAEngine: mockEngine,
+                Session: Session
+            });
+
+            for (var i = 1; i < scope.selects.length; i++) {
+                expect(scope.selects[i]).toEqual('0');
+            }
+        }));
+
+        it('should set $scope.error to an empty object if given an invalid editId', inject(function($controller) {
+            $controller('SpecialErrorDetailCtrl', {
+                $scope: scope,
+                $routeParams: { EditId: 'Q999' },
+                HMDAEngine: mockEngine
+            });
+
+            expect(scope.error).toEqual({});
+        }));
+    });
 });
