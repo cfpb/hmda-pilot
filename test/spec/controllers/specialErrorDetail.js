@@ -53,7 +53,7 @@ describe('Controller: SpecialErrorDetailCtrl', function () {
 
     describe('initialization', function() {
         it('should set $scope.checkboxes based on the session if Q595 is already verified', inject(function($controller) {
-            Session.addToVerifiedSpecialEdits('Q595', [1, 2, 3]);
+            Session.addToVerifiedSpecialEdits('Q595', [true, false, true]);
             $controller('SpecialErrorDetailCtrl', {
                 $scope: scope,
                 $routeParams: { EditId: 'Q595' },
@@ -61,7 +61,7 @@ describe('Controller: SpecialErrorDetailCtrl', function () {
                 Session: Session
             });
 
-            expect(scope.checkboxes).toEqual([1, 2, 3]);
+            expect(scope.checkboxes).toEqual([true, false, true]);
         }));
 
         it('should set $scope.checkboxes to false if Q595 is not verified', inject(function($controller) {
@@ -112,4 +112,25 @@ describe('Controller: SpecialErrorDetailCtrl', function () {
             expect(scope.error).toEqual({});
         }));
     });
+
+    describe('saveSpecialVerification()', function() {
+        it('should store the checkboxes in the session for Q595', function() {
+            scope.checkboxes = [true, false, true];
+            scope.saveSpecialVerification();
+            expect(Session.getVerifiedReasonByEditId('Q595')).toEqual([true, false, true]);
+        });
+
+        it('should store the selects in the session for Q029', inject(function($controller) {
+            $controller('SpecialErrorDetailCtrl', {
+                $scope: scope,
+                $routeParams: { EditId: 'Q029' },
+                HMDAEngine: mockEngine,
+                Session: Session
+            });
+            scope.selects = ['1', '0', '1'];
+            scope.saveSpecialVerification();
+            expect(Session.getVerifiedReasonByEditId('Q029')).toEqual(['1', '0', '1']);
+        }));
+    });
+
 });
