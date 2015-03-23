@@ -98,10 +98,12 @@ describe('Controller: SummaryQualityMacroCtrl', function () {
             });
         });
 
-        it('should return true if both quality and macro errors are null', function() {
-            scope.data.qualityErrors = null;
-            scope.data.macroErrors = null;
-            expect(scope.hasNext()).toBeTruthy();
+        describe('when quality and macro errors end up null', function() {
+            it('should return true', function() {
+                scope.data.qualityErrors = null;
+                scope.data.macroErrors = null;
+                expect(scope.hasNext()).toBeTruthy();
+            });
         });
     });
 
