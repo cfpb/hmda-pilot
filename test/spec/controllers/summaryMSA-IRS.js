@@ -67,6 +67,13 @@ describe('Controller: SummaryMSAIRSCtrl', function () {
                 expect(scope.showIRSReport()).toBeFalsy();
             });
         });
+
+        describe('when special errors end up null', function() {
+            it('should return true', function() {
+                scope.data.specialErrors = null;
+                expect(scope.showIRSReport()).toBeTruthy();
+            });
+        });
     });
 
     describe('isIRSVerified()', function() {
