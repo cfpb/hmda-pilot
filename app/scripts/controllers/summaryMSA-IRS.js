@@ -14,16 +14,21 @@ module.exports = /*@ngInject*/ function ($scope, $location, Wizard, HMDAEngine, 
     };
 
     function hasUnverifiedSpecialErrors() {
-        var editIds = Object.keys($scope.specialErrors),
-            verifiedIds = Session.getVerifiedSpecialEditIds(),
-            diff = editIds.diff(verifiedIds);
+        var editIds = [],
+            verifiedIds = Session.getVerifiedSpecialEditIds();
+        if ($scope.data.specialErrors) {
+            editIds = Object.keys($scope.data.specialErrors);
+        }
+        var diff = editIds.diff(verifiedIds);
         return diff.length > 0;
     }
 
     // Get the list of errors from the HMDAEngine
     var editErrors = HMDAEngine.getErrors();
 
-    $scope.specialErrors = editErrors.special || {};
+    $scope.data = {
+        specialErrors: editErrors.special
+    };
 
     $scope.showIRSReport = function() {
         return !hasUnverifiedSpecialErrors();

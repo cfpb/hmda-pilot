@@ -46,11 +46,11 @@ describe('Controller: SummaryQualityMacroCtrl', function () {
     }));
 
     it('should include the quality errors in the scope', function () {
-        expect(scope.qualityErrors).toEqual({});
+        expect(scope.data.qualityErrors).toEqual({});
     });
 
     it('should include the macro errors in the scope', function () {
-        expect(scope.macroErrors).toEqual({});
+        expect(scope.data.macroErrors).toEqual({});
     });
 
     describe('hasNext()', function() {
@@ -95,6 +95,14 @@ describe('Controller: SummaryQualityMacroCtrl', function () {
                 });
 
                 expect(scope.hasNext()).toBeFalsy();
+            });
+        });
+
+        describe('when quality and macro errors end up null', function() {
+            it('should return true', function() {
+                scope.data.qualityErrors = null;
+                scope.data.macroErrors = null;
+                expect(scope.hasNext()).toBeTruthy();
             });
         });
     });
