@@ -12,6 +12,7 @@ describe('Directive: WizardNav', function () {
     var element,
         scope,
         location,
+        Configuration,
         StepFactory,
         Wizard,
         ngDialog;
@@ -40,10 +41,11 @@ describe('Directive: WizardNav', function () {
         req.send();
     }));
 
-    beforeEach(inject(function ($rootScope, $timeout, $location, $compile, _StepFactory_, _Wizard_, _ngDialog_) {
+    beforeEach(inject(function ($rootScope, $timeout, $location, $compile, _StepFactory_, _Wizard_, _ngDialog_, _Configuration_) {
         StepFactory = _StepFactory_;
         Wizard = _Wizard_;
         ngDialog = _ngDialog_;
+        Configuration = _Configuration_;
 
         var mockNgDialogPromise = {
             then: function(callback) {
@@ -101,11 +103,23 @@ describe('Directive: WizardNav', function () {
     });
 
     describe('when the navigating to /selectFile', function() {
-        it('should display a confirmation dialog', function() {
-            scope.$broadcast('$locationChangeStart', '#/selectFile');
-            scope.$digest();
-            expect(ngDialog.openConfirm).toHaveBeenCalled();
-            expect(location.path()).toBe('/');
+        describe('and Configuration.confirmSessionReset is true', function() {
+            it('should display a confirmation dialog', function() {
+                Configuration.confirmSessionReset = true;
+                scope.$broadcast('$locationChangeStart', '#/selectFile');
+                scope.$digest();
+                expect(ngDialog.openConfirm).not.toHaveBeenCalled();
+                expect(location.path()).toBe('/');
+            });
+        });
+        describe('and Configuration.confirmSessionReset is false', function() {
+            it('should display a confirmation dialog', function() {
+                Configuration.confirmSessionReset = true;
+                scope.$broadcast('$locationChangeStart', '#/selectFile');
+                scope.$digest();
+                expect(ngDialog.openConfirm).toHaveBeenCalled();
+                expect(location.path()).toBe('/');
+            });
         });
     });
 

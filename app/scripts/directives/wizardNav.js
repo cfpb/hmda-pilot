@@ -35,21 +35,23 @@ module.exports = /*@ngInject*/ function ($location, $timeout, StepFactory, Wizar
         return step;
     }
 
-    function controller($scope) {
-        $scope.$on('$locationChangeStart', function(event, newUrl) {
-            if (newUrl.indexOf('#/selectFile') !== -1 ) {
-                ngDialog.openConfirm({
-                    template: 'partials/confirmSessionReset.html'
-                }).then(function (value) {
-                    if (value === 'reset') {
-                        $location.path('/');
-                    }
-			});
-                event.preventDefault();
-            }
+    function controller($scope, Configuration) {
+        if (Configuration.confirmSessionReset) {
+            $scope.$on('$locationChangeStart', function(event, newUrl) {
+                if (newUrl.indexOf('#/selectFile') !== -1 ) {
+                    ngDialog.openConfirm({
+                        template: 'partials/confirmSessionReset.html'
+                    }).then(function (value) {
+                        if (value === 'reset') {
+                            $location.path('/');
+                        }
+    			});
+                    event.preventDefault();
+                }
 
-            return;
-        });
+                return;
+            });
+        }
     }
 
     return {

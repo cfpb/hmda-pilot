@@ -14,7 +14,7 @@ describe('Controller: ValidationSummaryCtrl', function () {
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function ($rootScope, $q, $location, $controller, _FileMetadata_) {
+    beforeEach(inject(function ($rootScope, $q, $location, $controller, _FileMetadata_, _Configuration_) {
         scope = $rootScope.$new();
         location = $location;
         var FileMetadata = _FileMetadata_;
@@ -35,7 +35,8 @@ describe('Controller: ValidationSummaryCtrl', function () {
             $location: location,
             FileMetadata: _FileMetadata_,
             HMDAEngine: mockEngine,
-            ngDialog: mockNgDialog
+            ngDialog: mockNgDialog,
+            Configuration: _Configuration_
         });
     }));
 
@@ -70,10 +71,20 @@ describe('Controller: ValidationSummaryCtrl', function () {
     });
 
     describe('startOver()', function() {
-        it('should display the confirmation dialog', function () {
-            scope.startOver();
-            expect(mockNgDialog.openConfirm).toHaveBeenCalled();
-            expect(location.path()).toBe('/selectFile');
+        describe('when config.confirmSessionReset is true', function() {
+            it('should display the confirmation dialog', function () {
+                scope.startOver();
+                expect(mockNgDialog.openConfirm).not.toHaveBeenCalled();
+                expect(location.path()).toBe('/selectFile');
+            });
+        });
+
+        describe('when config.confirmSessionReset is false', function() {
+            it('should take the user to the home page', function () {
+                scope.startOver();
+                expect(mockNgDialog.openConfirm).not.toHaveBeenCalled();
+                expect(location.path()).toBe('/selectFile');
+            });
         });
     });
 });
