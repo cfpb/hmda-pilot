@@ -127,7 +127,10 @@ module.exports = function (grunt) {
     jshint: {
       options: {
         jshintrc: '.jshintrc',
-        reporter: require('jshint-stylish')
+        reporter: require('jshint-stylish'),
+        ignores: [
+            '<%= yeoman.app %>/config/config.js'
+        ]
       },
       all: {
         src: [
@@ -471,6 +474,19 @@ module.exports = function (grunt) {
         options: {
           patterns: [{
             json: grunt.file.readJSON('./config/environments/development.json')
+          }]
+        },
+        files: [{
+          expand: true,
+          flatten: true,
+          src: ['./config/config.js'],
+          dest: '<%= yeoman.app %>/scripts/modules/'
+        }]
+      },
+      production: {
+        options: {
+          patterns: [{
+            json: grunt.file.readJSON('./config/environments/production.json')
           }]
         },
         files: [{

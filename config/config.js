@@ -2,5 +2,6 @@
 
 angular.module('services.config', [])
     .constant('Configuration', {
-        apiUrl: '@@apiUrl'
+        apiUrl: '@@apiUrl',
+        confirmSessionReset: @@confirmSessionReset
     });

@@ -90,9 +90,11 @@ angular
     });
 
     // Warn the user on browser refresh that they are about to destroy their session
-    $window.onbeforeunload = function() {
-        return 'You are about to reset your session.\n\nDoing so will return you to the Select File and Validate page and you will need to resubmit your HMDA File for validation.';
-    };
+    if (Configuration.confirmSessionReset) {
+        $window.onbeforeunload = function() {
+            return 'You are about to reset your session.\n\nDoing so will return you to the Select File and Validate page and you will need to resubmit your HMDA File for validation.';
+        };
+    }
   });
 
 require('./services');

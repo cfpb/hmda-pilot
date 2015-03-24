@@ -7,7 +7,7 @@
  * # SummarySyntacticalValidityCtrl
  * Controller for the Syntactical and Validity Summary view
  */
-module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEngine, Wizard, ngDialog) {
+module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEngine, Wizard, ngDialog, Configuration) {
 
     // Populate the $scope
     $scope.errors = {};
@@ -20,13 +20,17 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
     $scope.validityErrors = editErrors.validity || {};
 
     $scope.previous = function() {
-        ngDialog.openConfirm({
-            template: 'partials/confirmSessionReset.html'
-        }).then(function (value) {
-            if (value === 'reset') {
-                $location.path('/');
-            }
-		});
+        if (Configuration.confirmSessionReset) {
+            ngDialog.openConfirm({
+                template: 'partials/confirmSessionReset.html'
+            }).then(function (value) {
+                if (value === 'reset') {
+                    $location.path('/');
+                }
+    		});
+        } else {
+            $location.path('/');
+        }
     };
 
     $scope.hasNext = function() {
