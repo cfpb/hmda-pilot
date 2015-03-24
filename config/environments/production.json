@@ -1,0 +1,4 @@
+{
+    "apiUrl": "http://hmda-pilot.ec2.devis.com/api",
+    "confirmSessionReset": true
+}
