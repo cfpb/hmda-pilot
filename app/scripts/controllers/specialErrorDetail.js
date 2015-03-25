@@ -7,7 +7,7 @@
  * # SpecialErrorDetailCtrl
  * Controller of the hmdaPilotApp
  */
-module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http, HMDAEngine, Session) {
+module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http, $filter, HMDAEngine, Session) {
 
     // Get the list of errors from the HMDAEngine
     var editType = 'special',
@@ -17,6 +17,8 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
     $scope.editType = editType;
     $scope.editId = editId;
     $scope.siblingEdits = [];
+    $scope.reverse = false;
+    $scope.sortedBy = '';
 
     if (editErrors[editType] && editErrors[editType][editId]) {
         $scope.error = editErrors[editType][editId];
@@ -25,6 +27,12 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
     } else {
         $scope.error = {};
     }
+
+    $scope.sort = function(property) {
+        $scope.reverse = $scope.sortedBy === property ? !$scope.reverse : false;
+        $scope.sortedBy = property;
+        $scope.error.errors = $filter('orderBy')($scope.error.errors, property, $scope.reverse);
+    };
 
     if (editId === 'Q595') {
         if (Session.isVerified(editId)) {
