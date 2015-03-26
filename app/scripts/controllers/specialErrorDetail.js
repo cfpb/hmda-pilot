@@ -36,21 +36,25 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
 
     if (editId === 'Q595') {
         if (Session.isVerified(editId)) {
-            $scope.checkboxes = Session.getVerifiedReasonByEditId(editId);
+            var checkboxes = Session.getVerifiedReasonByEditId(editId);
+            angular.forEach($scope.error.errors, function(error) {
+                error.properties.checkbox = checkboxes[error.properties['MSA/MD']];
+            });
         } else {
-            $scope.checkboxes = [];
-            for (var i = 1; i <= $scope.error.errors.length; i++) {
-                $scope.checkboxes[i] = false;
+            for (var i = 0; i < $scope.error.errors.length; i++) {
+                $scope.error.errors[i].properties.checkbox = false;
             }
         }
     } else if (editId === 'Q029') {
         $scope.selectedAnswer = $scope.selectedAnswer || '0';
         if (Session.isVerified(editId)) {
-            $scope.selects = Session.getVerifiedReasonByEditId(editId);
+            var selects = Session.getVerifiedReasonByEditId(editId);
+            angular.forEach($scope.error.errors, function(error) {
+                error.properties.select = selects[error.properties['LAR number']];
+            });
         } else {
-            $scope.selects = [];
-            for (var j = 1; j <= $scope.error.errors.length; j++) {
-                $scope.selects[j] = '0';
+            for (var j = 0; j < $scope.error.errors.length; j++) {
+                $scope.error.errors[j].properties.select = '0';
             }
         }
     }
@@ -65,9 +69,17 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
 
     $scope.saveSpecialVerification = function() {
         if (editId === 'Q595') {
-            Session.addToVerifiedSpecialEdits(editId, $scope.checkboxes);
+            var checkboxes = {};
+            angular.forEach($scope.error.errors, function(error) {
+                checkboxes[error.properties['MSA/MD']] = error.properties.checkbox;
+            });
+            Session.addToVerifiedSpecialEdits(editId, checkboxes);
         } else if (editId === 'Q029') {
-            Session.addToVerifiedSpecialEdits(editId, $scope.selects);
+            var selects = {};
+            angular.forEach($scope.error.errors, function(error) {
+                selects[error.properties['LAR number']] = error.properties.select;
+            });
+            Session.addToVerifiedSpecialEdits(editId, selects);
         }
         nextEdit();
     };

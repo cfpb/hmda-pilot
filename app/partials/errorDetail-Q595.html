@@ -7,15 +7,15 @@
     <thead>
         <tr>
             <td class="check"><label for="checkAll"><input type="checkbox" id="checkAll" ng-click="checkAll()" ng-checked="allChecked()"> Select All</label></td>
-            <th scope="col" class="id">MSA/MD</th>
-            <th scope="col" class="name">MSA/MD Name</th>
-            <th scope="col" class="count">MSA/MD LAR Count</th>
+            <th scope="col" class="id" ng-class="{'cf-icon icon-up': sortedBy === 'properties[\'MSA/MD\']' && !reverse, 'cf-icon icon-down': sortedBy === 'properties[\'MSA/MD\']' && reverse}" ng-click="sort('properties[\'MSA/MD\']')">MSA/MD</th>
+            <th scope="col" class="name" ng-class="{'cf-icon icon-up': sortedBy === 'properties[\'MSA/MD name\']' && !reverse, 'cf-icon icon-down': sortedBy === 'properties[\'MSA/MD name\']' && reverse}" ng-click="sort('properties[\'MSA/MD name\']')">MSA/MD Name</th>
+            <th scope="col" class="count" ng-class="{'cf-icon icon-up': sortedBy === 'properties[\'LAR Count\']' && !reverse, 'cf-icon icon-down': sortedBy === 'properties[\'LAR Count\']' && reverse}" ng-click="sort('properties[\'LAR Count\']')">MSA/MD LAR Count</th>
         </tr>
     </thead>
     <tbody>
         <tr ng-repeat="item in error.errors | paginate:start():end()">
-            <td class="check"><input type="checkbox" id="msa-{{$index}}" ng-model="checkboxes[start()+$index]"></td>
-            <th scope="row" class="id"><label for="msa-{{$index}}">{{item.properties['MSA/MD']}}</label></th>
+            <td class="check"><input type="checkbox" id="msa-{{item.properties['MSA/MD']}}" ng-model="item.properties.checkbox"></td>
+            <th scope="row" class="id"><label for="msa-{{item.properties['MSA/MD']}}">{{item.properties['MSA/MD']}}</label></th>
             <td class="name">{{item.properties['MSA/MD name']}}</td>
             <td class="count">{{item.properties['LAR Count']}}</td>
         </tr>

@@ -25,8 +25,8 @@
             <td class="state_code">{{item.properties['Reported State Code']}}</td>
             <td class="county_code">{{item.properties['Reported County Code']}}</td>
             <td class="census_tract">{{item.properties['Reported Census Tract']}}</td>
-            <td class="recommended col-group-first"><label for="lar-{{$index}}">{{item.properties['Recommended MSA/MD']}}</label></td>
-            <td class="col-group-first"><select id="lar-{{$index}}" ng-model="selects[start()+$index]"><option value="0">Select...</option><option value="1">Yes, the listed MSA/MD should be updated</option><option value="2">No, the listed MSA/MD should not be updated</option></select></td>
+            <td class="recommended col-group-first"><label for="lar-{{item.properties['LAR number']}}">{{item.properties['Recommended MSA/MD']}}</label></td>
+            <td class="col-group-first"><select id="lar-{{item.properties['LAR number']}}" ng-model="item.properties.select"><option value="0">Select...</option><option value="1">Yes, the listed MSA/MD should be updated</option><option value="2">No, the listed MSA/MD should not be updated</option></select></td>
         </tr>
     </tbody>
 </table>
