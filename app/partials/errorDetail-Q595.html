@@ -7,9 +7,9 @@
     <thead>
         <tr>
             <td class="check"><label for="checkAll"><input type="checkbox" id="checkAll" ng-click="checkAll()" ng-checked="allChecked()"> Select All</label></td>
-            <th scope="col" role="columnheader" class="id" ng-class="{'cf-icon icon-up': sortedBy === 'properties[\'MSA/MD\']' && !reverse, 'cf-icon icon-down': sortedBy === 'properties[\'MSA/MD\']' && reverse}" ng-click="sort('properties[\'MSA/MD\']')" ng-attr-aria-sort="{{isSortedBy('properties[\'MSA/MD\']')}}">MSA/MD</th>
-            <th scope="col" role="columnheader" class="name" ng-class="{'cf-icon icon-up': sortedBy === 'properties[\'MSA/MD name\']' && !reverse, 'cf-icon icon-down': sortedBy === 'properties[\'MSA/MD name\']' && reverse}" ng-click="sort('properties[\'MSA/MD name\']')" ng-attr-aria-sort="{{isSortedBy('properties[\'MSA/MD name\']')}}">MSA/MD Name</th>
-            <th scope="col" role="columnheader" class="count" ng-class="{'cf-icon icon-up': sortedBy === 'properties[\'LAR Count\']' && !reverse, 'cf-icon icon-down': sortedBy === 'properties[\'LAR Count\']' && reverse}" ng-click="sort('properties[\'LAR Count\']')" ng-attr-aria-sort="{{isSortedBy('properties[\'LAR Count\']')}}">MSA/MD LAR Count</th>
+            <th scope="col" role="columnheader" class="id" ng-class="{'cf-icon icon-up': sortedBy === 'properties[\'MSA/MD\']' && !reverse, 'cf-icon icon-down': sortedBy === 'properties[\'MSA/MD\']' && reverse}" ng-click="sort('properties[\'MSA/MD\']')" aria-sort="{{isSortedBy('properties[\'MSA/MD\']')}}">MSA/MD</th>
+            <th scope="col" role="columnheader" class="name" ng-class="{'cf-icon icon-up': sortedBy === 'properties[\'MSA/MD name\']' && !reverse, 'cf-icon icon-down': sortedBy === 'properties[\'MSA/MD name\']' && reverse}" ng-click="sort('properties[\'MSA/MD name\']')" aria-sort="{{isSortedBy('properties[\'MSA/MD name\']')}}">MSA/MD Name</th>
+            <th scope="col" role="columnheader" class="count" ng-class="{'cf-icon icon-up': sortedBy === 'properties[\'LAR Count\']' && !reverse, 'cf-icon icon-down': sortedBy === 'properties[\'LAR Count\']' && reverse}" ng-click="sort('properties[\'LAR Count\']')" aria-sort="{{isSortedBy('properties[\'LAR Count\']')}}">MSA/MD LAR Count</th>
         </tr>
     </thead>
     <tbody>
