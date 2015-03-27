@@ -32,6 +32,7 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
         $scope.sortAsc = $scope.sortedBy === property ? !$scope.sortAsc : false;
         $scope.sortedBy = property;
         $scope.error.errors = $filter('orderBy')($scope.error.errors, property, $scope.sortAsc);
+        $scope.paginate.currentPage = 1;
     };
 
     $scope.isSortedBy = function(property) {

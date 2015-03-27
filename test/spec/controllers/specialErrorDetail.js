@@ -23,6 +23,7 @@ describe('Controller: SpecialErrorDetailCtrl', function () {
 
     beforeEach(inject(function ($rootScope, $location, $controller, _Session_) {
         scope = $rootScope.$new();
+        scope.paginate = {};
         location = $location;
         Session = _Session_;
 
@@ -164,6 +165,12 @@ describe('Controller: SpecialErrorDetailCtrl', function () {
                 expect(+scope.error.errors[i].properties['MSA/MD']).toBeGreaterThan(+scope.error.errors[i+1].properties['MSA/MD']);
             }
         });
+
+        it('should reset pagination to the first page', function() {
+            scope.paginate.currentPage = 4;
+            scope.sort('foo');
+            expect(scope.paginate.currentPage).toEqual(1);
+        });
     });
 
     describe('isSortBy()', function() {
@@ -172,12 +179,12 @@ describe('Controller: SpecialErrorDetailCtrl', function () {
             expect(scope.isSortedBy('bar')).toEqual('none');
         });
 
-        it('should return \'ascending\' if sorted by the given property and not reversed', function() {
+        it('should return \'ascending\' if sorted by the given property and sortAsc', function() {
             scope.sort('foo');
             expect(scope.isSortedBy('foo')).toEqual('ascending');
         });
 
-        it('should return \'descending\' if sorted by the given property and reversed', function() {
+        it('should return \'descending\' if sorted by the given property and not sortAsc', function() {
             scope.sort('foo');
             scope.sort('foo');
             expect(scope.isSortedBy('foo')).toEqual('descending');

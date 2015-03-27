@@ -8,7 +8,7 @@
  * Controller for pagination
  */
 module.exports = /*@ngInject*/ function ($scope, $element, $timeout) {
-    $scope.paginate = {
+    $scope.$parent.paginate = {
         currentPage: 1,
         pageSize: 10
     };
@@ -60,11 +60,11 @@ module.exports = /*@ngInject*/ function ($scope, $element, $timeout) {
     };
 
     $scope.start = function() {
-        return ($scope.paginate.currentPage-1) * $scope.paginate.pageSize + 1;
+        return ($scope.$parent.paginate.currentPage-1) * $scope.$parent.paginate.pageSize + 1;
     };
 
     $scope.end = function() {
-        var end = $scope.paginate.currentPage * $scope.paginate.pageSize;
+        var end = $scope.$parent.paginate.currentPage * $scope.$parent.paginate.pageSize;
         return end > $scope.total() ? $scope.total() : end;
     };
 
@@ -73,42 +73,42 @@ module.exports = /*@ngInject*/ function ($scope, $element, $timeout) {
     };
 
     $scope.totalPages = function() {
-        return Math.ceil($scope.total() / $scope.paginate.pageSize);
+        return Math.ceil($scope.total() / $scope.$parent.paginate.pageSize);
     };
 
     $scope.hasPrev = function() {
-        return $scope.paginate.currentPage > 1;
+        return $scope.$parent.paginate.currentPage > 1;
     };
 
     $scope.onPrev = function() {
-        $scope.paginate.currentPage--;
+        $scope.$parent.paginate.currentPage--;
         $table[0].focus();
     };
 
     $scope.hasNext = function() {
-        return $scope.paginate.currentPage < $scope.totalPages();
+        return $scope.$parent.paginate.currentPage < $scope.totalPages();
     };
 
     $scope.onNext = function() {
-        $scope.paginate.currentPage++;
+        $scope.$parent.paginate.currentPage++;
         $table[0].focus();
     };
 
     $scope.isLastPage = function() {
-        return $scope.paginate.currentPage === $scope.totalPages();
+        return $scope.$parent.paginate.currentPage === $scope.totalPages();
     };
 
     $scope.currentPage = function(page) {
         if (angular.isDefined(page)) {
-            $scope.paginate.currentPage = page > $scope.totalPages() ? $scope.totalPages() : page;
+            $scope.$parent.paginate.currentPage = page > $scope.totalPages() ? $scope.totalPages() : page;
         } else {
-            return $scope.paginate.currentPage;
+            return $scope.$parent.paginate.currentPage;
         }
     };
 
     $scope.setPageSize = function(size) {
-        $scope.paginate.pageSize = size;
-        $scope.paginate.currentPage = 1;
+        $scope.$parent.paginate.pageSize = size;
+        $scope.$parent.paginate.currentPage = 1;
     };
 
     $scope.showPagination = function() {
