@@ -261,8 +261,17 @@ table.error-detail {
         &.count {
             text-align: center;
         }
+        &.cf-icon {
+            display: table-cell;
+            font-weight: bold;
+        }
+        &.icon-down:after {
+            content: " \e006";
+        }
+        &.icon-up:after {
+            content: " \e004";
+        }
     }
-
     tbody {
         tr {
             border-bottom: 0;

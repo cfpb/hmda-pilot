@@ -3,19 +3,19 @@
 <pagination>
 <pagination-size></pagination-size>
 
-<table id="Q029" class="error-detail row-hover" ng-if="error">
+<table id="Q029" class="error-detail row-hover" role="grid" ng-if="error">
     <thead>
         <tr>
             <th scope="col" colspan="4" class="col-group-header">Reported</th>
             <th scope="col" class="col-group-header">Recommended</th>
             <td class="col-group-first" aria-hidden="true">&nbsp;</td>
         </tr>
-        <tr>
-            <th scope="col" class="id">LAR Number</th>
-            <th scope="col" class="state_code">State Code</th>
-            <th scope="col" class="county_code">County Code</th>
-            <th scope="col" class="census_tract">Census Tract</th>
-            <th scope="col" class="recommended col-group-first">MSA/MD</th>
+        <tr role="row">
+            <th scope="col" role="columnheader" class="id" ng-class="{'cf-icon icon-up': isSortedUp('properties[\'LAR number\']'), 'cf-icon icon-down': isSortedDown('properties[\'LAR number\']')}" ng-click="sort('properties[\'LAR number\']')" aria-sort="{{isSortedBy('properties[\'LAR number\']')}}">LAR Number</th>
+            <th scope="col" role="columnheader" class="state_code" ng-class="{'cf-icon icon-up': isSortedUp('properties[\'Reported State Code\']'), 'cf-icon icon-down': isSortedDown('properties[\'Reported State Code\']')}" ng-click="sort('properties[\'Reported State Code\']')" aria-sort="{{isSortedBy('properties[\'Reported State Code\']')}}">State Code</th>
+            <th scope="col" role="columnheader" class="county_code" ng-class="{'cf-icon icon-up': isSortedUp('properties[\'Reported County Code\']'), 'cf-icon icon-down': isSortedDown('properties[\'Reported County Code\']')}" ng-click="sort('properties[\'Reported County Code\']')" aria-sort="{{isSortedBy('properties[\'Reported County Code\']')}}">County Code</th>
+            <th scope="col" role="columnheader" class="census_tract" ng-class="{'cf-icon icon-up': isSortedUp('properties[\'Reported Census Tract\']'), 'cf-icon icon-down': isSortedDown('properties[\'Reported Census Tract\']')}" ng-click="sort('properties[\'Reported Census Tract\']')" aria-sort="{{isSortedBy('properties[\'Reported Census Tract\']')}}">Census Tract</th>
+            <th scope="col" role="columnheader" class="recommended col-group-first" ng-class="{'cf-icon icon-up': isSortedUp('properties[\'Recommended MSA/MD\']'), 'cf-icon icon-down': isSortedDown('properties[\'Recommended MSA/MD\']')}" ng-click="sort('properties[\'Recommended MSA/MD\']')" aria-sort="{{isSortedBy('properties[\'Recommended MSA/MD\']')}}">MSA/MD</th>
             <td class="col-group-first"><label for="selectAll" class="u-visually-hidden">Verify all MSA/MDs as</label><select id="selectAll" ng-model="selectedAnswer" ng-change="selectAll(selectedAnswer)"><option value="0">Select...</option><option value="1">All of the listed MSA/MDs should be updated</option><option value="2">None of the listed MSA/MDs should be updated</option></select></td>
         </tr>
     </thead>
@@ -25,8 +25,8 @@
             <td class="state_code">{{item.properties['Reported State Code']}}</td>
             <td class="county_code">{{item.properties['Reported County Code']}}</td>
             <td class="census_tract">{{item.properties['Reported Census Tract']}}</td>
-            <td class="recommended col-group-first"><label for="lar-{{$index}}">{{item.properties['Recommended MSA/MD']}}</label></td>
-            <td class="col-group-first"><select id="lar-{{$index}}" ng-model="selects[start()+$index]"><option value="0">Select...</option><option value="1">Yes, the listed MSA/MD should be updated</option><option value="2">No, the listed MSA/MD should not be updated</option></select></td>
+            <td class="recommended col-group-first"><label for="lar-{{item.properties['LAR number']}}">{{item.properties['Recommended MSA/MD']}}</label></td>
+            <td class="col-group-first"><select id="lar-{{item.properties['LAR number']}}" ng-model="item.properties.select"><option value="0">Select...</option><option value="1">Yes, the listed MSA/MD should be updated</option><option value="2">No, the listed MSA/MD should not be updated</option></select></td>
         </tr>
     </tbody>
 </table>

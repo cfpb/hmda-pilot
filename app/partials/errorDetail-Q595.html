@@ -3,19 +3,19 @@
 <pagination>
 <pagination-size></pagination-size>
 
-<table id="Q595" class="error-detail row-hover" ng-if="error">
+<table id="Q595" class="error-detail row-hover" role="grid" ng-if="error">
     <thead>
-        <tr>
+        <tr role="row">
             <td class="check"><label for="checkAll"><input type="checkbox" id="checkAll" ng-click="checkAll()" ng-checked="allChecked()"> Select All</label></td>
-            <th scope="col" class="id">MSA/MD</th>
-            <th scope="col" class="name">MSA/MD Name</th>
-            <th scope="col" class="count">MSA/MD LAR Count</th>
+            <th scope="col" role="columnheader" class="id" ng-class="{'cf-icon icon-up': isSortedUp('properties[\'MSA/MD\']'), 'cf-icon icon-down': isSortedDown('properties[\'MSA/MD\']')}" ng-click="sort('properties[\'MSA/MD\']')" aria-sort="{{isSortedBy('properties[\'MSA/MD\']')}}">MSA/MD</th>
+            <th scope="col" role="columnheader" class="name" ng-class="{'cf-icon icon-up': isSortedUp('properties[\'MSA/MD name\']'), 'cf-icon icon-down': isSortedDown('properties[\'MSA/MD name\']')}" ng-click="sort('properties[\'MSA/MD name\']')" aria-sort="{{isSortedBy('properties[\'MSA/MD name\']')}}">MSA/MD Name</th>
+            <th scope="col" role="columnheader" class="count" ng-class="{'cf-icon icon-up': isSortedUp('properties[\'LAR Count\']'), 'cf-icon icon-down': isSortedDown('properties[\'LAR Count\']')}" ng-click="sort('properties[\'LAR Count\']')" aria-sort="{{isSortedBy('properties[\'LAR Count\']')}}">MSA/MD LAR Count</th>
         </tr>
     </thead>
     <tbody>
         <tr ng-repeat="item in error.errors | paginate:start():end()">
-            <td class="check"><input type="checkbox" id="msa-{{$index}}" ng-model="checkboxes[start()+$index]"></td>
-            <th scope="row" class="id"><label for="msa-{{$index}}">{{item.properties['MSA/MD']}}</label></th>
+            <td class="check"><input type="checkbox" id="msa-{{item.properties['MSA/MD']}}" ng-model="item.properties.checkbox"></td>
+            <th scope="row" class="id"><label for="msa-{{item.properties['MSA/MD']}}">{{item.properties['MSA/MD']}}</label></th>
             <td class="name">{{item.properties['MSA/MD name']}}</td>
             <td class="count">{{item.properties['LAR Count']}}</td>
         </tr>

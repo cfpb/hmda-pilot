@@ -33,26 +33,26 @@ module.exports = /*@ngInject*/ function ($scope, $element, $timeout) {
     });
 
     $scope.selectAll = function(selectedAnswer) {
-        for (var i = $scope.start(); i <= $scope.end(); i++) {
-            $scope.selects[i] = selectedAnswer;
+        for (var i = $scope.start()-1; i < $scope.end(); i++) {
+            $scope.error.errors[i].properties.select = selectedAnswer;
         }
     };
 
     $scope.checkAll = function() {
         if ($scope.allChecked()) {
-            for (var i = $scope.start(); i <= $scope.end(); i++) {
-                $scope.checkboxes[i] = false;
+            for (var i = $scope.start()-1; i < $scope.end(); i++) {
+                $scope.error.errors[i].properties.checkbox = false;
             }
         } else {
-            for (var j = $scope.start(); j <= $scope.end(); j++) {
-                $scope.checkboxes[j] = true;
+            for (var j = $scope.start()-1; j < $scope.end(); j++) {
+                $scope.error.errors[j].properties.checkbox = true;
             }
         }
     };
 
     $scope.allChecked = function() {
-        for (var i = $scope.start(); i <= $scope.end(); i++) {
-            if ($scope.checkboxes[i] === false) {
+        for (var i = $scope.start()-1; i < $scope.end(); i++) {
+            if ($scope.error.errors[i].properties.checkbox === false) {
                 return false;
             }
         }
@@ -107,7 +107,6 @@ module.exports = /*@ngInject*/ function ($scope, $element, $timeout) {
     };
 
     $scope.setPageSize = function(size) {
-        console.log(size);
         $scope.paginate.pageSize = size;
         $scope.paginate.currentPage = 1;
     };

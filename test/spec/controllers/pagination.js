@@ -15,7 +15,7 @@ describe('Controller: PaginationCtrl', function () {
             errors: []
         };
         for (var i = 0; i < 100; i++) {
-            scope.error.errors.push(i);
+            scope.error.errors.push({properties: {}});
         }
 
         $controller('PaginationCtrl', {
@@ -170,9 +170,8 @@ describe('Controller: PaginationCtrl', function () {
 
     describe('checkAll()', function() {
         beforeEach(function() {
-            scope.checkboxes = [];
-            for (var i = 1; i <= scope.error.errors.length; i++) {
-                scope.checkboxes[i] = false;
+            for (var i = 0; i < scope.error.errors.length; i++) {
+                scope.error.errors[i].properties.checkbox = false;
             }
         });
 
@@ -183,8 +182,8 @@ describe('Controller: PaginationCtrl', function () {
         });
 
         it('should uncheck all checkboxes when all checkboxes are already checked', function() {
-            for (var i = 1; i <= 10; i++) {
-                scope.checkboxes[i] = true;
+            for (var i = 0; i < 10; i++) {
+                scope.error.errors[i].properties.checkbox = true;
             }
             expect(scope.allChecked()).toBeTruthy();
             scope.checkAll();
@@ -192,8 +191,8 @@ describe('Controller: PaginationCtrl', function () {
         });
 
         it('should check the rest of the checkboxes when some are already checked', function() {
-            for (var i = 3; i <= 6; i++) {
-                scope.checkboxes[i] = true;
+            for (var i = 2; i < 6; i++) {
+                scope.error.errors[i].properties.checkbox = true;
             }
             expect(scope.allChecked()).toBeFalsy();
             scope.checkAll();
@@ -203,19 +202,18 @@ describe('Controller: PaginationCtrl', function () {
 
     describe('selectAll()', function() {
         beforeEach(function() {
-            scope.selects = [];
-            for (var j = 1; j <= scope.error.errors.length; j++) {
-                scope.selects[j] = '0';
+            for (var j = 0; j < scope.error.errors.length; j++) {
+                scope.error.errors[j].properties.select = '0';
             }
         });
 
         it('should select all the selects when changed', function() {
-            for (var i = 1; i <= 10; i++) {
-                expect(scope.selects[i]).toBe('0');
+            for (var i = 0; i < 10; i++) {
+                expect(scope.error.errors[i].properties.select).toBe('0');
             }
             scope.selectAll('1');
-            for (i = 1; i <= 10; i++) {
-                expect(scope.selects[i]).toBe('1');
+            for (i = 0; i < 10; i++) {
+                expect(scope.error.errors[i].properties.select).toBe('1');
             }
         });
     });
