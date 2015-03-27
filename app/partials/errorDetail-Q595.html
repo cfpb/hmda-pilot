@@ -3,9 +3,9 @@
 <pagination>
 <pagination-size></pagination-size>
 
-<table id="Q595" class="error-detail row-hover" ng-if="error">
+<table id="Q595" class="error-detail row-hover" role="grid" ng-if="error">
     <thead>
-        <tr>
+        <tr role="row">
             <td class="check"><label for="checkAll"><input type="checkbox" id="checkAll" ng-click="checkAll()" ng-checked="allChecked()"> Select All</label></td>
             <th scope="col" role="columnheader" class="id" ng-class="{'cf-icon icon-up': isSortedUp('properties[\'MSA/MD\']'), 'cf-icon icon-down': isSortedDown('properties[\'MSA/MD\']')}" ng-click="sort('properties[\'MSA/MD\']')" aria-sort="{{isSortedBy('properties[\'MSA/MD\']')}}">MSA/MD</th>
             <th scope="col" role="columnheader" class="name" ng-class="{'cf-icon icon-up': isSortedUp('properties[\'MSA/MD name\']'), 'cf-icon icon-down': isSortedDown('properties[\'MSA/MD name\']')}" ng-click="sort('properties[\'MSA/MD name\']')" aria-sort="{{isSortedBy('properties[\'MSA/MD name\']')}}">MSA/MD Name</th>

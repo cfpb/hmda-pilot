@@ -3,14 +3,14 @@
 <pagination>
 <pagination-size></pagination-size>
 
-<table id="Q029" class="error-detail row-hover" ng-if="error">
+<table id="Q029" class="error-detail row-hover" role="grid" ng-if="error">
     <thead>
         <tr>
             <th scope="col" colspan="4" class="col-group-header">Reported</th>
             <th scope="col" class="col-group-header">Recommended</th>
             <td class="col-group-first" aria-hidden="true">&nbsp;</td>
         </tr>
-        <tr>
+        <tr role="row">
             <th scope="col" role="columnheader" class="id" ng-class="{'cf-icon icon-up': isSortedUp('properties[\'LAR number\']'), 'cf-icon icon-down': isSortedDown('properties[\'LAR number\']')}" ng-click="sort('properties[\'LAR number\']')" aria-sort="{{isSortedBy('properties[\'LAR number\']')}}">LAR Number</th>
             <th scope="col" role="columnheader" class="state_code" ng-class="{'cf-icon icon-up': isSortedUp('properties[\'Reported State Code\']'), 'cf-icon icon-down': isSortedDown('properties[\'Reported State Code\']')}" ng-click="sort('properties[\'Reported State Code\']')" aria-sort="{{isSortedBy('properties[\'Reported State Code\']')}}">State Code</th>
             <th scope="col" role="columnheader" class="county_code" ng-class="{'cf-icon icon-up': isSortedUp('properties[\'Reported County Code\']'), 'cf-icon icon-down': isSortedDown('properties[\'Reported County Code\']')}" ng-click="sort('properties[\'Reported County Code\']')" aria-sort="{{isSortedBy('properties[\'Reported County Code\']')}}">County Code</th>
