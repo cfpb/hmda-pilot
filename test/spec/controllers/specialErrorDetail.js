@@ -15,8 +15,8 @@ describe('Controller: SpecialErrorDetailCtrl', function () {
             "Q029": {"scope": "hmda", "explanation": "Q029 explanation", "description": "Q029 description", "errors": [], "action": "Verify"}}}; //jshint ignore:line
 
     for (var i = 0; i < 10; i++) {
-        mockErrors.special.Q595.errors.push({'LAR Count': 2, 'MSA/MD': '1000' + i, 'MSA/MD name': 'metro area'});
-        mockErrors.special.Q029.errors.push({'LAR number': '2101023112' + i, 'Recommended MSA/MD': '1000' + i, 'Reported Census Tract': 'census tract'});
+        mockErrors.special.Q595.errors.push({properties: {'LAR Count': 2, 'MSA/MD': '1000' + i, 'MSA/MD name': 'metro area'}});
+        mockErrors.special.Q029.errors.push({properties: {'LAR number': '2101023112' + i, 'Recommended MSA/MD': '1000' + i, 'Reported Census Tract': 'census tract'}});
     }
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
@@ -52,8 +52,12 @@ describe('Controller: SpecialErrorDetailCtrl', function () {
     });
 
     describe('initialization', function() {
-        it('should set $scope.checkboxes based on the session if Q595 is already verified', inject(function($controller) {
-            Session.addToVerifiedSpecialEdits('Q595', [true, false, true]);
+        it('should set checkboxes based on the session if Q595 is already verified', inject(function($controller) {
+            var states = {};
+            for (var i = 0; i < 3; i++) {
+                states[scope.error.errors[i].properties['MSA/MD']] = true;
+            }
+            Session.addToVerifiedSpecialEdits('Q595', states);
             $controller('SpecialErrorDetailCtrl', {
                 $scope: scope,
                 $routeParams: { EditId: 'Q595' },
@@ -61,35 +65,30 @@ describe('Controller: SpecialErrorDetailCtrl', function () {
                 Session: Session
             });
 
-            expect(scope.checkboxes).toEqual([true, false, true]);
-        }));
-
-        it('should set $scope.checkboxes to false if Q595 is not verified', inject(function($controller) {
-            $controller('SpecialErrorDetailCtrl', {
-                $scope: scope,
-                $routeParams: { EditId: 'Q595' },
-                HMDAEngine: mockEngine,
-                Session: Session
-            });
-
-            for (var i = 1; i < scope.checkboxes.length; i++) {
-                expect(scope.checkboxes[i]).toBeFalsy();
+            for (i = 0; i < 3; i++) {
+                expect(scope.error.errors[i].properties.checkbox).toBeTruthy();
             }
         }));
 
-        it('should set $scope.selects based on the session if Q029 is already verified', inject(function($controller) {
-            Session.addToVerifiedSpecialEdits('Q029', ['1', '0', '1']);
+        it('should set checkboxes to false if Q595 is not verified', inject(function($controller) {
             $controller('SpecialErrorDetailCtrl', {
                 $scope: scope,
-                $routeParams: { EditId: 'Q029' },
+                $routeParams: { EditId: 'Q595' },
                 HMDAEngine: mockEngine,
                 Session: Session
             });
 
-            expect(scope.selects).toEqual(['1', '0', '1']);
+            for (var i = 0; i < scope.error.errors.length; i++) {
+                expect(scope.error.errors[i].properties.checkbox).toBeFalsy();
+            }
         }));
 
-        it('should set $scope.selects to \'0\' if Q029 is not verified', inject(function($controller) {
+        it('should set selects based on the session if Q029 is already verified', inject(function($controller) {
+            var states = {};
+            for (var i = 0; i < 3; i++) {
+                states[mockEngine.getErrors().special.Q029.errors[i].properties['LAR number']] = '1';
+            }
+            Session.addToVerifiedSpecialEdits('Q029', states);
             $controller('SpecialErrorDetailCtrl', {
                 $scope: scope,
                 $routeParams: { EditId: 'Q029' },
@@ -97,8 +96,21 @@ describe('Controller: SpecialErrorDetailCtrl', function () {
                 Session: Session
             });
 
-            for (var i = 1; i < scope.selects.length; i++) {
-                expect(scope.selects[i]).toEqual('0');
+            for (i = 0; i < 3; i++) {
+                expect(scope.error.errors[i].properties.select).toEqual('1');
+            }
+        }));
+
+        it('should set selects to \'0\' if Q029 is not verified', inject(function($controller) {
+            $controller('SpecialErrorDetailCtrl', {
+                $scope: scope,
+                $routeParams: { EditId: 'Q029' },
+                HMDAEngine: mockEngine,
+                Session: Session
+            });
+
+            for (i = 0; i < scope.error.errors.length; i++) {
+                expect(scope.error.errors[i].properties.select).toEqual('0');
             }
         }));
 
@@ -115,9 +127,11 @@ describe('Controller: SpecialErrorDetailCtrl', function () {
 
     describe('saveSpecialVerification()', function() {
         it('should store the checkboxes in the session for Q595', function() {
-            scope.checkboxes = [true, false, true];
             scope.saveSpecialVerification();
-            expect(Session.getVerifiedReasonByEditId('Q595')).toEqual([true, false, true]);
+            var reasons = Session.getVerifiedReasonByEditId('Q595');
+            for (var i = 0; i < scope.error.errors.length; i++) {
+                expect(reasons[scope.error.errors[i].properties['MSA/MD']]).toBeFalsy();
+            }
         });
 
         it('should store the selects in the session for Q029', inject(function($controller) {
@@ -127,9 +141,11 @@ describe('Controller: SpecialErrorDetailCtrl', function () {
                 HMDAEngine: mockEngine,
                 Session: Session
             });
-            scope.selects = ['1', '0', '1'];
             scope.saveSpecialVerification();
-            expect(Session.getVerifiedReasonByEditId('Q029')).toEqual(['1', '0', '1']);
+            var reasons = Session.getVerifiedReasonByEditId('Q029');
+            for (var i = 0; i < scope.error.errors.length; i++) {
+                expect(reasons[scope.error.errors[i].properties['LAR number']]).toEqual('0');
+            }
         }));
     });
 

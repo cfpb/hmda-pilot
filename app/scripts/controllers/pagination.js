@@ -107,7 +107,6 @@ module.exports = /*@ngInject*/ function ($scope, $element, $timeout) {
     };
 
     $scope.setPageSize = function(size) {
-        console.log(size);
         $scope.paginate.pageSize = size;
         $scope.paginate.currentPage = 1;
     };
