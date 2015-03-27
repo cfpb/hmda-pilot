@@ -149,4 +149,38 @@ describe('Controller: SpecialErrorDetailCtrl', function () {
         }));
     });
 
+    describe('sort()', function() {
+        it('should order the scope errors by a property in ascending order when sorted once', function() {
+            scope.sort('properties[\'MSA/MD\']');
+            for (var i = 0; i < scope.error.errors.length-1; i++) {
+                expect(+scope.error.errors[i].properties['MSA/MD']).toBeLessThan(+scope.error.errors[i+1].properties['MSA/MD']);
+            }
+        });
+
+        it('should order the scope errors by a property in descending order when sorted twice', function() {
+            scope.sort('properties[\'MSA/MD\']');
+            scope.sort('properties[\'MSA/MD\']');
+            for (var i = 0; i < scope.error.errors.length-1; i++) {
+                expect(+scope.error.errors[i].properties['MSA/MD']).toBeGreaterThan(+scope.error.errors[i+1].properties['MSA/MD']);
+            }
+        });
+    });
+
+    describe('isSortBy()', function() {
+        it('should return \'none\' if not sorted by the given property', function() {
+            scope.sort('foo');
+            expect(scope.isSortedBy('bar')).toEqual('none');
+        });
+
+        it('should return \'ascending\' if sorted by the given property and not reversed', function() {
+            scope.sort('foo');
+            expect(scope.isSortedBy('foo')).toEqual('ascending');
+        });
+
+        it('should return \'descending\' if sorted by the given property and reversed', function() {
+            scope.sort('foo');
+            scope.sort('foo');
+            expect(scope.isSortedBy('foo')).toEqual('descending');
+        });
+    });
 });
