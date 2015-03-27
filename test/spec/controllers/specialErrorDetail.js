@@ -183,4 +183,40 @@ describe('Controller: SpecialErrorDetailCtrl', function () {
             expect(scope.isSortedBy('foo')).toEqual('descending');
         });
     });
+
+    describe('isSortedUp()', function() {
+        it('should return true if sorted by the property and descending', function() {
+            scope.sort('foo');
+            expect(scope.isSortedUp('foo')).toBeTruthy();
+        });
+
+        it('should return false if sorted by the property and ascending', function() {
+            scope.sort('foo');
+            scope.sort('foo');
+            expect(scope.isSortedUp('foo')).toBeFalsy();
+        });
+
+        it('should return false if not sorted by the property', function() {
+            scope.sort('bar');
+            expect(scope.isSortedUp('foo')).toBeFalsy();
+        });
+    });
+
+    describe('isSortedDown()', function() {
+        it('should return true if sorted by the property and ascending', function() {
+            scope.sort('foo');
+            scope.sort('foo');
+            expect(scope.isSortedDown('foo')).toBeTruthy();
+        });
+
+        it('should return false if sorted by the property and descending', function() {
+            scope.sort('foo');
+            expect(scope.isSortedDown('foo')).toBeFalsy();
+        });
+
+        it('should return false if not sorted by the property', function() {
+            scope.sort('bar');
+            expect(scope.isSortedDown('foo')).toBeFalsy();
+        });
+    });
 });

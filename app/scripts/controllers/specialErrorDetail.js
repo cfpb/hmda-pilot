@@ -41,6 +41,14 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
         return 'none';
     };
 
+    $scope.isSortedUp = function(property) {
+        return $scope.sortedBy === property && !$scope.reverse;
+    };
+
+    $scope.isSortedDown = function(property) {
+        return $scope.sortedBy === property && $scope.reverse;
+    };
+
     if (editId === 'Q595') {
         if (Session.isVerified(editId)) {
             var checkboxes = Session.getVerifiedReasonByEditId(editId);
