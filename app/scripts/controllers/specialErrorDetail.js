@@ -17,7 +17,7 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
     $scope.editType = editType;
     $scope.editId = editId;
     $scope.siblingEdits = [];
-    $scope.reverse = false;
+    $scope.sortAsc = false;
     $scope.sortedBy = '';
 
     if (editErrors[editType] && editErrors[editType][editId]) {
@@ -29,24 +29,24 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
     }
 
     $scope.sort = function(property) {
-        $scope.reverse = $scope.sortedBy === property ? !$scope.reverse : false;
+        $scope.sortAsc = $scope.sortedBy === property ? !$scope.sortAsc : false;
         $scope.sortedBy = property;
-        $scope.error.errors = $filter('orderBy')($scope.error.errors, property, $scope.reverse);
+        $scope.error.errors = $filter('orderBy')($scope.error.errors, property, $scope.sortAsc);
     };
 
     $scope.isSortedBy = function(property) {
         if ($scope.sortedBy === property) {
-            return $scope.reverse ? 'descending' : 'ascending';
+            return $scope.sortAsc ? 'descending' : 'ascending';
         }
         return 'none';
     };
 
     $scope.isSortedUp = function(property) {
-        return $scope.sortedBy === property && !$scope.reverse;
+        return $scope.sortedBy === property && !$scope.sortAsc;
     };
 
     $scope.isSortedDown = function(property) {
-        return $scope.sortedBy === property && $scope.reverse;
+        return $scope.sortedBy === property && $scope.sortAsc;
     };
 
     if (editId === 'Q595') {
