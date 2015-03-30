@@ -7,7 +7,7 @@
  * # SpecialErrorDetailCtrl
  * Controller of the hmdaPilotApp
  */
-module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http, HMDAEngine, Session) {
+module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http, $filter, HMDAEngine, Session) {
 
     // Get the list of errors from the HMDAEngine
     var editType = 'special',
@@ -17,96 +17,63 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
     $scope.editType = editType;
     $scope.editId = editId;
     $scope.siblingEdits = [];
+    $scope.sortAsc = false;
+    $scope.sortedBy = '';
 
     if (editErrors[editType] && editErrors[editType][editId]) {
-        $scope.editError = editErrors[editType][editId];
+        $scope.error = editErrors[editType][editId];
         $scope.siblingEdits = Object.keys(editErrors[editType]).sort();
         $scope.selectedEditId = editId;
     } else {
-        $scope.editError = {};
+        $scope.error = {};
     }
+
+    $scope.sort = function(property) {
+        $scope.sortAsc = $scope.sortedBy === property ? !$scope.sortAsc : false;
+        $scope.sortedBy = property;
+        $scope.error.errors = $filter('orderBy')($scope.error.errors, property, $scope.sortAsc);
+        $scope.paginate.currentPage = 1;
+    };
+
+    $scope.isSortedBy = function(property) {
+        if ($scope.sortedBy === property) {
+            return $scope.sortAsc ? 'descending' : 'ascending';
+        }
+        return 'none';
+    };
+
+    $scope.isSortedUp = function(property) {
+        return $scope.sortedBy === property && !$scope.sortAsc;
+    };
+
+    $scope.isSortedDown = function(property) {
+        return $scope.sortedBy === property && $scope.sortAsc;
+    };
 
     if (editId === 'Q595') {
         if (Session.isVerified(editId)) {
-            $scope.checkboxes = Session.getVerifiedReasonByEditId(editId);
+            var checkboxes = Session.getVerifiedReasonByEditId(editId);
+            angular.forEach($scope.error.errors, function(error) {
+                error.properties.checkbox = checkboxes[error.properties['MSA/MD']];
+            });
         } else {
-            $scope.checkboxes = [];
-            for (var i = 1; i <= $scope.editError.errors.length; i++) {
-                $scope.checkboxes[i] = false;
+            for (var i = 0; i < $scope.error.errors.length; i++) {
+                $scope.error.errors[i].properties.checkbox = false;
             }
         }
     } else if (editId === 'Q029') {
         $scope.selectedAnswer = $scope.selectedAnswer || '0';
         if (Session.isVerified(editId)) {
-            $scope.selects = Session.getVerifiedReasonByEditId(editId);
+            var selects = Session.getVerifiedReasonByEditId(editId);
+            angular.forEach($scope.error.errors, function(error) {
+                error.properties.select = selects[error.properties['LAR number']];
+            });
         } else {
-            $scope.selects = [];
-            for (var j = 1; j <= $scope.editError.errors.length; j++) {
-                $scope.selects[j] = '0';
+            for (var j = 0; j < $scope.error.errors.length; j++) {
+                $scope.error.errors[j].properties.select = '0';
             }
         }
     }
-
-    $scope.$watch(function() {
-        return $scope.isLastPage();
-    }, function(isLastPage) {
-        if (isLastPage) {
-            $scope.canVerify = true;
-        }
-    });
-
-    $scope.pageSize = $scope.pageSize || 10;
-    $scope.currentPage = $scope.currentPage || 1;
-
-    $scope.start = function() {
-        return ($scope.currentPage-1) * $scope.pageSize + 1;
-    };
-
-    $scope.end = function() {
-        var end = $scope.currentPage * $scope.pageSize;
-        return end > $scope.total() ? $scope.total() : end;
-    };
-
-    $scope.total = function() {
-        return ($scope.editError && $scope.editError.errors) ? $scope.editError.errors.length : 0;
-    };
-
-    $scope.totalPages = function() {
-        return Math.ceil($scope.total() / $scope.pageSize);
-    };
-
-    $scope.hasPrev = function() {
-        return $scope.currentPage > 1;
-    };
-
-    $scope.onPrev = function() {
-        $scope.currentPage--;
-    };
-
-    $scope.hasNext = function() {
-        return $scope.currentPage < $scope.totalPages();
-    };
-
-    $scope.onNext = function() {
-        $scope.currentPage++;
-    };
-
-    $scope.isLastPage = function() {
-        return $scope.currentPage === $scope.totalPages();
-    };
-
-    $scope.setCurrentPage = function(page) {
-        $scope.currentPage = page;
-    };
-
-    $scope.setPageSize = function(pageSize) {
-        $scope.pageSize = pageSize;
-        $scope.currentPage = 1;
-    };
-
-    $scope.showPagination = function() {
-        return $scope.totalPages() !== 1;
-    };
 
     $scope.backToSummary = function() {
         $location.path('/summaryMSA-IRS');
@@ -118,9 +85,17 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
 
     $scope.saveSpecialVerification = function() {
         if (editId === 'Q595') {
-            Session.addToVerifiedSpecialEdits(editId, $scope.checkboxes);
+            var checkboxes = {};
+            angular.forEach($scope.error.errors, function(error) {
+                checkboxes[error.properties['MSA/MD']] = error.properties.checkbox;
+            });
+            Session.addToVerifiedSpecialEdits(editId, checkboxes);
         } else if (editId === 'Q029') {
-            Session.addToVerifiedSpecialEdits(editId, $scope.selects);
+            var selects = {};
+            angular.forEach($scope.error.errors, function(error) {
+                selects[error.properties['LAR number']] = error.properties.select;
+            });
+            Session.addToVerifiedSpecialEdits(editId, selects);
         }
         nextEdit();
     };
@@ -135,31 +110,4 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
         }
         $location.path(path);
     }
-
-    $scope.selectAll = function(selectedAnswer) {
-        for (var i = $scope.start(); i <= $scope.end(); i++) {
-            $scope.selects[i] = selectedAnswer;
-        }
-    };
-
-    $scope.checkAll = function() {
-        if ($scope.allChecked()) {
-            for (var i = $scope.start(); i <= $scope.end(); i++) {
-                $scope.checkboxes[i] = false;
-            }
-        } else {
-            for (var j = $scope.start(); j <= $scope.end(); j++) {
-                $scope.checkboxes[j] = true;
-            }
-        }
-    };
-
-    $scope.allChecked = function() {
-        for (var i = $scope.start(); i <= $scope.end(); i++) {
-            if ($scope.checkboxes[i] === false) {
-                return false;
-            }
-        }
-        return true;
-    };
 };

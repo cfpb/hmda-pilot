@@ -22,6 +22,10 @@
 @import (less) "brand-palette.less";
 @import (less) "cf-theme-overrides.less";
 
+// ngDialog CSS libraries
+@import (inline) "../../node_modules/ng-dialog/css/ngDialog.css";
+@import (less) "dialog.less";
+
 // HMDA Pilot components
 @import (less) "utils.less";
 @import (less) "wizard.less";
@@ -193,6 +197,7 @@ h2 label { display: inline; }
 table {
     width: 100%;
     margin-bottom: 20px;
+    outline: 0;
 
     a { .u-link__colors(@pacific); }
 
@@ -256,8 +261,17 @@ table.error-detail {
         &.count {
             text-align: center;
         }
+        &.cf-icon {
+            display: table-cell;
+            font-weight: bold;
+        }
+        &.icon-down:after {
+            content: " \e006";
+        }
+        &.icon-up:after {
+            content: " \e004";
+        }
     }
-
     tbody {
         tr {
             border-bottom: 0;
@@ -315,9 +329,11 @@ table.report-detail {
 }
 
 table.row-hover {
-    tr:hover td,
-    tr:hover th {
-        background-color: tint(@teal, 80%);;
+    tbody {
+        tr:hover td,
+        tr:hover th {
+            background-color: tint(@teal, 80%);;
+        }
     }
 }
 

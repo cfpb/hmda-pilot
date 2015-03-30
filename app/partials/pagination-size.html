@@ -1,0 +1,4 @@
+<div class="page-size" ng-if="error">Showing {{start()}} - {{end()}} of {{total()}} | <label for="page-size" class="pagination_label">View</label>
+    <select id="page-size" ng-model="$parent.paginate.pageSize" ng-options="size as size for size in [10, 20, 50, 100]" ng-change="setPageSize($parent.paginate.pageSize)"></select>
+</div>
+

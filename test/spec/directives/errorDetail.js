@@ -23,27 +23,19 @@ describe('Directive: ErrorDetail', function () {
     }
 
     beforeEach(inject(function($templateCache) {
-        var directiveTemplate = null;
-        var templateId = 'partials/errorDetail.html';
-        var req = new XMLHttpRequest();
-        req.onload = function() {
-            directiveTemplate = this.responseText;
-        };
-        req.open('get', '/base/app/'+templateId, false);
-        req.send();
-        $templateCache.put(templateId, directiveTemplate);
-    }));
+        var templates = ['partials/errorDetail.html', 'partials/errorDetail-macro.html',
+            'partials/pagination-size.html', 'partials/pagination-nav.html'];
 
-    beforeEach(inject(function($templateCache) {
-        var directiveTemplate = null;
-        var templateId = 'partials/errorDetail-macro.html';
-        var req = new XMLHttpRequest();
-        req.onload = function() {
-            directiveTemplate = this.responseText;
-        };
-        req.open('get', '/base/app/'+templateId, false);
-        req.send();
-        $templateCache.put(templateId, directiveTemplate);
+        angular.forEach(templates, function(templateId) {
+            var directiveTemplate = null;
+            var req = new XMLHttpRequest();
+            req.onload = function() {
+                directiveTemplate = this.responseText;
+            };
+            req.open('get', '/base/app/'+templateId, false);
+            req.send();
+            $templateCache.put(templateId, directiveTemplate);
+        });
     }));
 
     describe('when there are errors', function() {
@@ -132,70 +124,6 @@ describe('Directive: ErrorDetail', function () {
                 expect(jQuery('tbody td:eq(1)', $table).text()).toBe('2012');
                 expect(jQuery('tbody td:eq(1)', $table).hasClass('value')).toBeTruthy();
             }));
-        });
-
-        describe('pagination', function() {
-            var $pagination,
-                    $pageSize;
-            beforeEach(function() {
-                $pagination = jQuery('nav', element);
-                $pageSize = jQuery('div.page-size', element);
-            });
-
-            it('should have a list of possible page sizes defaulting to 10', function() {
-                expect($pageSize).toBeDefined();
-                expect(jQuery('option', $pageSize).length).toBe(4);
-                expect(jQuery('option:selected', $pageSize).text()).toBe('10');
-            });
-
-            it('should have a reset to the first page when switching the page size', function() {
-                var $currentPage = jQuery('#pagination_current-page', $pagination);
-                var $nextButton = jQuery('button.pagination_next', $pagination);
-                var $pageSizeSelect = jQuery('select', $pageSize);
-                $nextButton.click();
-                expect($currentPage.val()).toBe('2');
-                $pageSizeSelect.val('1');
-                $pageSizeSelect.trigger('change');
-                expect(jQuery('option:selected', $pageSizeSelect).text()).toBe('20');
-                expect($currentPage.val()).toBe('1');
-            });
-
-            it('should have previous and next buttons', function() {
-                expect($pagination).toBeDefined();
-                expect(jQuery('button.pagination_prev', $pagination)).toBeDefined();
-                expect(jQuery('button.pagination_next', $pagination)).toBeDefined();
-            });
-
-            it('should have previous and next buttons', function() {
-                expect($pagination).toBeDefined();
-                expect(jQuery('button.pagination_prev', $pagination)).toBeDefined();
-                expect(jQuery('button.pagination_next', $pagination)).toBeDefined();
-            });
-
-            it('should advance page when clicking next and back when clicking prev', function() {
-                var $currentPage = jQuery('#pagination_current-page', $pagination);
-                var $nextButton = jQuery('button.pagination_next', $pagination);
-                var $prevButton = jQuery('button.pagination_prev', $pagination);
-                expect($nextButton.disabled).toBeFalsy();
-                expect($currentPage.val()).toBe('1');
-                $nextButton.click();
-                expect($currentPage.val()).toBe('2');
-                expect($prevButton.disabled).toBeFalsy();
-                $prevButton.click();
-                expect($currentPage.val()).toBe('1');
-            });
-
-            it('should display the which errors are being displayed out of how many total', function() {
-                expect($pageSize.text()).toMatch(/Showing \d+ - \d+ of \d+/);
-            });
-
-            it('should jump to the chosen page when using the \'Go\' button', function() {
-                var $go = jQuery('button.pagination_submit', $pagination);
-                var $currentPage = jQuery('#pagination_current-page', $pagination);
-                $currentPage = 2;
-                $go.click();
-                expect($currentPage).toBe(2);
-            });
         });
     });
 

@@ -20,7 +20,8 @@ describe('Controller: SelectFileCtrl', function () {
             fileToJson: function(file, year, next) { return next(null); },
             runSyntactical: function() { return; },
             runValidity: function() { return; },
-            getDebug: function() { return false; }
+            getDebug: function() { return false; },
+            setUseLocalDB: function() { }
         };
 
 

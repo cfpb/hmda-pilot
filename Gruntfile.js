@@ -112,6 +112,14 @@ module.exports = function (grunt) {
           open: true,
           base: '<%= yeoman.dist %>'
         }
+      },
+      docs: {
+        options: {
+          port: 9002,
+          open: true,
+          base: 'docs',
+          keepalive: true
+        }
       }
     },
 
@@ -119,7 +127,10 @@ module.exports = function (grunt) {
     jshint: {
       options: {
         jshintrc: '.jshintrc',
-        reporter: require('jshint-stylish')
+        reporter: require('jshint-stylish'),
+        ignores: [
+            '<%= yeoman.app %>/config/config.js'
+        ]
       },
       all: {
         src: [
@@ -148,7 +159,8 @@ module.exports = function (grunt) {
         }]
       },
       server: '.tmp',
-      coverage: ['coverage/*']
+      coverage: ['coverage/*'],
+      docs: ['docs/*']
     },
 
     // Add vendor prefixed styles
@@ -386,6 +398,14 @@ module.exports = function (grunt) {
       }
     },
 
+    coveralls: {
+      options: {
+        debug: true,
+        force: true,
+        coverageDir: 'coverage/coveralls'
+      }
+    },
+
     compress: {
       'hmda-pilot': {
         options: {
@@ -462,13 +482,30 @@ module.exports = function (grunt) {
           src: ['./config/config.js'],
           dest: '<%= yeoman.app %>/scripts/modules/'
         }]
+      },
+      production: {
+        options: {
+          patterns: [{
+            json: grunt.file.readJSON('./config/environments/production.json')
+          }]
+        },
+        files: [{
+          expand: true,
+          flatten: true,
+          src: ['./config/config.js'],
+          dest: '<%= yeoman.app %>/scripts/modules/'
+        }]
       }
+    },
+    ngdocs: {
+      all: ['<%= yeoman.app %>/scripts/{,*/}*.js']
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-ng-annotate');
   grunt.loadNpmTasks('grunt-replace');
+  grunt.loadNpmTasks('grunt-karma-coveralls');
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
@@ -501,6 +538,11 @@ module.exports = function (grunt) {
     'autoprefixer',
     'connect:test',
     'karma'
+  ]);
+
+  grunt.registerTask('travis-coveralls', [
+    'test',
+    'coveralls'
   ]);
 
   grunt.registerTask('coverage', [
@@ -541,5 +583,11 @@ module.exports = function (grunt) {
     'newer:jshint',
     'test',
     'build:development'
+  ]);
+
+  grunt.registerTask('generate-docs', [
+      'clean:docs',
+      'ngdocs',
+      'connect:docs'
   ]);
 };

@@ -37,7 +37,7 @@ describe('Controller: SummaryMSAIRSCtrl', function () {
     }));
 
     it('should include the special errors in the scope', function () {
-        expect(scope.specialErrors).toEqual({});
+        expect(scope.data.specialErrors).toEqual({});
     });
 
     describe('showIRSReport()', function() {
@@ -65,6 +65,13 @@ describe('Controller: SummaryMSAIRSCtrl', function () {
                 });
 
                 expect(scope.showIRSReport()).toBeFalsy();
+            });
+        });
+
+        describe('when special errors end up null', function() {
+            it('should return true', function() {
+                scope.data.specialErrors = null;
+                expect(scope.showIRSReport()).toBeTruthy();
             });
         });
     });

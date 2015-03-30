@@ -7,7 +7,7 @@
  * # SummarySyntacticalValidityCtrl
  * Controller for the Syntactical and Validity Summary view
  */
-module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEngine, Wizard) {
+module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEngine, Wizard, ngDialog, Configuration) {
 
     // Populate the $scope
     $scope.errors = {};
@@ -20,7 +20,17 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
     $scope.validityErrors = editErrors.validity || {};
 
     $scope.previous = function() {
-        $location.path('/');
+        if (Configuration.confirmSessionReset) {
+            ngDialog.openConfirm({
+                template: 'partials/confirmSessionReset.html'
+            }).then(function (value) {
+                if (value === 'reset') {
+                    $location.path('/');
+                }
+    		});
+        } else {
+            $location.path('/');
+        }
     };
 
     $scope.hasNext = function() {
@@ -46,14 +56,20 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
     $scope.process = function() {
         // Run the second set of validations
         var ruleYear = HMDAEngine.getRuleYear();
+
+        /* istanbul ignore if debug */
         if (HMDAEngine.getDebug()) {
             console.time('total time for quality and macro edits');
         }
+
         $q.all([HMDAEngine.runQuality(ruleYear), HMDAEngine.runMacro(ruleYear)])
         .then(function() {
+
+            /* istanbul ignore if debug */
             if (HMDAEngine.getDebug()) {
                 console.timeEnd('total time for quality and macro edits');
             }
+
             // Complete the current step in the wizard
             $scope.wizardSteps = Wizard.completeStep();
 

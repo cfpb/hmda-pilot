@@ -11,6 +11,8 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
         timeout,
         Q,
         Wizard,
+        mockNgDialog,
+        Configuration,
         mockErrors = {
             syntactical: {},
             validity: {},
@@ -27,11 +29,23 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function ($rootScope, $location, $controller, $q, $timeout, _Wizard_) {
+    beforeEach(inject(function ($rootScope, $location, $controller, $q, $timeout, _Wizard_, _Configuration_) {
         scope = $rootScope.$new();
         location = $location;
         controller = $controller;
         timeout = $timeout;
+        Configuration = _Configuration_;
+
+        var mockNgDialogPromise = {
+            then: function(callback) {
+                callback('reset');
+            }
+        };
+        mockNgDialog = {
+            openConfirm: function() { }
+        };
+        spyOn(mockNgDialog, 'openConfirm').and.returnValue(mockNgDialogPromise);
+
         Q = $q;
         Wizard = _Wizard_;
         Wizard.initSteps();
@@ -40,8 +54,22 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
             $location: location,
             $timeout: timeout,
             HMDAEngine: mockEngine,
-            Wizard: _Wizard_
+            Wizard: _Wizard_,
+            ngDialog: mockNgDialog,
+            Configuration: _Configuration_
         });
+    }));
+
+    beforeEach(inject(function ($templateCache) {
+        var templateUrl = 'partials/confirmSessionReset.html';
+        var asynchronous = false;
+
+        var req = new XMLHttpRequest();
+        req.onload = function () {
+            $templateCache.put(templateUrl, this.responseText);
+        };
+        req.open('get', '/base/app/' + templateUrl, asynchronous);
+        req.send();
     }));
 
     it('should include the syntactical errors in the scope', function () {
@@ -205,13 +233,30 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
     });
 
     describe('previous()', function () {
-        beforeEach(function() {
-            scope.previous();
-            scope.$digest();
+        describe('when config.confirmSessionReset is true', function() {
+            beforeEach(function() {
+                Configuration.confirmSessionReset = true;
+                scope.previous();
+                scope.$digest();
+            });
+
+            it('should display the confirmation dialog', function () {
+                expect(mockNgDialog.openConfirm).toHaveBeenCalled();
+                expect(location.path()).toBe('/');
+            });
         });
 
-        it('should direct the user to the home (/) page', function () {
-            expect(location.path()).toBe('/');
+        describe('when config.confirmSessionReset is false', function() {
+            beforeEach(function() {
+                Configuration.confirmSessionReset = false;
+                scope.previous();
+                scope.$digest();
+            });
+
+            it('should take the user to the home page', function () {
+                expect(mockNgDialog.openConfirm).not.toHaveBeenCalled();
+                expect(location.path()).toBe('/');
+            });
         });
     });
 });

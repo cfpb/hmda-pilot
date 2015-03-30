@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * @ngdoc constant
+ * @ngdoc object
  * @name hmdaPilotApp.constant:stepStatus
  * @description
  * # Step Status constant

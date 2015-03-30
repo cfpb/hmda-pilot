@@ -14,16 +14,22 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
     };
 
     function hasUnverifiedQualityErrors() {
-        var editIds = Object.keys($scope.qualityErrors),
-            verifiedIds = Session.getVerifiedQualityEditIds(),
-            diff = editIds.diff(verifiedIds);
+        var editIds = [],
+            verifiedIds = Session.getVerifiedQualityEditIds();
+        if ($scope.data.qualityErrors) {
+            editIds = Object.keys($scope.data.qualityErrors);
+        }
+        var diff = editIds.diff(verifiedIds);
         return diff.length > 0;
     }
 
     function hasUnverifiedMacroErrors() {
-        var editIds = Object.keys($scope.macroErrors),
-            verifiedIds = Session.getVerifiedMacroEditIds(),
-            diff = editIds.diff(verifiedIds);
+        var editIds = [],
+            verifiedIds = Session.getVerifiedMacroEditIds();
+        if ($scope.data.macroErrors) {
+            editIds = Object.keys($scope.data.macroErrors);
+        }
+        var diff = editIds.diff(verifiedIds);
         return diff.length > 0;
     }
 
@@ -38,8 +44,10 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
     // Get the list of errors from the HMDAEngine
     var editErrors = HMDAEngine.getErrors();
 
-    $scope.qualityErrors = editErrors.quality || {};
-    $scope.macroErrors = editErrors.macro || {};
+    $scope.data = {
+        qualityErrors: editErrors.quality,
+        macroErrors: editErrors.macro
+    };
 
     $scope.previous = function () {
         $location.path('/summarySyntacticalValidity');
@@ -64,13 +72,19 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
     $scope.process = function() {
         // Run the second set of validations
         var ruleYear = HMDAEngine.getRuleYear();
+
+        /* istanbul ignore if debug */
         if (HMDAEngine.getDebug()) {
             console.time('total time for special edits');
         }
+
         $q.all([HMDAEngine.runSpecial(ruleYear)]).then(function() {
+
+            /* istanbul ignore if debug */
             if (HMDAEngine.getDebug()) {
                 console.timeEnd('total time for special edits');
             }
+
             // Complete the current step in the wizard
             $scope.wizardSteps = Wizard.completeStep();
 

@@ -52,8 +52,8 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
         }
     };
 
-    $scope.goToEditDetail = function() {
-        $location.path('/detail/' + editType + '/' + $scope.selectedEditId);
+    $scope.goToEditDetail = function(editId) {
+        $location.path('/detail/' + editType + '/' + editId);
     };
 
     $scope.saveQualityVerification = function() {

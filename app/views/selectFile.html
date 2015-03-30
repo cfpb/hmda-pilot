@@ -2,21 +2,29 @@
 <p>To validate a file, select the Reporting year and <abbr title="Home Mortgage Disclosure Act">HMDA</abbr> dataset you want to validate.</p>
 <p>The file must pass all Syntactical and Validity edits before running the Quality and Macro Quality edits.</p>
 
-<form name="select-file" class="form-group form-group-horizontal form-well" ng-submit="submit(hmdaData)">
-    <p class="note-required">* indicates required field</p>
+<form name="select-file" class="form-group form-well" ng-submit="submit(hmdaData)">
+    <div class="form-group-horizontal">
+        <p class="note-required">* indicates required field</p>
 
-    <p ng-if="errors.global" class="page-errors">{{errors.global}}</p>
+        <p ng-if="errors.global" class="page-errors">{{errors.global}}</p>
 
-    <div class="form-group_item">
-        <label for="year" class="form-label-header"><span class="form-label-required" role="presentation">*</span> Reporting year</label>
-        <select id="year" class="form-input" name="year" ng-model="hmdaData.year" required>
-            <option ng-repeat="year in reportingYears" value="{{year}}" ng-selected="{{hmdaData.year === year}}">{{year}}</option>
-        </select>
+        <div class="form-group_item">
+            <label for="year" class="form-label-header"><span class="form-label-required" role="presentation">*</span> Reporting year</label>
+            <select id="year" class="form-input" name="year" ng-model="hmdaData.year" required>
+                <option ng-repeat="year in reportingYears" value="{{year}}" ng-selected="{{hmdaData.year === year}}">{{year}}</option>
+            </select>
+        </div>
+
+        <div class="form-group_item">
+            <label for="file" class="form-label-header"><span class="form-label-required" role="presentation">*</span> HMDA dataset</label>
+            <input type="file" class="form-input" id="file" name="file" required ng-file-select="onFileSelect($files)">
+        </div>
     </div>
 
-    <div class="form-group_item">
-        <label for="file" class="form-label-header"><span class="form-label-required" role="presentation">*</span> HMDA dataset</label>
-        <input type="file" class="form-input" id="file" name="file" required ng-file-select="onFileSelect($files)">
+    <div class="form-group_item u-mt30 u-mb30">
+        <p class="h5">Validator Performance Option</p>
+        <p class="u-mb10">Using this option will download approximately 20 MB of census data and help reduce processing time.</p>
+        <label for="local"><input type="checkbox" id="local" name="local" ng-model="hmdaData.local"/>Allow HMDA Pilot to store data locally</label>
     </div>
 
     <div class="form-buttons">
