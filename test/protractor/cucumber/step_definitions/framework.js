@@ -10,11 +10,6 @@ module.exports = function() {
         next();
     });
 
-    this.Given(/^that I am at the HMDA homepage$/, function(next) {
-        browser.get('http://dev.hmda-pilot.ec2.devis.com/#/');
-        next();
-    });
-
     this.Then(/^it should still do normal tests$/, function(next) {
         expect(true).to.equal(true);
         next();
