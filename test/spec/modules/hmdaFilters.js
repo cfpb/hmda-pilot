@@ -84,6 +84,91 @@ describe('Filters: hmdaFilters', function() {
         }));
     });
 
+    describe('hmdaValue', function() {
+        var sampleDate, sampleDateTime,
+            now = new Date(),
+            mockHmdaFile = {
+                hmdaFile: {
+                    transmittalSheet: {
+                        activityYear: '2015',
+                        respondentID: '1234567890',
+                        totalLineEntries: '100'
+                    }
+                }
+            },
+            mockFileSpec = {
+                loanApplicationRegister: {
+                    invalid: { },
+                    string: { validation: { type: 'string' } },
+                    number: { validation: { type: 'number' } },
+                    currency: { validation: { type: 'currency', multiplier: 1000 } },
+                    percent: { validation: { type: 'percent'} },
+                    shortDate: { validation: { type: 'date', match: 'yyyyMMdd'} },
+                    longDate: { validation: { type: 'date', match: 'yyyyMMddHHmm'} }
+                }
+            };
+
+        beforeEach(angular.mock.module(function($provide) {
+            $provide.value('HMDAEngine', {
+                getFileSpec: function() { return mockFileSpec; },
+                getHmdaJson: function() { return mockHmdaFile; },
+                getRuleYear: function() { return '2015'; }
+            });
+
+            Date.prototype.getMonthFormatted = function() {
+                var month = this.getMonth();
+                return month < 10 ? '0' + (month + 1) : month + 1;
+            };
+
+            Date.prototype.getDateFormatted = function() {
+                var date = this.getDate();
+                return date < 10 ? '0' + date : date;
+            };
+
+            Date.prototype.getHoursFormatted = function() {
+                var hours = this.getHours();
+                return hours < 10 ? '0' + hours : hours;
+            };
+
+            Date.prototype.getMinutesFormatted = function() {
+                var mins = this.getMinutes();
+                return mins < 10 ? '0' + mins : mins;
+            };
+
+            sampleDate = now.getFullYear().toString() + now.getMonthFormatted().toString() + now.getDateFormatted().toString();
+            sampleDateTime = sampleDate + now.getHoursFormatted().toString() + now.getMinutesFormatted().toString();
+
+        }));
+
+        it('should not format a file-spec property unless it has a validation property', angular.mock.inject(function(hmdaValueFilter) {
+            expect(hmdaValueFilter('test', 'lar', 'invalid')).toBe('test');
+        }));
+
+        it('should not format a file-spec property of type string', angular.mock.inject(function(hmdaValueFilter) {
+            expect(hmdaValueFilter('test', 'lar', 'string')).toBe('test');
+        }));
+
+        it('should not format a file-spec property of type number', angular.mock.inject(function(hmdaValueFilter) {
+            expect(hmdaValueFilter('100', 'lar', 'number')).toBe('100');
+        }));
+
+        it('should format a file-spec property of type percent', angular.mock.inject(function(hmdaValueFilter) {
+            expect(hmdaValueFilter('12.34', 'lar', 'percent')).toBe('12.34%');
+        }));
+
+        it('should format a file-spec property of type date that matches yyyyMMdd', angular.mock.inject(function(hmdaValueFilter) {
+            expect(hmdaValueFilter(sampleDate, 'lar', 'shortDate')).toBe(now.getMonth()+1 + '/' + now.getDate() + '/' + now.getFullYear());
+        }));
+
+        it('should format a file-spec property of type date that matches yyyyMMddHHmm', angular.mock.inject(function(hmdaValueFilter) {
+            expect(hmdaValueFilter(sampleDateTime, 'lar', 'longDate')).toBe(now.getMonth()+1 + '/' + now.getDate() + '/' + now.getFullYear() + ' ' + now.getHours() + ':' + now.getMinutes());
+        }));
+
+        it('should format a file-spec property of type currency', angular.mock.inject(function(hmdaValueFilter) {
+            expect(hmdaValueFilter('123', 'lar', 'currency')).toBe('$123,000');
+        }));
+    });
+
     describe('capitalize', function() {
         it('should capitalize the first letter of the word', angular.mock.inject(function(capitalizeFilter) {
             expect(capitalizeFilter('test')).toBe('Test');

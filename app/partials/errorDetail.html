@@ -15,7 +15,7 @@
         <tr ng-repeat="(key, value) in item.properties">
             <th class="{{error.scope === 'lar' ? 'loan-number':'line-number'}}" scope="row" rowspan="{{item.properties | keyLength}}" ng-if="$first">{{item.loanNumber || item.lineNumber}}</th>
             <td class="description">{{ {'property':key, 'lineNumber':item.lineNumber} | hmdaLabel:error.scope}}</td>
-            <td class="value">{{value}}</td>
+            <td class="value">{{value | hmdaValue:error.scope:key}}</td>
             <td class="action" rowspan="{{item.properties | keyLength}}" ng-if="$first && editType !== 'quality'">Correct and revalidate</td>
         </tr>
     </tbody>
