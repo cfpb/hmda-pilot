@@ -67,6 +67,24 @@ angular.module('hmdaFilters', [])
             return value;
         };
     }])
+    .filter('hmdaMacroValue', ['$filter', function($filter) {
+        String.prototype.startsWith = function(val) {
+            return this.indexOf(val) === 0;
+        };
+
+        String.prototype.endsWith = function(suffix) {
+            return this.indexOf(suffix, this.length - suffix.length) !== -1;
+        };
+
+        return function(value, key) {
+            if (key.startsWith('% of') || key.startsWith('% Difference') || key.endsWith('Percentage')) {
+                return value + '%';
+            } else if (key.startsWith('Total Dollar')) {
+                return $filter('currency')(value, '$', 0);
+            }
+            return value;
+        };
+    }])
     .filter('keyLength', function() {
         return function(input) {
             return Object.keys(input).length;

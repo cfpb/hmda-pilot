@@ -135,6 +135,14 @@ describe('Filters: hmdaFilters', function() {
                 return mins < 10 ? '0' + mins : mins;
             };
 
+            Date.prototype.formatCFPBDate = function() {
+                return this.getMonth()+1 + '/' + this.getDate() + '/' + this.getFullYear();
+            };
+
+            Date.prototype.formatCFPBDatetime = function() {
+                return this.getMonth()+1 + '/' + this.getDate() + '/' + this.getFullYear() + ' ' + this.getHours() + ':' + this.getMinutesFormatted();
+            };
+
             sampleDate = now.getFullYear().toString() + now.getMonthFormatted().toString() + now.getDateFormatted().toString();
             sampleDateTime = sampleDate + now.getHoursFormatted().toString() + now.getMinutesFormatted().toString();
 
@@ -157,15 +165,27 @@ describe('Filters: hmdaFilters', function() {
         }));
 
         it('should format a file-spec property of type date that matches yyyyMMdd', angular.mock.inject(function(hmdaValueFilter) {
-            expect(hmdaValueFilter(sampleDate, 'lar', 'shortDate')).toBe(now.getMonth()+1 + '/' + now.getDate() + '/' + now.getFullYear());
+            expect(hmdaValueFilter(sampleDate, 'lar', 'shortDate')).toBe(now.formatCFPBDate());
         }));
 
         it('should format a file-spec property of type date that matches yyyyMMddHHmm', angular.mock.inject(function(hmdaValueFilter) {
-            expect(hmdaValueFilter(sampleDateTime, 'lar', 'longDate')).toBe(now.getMonth()+1 + '/' + now.getDate() + '/' + now.getFullYear() + ' ' + now.getHours() + ':' + now.getMinutes());
+            expect(hmdaValueFilter(sampleDateTime, 'lar', 'longDate')).toBe(now.formatCFPBDatetime());
         }));
 
         it('should format a file-spec property of type currency', angular.mock.inject(function(hmdaValueFilter) {
             expect(hmdaValueFilter('123', 'lar', 'currency')).toBe('$123,000');
+        }));
+    });
+
+    describe('hmdaMacroValue', function() {
+        it('should format percentange values', angular.mock.inject(function(hmdaMacroValueFilter) {
+            expect(hmdaMacroValueFilter('12.34', '% of Total')).toBe('12.34%');
+            expect(hmdaMacroValueFilter('12.34', '% Difference')).toBe('12.34%');
+            expect(hmdaMacroValueFilter('12.34', 'Previous Year Percentage')).toBe('12.34%');
+        }));
+
+        it('should format dollar amount values', angular.mock.inject(function(hmdaMacroValueFilter) {
+            expect(hmdaMacroValueFilter('12400', 'Total Dollar')).toBe('$12,400');
         }));
     });
 
