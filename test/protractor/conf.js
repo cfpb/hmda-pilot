@@ -11,7 +11,7 @@ exports.config = {
   browserName: 'firefox',
 
   cucumberOpts: {
-    require: 'cucumber/stepDefinitions.js',
+    require: 'cucumber/step_definitions/*.js',
     format: 'summary'
   }
 };
