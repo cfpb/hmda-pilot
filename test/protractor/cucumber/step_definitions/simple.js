@@ -10,7 +10,7 @@ module.exports = function() {
         next();
     });
 
-    this.Given(/^I go on the HMDA homepage$/, function(next) {
+    this.Given(/^that I am at the HMDA homepage$/, function(next) {
         browser.get('http://dev.hmda-pilot.ec2.devis.com/#/');
         next();
     });

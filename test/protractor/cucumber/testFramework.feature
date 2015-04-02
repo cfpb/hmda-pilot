@@ -9,5 +9,5 @@ Feature: Running Cucumber with Protractor
     Then it should expose the correct global variables
 
   Scenario: Works with HMDA
-    Given I go on the HMDA homepage
+    Given that I am at the HMDA homepage
     Then the title should equal "HMDA Pilot | CFPB"
