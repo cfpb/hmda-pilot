@@ -178,6 +178,14 @@ describe('Filters: hmdaFilters', function() {
     });
 
     describe('hmdaMacroValue', function() {
+        beforeEach(angular.mock.module(function($provide) {
+            /* jshint camelcase: false */
+            $provide.value('HMDAEngine', {
+                starts_with: function(key, prefix) { return key.indexOf(prefix) === 0; },
+                ends_with: function(key, suffix) { return key.indexOf(suffix, key.length - suffix.length) !== -1; }
+            });
+        }));
+
         it('should format percentange values', angular.mock.inject(function(hmdaMacroValueFilter) {
             expect(hmdaMacroValueFilter('12.34', '% of Total')).toBe('12.34%');
             expect(hmdaMacroValueFilter('12.34', '% Difference')).toBe('12.34%');

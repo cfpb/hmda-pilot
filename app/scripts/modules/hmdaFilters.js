@@ -67,21 +67,15 @@ angular.module('hmdaFilters', [])
             return value;
         };
     }])
-    .filter('hmdaMacroValue', ['$filter', function($filter) {
-        String.prototype.startsWith = function(val) {
-            return this.indexOf(val) === 0;
-        };
-
-        String.prototype.endsWith = function(suffix) {
-            return this.indexOf(suffix, this.length - suffix.length) !== -1;
-        };
-
+    .filter('hmdaMacroValue', ['HMDAEngine', '$filter', function(HMDAEngine, $filter) {
         return function(value, key) {
-            if (key.startsWith('% of') || key.startsWith('% Difference') || key.endsWith('Percentage')) {
+            /* jshint camelcase: false */
+            if (HMDAEngine.starts_with(key, '% of') || HMDAEngine.starts_with(key, '% Difference') || HMDAEngine.ends_with(key, 'Percentage')) {
                 return value + '%';
-            } else if (key.startsWith('Total Dollar')) {
+            } else if (HMDAEngine.starts_with(key, 'Total Dollar')) {
                 return $filter('currency')(value, '$', 0);
             }
+
             return value;
         };
     }])
