@@ -1,6 +1,6 @@
 # About
 
-The HMDA Pilot is a work in progress by the Consumer Financial Protection Bureau to provide a new way to validate HMDA data. The application makes it easier to review and verify validation edits.
+The HMDA Pilot is a work in progress by the [Consumer Financial Protection Bureau](http://consumerfinance.gov/) to provide a new way to validate HMDA data. The application makes it easier to review and verify validation edits.
 
 ## Validate a HMDA Dataset
 
