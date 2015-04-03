@@ -11,6 +11,7 @@ describe('Directive: ErrorDetail', function () {
 
     beforeEach(angular.mock.module(function($provide){
         $provide.value('hmdaLabelFilter', function(input){ return input + ' label'; });
+        $provide.value('hmdaValueFilter', function(input){ return input + ' value'; });
     }));
 
     var element,

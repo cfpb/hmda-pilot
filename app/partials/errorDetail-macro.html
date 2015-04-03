@@ -2,7 +2,7 @@
     <tbody ng-repeat="item in error.errors">
         <tr ng-repeat="(key, value) in item.properties">
             <th class="property" scope="row">{{key}}</th>
-            <td class="value">{{value}}</td>
+            <td class="value">{{value | hmdaMacroValue:key}}</td>
         </tr>
     </tbody>
 </table>
