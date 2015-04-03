@@ -71,6 +71,12 @@ angular
         templateUrl: 'views/reportIRS.html',
         controller: 'IRSReportCtrl'
       })
+      .when('/about', {
+        templateUrl: 'views/about.html'
+      })
+      .when('/common-questions', {
+        templateUrl: 'views/common_questions.html'
+      })
       .otherwise({
         redirectTo: '/'
       });
