@@ -6,6 +6,10 @@ exports.config = {
     'cucumber/*.feature'
   ],
 
+  allScriptsTimeout: 30000,
+  getPageTimeout: 30000,
+
+
   baseUrl: 'http://dev.hmda-pilot.ec2.devis.com/#/',
 
   browserName: 'firefox',
