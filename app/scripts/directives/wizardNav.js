@@ -64,6 +64,11 @@ module.exports = /*@ngInject*/ function ($location, $timeout, StepFactory, Wizar
             // Initialize scope variables
             scope.steps = [];
 
+            // Determine if the wizard nav should be displayed or not
+            scope.showWizardNav = function() {
+                return ['/about', '/common-questions'].indexOf($location.path()) === -1;
+            };
+
             // Watch the Wizard steps to see if they change
             scope.$watch(function() {
                 return Wizard.getCurrentStep();
