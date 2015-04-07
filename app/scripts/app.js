@@ -90,7 +90,7 @@ angular
     $rootScope.$watch(function() {
         return HMDAEngine.getHmdaJson();
     }, function(newVal) {
-        if (angular.equals({}, newVal)) {
+        if (angular.equals({}, newVal) && ['/about', '/common-questions'].indexOf($location.path()) === -1) {
             $location.path('/');
         }
     });
