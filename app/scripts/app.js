@@ -71,6 +71,12 @@ angular
         templateUrl: 'views/reportIRS.html',
         controller: 'IRSReportCtrl'
       })
+      .when('/about', {
+        templateUrl: 'views/about.html'
+      })
+      .when('/common-questions', {
+        templateUrl: 'views/common_questions.html'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -84,7 +90,7 @@ angular
     $rootScope.$watch(function() {
         return HMDAEngine.getHmdaJson();
     }, function(newVal) {
-        if (angular.equals({}, newVal)) {
+        if (angular.equals({}, newVal) && ['/about', '/common-questions'].indexOf($location.path()) === -1) {
             $location.path('/');
         }
     });

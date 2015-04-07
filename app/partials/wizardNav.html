@@ -1,4 +1,4 @@
-<nav class="nav-wizard">
+<nav class="nav-wizard" ng-if="showWizardNav()">
     <ol>
         <li ng-repeat="step in steps" class="step {{step.stepClass}}">
             <span class="{{step.badgeClass}}">{{step.badgeText}}</span>

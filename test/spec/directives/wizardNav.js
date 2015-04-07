@@ -130,4 +130,18 @@ describe('Directive: WizardNav', function () {
             expect(ngDialog.openConfirm).not.toHaveBeenCalled();
         });
     });
+
+    describe('when navigating to help pages', function() {
+        it('should not display the wizard nav on the About page', function() {
+            location.path('/about');
+            scope.$digest();
+            expect(element.children().length).toBeFalsy();
+        });
+
+        it('should not display the wizard nav on the Common Questions page', function() {
+            location.path('/common-questions');
+            scope.$digest();
+            expect(element.children().length).toBeFalsy();
+        });
+    });
 });
