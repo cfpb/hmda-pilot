@@ -7,11 +7,13 @@ var expect = chai.expect;
 module.exports = function() {
 
     this.When(/^I wait for the file to be processed$/, function (next) {
-        //Waits for URL to include "Syntactical"
-        //TODO: Set to wait for URL to change at all. More flexible.
+        //Waits for URL to change
+        browser.getCurrentUrl().then(function(url){
+            startUrl = url;
+        });
         browser.wait(function() {
             return browser.getCurrentUrl().then(function(url) {
-                return (url.indexOf("Syntactical") !== -1);
+                return (url !== startUrl);
             });
         }, 20000);
 
