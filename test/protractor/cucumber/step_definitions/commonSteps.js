@@ -19,4 +19,8 @@ module.exports = function() {
     this.Then(/^I will see a disclaimer at the top$/, function (next) {
         expect(disclaimer.isPresent()).to.eventually.be.true.notify(next);
     });
+
+    this.Then(/^the text will say "([^"]*)"$/, function (text, next) {
+        expect(disclaimer.getText()).to.eventually.have.string(text).notify(next);
+    });
 };
