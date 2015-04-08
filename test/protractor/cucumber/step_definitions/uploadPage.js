@@ -8,7 +8,7 @@ var expect = chai.expect;
 var path = require('path');
 
 //Defining page elements
-var pageErrors = element(by.css(".page-errors"));
+var pageErrors = element.all(by.css(".page-errors"));
 var submitButton = element(by.css(".form-buttons button"));
 var fileSelector = element(by.id('file'));
 
@@ -23,4 +23,16 @@ module.exports = function() {
         next();
     });
 
+    this.When(/^I click the submit button$/, function (next) {
+        submitButton.click();
+        next();
+    });
+
+    this.Then(/^I am notified that the format is incorrect$/, function (next) {
+        next();
+    });
+
+    this.Then(/^I am not notified that the format is incorrect$/, function (next) {
+        next();
+    });
 };
