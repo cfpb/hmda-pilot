@@ -28,6 +28,13 @@ module.exports = function() {
         next();
     });
 
+    this.When(/^I upload the "([^"]*)" and submit$/, function (fileName, next) {
+        selectFile(fileName);
+        submitButton.click().then(function(){
+            next();
+        });
+    });
+
     this.When(/^I click the submit button$/, function (next) {
         submitButton.click().then(function(){
             next();
