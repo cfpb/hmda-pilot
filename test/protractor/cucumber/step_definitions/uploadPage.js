@@ -19,6 +19,7 @@ module.exports = function() {
         var fileToUpload = '../files/'+fileName;
         var absolutePath = path.resolve(__dirname, fileToUpload);
 
+        browser.debugger();
         fileSelector.sendKeys(absolutePath);
         next();
     });
@@ -29,6 +30,7 @@ module.exports = function() {
     });
 
     this.Then(/^I am notified that the format is incorrect$/, function (next) {
+        expect(pageErrors.count()).to.eventually.equal(1);
         next();
     });
 
