@@ -6,7 +6,7 @@ var expect = chai.expect;
 
 module.exports = function() {
 
-    this.When(/^I wait for the file to be processed$/, function (next) {
+    waitUrlChange = function(){
         //Waits for URL to change
         browser.getCurrentUrl().then(function(url){
             startUrl = url;
@@ -16,7 +16,10 @@ module.exports = function() {
                 return (url !== startUrl);
             });
         }, 20000);
+    }
 
+    this.When(/^I wait for the file to be processed$/, function (next) {
+        waitUrlChange();
         next();
     });
 
