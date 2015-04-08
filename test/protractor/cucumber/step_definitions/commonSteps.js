@@ -10,6 +10,8 @@ module.exports = function() {
         browser.get('http://dev.hmda-pilot.ec2.devis.com/#/');
         //Prevents "are you sure you want to leave?" window from popping up
         browser.executeScript("window.onbeforeunload = function(){};");
-        next();
+        setTimeout(function(){
+            next();
+        },5000);
     });
 };
