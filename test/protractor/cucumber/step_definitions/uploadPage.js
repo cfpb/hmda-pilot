@@ -37,6 +37,8 @@ module.exports = function() {
     });
 
     this.Then(/^I am not notified that the format is incorrect$/, function (next) {
-        next();
+        expect(pageErrors.count()).to.eventually.equal(0).then(function(){
+            next();
+        });
     });
 };
