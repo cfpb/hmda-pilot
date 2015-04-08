@@ -19,19 +19,21 @@ module.exports = function() {
         var fileToUpload = '../files/'+fileName;
         var absolutePath = path.resolve(__dirname, fileToUpload);
 
-        browser.debugger();
-        fileSelector.sendKeys(absolutePath);
-        next();
+        fileSelector.sendKeys(absolutePath).then(function(){
+            next();
+        });
     });
 
     this.When(/^I click the submit button$/, function (next) {
-        submitButton.click();
-        next();
+        submitButton.click().then(function(){
+            next();
+        });
     });
 
     this.Then(/^I am notified that the format is incorrect$/, function (next) {
-        expect(pageErrors.count()).to.eventually.equal(1);
-        next();
+        expect(pageErrors.count()).to.eventually.equal(1).then(function(){
+            next();
+        });
     });
 
     this.Then(/^I am not notified that the format is incorrect$/, function (next) {
