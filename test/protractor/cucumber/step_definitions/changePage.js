@@ -6,15 +6,25 @@ var expect = chai.expect;
 
 module.exports = function() {
 
-    waitUrlChange = function(){
+    continueButton = element(by.buttonText("Continue"));
+    var recentlyChangedUrl;
+
+    waitUrlChange = function(startUrl){
         //Waits for URL to change before allowing execution to move forward. Timeout is at end of fn.
+        //Finding start URL within fn is slow, and can happen after a quick page change has occurred
+        //As such, you can pass a start URL (as string) to it and that will be used.
         var deferred = protractor.promise.defer();
-        browser.getCurrentUrl().then(function(url){
-            startUrl = url;
-        });
+        if(typeof startUrl === 'undefined'){
+            browser.getCurrentUrl().then(function(url){
+                oldUrl = url;
+            });
+        }
+        else{
+            oldUrl = startUrl;
+        }
         browser.wait(function() {
             return browser.getCurrentUrl().then(function(url) {
-                return (url !== startUrl);
+                return (url !== oldUrl);
             });
         }, 20000);
         deferred.fulfill();
