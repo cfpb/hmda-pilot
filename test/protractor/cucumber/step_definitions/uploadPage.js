@@ -32,7 +32,7 @@ module.exports = function() {
         });
     });
 
-    this.When(/^I upload the "([^"]*)" and submit$/, function (fileName, next) {
+    this.When(/^I upload the "([^"]*)" file and submit$/, function (fileName, next) {
         selectFile(fileName).then(function(){
             submitButton.click();
         }).then(function(){
