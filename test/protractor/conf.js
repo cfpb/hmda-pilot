@@ -2,8 +2,13 @@ exports.config = {
 
   framework: 'cucumber',
 
+  //Pass --specs when running to try an individual test
   specs: [
-    'cucumber/*.feature'
+    'cucumber/TestFramework.feature',
+    'cucumber/FileUpload.feature',
+    'cucumber/HighLevelSyntacticalEditReport.feature',
+    'cucumber/HighLevelQualityMacroEditReport.feature',
+    'cucumber/Disclaimer.feature',
   ],
 
   allScriptsTimeout: 30000,
