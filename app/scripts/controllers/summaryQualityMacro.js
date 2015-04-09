@@ -7,7 +7,7 @@
  * # SummaryQualityMacroCtrl
  * Controller for the Syntactical and Validity Summary view
  */
-module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEngine, Wizard, Session) { /*jshint ignore:line*/
+module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEngine, Wizard, Session, ngDialog, Configuration) { /*jshint ignore:line*/
 
     Array.prototype.diff = function(a) {
         return this.filter(function(i) { return a.indexOf(i) < 0; });
@@ -42,7 +42,8 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
     $scope.isProcessing = false;
 
     // Get the list of errors from the HMDAEngine
-    var editErrors = HMDAEngine.getErrors();
+    var progressDialog,
+        editErrors = HMDAEngine.getErrors();
 
     $scope.data = {
         qualityErrors: editErrors.quality,
@@ -63,6 +64,11 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
         } else {
             // Toggle processing flag on so that we can notify the user
             $scope.isProcessing = true;
+
+            // Give a name to the current step in the process (shown in the progressDialog)
+            $scope.processStep = 'Processing MSA/MD Data...';
+
+            progressDialog = ngDialog.open(angular.extend(Configuration.progressDialog, {scope: $scope}));
 
             // Pause before starting the validation so that the DOM can update
             $timeout(function() { $scope.process(); }, 100);
@@ -93,9 +99,11 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
 
             // Toggle processing flag off
             $scope.isProcessing = false;
+            progressDialog.close();
         }).catch(function(err) {
             // Toggle processing flag off
             $scope.isProcessing = false;
+            progressDialog.close();
 
             $scope.errors.global = err.message;
             return;

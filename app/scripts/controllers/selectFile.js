@@ -7,13 +7,15 @@
  * # Select File
  * Controller for selecting a HMDA file and Reporting Year for verification.
  */
-module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileReader, FileMetadata, HMDAEngine, Wizard, Session) {
-    var fiscalYears = HMDAEngine.getValidYears();
+module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileReader, FileMetadata, HMDAEngine, Wizard, Session, ngDialog, Configuration) {
+    var progressDialog,
+        fiscalYears = HMDAEngine.getValidYears();
 
     // Set/Reset the state of different objects on load
     Session.reset();
     HMDAEngine.clearHmdaJson();
     HMDAEngine.clearErrors();
+    HMDAEngine.clearProgress();
     $scope.metadata = FileMetadata.clear();
     $scope.wizardSteps = Wizard.initSteps();
 
@@ -48,11 +50,17 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileRe
         // Toggle processing flag on so that we can notify the user
         $scope.isProcessing = true;
 
-        $timeout(function() { $scope.process(hmdaData); }, 100); // Pause before starting the conversion so that the DOM can update
+        // Give a name to the current step in the process (shown in the progressDialog)
+        $scope.processStep = 'Processing HMDA file...';
 
+        progressDialog = ngDialog.open(angular.extend(Configuration.progressDialog, {scope: $scope}));
+
+        $timeout(function() { $scope.process(hmdaData); }, 100); // Pause before starting the conversion so that the DOM can update
     };
 
     $scope.process = function(hmdaData) {
+
+        // Enable LocalDB support?
         HMDAEngine.setUseLocalDB(hmdaData.local);
 
         /* istanbul ignore if debug */
@@ -77,6 +85,9 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileRe
                 console.time('total time for syntactical and validity edits');
             }
 
+            // Give a name to the current step in the process (shown in the progressDialog)
+            $scope.processStep = 'Validating Syntactical and Validity edits...';
+
             $q.all([HMDAEngine.runSyntactical(hmdaData.year), HMDAEngine.runValidity(hmdaData.year)])
             .then(function() {
 
@@ -96,10 +107,12 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileRe
 
                 // Toggle processing flag off
                 $scope.isProcessing = false;
+                progressDialog.close();
             })
             .catch(function(err) {
                 // Toggle processing flag off
                 $scope.isProcessing = false;
+                progressDialog.close();
 
                 $scope.errors.global = err.message;
                 return;

@@ -26,7 +26,19 @@ describe('Controller: SummaryQualityMacroCtrl', function () {
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function ($rootScope, $location, $controller, $q, $timeout, _Wizard_, _Session_) {
+    beforeEach(inject(function($templateCache) {
+        var directiveTemplate = null;
+        var templateId = 'partials/progressBar.html';
+        var req = new XMLHttpRequest();
+        req.onload = function() {
+            directiveTemplate = this.responseText;
+        };
+        req.open('get', '/base/app/'+templateId, false);
+        req.send();
+        $templateCache.put(templateId, directiveTemplate);
+    }));
+
+    beforeEach(inject(function ($rootScope, $location, $controller, $q, $timeout, _Wizard_, _Session_, _ngDialog_, _Configuration_) {
         scope = $rootScope.$new();
         location = $location;
         controller = $controller;
@@ -34,14 +46,18 @@ describe('Controller: SummaryQualityMacroCtrl', function () {
         Q = $q;
         Wizard = _Wizard_;
         Session = _Session_;
+
         Wizard.initSteps();
+
         $controller('SummaryQualityMacroCtrl', {
             $scope: scope,
             $location: location,
             $timeout: timeout,
             HMDAEngine: mockEngine,
             Wizard: _Wizard_,
-            Session: _Session_
+            Session: _Session_,
+            ngDialog: _ngDialog_,
+            Configuration: _Configuration_
         });
     }));
 
@@ -133,39 +149,18 @@ describe('Controller: SummaryQualityMacroCtrl', function () {
             });
         });
 
-        describe('when special edit checks have not been run', function() {
-            beforeEach(function() {
-                mockErrors.special = {};
-                controller('SummaryQualityMacroCtrl', {
-                    $scope: scope,
-                    $location: location,
-                    $timeout: timeout,
-                    HMDAEngine: mockEngine,
-                    Session: Session
-                });
-            });
-
-            it('should run the process() function', function() {
-                spyOn(scope, 'process');
-                scope.next();
-                scope.$digest();
-                timeout.flush();
-                expect(scope.process).toHaveBeenCalled();
-            });
-        });
-    });
-
-    describe('process()', function() {
         describe('when runSpecial has a runtime error', function() {
             it('should display a global error', function() {
                 mockEngine.runSpecial = function() { return Q.reject(new Error('error')); };
+                mockErrors.special = {};
                 controller('SummaryQualityMacroCtrl', {
                     $scope: scope,
                     $location: location,
                     $q: Q,
                     HMDAEngine: mockEngine
                 });
-                scope.process();
+                scope.next();
+                timeout.flush();
                 scope.$digest();
 
                 expect(scope.errors.global).toBe('error');
@@ -175,13 +170,15 @@ describe('Controller: SummaryQualityMacroCtrl', function () {
         describe('when runSpecial has no runtime errors', function() {
             beforeEach(function() {
                 mockEngine.runSpecial = function() { return; };
+                mockErrors.special = {};
                 controller('SummaryQualityMacroCtrl', {
                     $scope: scope,
                     $location: location,
                     $q: Q,
                     HMDAEngine: mockEngine
                 });
-                scope.process();
+                scope.next();
+                timeout.flush();
                 scope.$digest();
             });
 
