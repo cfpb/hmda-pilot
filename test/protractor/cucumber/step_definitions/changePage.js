@@ -26,7 +26,7 @@ module.exports = function() {
             return browser.getCurrentUrl().then(function(url) {
                 return (url !== oldUrl);
             });
-        }, 20000);
+        }, 2000000);
         deferred.fulfill();
         return deferred.promise;
     }
