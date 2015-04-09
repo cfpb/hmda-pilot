@@ -14,6 +14,7 @@ var submitButton = element(by.css(".form-buttons button"));
 module.exports = function() {
 
     selectFile = function(fileName){
+        var deferred = protractor.promise.defer();
         var fileSelector = element(by.id('file'));
 
         //Get filename as argument, convert into path, send path to selector on site.
@@ -21,16 +22,20 @@ module.exports = function() {
         var absolutePath = path.resolve(__dirname, fileToUpload);
 
         fileSelector.sendKeys(absolutePath);
+        deferred.fulfill();
+        return deferred.promise;
     }
 
     this.When(/^I upload the "([^"]*)" file for validation$/, function (fileName, next) {
-        selectFile(fileName);
-        next();
+        selectFile(fileName).then(function(){
+            next();
+        });
     });
 
     this.When(/^I upload the "([^"]*)" and submit$/, function (fileName, next) {
-        selectFile(fileName);
-        submitButton.click().then(function(){
+        selectFile(fileName).then(function(){
+            submitButton.click();
+        }).then(function(){
             next();
         });
     });
