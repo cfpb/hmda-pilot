@@ -21,7 +21,6 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileRe
 
     // Populate the $scope
     $scope.reportingYears = fiscalYears;
-    $scope.isProcessing = false;
 
     // Initialize the errors for the form fields
     $scope.errors = {};
@@ -47,8 +46,6 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileRe
     $scope.submit = function(hmdaData) {
         // Clear out any existing errors
         $scope.errors.global = null;
-        // Toggle processing flag on so that we can notify the user
-        $scope.isProcessing = true;
 
         // Give a name to the current step in the process (shown in the progressDialog)
         $scope.processStep = 'Processing HMDA file...';
@@ -71,8 +68,8 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileRe
         // Convert the file to JSON
         HMDAEngine.fileToJson(hmdaData.file, hmdaData.year, function(fileErr) {
             if (fileErr) {
-                // Toggle processing flag off
-                $scope.isProcessing = false;
+                // Close the progress dialog
+                progressDialog.close();
 
                 $scope.errors.global = fileErr;
                 $scope.$apply();
@@ -105,13 +102,11 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileRe
                 // And go the summary page
                 $location.path('/summarySyntacticalValidity');
 
-                // Toggle processing flag off
-                $scope.isProcessing = false;
+                // Close the progress dialog
                 progressDialog.close();
             })
             .catch(function(err) {
-                // Toggle processing flag off
-                $scope.isProcessing = false;
+                // Close the progress dialog
                 progressDialog.close();
 
                 $scope.errors.global = err.message;
