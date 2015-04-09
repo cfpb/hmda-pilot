@@ -38,6 +38,16 @@ module.exports = function() {
     });
 
     this.When(/^I continue to the quality and macro edit reports page$/, function (next) {
-
+        waitUrlChange().then(function(){
+            browser.getCurrentUrl().then(function(url){
+                recentlyChangedUrl = url
+            }).then(function(){
+                continueButton.click();
+            }).then(function(){
+                waitUrlChange(recentlyChangedUrl);
+            }).then(function(){
+                next();
+            });
+        });
     });
 };
