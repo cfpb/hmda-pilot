@@ -41,12 +41,11 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
     $scope.errors = {};
 
     // Get the list of errors from the HMDAEngine
-    var progressDialog,
-        editErrors = HMDAEngine.getErrors();
+    var progressDialog;
 
     $scope.data = {
-        qualityErrors: editErrors.quality,
-        macroErrors: editErrors.macro
+        qualityErrors: HMDAEngine.getErrors().quality,
+        macroErrors: HMDAEngine.getErrors().macro
     };
 
     $scope.previous = function () {
@@ -58,7 +57,7 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
     };
 
     $scope.next = function() {
-        if (hasErrors(editErrors.special)) {
+        if (hasErrors(HMDAEngine.getErrors().special)) {
             $location.path('/summaryMSA-IRS');
         } else {
             // Give a name to the current step in the process (shown in the progressDialog)
