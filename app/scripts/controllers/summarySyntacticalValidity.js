@@ -9,15 +9,16 @@
  */
 module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEngine, Wizard, ngDialog, Configuration) {
 
-    // Populate the $scope
-    $scope.errors = {};
-    $scope.isProcessing = false;
+    // Set/Reset the state of different objects on load
+    HMDAEngine.clearProgress();
 
     // Get the list of errors from the HMDAEngine
-    var editErrors = HMDAEngine.getErrors();
+    var progressDialog;
 
-    $scope.syntacticalErrors = editErrors.syntactical || {};
-    $scope.validityErrors = editErrors.validity || {};
+    // Populate the $scope
+    $scope.errors = {};
+    $scope.syntacticalErrors = HMDAEngine.getErrors().syntactical;
+    $scope.validityErrors = HMDAEngine.getErrors().validity;
 
     $scope.previous = function() {
         if (Configuration.confirmSessionReset) {
@@ -34,7 +35,7 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
     };
 
     $scope.hasNext = function() {
-        return angular.equals({}, $scope.syntacticalErrors) && angular.equals({}, $scope.validityErrors);
+        return angular.equals({}, HMDAEngine.getErrors().syntactical) && angular.equals({}, HMDAEngine.getErrors().validity);
     };
 
     function hasErrors(obj) {
@@ -42,11 +43,13 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
     }
 
     $scope.next = function() {
-        if (hasErrors(editErrors.quality) || hasErrors(editErrors.macro)) {
+        if (hasErrors(HMDAEngine.getErrors().quality) || hasErrors(HMDAEngine.getErrors().macro)) {
             $location.path('/summaryQualityMacro');
         } else{
-            // Toggle processing flag on so that we can notify the user
-            $scope.isProcessing = true;
+            // Give a name to the current step in the process (shown in the progressDialog)
+            $scope.processStep = 'Processing Quality and Macro edits...';
+
+            progressDialog = ngDialog.open(angular.extend(Configuration.progressDialog, {scope: $scope}));
 
             // Pause before starting the validation so that the DOM can update
             $timeout(function() { $scope.process(); }, 100);
@@ -76,12 +79,12 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
             // And go the next summary page
             $location.path('/summaryQualityMacro');
 
-            // Toggle processing flag off
-            $scope.isProcessing = false;
+            // Close the progress dialog
+            progressDialog.close();
         })
         .catch(function(err) {
-            // Toggle processing flag off
-            $scope.isProcessing = false;
+            // Close the progress dialog
+            progressDialog.close();
 
             $scope.errors.global = err.message;
             return;

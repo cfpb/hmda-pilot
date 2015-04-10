@@ -13,3 +13,4 @@ app.controller('ErrorDetailCtrl', require('./errorDetail'));
 app.controller('SpecialErrorDetailCtrl', require('./specialErrorDetail'));
 app.controller('IRSReportCtrl', require('./irsReport'));
 app.controller('PaginationCtrl', require('./pagination'));
+app.controller('ProgressBarCtrl', require('./progressBar'));

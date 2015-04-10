@@ -24,10 +24,8 @@ module.exports = /*@ngInject*/ function ($scope, $location, Wizard, HMDAEngine, 
     }
 
     // Get the list of errors from the HMDAEngine
-    var editErrors = HMDAEngine.getErrors();
-
     $scope.data = {
-        specialErrors: editErrors.special
+        specialErrors: HMDAEngine.getErrors().special
     };
 
     $scope.showIRSReport = function() {

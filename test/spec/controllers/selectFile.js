@@ -8,6 +8,7 @@ describe('Controller: SelectFileCtrl', function () {
     var controller,
         scope,
         location,
+        timeout,
         Q,
         Wizard,
         FileMetadata,
@@ -17,6 +18,7 @@ describe('Controller: SelectFileCtrl', function () {
             getValidYears: function() { return ['2013', '2014']; },
             clearHmdaJson: function () { return {}; },
             clearErrors: function () { return {}; },
+            clearProgress: function () { return {}; },
             fileToJson: function(file, year, next) { return next(null); },
             runSyntactical: function() { return; },
             runValidity: function() { return; },
@@ -27,11 +29,24 @@ describe('Controller: SelectFileCtrl', function () {
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function ($rootScope, $location, $controller, $q, _Wizard_, _FileMetadata_, _FileReader_) {
+    beforeEach(inject(function($templateCache) {
+        var directiveTemplate = null;
+        var templateId = 'partials/progressBar.html';
+        var req = new XMLHttpRequest();
+        req.onload = function() {
+            directiveTemplate = this.responseText;
+        };
+        req.open('get', '/base/app/'+templateId, false);
+        req.send();
+        $templateCache.put(templateId, directiveTemplate);
+    }));
+
+    beforeEach(inject(function ($rootScope, $location, $controller, $q, $timeout, _Wizard_, _FileMetadata_, _FileReader_, _Configuration_, _ngDialog_) {
         scope = $rootScope.$new();
         controller = $controller;
         location = $location;
         Q = $q;
+        timeout = $timeout;
         Wizard = _Wizard_;
         FileMetadata = _FileMetadata_;
         FileReader = _FileReader_;
@@ -41,10 +56,13 @@ describe('Controller: SelectFileCtrl', function () {
             $scope: scope,
             $location: location,
             $q: Q,
+            $timeout: timeout,
             Wizard: _Wizard_,
             FileMetadata: _FileMetadata_,
             FileReader: _FileReader_,
-            HMDAEngine: mockEngine
+            HMDAEngine: mockEngine,
+            ngDialog: _ngDialog_,
+            Configuration: _Configuration_
         });
     }));
 
@@ -60,10 +78,6 @@ describe('Controller: SelectFileCtrl', function () {
         it('should include an empty errors object', function () {
             expect(scope.errors).toBeDefined();
             expect(scope.errors).toEqual({});
-        });
-
-        it('should set the isProcessing flag to false', function () {
-            expect(scope.isProcessing).toBeFalsy();
         });
     });
 
@@ -82,7 +96,7 @@ describe('Controller: SelectFileCtrl', function () {
         });
     });
 
-    describe('process()', function() {
+    describe('submit()', function() {
 
         var hmdaData = {
             file: 'test.dat',
@@ -100,7 +114,8 @@ describe('Controller: SelectFileCtrl', function () {
                     $q: Q,
                     HMDAEngine: mockEngine
                 });
-                scope.process(hmdaData);
+                scope.submit(hmdaData);
+                timeout.flush();
                 scope.$digest();
 
                 expect(scope.errors.global).toBe('error');
@@ -118,7 +133,8 @@ describe('Controller: SelectFileCtrl', function () {
                     $q: Q,
                     HMDAEngine: mockEngine
                 });
-                scope.process(hmdaData);
+                scope.submit(hmdaData);
+                timeout.flush();
                 scope.$digest();
 
                 expect(scope.errors.global).toBe('error');
@@ -136,7 +152,8 @@ describe('Controller: SelectFileCtrl', function () {
                     $q: Q,
                     HMDAEngine: mockEngine
                 });
-                scope.process(hmdaData);
+                scope.submit(hmdaData);
+                timeout.flush();
                 scope.$digest();
 
                 expect(scope.errors.global).toBe('error');
@@ -153,7 +170,8 @@ describe('Controller: SelectFileCtrl', function () {
                     $q: Q,
                     HMDAEngine: mockEngine
                 });
-                scope.process(hmdaData);
+                scope.submit(hmdaData);
+                timeout.flush();
                 scope.$digest();
             });
 

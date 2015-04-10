@@ -7,7 +7,10 @@
  * # SummaryQualityMacroCtrl
  * Controller for the Syntactical and Validity Summary view
  */
-module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEngine, Wizard, Session) { /*jshint ignore:line*/
+module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEngine, Wizard, Session, ngDialog, Configuration) { /*jshint ignore:line*/
+
+    // Set/Reset the state of different objects on load
+    HMDAEngine.clearProgress();
 
     Array.prototype.diff = function(a) {
         return this.filter(function(i) { return a.indexOf(i) < 0; });
@@ -39,14 +42,13 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
 
     // Populate the $scope
     $scope.errors = {};
-    $scope.isProcessing = false;
 
     // Get the list of errors from the HMDAEngine
-    var editErrors = HMDAEngine.getErrors();
+    var progressDialog;
 
     $scope.data = {
-        qualityErrors: editErrors.quality,
-        macroErrors: editErrors.macro
+        qualityErrors: HMDAEngine.getErrors().quality,
+        macroErrors: HMDAEngine.getErrors().macro
     };
 
     $scope.previous = function () {
@@ -58,11 +60,13 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
     };
 
     $scope.next = function() {
-        if (hasErrors(editErrors.special)) {
+        if (hasErrors(HMDAEngine.getErrors().special)) {
             $location.path('/summaryMSA-IRS');
         } else {
-            // Toggle processing flag on so that we can notify the user
-            $scope.isProcessing = true;
+            // Give a name to the current step in the process (shown in the progressDialog)
+            $scope.processStep = 'Processing MSA/MD Data...';
+
+            progressDialog = ngDialog.open(angular.extend(Configuration.progressDialog, {scope: $scope}));
 
             // Pause before starting the validation so that the DOM can update
             $timeout(function() { $scope.process(); }, 100);
@@ -91,11 +95,11 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
             // And go the next summary page
             $location.path('/summaryMSA-IRS');
 
-            // Toggle processing flag off
-            $scope.isProcessing = false;
+            // Close the progress dialog
+            progressDialog.close();
         }).catch(function(err) {
-            // Toggle processing flag off
-            $scope.isProcessing = false;
+            // Close the progress dialog
+            progressDialog.close();
 
             $scope.errors.global = err.message;
             return;
