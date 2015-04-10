@@ -13,3 +13,4 @@ app.directive('disclaimer',   require('./disclaimer'));
 app.directive('paginationSize',   require('./paginationSize'));
 app.directive('paginationNav',   require('./paginationNav'));
 app.directive('pagination',   require('./pagination'));
+app.directive('hmdaExport',   require('./hmdaExport'));
