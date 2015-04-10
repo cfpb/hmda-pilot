@@ -9,6 +9,9 @@
  */
 module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEngine, Wizard, Session, ngDialog, Configuration) { /*jshint ignore:line*/
 
+    // Set/Reset the state of different objects on load
+    HMDAEngine.clearProgress();
+
     Array.prototype.diff = function(a) {
         return this.filter(function(i) { return a.indexOf(i) < 0; });
     };

@@ -24,7 +24,8 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
             getRuleYear: function() { return '2015'; },
             runQuality: function(year, next) { return next(null); },
             runMacro: function(year, next) { return next(null); },
-            getDebug: function() { return false; }
+            getDebug: function() { return false; },
+            clearProgress: function () { return {}; }
         };
 
     beforeEach(angular.mock.module('hmdaPilotApp'));

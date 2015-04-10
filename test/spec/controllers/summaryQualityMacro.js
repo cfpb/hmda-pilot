@@ -21,7 +21,8 @@ describe('Controller: SummaryQualityMacroCtrl', function () {
             getErrors: function() { return mockErrors; },
             getRuleYear: function() { return '2015'; },
             runSpecial: function(year, next) { return next(null); },
-            getDebug: function() { return false; }
+            getDebug: function() { return false; },
+            clearProgress: function () { return {}; }
         };
 
     beforeEach(angular.mock.module('hmdaPilotApp'));

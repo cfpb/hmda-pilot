@@ -9,6 +9,9 @@
  */
 module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEngine, Wizard, ngDialog, Configuration) {
 
+    // Set/Reset the state of different objects on load
+    HMDAEngine.clearProgress();
+
     // Get the list of errors from the HMDAEngine
     var progressDialog;
 
