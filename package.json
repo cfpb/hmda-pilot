@@ -84,7 +84,8 @@
     "load-grunt-tasks": "^0.4.0",
     "napa": "^1.2.0",
     "protractor": "^2.0.0",
-    "time-grunt": "^0.3.1"
+    "time-grunt": "^0.3.1",
+    "webdriver-manager": "^3.0.0"
   },
   "engines": {
     "node": ">=0.10.0"
