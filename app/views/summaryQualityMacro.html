@@ -2,7 +2,15 @@
 
 <p>All of the Quality and Macro edits must be reviewed and verified before running the MSA and IRS edits.</p>
 
-<h2>Quality Edit Report</h2>
+<div class="summary-header content-l">
+    <div class="content-l_col content-l_col-2-3">
+        <h2>Quality Edit Report</h2>
+    </div>
+    <div class="toolbar content-l_col content-l_col-1-2">
+        <button class="btn btn__link" hmda-export export="all" type="quality" ng-if="data.qualityErrors"><span class="cf-icon cf-icon-pdf"></span> Export</button>
+    </div>
+</div>
+
 <error-summary type="quality" errors="data.qualityErrors"></error-summary>
 
 <h2>Macro Edit Report</h2>

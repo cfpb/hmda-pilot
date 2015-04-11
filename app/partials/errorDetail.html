@@ -1,5 +1,13 @@
 <pagination>
-<pagination-size></pagination-size>
+
+<div class="detail-header content-l">
+    <div class="content-l_col content-l_col-2-3">
+        <pagination-size></pagination-size>
+    </div>
+    <div class="toolbar content-l_col content-l_col-1-3">
+        <button class="btn btn__link" hmda-export export="individual" type="{{editType}}" edit-id="{{selectedEditId}}" ng-if="error"><span class="cf-icon cf-icon-pdf"></span> Export</button>
+    </div>
+</div>
 
 <table id="{{editType}}" class="error-detail grouped-rows" ng-if="error">
     <thead>
