@@ -29,6 +29,7 @@
 // HMDA Pilot components
 @import (less) "utils.less";
 @import (less) "wizard.less";
+@import (less) "progressBar.less";
 
 // Layouts
 .wrapper, .wrap {
@@ -38,6 +39,21 @@
 body {
     .webfont-regular;
 }
+
+ul.site-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 18px;
+    right: 255px;
+
+    li {
+        display: inline-block;
+        margin-right: 10px;
+    }
+}
+
 footer {
     margin-top: 3em;
 }
@@ -334,6 +350,18 @@ table.row-hover {
         tr:hover th {
             background-color: tint(@teal, 80%);;
         }
+    }
+}
+
+.toolbar {
+    text-align: right;
+
+    .summary-header & {
+        margin-top: 1em;
+    }
+
+    .detail-header & {
+        margin-top: 0;
     }
 }
 

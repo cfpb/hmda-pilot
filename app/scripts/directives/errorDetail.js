@@ -14,7 +14,8 @@ module.exports = /*@ngInject*/ function () {
         template: '<div ng-include="getTemplateUrl()"></div>',
         scope: {
             error: '=',
-            editType: '@type'
+            editType: '@type',
+            editId: '@'
         },
         link: function(scope) {
             if (angular.equals({}, scope.error)) {

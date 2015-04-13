@@ -1,5 +1,13 @@
 <pagination>
-<pagination-size></pagination-size>
+
+<div class="detail-header content-l">
+    <div class="content-l_col content-l_col-2-3">
+        <pagination-size></pagination-size>
+    </div>
+    <div class="toolbar content-l_col content-l_col-1-3">
+        <button class="btn btn__link" hmda-export export="individual" type="{{editType}}" edit-id="{{editId}}" ng-if="error"><span class="cf-icon cf-icon-pdf"></span> Export</button>
+    </div>
+</div>
 
 <table id="{{editType}}" class="error-detail grouped-rows" ng-if="error">
     <thead>
@@ -15,7 +23,7 @@
         <tr ng-repeat="(key, value) in item.properties">
             <th class="{{error.scope === 'lar' ? 'loan-number':'line-number'}}" scope="row" rowspan="{{item.properties | keyLength}}" ng-if="$first">{{item.loanNumber || item.lineNumber}}</th>
             <td class="description">{{ {'property':key, 'lineNumber':item.lineNumber} | hmdaLabel:error.scope}}</td>
-            <td class="value">{{value}}</td>
+            <td class="value">{{value | hmdaValue:error.scope:key}}</td>
             <td class="action" rowspan="{{item.properties | keyLength}}" ng-if="$first && editType !== 'quality'">Correct and revalidate</td>
         </tr>
     </tbody>

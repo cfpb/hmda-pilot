@@ -24,10 +24,23 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
             getRuleYear: function() { return '2015'; },
             runQuality: function(year, next) { return next(null); },
             runMacro: function(year, next) { return next(null); },
-            getDebug: function() { return false; }
+            getDebug: function() { return false; },
+            clearProgress: function () { return {}; }
         };
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
+
+    beforeEach(inject(function($templateCache) {
+        var directiveTemplate = null;
+        var templateId = 'partials/progressBar.html';
+        var req = new XMLHttpRequest();
+        req.onload = function() {
+            directiveTemplate = this.responseText;
+        };
+        req.open('get', '/base/app/'+templateId, false);
+        req.send();
+        $templateCache.put(templateId, directiveTemplate);
+    }));
 
     beforeEach(inject(function ($rootScope, $location, $controller, $q, $timeout, _Wizard_, _Configuration_) {
         scope = $rootScope.$new();
@@ -42,7 +55,9 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
             }
         };
         mockNgDialog = {
-            openConfirm: function() { }
+            open: function() {},
+            openConfirm: function() {},
+            close: function() {}
         };
         spyOn(mockNgDialog, 'openConfirm').and.returnValue(mockNgDialogPromise);
 
@@ -169,9 +184,7 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
                 expect(scope.process).toHaveBeenCalled();
             });
         });
-    });
 
-    describe('process()', function() {
         describe('when runQuality has a runtime error', function() {
             it('should display a global error', function() {
                 mockEngine.runQuality = function() { return Q.reject(new Error('error')); };
@@ -182,8 +195,9 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
                     $q: Q,
                     HMDAEngine: mockEngine
                 });
-                scope.process();
+                scope.next();
                 scope.$digest();
+                timeout.flush();
 
                 expect(scope.errors.global).toBe('error');
             });
@@ -199,7 +213,8 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
                     $q: Q,
                     HMDAEngine: mockEngine
                 });
-                scope.process();
+                scope.next();
+                timeout.flush();
                 scope.$digest();
 
                 expect(scope.errors.global).toBe('error');
@@ -216,7 +231,8 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
                     $q: Q,
                     HMDAEngine: mockEngine
                 });
-                scope.process();
+                scope.next();
+                timeout.flush();
                 scope.$digest();
             });
 

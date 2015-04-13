@@ -6,7 +6,7 @@ before_install:
 - npm install -g grunt-cli
 install: npm install
 before_deploy:
-- grunt build
+- scripts/grunt_build.bash
 - grunt zip
 - grunt codedeploy
 deploy:

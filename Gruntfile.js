@@ -64,6 +64,10 @@ module.exports = function (grunt) {
       gruntfile: {
         files: ['Gruntfile.js']
       },
+      markdown: {
+        files: ['ABOUT.md', 'COMMON_QUESTIONS.md'],
+        tasks: ['markdown:help']
+      },
       livereload: {
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -499,6 +503,17 @@ module.exports = function (grunt) {
     },
     ngdocs: {
       all: ['<%= yeoman.app %>/scripts/{,*/}*.js']
+    },
+    markdown: {
+        help: {
+            files: [{
+                'app/partials/about.html': 'ABOUT.md',
+                'app/views/common_questions.html': 'COMMON_QUESTIONS.md',
+            }],
+            options: {
+                template: 'config/md-to-html.jst',
+            }
+        }
     }
   });
 
@@ -520,6 +535,7 @@ module.exports = function (grunt) {
       'concurrent:server',
       'autoprefixer',
       'replace:local',
+      'markdown:help',
       'connect:livereload',
       'watch'
     ]);
@@ -567,7 +583,8 @@ module.exports = function (grunt) {
       'uglify',
       'filerev',
       'usemin',
-      'htmlmin'
+      'htmlmin',
+      'markdown:help'
     ]);
   });
 
