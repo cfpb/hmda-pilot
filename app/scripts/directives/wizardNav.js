@@ -66,7 +66,14 @@ module.exports = /*@ngInject*/ function ($location, $timeout, StepFactory, Wizar
 
             // Determine if the wizard nav should be displayed or not
             scope.showWizardNav = function() {
+                console.log('showWizardNav');
                 return ['/about', '/common-questions'].indexOf($location.path()) === -1;
+            };
+
+            scope.setActive = function(step) {
+                console.log('markActive');
+                $location.path(step.view);
+                Wizard.setCurrentStep(step);
             };
 
             // Watch the Wizard steps to see if they change

@@ -2,7 +2,7 @@
     <ol>
         <li ng-repeat="step in steps" class="step {{step.stepClass}}">
             <span class="{{step.badgeClass}}">{{step.badgeText}}</span>
-            <a class="step-title" ng-if="step.isComplete()" ng-href="/#/{{step.view}}">{{step.title}}</a>
+            <a class="step-title" ng-if="step.isComplete()" ng-click="setActive(step)">{{step.title}}</a>
             <span class="step-title" ng-if="!step.isComplete()">{{step.title}}</span>
         </li>
     </ol>
