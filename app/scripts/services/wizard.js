@@ -47,8 +47,20 @@ module.exports = /*@ngInject*/ function (StepFactory) {
      *
      * @return {Object} step
      */
-    this.getCurrentStep = function () {
+    this.getCurrentStep = function() {
         return steps[currentStepIdx];
+    };
+
+    /**
+     * Set the current step
+     */
+    this.setCurrentStep = function(step) {
+        console.log('setCurrentStep');
+        console.log(currentStepIdx);
+        steps[currentStepIdx].isActive = false;
+        currentStepIdx = steps.indexOf(step);
+        steps[currentStepIdx].isActive = true;
+        console.log(currentStepIdx);
     };
 
     /**
