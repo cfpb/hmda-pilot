@@ -10,4 +10,4 @@ Feature: Display a disclaimer on each page
   Scenario: Disclaimer on homepage
     Given that I am at the HMDA homepage
     Then I will see a disclaimer at the top
-    And the text will say "This prototype is a work in progress"
+    And the text will say 'This prototype is a work in progress'

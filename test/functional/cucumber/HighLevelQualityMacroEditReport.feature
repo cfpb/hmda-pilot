@@ -7,7 +7,7 @@ Feature: User can view a loan-level report of the syntactical/validity edits
 
   Scenario: Receive electronic report
     Given that I am at the HMDA homepage
-    When I upload the "0001000052.dat" file and submit
+    When I upload the '0001000052.dat' file and submit
     And I continue to the quality and macro edit reports page
     Then I see an electronic report showing how many quality edits failed
     And I see an electronic report showing how many macro edits failed

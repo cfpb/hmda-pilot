@@ -7,7 +7,7 @@ Feature: User can view a high-level report of the syntactical/validity edits
 
   Scenario: Receive electronic report
     Given that I am at the HMDA homepage
-    When I upload the "V262short.dat" file for validation
+    When I upload the 'V262short.dat' file for validation
     And I click the submit button
     And I wait for the file to be processed
     Then I see an electronic report showing how many syntactical edits failed

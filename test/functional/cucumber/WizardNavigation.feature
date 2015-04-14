@@ -7,5 +7,5 @@ Feature: Display edit validation steps using a wizard
 
   Scenario: Receive electronic report
     Given that I am at the HMDA homepage
-    When I upload the "quality/q001.dat" file for validation
+    When I upload the 'quality/q001.dat' file for validation
     Then I see a navigation wizard

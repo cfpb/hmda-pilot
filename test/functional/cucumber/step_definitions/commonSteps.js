@@ -6,12 +6,12 @@ var expect = chai.expect;
 
 module.exports = function() {
 
-    disclaimer = element(by.css("div.disclaimer"));
+    disclaimer = element(by.css('div.disclaimer'));
 
     this.Given(/^that I am at the HMDA homepage$/, function(next) {
         browser.get('http://dev.hmda-pilot.ec2.devis.com/#/');
-        //Prevents "are you sure you want to leave?" window from popping up
-        browser.executeScript("window.onbeforeunload = function(){};").then(function(){
+        //Prevents 'are you sure you want to leave?' window from popping up
+        browser.executeScript('window.onbeforeunload = function(){};').then(function(){
             next();
         });
     });
@@ -20,7 +20,7 @@ module.exports = function() {
         expect(disclaimer.isPresent()).to.eventually.be.true.notify(next);
     });
 
-    this.Then(/^the text will say "([^"]*)"$/, function (text, next) {
+    this.Then(/^the text will say '([^']*)'$/, function (text, next) {
         expect(disclaimer.getText()).to.eventually.have.string(text).notify(next);
     });
 };

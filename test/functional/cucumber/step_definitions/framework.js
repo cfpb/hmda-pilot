@@ -24,7 +24,7 @@ module.exports = function() {
         next();
     });
 
-    this.Then(/the title should equal "([^"]*)"$/, function(text, next) {
+    this.Then(/the title should equal '([^']*)'$/, function(text, next) {
         expect(browser.getTitle()).to.eventually.equal(text).and.notify(next);
     });
 

@@ -8,8 +8,8 @@ var expect = chai.expect;
 var path = require('path');
 
 //Defining page elements
-var pageErrors = element.all(by.css(".page-errors"));
-var submitButton = element(by.css(".form-buttons button"));
+var pageErrors = element.all(by.css('.page-errors'));
+var submitButton = element(by.css('.form-buttons button'));
 
 module.exports = function() {
 
@@ -26,13 +26,13 @@ module.exports = function() {
         return deferred.promise;
     }
 
-    this.When(/^I upload the "([^"]*)" file for validation$/, function (fileName, next) {
+    this.When(/^I upload the '([^']*)' file for validation$/, function (fileName, next) {
         selectFile(fileName).then(function(){
             next();
         });
     });
 
-    this.When(/^I upload the "([^"]*)" file and submit$/, function (fileName, next) {
+    this.When(/^I upload the '([^']*)' file and submit$/, function (fileName, next) {
         selectFile(fileName).then(function(){
             submitButton.click();
         }).then(function(){

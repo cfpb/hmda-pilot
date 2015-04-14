@@ -8,7 +8,7 @@ Feature: Display quality edit report
 
   Scenario: Able to see quality edit report
     Given that I am at the HMDA homepage
-    When I upload the "quality/q001.dat" file for validation
+    When I upload the 'quality/q001.dat' file for validation
     And I continue to the quality and macro edit reports page
-    And I click the "View Quality Edits" button
+    And I click the 'View Quality Edits' button
     Then I see a list of the failed quality edits

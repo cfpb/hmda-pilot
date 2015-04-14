@@ -8,5 +8,5 @@ Feature: Processing information warning while file is uploading
 
   Scenario: Upload file and see processing notice
     Given that I am at the HMDA homepage
-    When I upload the "V262short.dat"  file for validation
+    When I upload the 'V262short.dat'  file for validation
     Then the validation button will change to a processing button

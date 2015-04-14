@@ -10,4 +10,4 @@ Feature: Running Cucumber with Protractor
 
   Scenario: Works with HMDA
     Given that I am at the HMDA homepage
-    Then the title should equal "HMDA Pilot | CFPB"
+    Then the title should equal 'HMDA Pilot | CFPB'

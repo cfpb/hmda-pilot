@@ -6,7 +6,7 @@ var expect = chai.expect;
 
 module.exports = function() {
 
-    continueButton = element(by.buttonText("Continue"));
+    continueButton = element(by.buttonText('Continue'));
     progressBar = element.all(by.css('div.ngdialog-overlay'));
 
     waitUrlChange = function(startUrl){
