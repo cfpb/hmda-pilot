@@ -10,7 +10,6 @@
 module.exports = /*@ngInject*/ function ($location, $timeout, StepFactory, Wizard, ngDialog) {
 
     function getStepClass(step) {
-        console.log(step);
         if (step.isActive) {
             step.stepClass = 'active';
         } else {
@@ -74,13 +73,11 @@ module.exports = /*@ngInject*/ function ($location, $timeout, StepFactory, Wizar
                 return ['/about', '/common-questions'].indexOf($location.path()) === -1;
             };
 
-            scope.setActive = function(step) {
-                console.log('setActive');
+            scope.setFocused = function(step) {
                 var newSteps = Wizard.getSteps();
 
                 for (var i=0; i < newSteps.length; i++) {
                     if (newSteps[i] === step) {
-                        console.log('equals');
                         newSteps[i].isFocused = true;
                     } else {
                         newSteps[i].isFocused = false;
