@@ -92,7 +92,8 @@
   },
   "scripts": {
     "test": "grunt travis-coveralls",
-    "install": "napa"
+    "install": "napa",
+    "postinstall": "node node_modules/protractor/bin/webdriver-manager update"
   },
   "browserify": {
     "transform": [
