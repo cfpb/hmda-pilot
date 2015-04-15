@@ -11,9 +11,13 @@ module.exports = /*@ngInject*/ function ($scope, HMDAEngine) {
 
     $scope.percentageComplete = 0;
 
-    HMDAEngine.getProgress().events.on('progressStep', function(percent) {
-        $scope.$apply(function(){
+    function applyProgress(percent) {
+        $scope.$apply(function($scope){
             $scope.percentageComplete = percent;
         });
-    });
+    }
+
+    HMDAEngine.getProgress().events.on('progressStep', applyProgress);
+    HMDAEngine.getFileProgress().events.on('progressStep', applyProgress);
+
 };

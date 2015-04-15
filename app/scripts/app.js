@@ -1,14 +1,10 @@
 'use strict';
 
 require('angular');
-require('angular-animate');
 require('angular-aria');
-require('angular-cookies');
 require('angular-resource');
 require('angular-route');
 require('angular-sanitize');
-require('angular-touch');
-require('angular-fileupload');
 require('./modules/config');
 require('./modules/HMDAEngine');
 require('./modules/hmdaFilters');
@@ -24,16 +20,12 @@ require('ng-dialog');
  */
 angular
   .module('hmdaPilotApp', [
-    'ngAnimate',
     'ngAria',
-    'ngCookies',
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch',
     'ngDialog',
     'services.config',
-    'filereader',
     'HMDAEngine',
     'hmdaFilters'
   ])
