@@ -138,7 +138,10 @@ module.exports = function (grunt) {
         options: {
           jshintrc: 'test/.jshintrc'
         },
-        src: ['test/spec/{,*/}*.js']
+        src: [
+          'test/spec/{,*/}*.js',
+          'test/functional/{,*/}*.js'
+        ]
       }
     },
 
@@ -564,6 +567,11 @@ module.exports = function (grunt) {
     'autoprefixer',
     'connect:test',
     'karma'
+  ]);
+
+  grunt.registerTask('functional', [
+    'jshint:test',
+    'protractor'
   ]);
 
   grunt.registerTask('travis-coveralls', [
