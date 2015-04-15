@@ -45,4 +45,21 @@ describe('Factory: StepFactory', function () {
             expect(step.isIncomplete()).toBeTruthy();
         });
     });
+
+    describe('isSelectable', function() {
+        it('should return true if the step status is complete', function() {
+            step.markComplete();
+            expect(step.isSelectable()).toBeTruthy();
+        });
+
+        it('should return true if the step status is active', function() {
+            step.isActive = true;
+            expect(step.isSelectable()).toBeTruthy();
+        });
+
+        it('should return false if the step status is incomplete', function() {
+            step.markIncomplete();
+            expect(step.isSelectable()).toBeFalsy();
+        });
+    });
 });

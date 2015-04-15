@@ -47,7 +47,7 @@ module.exports = /*@ngInject*/ function (StepFactory) {
      *
      * @return {Object} step
      */
-    this.getCurrentStep = function () {
+    this.getCurrentStep = function() {
         return steps[currentStepIdx];
     };
 

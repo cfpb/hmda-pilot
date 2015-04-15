@@ -2,8 +2,8 @@
     <ol>
         <li ng-repeat="step in steps" class="step {{step.stepClass}}">
             <span class="{{step.badgeClass}}">{{step.badgeText}}</span>
-            <a class="step-title" ng-if="step.isComplete()" ng-href="/#/{{step.view}}">{{step.title}}</a>
-            <span class="step-title" ng-if="!step.isComplete()">{{step.title}}</span>
+            <a class="step-title" ng-if="step.isSelectable()" ng-href="/#/{{step.view}}">{{step.title}}</a>
+            <span class="step-title" ng-if="!step.isSelectable()">{{step.title}}</span>
         </li>
     </ol>
 </nav>

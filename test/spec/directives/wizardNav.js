@@ -102,6 +102,19 @@ describe('Directive: WizardNav', function () {
         expect(step.hasClass('is_focused')).toBeFalsy();
     });
 
+    it('should set an already completed step to "is_focused" when it is selected', function() {
+        var $completedStep = jQuery('li.complete', element);
+        scope.$broadcast('$locationChangeSuccess', '#/selectFile');
+        scope.$digest();
+        expect($completedStep.hasClass('is_focused')).toBeTruthy();
+    });
+
+    it('should not set an incomplete step to "is_focused" if it is selected', function() {
+        var $incompletedStep = jQuery('li.incomplete', element);
+        jQuery('a', $incompletedStep).click();
+        expect($incompletedStep.hasClass('is_focused')).toBeFalsy();
+    });
+
     describe('when the navigating to /selectFile', function() {
         describe('and Configuration.confirmSessionReset is true', function() {
             it('should display a confirmation dialog', function() {

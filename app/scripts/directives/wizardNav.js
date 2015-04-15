@@ -16,8 +16,12 @@ module.exports = /*@ngInject*/ function ($location, $timeout, StepFactory, Wizar
             step.stepClass = step.status;
         }
 
-        if (step.isComplete()) {
+        if (step.isComplete() || step.isActive) {
             step.stepClass += ' focusable';
+        }
+
+        if (step.isFocused && !step.isActive) {
+            step.stepClass += ' is_focused';
         }
 
         return step;
@@ -91,7 +95,6 @@ module.exports = /*@ngInject*/ function ($location, $timeout, StepFactory, Wizar
                         angular.element(event.target).parent().removeClass('is_focused');
                     });
                 }, 100);
-
             });
 
             scope.$on('$routeChangeSuccess', function (event, current, previous) {
@@ -99,6 +102,19 @@ module.exports = /*@ngInject*/ function ($location, $timeout, StepFactory, Wizar
                     scope.steps = Wizard.getSteps();
                 }
             });
+            scope.$on('$locationChangeSuccess', function(event, newUrl) {
+                var newSteps = Wizard.getSteps();
+
+                for (var i=0; i < newSteps.length; i++) {
+                    if (newUrl.indexOf('#/' + newSteps[i].view) !== -1) {
+                        newSteps[i].isFocused = true;
+                    } else {
+                        newSteps[i].isFocused = false;
+                    }
+                    newSteps[i] = getStepClass(newSteps[i]);
+                }
+            });
+
         },
         controller: /*@ngInject*/ controller
     };
