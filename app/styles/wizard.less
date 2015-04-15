@@ -69,8 +69,10 @@
                     background-color: @gold;
                 }
             }
-
-            a { outline: 0; cursor: pointer; }
+            &.focusable > span.step-title {
+                cursor: pointer;
+                outline: 0;
+            }
 
             .step-title {
                 .vertical-align(55%);

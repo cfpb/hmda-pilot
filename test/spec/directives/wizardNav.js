@@ -95,17 +95,23 @@ describe('Directive: WizardNav', function () {
 
     it('should toggle "is_focused" class on the parent step when using the keyboard', function() {
         var step = jQuery('li.complete', element);
-        jQuery('a', step).triggerHandler('focus');
+        jQuery('span.step-title', step).triggerHandler('focus');
         expect(step.hasClass('is_focused')).toBeTruthy();
 
-        jQuery('a', step).triggerHandler('blur');
+        jQuery('span.step-title', step).triggerHandler('blur');
         expect(step.hasClass('is_focused')).toBeFalsy();
     });
 
     it('should set an already completed step to "is_focused" when it is selected', function() {
         var $completedStep = jQuery('li.complete', element);
-        jQuery('a', $completedStep).click();
+        jQuery('span.step-title', $completedStep).click();
         expect($completedStep.hasClass('is_focused')).toBeTruthy();
+    });
+
+    it('should not set an incomplete step to "is_focused" if it is selected', function() {
+        var $incompletedStep = jQuery('li.incomplete', element);
+        jQuery('span.step-title', $incompletedStep).click();
+        expect($incompletedStep.hasClass('is_focused')).toBeFalsy();
     });
 
     describe('when the navigating to /selectFile', function() {

@@ -74,17 +74,19 @@ module.exports = /*@ngInject*/ function ($location, $timeout, StepFactory, Wizar
             };
 
             scope.setFocused = function(step) {
-                var newSteps = Wizard.getSteps();
+                if (step.isSelectable()) {
+                    var newSteps = Wizard.getSteps();
 
-                for (var i=0; i < newSteps.length; i++) {
-                    if (newSteps[i] === step) {
-                        newSteps[i].isFocused = true;
-                    } else {
-                        newSteps[i].isFocused = false;
+                    for (var i=0; i < newSteps.length; i++) {
+                        if (newSteps[i] === step) {
+                            newSteps[i].isFocused = true;
+                        } else {
+                            newSteps[i].isFocused = false;
+                        }
+                        newSteps[i] = getStepClass(newSteps[i]);
                     }
-                    newSteps[i] = getStepClass(newSteps[i]);
+                    $location.path(step.view);
                 }
-                $location.path(step.view);
             };
 
             // Watch the Wizard steps to see if they change
@@ -101,11 +103,11 @@ module.exports = /*@ngInject*/ function ($location, $timeout, StepFactory, Wizar
                 scope.steps = newSteps;
 
                 $timeout(function() { // Wrap the events in a timeout to give the partial time to render :(
-                    element.find('a').on('focus', function(event) {
+                    element.find('span.step-title').on('focus', function(event) {
                         angular.element(event.target).parent().addClass('is_focused');
                     });
 
-                    element.find('a').on('blur', function(event) {
+                    element.find('span.step-title').on('blur', function(event) {
                         angular.element(event.target).parent().removeClass('is_focused');
                     });
                 }, 100);
