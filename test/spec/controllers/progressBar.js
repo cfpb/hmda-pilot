@@ -9,6 +9,9 @@ describe('Controller: ProgressBarCtrl', function () {
         mockEngine = {
             getProgress: function() {
                 return { events: { on: function() {} } };
+            },
+            getFileProgress: function() {
+                return { events: { on: function() {} } };
             }
         };
 
