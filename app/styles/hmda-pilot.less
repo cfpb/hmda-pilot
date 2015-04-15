@@ -6,7 +6,12 @@
 @import (less) "../../node_modules/cf-core/src/cf-vars.less";
 @import (less) "../../node_modules/cf-core/src/cf-media-queries.less";
 @import (less) "../../node_modules/cf-core/src/cf-utilities.less";
-@import (less) "../../node_modules/cf-core/src/cf-base.less";
+
+// TODO: Replace with cf-core/src/cf-base.less once the fonts for the Capital
+// Framework are self-hosted.
+// @see https://github.com/cfpb/cf-core/issues/33
+@import (less) "cf-base.less";
+
 @import (less) "../../node_modules/cf-grid/src/cf-grid.less";
 @import (less) "../../node_modules/cf-buttons/src/cf-buttons.less";
 @import (less) "../../node_modules/cf-forms/src/cf-forms.less";
