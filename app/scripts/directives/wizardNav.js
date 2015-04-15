@@ -65,7 +65,7 @@ module.exports = /*@ngInject*/ function ($location, $timeout, StepFactory, Wizar
         scope: {
             steps: '='
         },
-        link: function(scope) {
+        link: function(scope, element) {
             // Initialize scope variables
             scope.steps = [];
 
@@ -103,6 +103,15 @@ module.exports = /*@ngInject*/ function ($location, $timeout, StepFactory, Wizar
 
                 scope.steps = newSteps;
 
+                $timeout(function() { // Wrap the events in a timeout to give the partial time to render :(
+                    element.find('a').on('focus', function(event) {
+                        angular.element(event.target).parent().addClass('is_focused');
+                    });
+
+                    element.find('a').on('blur', function(event) {
+                        angular.element(event.target).parent().removeClass('is_focused');
+                    });
+                }, 100);
             });
 
             scope.$on('$routeChangeSuccess', function (event, current, previous) {
