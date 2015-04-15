@@ -1,4 +1,5 @@
 'use strict';
+var ReadableBlobStream = require('readable-blob-stream');
 
 /**
  * @ngdoc function
@@ -7,7 +8,7 @@
  * # Select File
  * Controller for selecting a HMDA file and Reporting Year for verification.
  */
-module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileReader, FileMetadata, HMDAEngine, Wizard, Session, ngDialog, Configuration) {
+module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileMetadata, HMDAEngine, Wizard, Session, ngDialog, Configuration) {
     var progressDialog,
         fiscalYears = HMDAEngine.getValidYears();
 
@@ -33,10 +34,8 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileRe
     };
 
     $scope.getFile = function() {
-        // Read the contents of the file and set a value in the scope when its complete
-        FileReader.readAsText($scope.file, 'utf-8', $scope).then(function(result) {
-            $scope.hmdaData.file = result;
-        });
+        // Assign selected file as a readable stream
+        $scope.hmdaData.file = new ReadableBlobStream($scope.file);
 
         // Set the filename so that we can use it when displaying the metadata
         FileMetadata.setFilename($scope.file.name);
@@ -70,7 +69,6 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileRe
             if (fileErr) {
                 // Close the progress dialog
                 progressDialog.close();
-
                 $scope.errors.global = fileErr;
                 $scope.$apply();
                 return;
@@ -82,6 +80,8 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileRe
                 console.time('total time for syntactical and validity edits');
             }
 
+            // Reset progress back to 0
+            $scope.percentageComplete = 0;
             // Give a name to the current step in the process (shown in the progressDialog)
             $scope.processStep = 'Validating Syntactical and Validity edits...';
 

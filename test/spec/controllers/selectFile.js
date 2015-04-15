@@ -12,7 +12,6 @@ describe('Controller: SelectFileCtrl', function () {
         Q,
         Wizard,
         FileMetadata,
-        FileReader,
         HMDAEngine,
         mockEngine = {
             getValidYears: function() { return ['2013', '2014']; },
@@ -41,7 +40,7 @@ describe('Controller: SelectFileCtrl', function () {
         $templateCache.put(templateId, directiveTemplate);
     }));
 
-    beforeEach(inject(function ($rootScope, $location, $controller, $q, $timeout, _Wizard_, _FileMetadata_, _FileReader_, _Configuration_, _ngDialog_) {
+    beforeEach(inject(function ($rootScope, $location, $controller, $q, $timeout, _Wizard_, _FileMetadata_, _Configuration_, _ngDialog_) {
         scope = $rootScope.$new();
         controller = $controller;
         location = $location;
@@ -49,7 +48,6 @@ describe('Controller: SelectFileCtrl', function () {
         timeout = $timeout;
         Wizard = _Wizard_;
         FileMetadata = _FileMetadata_;
-        FileReader = _FileReader_;
         HMDAEngine = mockEngine;
 
         controller('SelectFileCtrl', {
@@ -59,7 +57,6 @@ describe('Controller: SelectFileCtrl', function () {
             $timeout: timeout,
             Wizard: _Wizard_,
             FileMetadata: _FileMetadata_,
-            FileReader: _FileReader_,
             HMDAEngine: mockEngine,
             ngDialog: _ngDialog_,
             Configuration: _Configuration_
@@ -83,9 +80,8 @@ describe('Controller: SelectFileCtrl', function () {
 
     describe('getFile()', function() {
         beforeEach(function() {
-            scope.file = {
-                name: 'test.dat'
-            };
+            scope.file = [];
+            scope.file.name = 'test.dat';
             scope.getFile();
             scope.$digest();
         });
