@@ -102,6 +102,12 @@ describe('Directive: WizardNav', function () {
         expect(step.hasClass('is_focused')).toBeFalsy();
     });
 
+    it('should set an already completed step to "is_focused" when it is selected', function() {
+        var $completedStep = jQuery('li.complete', element);
+        jQuery('a', $completedStep).click();
+        expect($completedStep.hasClass('is_focused')).toBeTruthy();
+    });
+
     describe('when the navigating to /selectFile', function() {
         describe('and Configuration.confirmSessionReset is true', function() {
             it('should display a confirmation dialog', function() {
