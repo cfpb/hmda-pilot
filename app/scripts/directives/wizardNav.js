@@ -17,11 +17,11 @@ module.exports = /*@ngInject*/ function ($location, $timeout, StepFactory, Wizar
             step.stepClass = step.status;
         }
 
-        if (step.isComplete()) {
+        if (step.isComplete() || step.isActive) {
             step.stepClass += ' focusable';
         }
 
-        if (step.isFocused) {
+        if (step.isFocused && !step.isActive) {
             step.stepClass += ' is_focused';
         }
 
