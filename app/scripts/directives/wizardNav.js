@@ -16,7 +16,7 @@ module.exports = /*@ngInject*/ function ($location, $timeout, StepFactory, Wizar
             step.stepClass = step.status;
         }
 
-        if (step.isComplete()) {
+        if (step.isComplete() || (step.isFocused && !step.isActive)) {
             step.stepClass += ' focusable';
         }
 
@@ -72,8 +72,13 @@ module.exports = /*@ngInject*/ function ($location, $timeout, StepFactory, Wizar
 
             scope.setActive = function(step) {
                 console.log('markActive');
+                var newSteps = Wizard.getSteps();
+
+                for (var i=0; i < newSteps.length; i++) {
+                    newSteps[i].isFocused = false;
+                }
+                step.isFocused = true;
                 $location.path(step.view);
-                Wizard.setCurrentStep(step);
             };
 
             // Watch the Wizard steps to see if they change

@@ -15,6 +15,7 @@ module.exports = /*@ngInject*/ function (StepStatus) {
         this.view = view;
         this.status = StepStatus.incomplete;
         this.isActive = false;
+        this.isFocused = false;
     }
 
     Step.prototype = {
@@ -32,6 +33,10 @@ module.exports = /*@ngInject*/ function (StepStatus) {
 
         markIncomplete: function() {
             this.status = StepStatus.incomplete;
+        },
+
+        isSelectable: function() {
+            return this.status === StepStatus.complete || this.isActive;
         }
     };
 
