@@ -93,6 +93,13 @@ angular
             return 'You are about to reset your session.\n\nDoing so will return you to the Select File and Validate page and you will need to resubmit your HMDA File for validation.';
         };
     }
+
+    // Make bluebird promises behave like $q promises
+    // http://stackoverflow.com/questions/23984471/how-do-i-use-bluebird-with-angular
+    Promise.setScheduler(function(cb) {
+        $rootScope.$evalAsync(cb);
+    });
+
   });
 
 require('./services');

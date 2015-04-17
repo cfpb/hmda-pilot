@@ -530,11 +530,11 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'jshint',
+      'replace:local',
       'browserify:dev',
       'less:server',
       'concurrent:server',
       'autoprefixer',
-      'replace:local',
       'markdown:help',
       'connect:livereload',
       'watch'

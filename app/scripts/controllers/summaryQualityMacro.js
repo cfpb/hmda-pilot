@@ -82,7 +82,8 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
             console.time('total time for special edits');
         }
 
-        $q.all([HMDAEngine.runSpecial(ruleYear)]).then(function() {
+        Promise.all([HMDAEngine.runSpecial(ruleYear)])
+        .then(function() {
 
             /* istanbul ignore if debug */
             if (HMDAEngine.getDebug()) {
