@@ -7,7 +7,7 @@
  * # ProgressBarCtrl
  * Controller of the hmdaPilotApp
  */
-module.exports = /*@ngInject*/ function ($scope, $window, $location, HMDAEngine) {
+module.exports = /*@ngInject*/ function ($scope, $window, HMDAEngine) {
 
     $scope.percentageComplete = 0;
 
