@@ -65,7 +65,7 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
             console.time('total time for quality and macro edits');
         }
 
-        $q.all([HMDAEngine.runQuality(ruleYear), HMDAEngine.runMacro(ruleYear)])
+        Promise.all([HMDAEngine.runQuality(ruleYear), HMDAEngine.runMacro(ruleYear)])
         .then(function() {
 
             /* istanbul ignore if debug */

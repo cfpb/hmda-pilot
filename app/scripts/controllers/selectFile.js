@@ -85,7 +85,7 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileMe
             // Give a name to the current step in the process (shown in the progressDialog)
             $scope.processStep = 'Validating Syntactical and Validity edits...';
 
-            $q.all([HMDAEngine.runSyntactical(hmdaData.year), HMDAEngine.runValidity(hmdaData.year)])
+            Promise.all([HMDAEngine.runSyntactical(hmdaData.year), HMDAEngine.runValidity(hmdaData.year)])
             .then(function() {
 
                 /* istanbul ignore if debug */

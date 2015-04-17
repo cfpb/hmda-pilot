@@ -10,6 +10,16 @@ require('./modules/HMDAEngine');
 require('./modules/hmdaFilters');
 require('ng-dialog');
 
+// Make bluebird promises behave like $q promises
+// http://stackoverflow.com/questions/23984471/how-do-i-use-bluebird-with-angular
+function bluebirdDigests(app) {
+    app.run(['$rootScope', function($rootScope) {
+        Promise.setScheduler(function(cb) {
+            $rootScope.$evalAsync(cb);
+        });
+    }]);
+}
+
 /**
  * @ngdoc overview
  * @name hmdaPilotApp
@@ -18,8 +28,7 @@ require('ng-dialog');
  *
  * Main module of the application.
  */
-angular
-  .module('hmdaPilotApp', [
+var app = angular.module('hmdaPilotApp', [
     'ngAria',
     'ngResource',
     'ngRoute',
@@ -94,6 +103,8 @@ angular
         };
     }
   });
+
+bluebirdDigests(app);
 
 require('./services');
 require('./directives');
