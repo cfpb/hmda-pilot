@@ -2,5 +2,13 @@
     <div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{percentageComplete}}" aria-valuetext="Complete" class="meter">
         <span style="width:{{percentageComplete}}%"></span>
     </div>
-    <p class="description">{{processStep}}</p>
+
+    <p class="description ngdialog-message">{{processStep}}</p>
+
+    <div class="dialog-buttons">
+        <button type="button" class="btn btn__warning" ng-click="cancel()">
+            <span class="btn_icon__left cf-icon cf-icon-delete"></span>
+            Start over
+        </button>
+    </div>
 </div>

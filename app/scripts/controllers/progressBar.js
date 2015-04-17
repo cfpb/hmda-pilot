@@ -7,12 +7,12 @@
  * # ProgressBarCtrl
  * Controller of the hmdaPilotApp
  */
-module.exports = /*@ngInject*/ function ($scope, HMDAEngine) {
+module.exports = /*@ngInject*/ function ($scope, $window, $location, HMDAEngine) {
 
     $scope.percentageComplete = 0;
 
     function applyProgress(percent) {
-        $scope.$apply(function($scope){
+        $scope.$evalAsync(function($scope){
             $scope.percentageComplete = percent;
         });
     }
@@ -20,4 +20,8 @@ module.exports = /*@ngInject*/ function ($scope, HMDAEngine) {
     HMDAEngine.getProgress().events.on('progressStep', applyProgress);
     HMDAEngine.getFileProgress().events.on('progressStep', applyProgress);
 
+    $scope.cancel = function() {
+        $scope.closeThisDialog();
+        $window.location.reload();
+    };
 };
