@@ -1,0 +1,31 @@
+{
+	"tags"      : {
+		"allowUnknownTags" : true
+	},
+	"plugins"   : [
+		"plugins/markdown",
+		"node_modules/angular-jsdoc/plugins/ngdoc"
+	],
+
+	"templates" : {
+		"cleverLinks"           : true,
+		"monospaceLinks"        : false,
+		"dateFormat"            : "ddd MMM Do YYYY",
+		"outputSourceFiles"     : true,
+		"outputSourcePath"      : true,
+		"systemName"            : "HMDA Pilot",
+		"footer"                : "",
+		"copyright"             : "",
+		"navType"               : "vertical",
+		"theme"                 : "spacelab",
+		"linenums"              : true,
+		"collapseSymbols"       : false,
+		"inverseNav"            : false,
+		"highlightTutorialCode" : true,
+		"protocol": "fred://"
+	},
+	"markdown"  : {
+		"parser"   : "gfm",
+		"hardwrap" : true
+	}
+}

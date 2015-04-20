@@ -116,14 +116,6 @@ module.exports = function (grunt) {
           open: true,
           base: '<%= yeoman.dist %>'
         }
-      },
-      docs: {
-        options: {
-          port: 9002,
-          open: true,
-          base: 'docs',
-          keepalive: true
-        }
       }
     },
 
@@ -501,8 +493,15 @@ module.exports = function (grunt) {
         }]
       }
     },
-    ngdocs: {
-      all: ['<%= yeoman.app %>/scripts/{,*/}*.js']
+    jsdoc : {
+        dist : {
+            src: ['<%= yeoman.app %>/scripts/{,*/}*.js', 'README.md'],
+            options: {
+                destination: 'docs',
+                template : 'node_modules/grunt-jsdoc/node_modules/ink-docstrap/template',
+                configure: '.jsdoc.conf.json'
+            }
+        }
     },
     markdown: {
         help: {
@@ -604,7 +603,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('generate-docs', [
       'clean:docs',
-      'ngdocs',
-      'connect:docs'
+      'jsdoc:dist'
   ]);
 };
