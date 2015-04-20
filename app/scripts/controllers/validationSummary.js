@@ -11,6 +11,7 @@ module.exports = /*@ngInject*/ function ($scope, $location, FileMetadata, HMDAEn
 
     $scope.fileMetadata = FileMetadata.get();
     $scope.transmittalSheet = HMDAEngine.getHmdaJson().hmdaFile.transmittalSheet;
+    HMDAEngine.destroyDB();
 
     $scope.previous = function () {
         $location.path('/summaryMSA-IRS');

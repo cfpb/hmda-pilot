@@ -22,7 +22,8 @@ describe('Controller: SelectFileCtrl', function () {
             runSyntactical: function() { return; },
             runValidity: function() { return; },
             getDebug: function() { return false; },
-            setUseLocalDB: function() { }
+            setUseLocalDB: function() { },
+            destroyDB: function() { return; }
         };
 
 
@@ -50,6 +51,8 @@ describe('Controller: SelectFileCtrl', function () {
         FileMetadata = _FileMetadata_;
         HMDAEngine = mockEngine;
 
+        spyOn(HMDAEngine, 'destroyDB');
+
         controller('SelectFileCtrl', {
             $scope: scope,
             $location: location,
@@ -75,6 +78,10 @@ describe('Controller: SelectFileCtrl', function () {
         it('should include an empty errors object', function () {
             expect(scope.errors).toBeDefined();
             expect(scope.errors).toEqual({});
+        });
+
+        it('should call destroyDB', function() {
+            expect(HMDAEngine.destroyDB).toHaveBeenCalled();
         });
     });
 
