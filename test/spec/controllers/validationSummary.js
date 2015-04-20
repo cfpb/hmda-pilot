@@ -8,8 +8,10 @@ describe('Controller: ValidationSummaryCtrl', function () {
     var scope,
         location,
         mockNgDialog,
+        HMDAEngine,
         mockEngine = {
-            getHmdaJson: function() { return {hmdaFile: { transmittalSheet: {}}}; }
+            getHmdaJson: function() { return {hmdaFile: { transmittalSheet: {}}}; },
+            destroyDB: function() { return; }
         };
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
@@ -29,6 +31,9 @@ describe('Controller: ValidationSummaryCtrl', function () {
             openConfirm: function() { }
         };
         spyOn(mockNgDialog, 'openConfirm').and.returnValue(mockNgDialogPromise);
+
+        HMDAEngine = mockEngine;
+        spyOn(HMDAEngine, 'destroyDB');
 
         $controller('ValidationSummaryCtrl', {
             $scope: scope,
@@ -60,6 +65,11 @@ describe('Controller: ValidationSummaryCtrl', function () {
         it('should include the file transmittalSheet', function() {
             expect(scope.transmittalSheet).toBeDefined();
         });
+
+        it('should call destroyDB', function() {
+            expect(HMDAEngine.destroyDB).toHaveBeenCalled();
+        });
+
     });
 
     describe('previous()', function() {

@@ -17,6 +17,7 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileMe
     HMDAEngine.clearHmdaJson();
     HMDAEngine.clearErrors();
     HMDAEngine.clearProgress();
+    HMDAEngine.destroyDB();
     $scope.metadata = FileMetadata.clear();
     $scope.wizardSteps = Wizard.initSteps();
 
