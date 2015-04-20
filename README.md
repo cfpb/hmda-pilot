@@ -54,13 +54,16 @@ grunt build
 
 Copy the files in `dist` to your web server root
 
-### Viewing the documentation
-To generate the documentation, via ngDoc:
+## Documentation
 
+Documentation of is maintained within the source code using [JSDoc](http://usejsdoc.org/) tags within JavaScript block comments.
+
+To generate the documentation, run the grunt task:
 ```shell
-grunt generate-docs
+$ grunt generate-docs
 ```
 
+You can then open './docs/index.html' in your browser to view the documentation.
 
 ## Getting involved
 
