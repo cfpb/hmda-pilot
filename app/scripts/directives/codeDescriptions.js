@@ -10,20 +10,26 @@
 module.exports = /*@ngInject*/ function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/codeDescriptions.html',
-        controller: /*ngInject*/ function($scope, HMDAEngine) {
-            var properties = {};
+        template: '<span class="pointer" ng-click="open()">Show List of HMDA Edit Values</span>',
+        controller: /*ngInject*/ function($scope, HMDAEngine, ngDialog) {
+            $scope.open = function() {
+                var properties = {};
 
-            var fileSpec = HMDAEngine.getFileSpec(HMDAEngine.getRuleYear());
-            angular.forEach(['transmittalSheet', 'loanApplicationRegister'], function(val) {
-                for (var prop in fileSpec[val]) {
-                    var property = fileSpec[val][prop];
-                    if (property.validation && property.validation.type === 'number' && property.validation.values) {
-                        properties[property.label] = property.validation.values;
+                var fileSpec = HMDAEngine.getFileSpec(HMDAEngine.getRuleYear());
+                angular.forEach(['transmittalSheet', 'loanApplicationRegister'], function(val) {
+                    for (var prop in fileSpec[val]) {
+                        var property = fileSpec[val][prop];
+                        if (property.validation && property.validation.type === 'number' && property.validation.values) {
+                            properties[property.label] = property.validation.values;
+                        }
                     }
-                }
-            });
-            console.log(properties);
+                });
+
+                ngDialog.open({
+                    template: 'partials/codeDescriptions.html',
+                    data: properties
+                });
+            };
         }
     };
 };
