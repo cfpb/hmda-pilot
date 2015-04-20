@@ -12,6 +12,8 @@ describe('Directive: Code Descriptions', function () {
     var element,
         scope,
         $el,
+        HMDAEngine,
+        ngDialog,
         mockFileSpec = {
             transmittalSheet: {
                 agencyCode: {
@@ -34,7 +36,7 @@ describe('Directive: Code Descriptions', function () {
                     label: 'Loan Type',
                     validation: {
                         type: 'number',
-                        'values': {
+                        values: {
                             '1': 'Conventional (any loan other than FHA, VA, FSA, or RHS loans)',
                             '2': 'FHA-insured (Federal Housing Administration)',
                             '3': 'VA-guaranteed (Veterans Administration)',
@@ -46,13 +48,9 @@ describe('Directive: Code Descriptions', function () {
         };
 
     beforeEach(inject(function(_ngDialog_) {
-        spyOn(_ngDialog_, 'open');
-    }));
-
-    beforeEach(angular.mock.module(function($provide) {
-        $provide.value('HMDAEngine', {
-            getFileSpec: function() { return mockFileSpec; }
-        });
+        HMDAEngine = { getFileSpec: function() { return mockFileSpec; } };
+        ngDialog = _ngDialog_;
+        spyOn(ngDialog, 'open');
     }));
 
     beforeEach(inject(function($templateCache) {
