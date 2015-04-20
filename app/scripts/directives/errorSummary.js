@@ -1,11 +1,10 @@
 'use strict';
 
 /**
- * @ngdoc directive
- * @name hmdaPilotApp.directive:ErrorSummary
- * @description
- * # Error Summary directive
  * Directive for displaying a summary of edit errors
+ *
+ * @namespace hmdaPilotApp
+ * @module {Directive} ErrorSummary
  */
 module.exports = /*@ngInject*/ function () {
 

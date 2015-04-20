@@ -1,11 +1,10 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name hmdaPilotApp.controller:SummarySyntacticalValidityCtrl
- * @description
- * # SummarySyntacticalValidityCtrl
- * Controller for the Syntactical and Validity Summary view
+ * Provides the scope and functions for the Syntactical and Validity Summary view.
+ *
+ * @namespace hmdaPilotApp
+ * @module {Controller} SummarySyntacticalValidity
  */
 module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEngine, Wizard, ngDialog, Configuration) {
 

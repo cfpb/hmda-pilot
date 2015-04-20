@@ -1,11 +1,10 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name hmdaPilotApp.controller:ProgressBarCtrl
- * @description
- * # ProgressBarCtrl
- * Controller of the hmdaPilotApp
+ * Provides the scope and functions for the progress bar.
+ *
+ * @namespace hmdaPilotApp
+ * @module {Controller} ProgressBar
  */
 module.exports = /*@ngInject*/ function ($scope, $window, HMDAEngine) {
 

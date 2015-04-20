@@ -1,11 +1,11 @@
 'use strict';
 
 /**
- * @ngdoc service
- * @name hmdaPilotApp.service:Session
- * @description
- * # Session service
- * Service to maintain information about the current session
+ * Maintain information about the current session. Useful for sharing
+ * information between controllers.
+ *
+ * @namespace hmdaPilotApp
+ * @module {Service} Session
  */
 module.exports = /*@ngInject*/ function () {
 
@@ -19,7 +19,7 @@ module.exports = /*@ngInject*/ function () {
     /**
      * Get the current session
      *
-     * @return {Object} Session
+     * @return {object} Session
      */
     this.getSession = function() {
         return session;
@@ -28,7 +28,7 @@ module.exports = /*@ngInject*/ function () {
     /**
      * Reset the current session to defaults
      *
-     * @return {Object} session
+     * @return {object} session
      */
     this.reset = function() {
         session.verifiedQualityEdits = [];
@@ -41,8 +41,8 @@ module.exports = /*@ngInject*/ function () {
     /**
      * Is an editId verified or not
      *
-     * @param {String} editId
-     * @return {Boolean}
+     * @param {string} editId
+     * @return {boolean}
      */
     this.isVerified = function(editId) {
         if (session.verifiedQualityEdits.indexOf(editId) !== -1) {
@@ -72,7 +72,7 @@ module.exports = /*@ngInject*/ function () {
     /**
      * Add an editId to a list of verified Quality edits
      *
-     * @param {String} editId to be added
+     * @param {string} editId to be added
      * @return {Array} verified quality edits
      */
     this.addToVerifiedQualityEdits = function (editId) {
@@ -85,7 +85,7 @@ module.exports = /*@ngInject*/ function () {
     /**
      * Remove a specified Quality edit from the list of verified
      *
-     * @param {String} editId to be removed
+     * @param {string} editId to be removed
      * @return {Array} verified quality edits
      */
     this.removeVerifiedQualityEdit = function (editId) {
@@ -108,8 +108,8 @@ module.exports = /*@ngInject*/ function () {
     /**
      * Add an editId to a list of verified Macro edits
      *
-     * @param {String} editId to be added
-     * @param {String} reason
+     * @param {string} editId to be added
+     * @param {string} reason
      * @return {Array} verified macro edits
      */
     this.addToVerifiedMacroEdits = function (editId, reason) {
@@ -122,7 +122,7 @@ module.exports = /*@ngInject*/ function () {
     /**
      * Remove a specified Macro edit from the list of verified
      *
-     * @param {String} editId to be removed
+     * @param {string} editId to be removed
      * @return {Array} verified macro edits
      */
     this.removeVerifiedMacroEdit = function (editId) {
@@ -133,7 +133,7 @@ module.exports = /*@ngInject*/ function () {
     /**
      * Get the verification reason for a specific Macro or Special edit by Id
      *
-     * @param {String} editId
+     * @param {string} editId
      * @return {String|Object} reason
      */
     this.getVerifiedReasonByEditId = function(editId) {
@@ -159,9 +159,9 @@ module.exports = /*@ngInject*/ function () {
     /**
      * Add an editId to a list of verified Special edits
      *
-     * @param {String} editId to be added
+     * @param {string} editId to be added
      * @param {Array} selected options
-     * @return {Object} verified special edits
+     * @return {object} verified special edits
      */
     this.addToVerifiedSpecialEdits = function (editId, selected) {
         session.verifiedSpecialEdits[editId] = selected;
@@ -171,8 +171,8 @@ module.exports = /*@ngInject*/ function () {
     /**
      * Remove a specified Special edit from the list of verified
      *
-     * @param {String} editId to be removed
-     * @return {Object} verified special edits
+     * @param {string} editId to be removed
+     * @return {object} verified special edits
      */
     this.removeVerifiedSpecialEdit = function (editId) {
         delete session.verifiedSpecialEdits[editId];
@@ -184,7 +184,7 @@ module.exports = /*@ngInject*/ function () {
     /**
      * Has the IRS Report been verified?
      *
-     * @return {Boolean}
+     * @return {boolean}
      */
     this.hasVerifiedIRSReport = function() {
         return session.verifiedIRSReport;
@@ -193,7 +193,7 @@ module.exports = /*@ngInject*/ function () {
     /**
      * Mark the IRS Report as verified
      *
-     * @return {Boolean}
+     * @return {boolean}
      */
     this.verifyIRSReport = function() {
         session.verifiedIRSReport = true;
@@ -203,7 +203,7 @@ module.exports = /*@ngInject*/ function () {
     /**
      * Mark the IRS Report as unverified
      *
-     * @return {Boolean}
+     * @return {boolean}
      */
     this.unverifyIRSReport = function() {
         session.verifiedIRSReport = false;

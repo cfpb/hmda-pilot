@@ -1,11 +1,10 @@
 'use strict';
 
 /**
- * @ngdoc directive
- * @name hmdaPilotApp.directive:WizardNav
- * @description
- * # Wizard Nav directive
  * Directive for displaying the wizard navigation.
+ *
+ * @namespace hmdaPilotApp
+ * @module {Directive} WizardNav
  */
 module.exports = /*@ngInject*/ function ($location, $timeout, StepFactory, Wizard, ngDialog) {
 

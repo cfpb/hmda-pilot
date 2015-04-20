@@ -1,11 +1,10 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name hmdaPilotApp.controller:SummaryQualityMacroCtrl
- * @description
- * # SummaryQualityMacroCtrl
- * Controller for the Syntactical and Validity Summary view
+ * Provides the scope and functions for the Quality and Macro Summary view.
+ *
+ * @namespace hmdaPilotApp
+ * @module {Controller} SummaryQualityMacro
  */
 module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEngine, Wizard, Session, ngDialog, Configuration) { /*jshint ignore:line*/
 

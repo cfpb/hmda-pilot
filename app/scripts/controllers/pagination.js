@@ -1,11 +1,10 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name hmdaPilotApp.controller:PaginationCtrl
- * @description
- * # PaginationCtrl
- * Controller for pagination
+ * Provides the scope and functions for the {@link pagination} directive.
+ *
+ * @namespace hmdaPilotApp
+ * @module {Controller} Pagination
  */
 module.exports = /*@ngInject*/ function ($scope, $element, $timeout) {
     $scope.$parent.paginate = {

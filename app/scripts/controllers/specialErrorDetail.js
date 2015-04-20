@@ -1,11 +1,11 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name hmdaPilotApp.controller:SpecialErrorDetailCtrl
- * @description
- * # SpecialErrorDetailCtrl
- * Controller of the hmdaPilotApp
+ * Provides the scope and functions for the special, Q029 and Q595, Error Detail
+ * views.
+ *
+ * @namespace hmdaPilotApp
+ * @module {Controller} SpecialErrorDetail
  */
 module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http, $filter, HMDAEngine, Session) {
 

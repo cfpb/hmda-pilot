@@ -1,11 +1,10 @@
 'use strict';
 
 /**
- * @ngdoc directive
- * @name hmdaPilotApp.directive:Pagination
- * @description
- * # Pagination directive
- * Directive for displaying the pagination
+ * Wrapper directive for the paginationNav and paginationSize directives.
+ *
+ * @namespace hmdaPilotApp
+ * @module {Directive} Pagination
  */
 module.exports = /*@ngInject*/ function () {
 

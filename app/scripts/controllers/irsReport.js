@@ -1,11 +1,10 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name hmdaPilotApp.controller:IRSReportCtrl
- * @description
- * # IRSReportCtrl
- * Controller of the hmdaPilotApp
+ * Provides the scope and functions for the IRS Report view
+ *
+ * @namespace hmdaPilotApp
+ * @module {Controller} IRSReport
  */
 module.exports = /*@ngInject*/ function ($scope, $location, $q, HMDAEngine, Session) {
 

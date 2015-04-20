@@ -1,11 +1,10 @@
 'use strict';
 
 /**
- * @ngdoc directive
- * @name hmdaPilotApp.directive:hmdaExport
- * @description
- * # Export error results to CSV
- * Directive for the Export button used on summary and detail views
+ * Export button used on Error Summary and Error Detail views
+ *
+ * @namespace hmdaPilotApp
+ * @module {Directive} HmdaExport
  */
 module.exports = /*@ngInject*/ function (HMDAEngine) {
 

@@ -1,11 +1,10 @@
 'use strict';
 
 /**
- * @ngdoc object
- * @name hmdaPilotApp.constant:stepStatus
- * @description
- * # Step Status constant
  * Constant definition of the different step statuses.
+ *
+ * @namespace hmdaPilotApp
+ * @module {Object} StepStatus
  */
 module.exports = {
     complete: 'complete',
