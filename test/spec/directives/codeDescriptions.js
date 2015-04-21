@@ -92,17 +92,17 @@ describe('Directive: Code Descriptions', function () {
     }));
 
     describe('template', function() {
-        it('should display a clickable span', function() {
-            var $span = $el.find('span');
-            expect($span.hasClass('pointer')).toBeTruthy();
-            $span.click();
+        it('should display a button to open the modal', function() {
+            var $btn = $el.find('button');
+            expect($btn).not.toBeNull();
+            $btn.click();
             expect(ngDialog.open).toHaveBeenCalled();
         });
     });
 
     describe('open', function() {
         it('should display a definition list', function() {
-            jQuery('span', element).click();
+            $el.find('button').click();
             expect($el.find('dl')).toBeDefined();
         });
     });

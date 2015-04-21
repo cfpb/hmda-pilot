@@ -10,7 +10,7 @@
 module.exports = /*@ngInject*/ function() {
     return {
         restrict: 'E',
-        template: '<span class="pointer" ng-click="open()">Show List of HMDA Edit Values</span>',
+        template: '<button class="btn btn__link" ng-click="open()">Show List of HMDA Edit Values</button>',
         controller: /*ngInject*/ function($scope, HMDAEngine, ngDialog) {
             $scope.open = function() {
                 var properties = {};
