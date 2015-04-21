@@ -1,11 +1,10 @@
 'use strict';
 
 /**
- * @ngdoc directive
- * @name hmdaPilotApp.directive:codeDescriptions
- * @description
- * # Display text descriptions of what each numeric code is
- * Directive for displaying code descriptions
+ * Display text descriptions of what each numeric code is
+ *
+ * @namespace hmdaPilotApp
+ * @module {Directive} CodeDescriptions
  */
 module.exports = /*@ngInject*/ function() {
     return {
