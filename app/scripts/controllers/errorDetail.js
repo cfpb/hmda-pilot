@@ -1,11 +1,11 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name hmdaPilotApp.controller:ErrorDetailCtrl
- * @description
- * # ErrorDetailCtrl
- * Controller of the hmdaPilotApp
+ * Provides the scope and functions for the Syntactical, Validity, Quality and
+ * Macro Error Detail views.
+ *
+ * @namespace hmdaPilotApp
+ * @module {Controller} ErrorDetail
  */
 module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http, HMDAEngine, Session) {
 

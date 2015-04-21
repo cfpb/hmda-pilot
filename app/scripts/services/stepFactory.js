@@ -1,11 +1,10 @@
 'use strict';
 
 /**
- * @ngdoc interface
- * @name hmdaPilotApp.factory:step
- * @description
- * # Step Factory
  * Factory for creating steps that can be used by the Wizard navigation service.
+ *
+ * @namespace hmdaPilotApp
+ * @module {Factory} StepFactory
  */
 module.exports = /*@ngInject*/ function (StepStatus) {
 

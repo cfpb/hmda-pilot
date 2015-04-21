@@ -1,11 +1,10 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name hmdaPilotApp.controller:ValidationSummaryCtrl
- * @description
- * # ValidationSummaryCtrl
- * Controller of the hmdaPilotApp
+ * Provides the scope and functions for the Validation Summary view.
+ *
+ * @namespace hmdaPilotApp
+ * @module {Controller} ValidationSummary
  */
 module.exports = /*@ngInject*/ function ($scope, $location, FileMetadata, HMDAEngine, ngDialog, Configuration) {
 

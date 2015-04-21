@@ -2,11 +2,10 @@
 var ReadableBlobStream = require('readable-blob-stream');
 
 /**
- * @ngdoc function
- * @name hmdaPilotApp.controller:selectFile
- * @description
- * # Select File
- * Controller for selecting a HMDA file and Reporting Year for verification.
+ * Provides the scope and functions for the HMDA file and reporting Year view.
+ *
+ * @namespace hmdaPilotApp
+ * @module {Controller} SelectFile
  */
 module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileMetadata, HMDAEngine, Wizard, Session, ngDialog, Configuration) {
     var progressDialog,

@@ -1,11 +1,10 @@
 'use strict';
 
 /**
- * @ngdoc service
- * @name hmdaPilotApp.service:wizard
- * @description
- * # Wizard navigation service
  * Service for maintaining the state of the wizard navigation.
+ *
+ * @namespace hmdaPilotApp
+ * @module {Service} Wizard
  */
 module.exports = /*@ngInject*/ function (StepFactory) {
 
@@ -45,7 +44,7 @@ module.exports = /*@ngInject*/ function (StepFactory) {
     /**
      * Get the current step
      *
-     * @return {Object} step
+     * @return {object} step
      */
     this.getCurrentStep = function() {
         return steps[currentStepIdx];

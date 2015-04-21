@@ -1,11 +1,10 @@
 'use strict';
 
 /**
- * @ngdoc directive
- * @name hmdaPilotApp.directive:FileSelector
- * @description
- * # File Selector directive
- * Directive for selecting the HMDA Data file
+ * Select the HMDA Data file
+ *
+ * @namespace hmdaPilotApp
+ * @module {Directive} FileSelector
  */
 module.exports = /*@ngInject*/ function () {
 

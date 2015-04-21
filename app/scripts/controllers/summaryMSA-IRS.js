@@ -1,11 +1,10 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name hmdaPilotApp.controller:SummaryMSAIRSCtrl
- * @description
- * # SummaryMSAIRSCtrl
- * Controller of the hmdaPilotApp
+ * Provides the scope and functions for the MSA/MD and IRS Summary view.
+ *
+ * @namespace hmdaPilotApp
+ * @module {Controller} SummaryMSAIRS
  */
 module.exports = /*@ngInject*/ function ($scope, $location, Wizard, HMDAEngine, Session) {
 
