@@ -16,6 +16,22 @@ describe('Directive: Code Descriptions', function () {
         ngDialog,
         mockFileSpec = {
             transmittalSheet: {
+                recordID: {
+                    label: 'Record Identifier',
+                    validation: {
+                        type: 'number',
+                        canBeBlank: false,
+                        canBeNA: false
+                    }
+                },
+                respondentID: {
+                    label: 'Respondent-ID',
+                    validation: {
+                        type: 'string',
+                        canBeBlank: false,
+                        canBeNA: false
+                    }
+                },
                 agencyCode: {
                     label: 'Agency Code',
                     validation: {
@@ -47,8 +63,10 @@ describe('Directive: Code Descriptions', function () {
             }
         };
 
-    beforeEach(inject(function(_ngDialog_) {
-        HMDAEngine = { getFileSpec: function() { return mockFileSpec; } };
+    beforeEach(inject(function(_HMDAEngine_, _ngDialog_) {
+        HMDAEngine = _HMDAEngine_;
+        HMDAEngine.getFileSpec = function() { return mockFileSpec; };
+        HMDAEngine.getRuleYear = function() { return '2013'; };
         ngDialog = _ngDialog_;
         spyOn(ngDialog, 'open');
     }));
@@ -73,8 +91,18 @@ describe('Directive: Code Descriptions', function () {
         $el = jQuery(element);
     }));
 
+    describe('template', function() {
+        it('should display a clickable span', function() {
+            var $span = $el.find('span');
+            expect($span.hasClass('pointer')).toBeTruthy();
+            $span.click();
+            expect(ngDialog.open).toHaveBeenCalled();
+        });
+    });
+
     describe('open', function() {
-        it('should display a definition list', function () {
+        it('should display a definition list', function() {
+            jQuery('span', element).click();
             expect($el.find('dl')).toBeDefined();
         });
     });
