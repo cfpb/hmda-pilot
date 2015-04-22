@@ -7,13 +7,32 @@
  * @namespace hmdaPilotApp
  * @module {Service} Session
  */
-module.exports = /*@ngInject*/ function () {
+module.exports = /*@ngInject*/ function ($cookies, $cookieStore) {
 
-    var session = {
-        verifiedQualityEdits: [],
-        verifiedMacroEdits: {},
-        verifiedSpecialEdits: {},
-        verifiedIRSReport: false
+    var validPassword = 'foobar',
+        session = {
+            verifiedQualityEdits: [],
+            verifiedMacroEdits: {},
+            verifiedSpecialEdits: {},
+            verifiedIRSReport: false
+        },
+        loginDialogOptions = {
+            name: 'login',
+            controller: 'LoginCtrl',
+            template: 'partials/login.html',
+            className: 'login-modal',
+            trapFocus: true,
+            showClose: false,
+            closeByDocument: false,
+            closeByEscape: false,
+        };
+
+    /**
+     * Get the options for the login modal
+     * @return {Object} ngDialog options
+     */
+    this.getLoginDialogOptions = function() {
+        return loginDialogOptions;
     };
 
     /**
@@ -23,6 +42,30 @@ module.exports = /*@ngInject*/ function () {
      */
     this.getSession = function() {
         return session;
+    };
+
+    /**
+     * Checks to see if the session is valid based on session cookie expiration
+     * @return {Boolean}
+     */
+    this.isValidSession = function() {
+        if ($cookieStore.get('validSession')) {
+            return true;
+        }
+        return false;
+    };
+
+    /**
+     * Authenticate with a password.
+     * @param  {String} password Password
+     * @return {Boolean}         Was authentication successful
+     */
+    this.authenticate = function(password) {
+        if (password === validPassword) {
+            $cookieStore.put('validSession', 'true');
+            return true;
+        }
+        return false;
     };
 
     /**
