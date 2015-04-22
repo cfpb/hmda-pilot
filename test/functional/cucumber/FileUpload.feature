@@ -8,12 +8,12 @@ Feature: User can select a HMDA data file from their local machine
 
   Scenario: Incorrectly formatted file
     Given that I am at the HMDA homepage
-    When I upload the "BadFile" file for validation
+    When I upload the 'BadFile' file for validation
     And I click the submit button
     Then I am notified that the format is incorrect
 
   Scenario: Correctly formatted file
     Given that I am at the HMDA homepage
-    When I upload the "V262short.dat" file for validation
+    When I upload the 'V262short.dat' file for validation
     And I click the submit button
     Then I am not notified that the format is incorrect
