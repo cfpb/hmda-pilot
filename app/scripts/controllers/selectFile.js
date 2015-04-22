@@ -9,8 +9,12 @@ var ReadableBlobStream = require('readable-blob-stream');
  */
 module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileMetadata, HMDAEngine, Wizard, Session, ngDialog, Configuration) {
     var progressDialog,
+        loginDialog,
         fiscalYears = HMDAEngine.getValidYears();
 
+    if (! Session.isValidSession()) {
+        loginDialog = ngDialog.open(angular.extend(Session.getLoginDialogOptions()));
+    }
     // Set/Reset the state of different objects on load
     Session.reset();
     HMDAEngine.clearHmdaJson();

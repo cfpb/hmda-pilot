@@ -29,7 +29,8 @@ describe('Controller: SelectFileCtrl', function () {
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function($templateCache) {
+    beforeEach(inject(function($templateCache, $cookieStore) {
+        $cookieStore.put('validSession', 'true');
         var directiveTemplate = null;
         var templateId = 'partials/progressBar.html';
         var req = new XMLHttpRequest();
