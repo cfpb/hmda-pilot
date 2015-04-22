@@ -15,6 +15,14 @@ describe('Service: Session', function () {
         cookieStore = $cookieStore;
     }));
 
+    describe('getLoginDialogOptions()', function() {
+        it('should return dialog options', function() {
+            var options = service.getLoginDialogOptions();
+            expect(options).toBeTruthy();
+            expect(options.name).toBe('login');
+        });
+    });
+
     describe('authenticate()', function() {
         it('should return false and not set cookie when password is invalid', function() {
             expect(service.authenticate('password')).toBeFalsy();
