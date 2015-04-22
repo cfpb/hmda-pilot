@@ -1,6 +1,7 @@
 #https://github.com/cfpb/hmda-pilot/issues/25
 #TODO: Update when this is actually implemented
 
+@wip
 Feature: User receives receipt confirming that all edits have been corrected
     As a user
     I want to view a confirmation page showing that the file has been error checked and that all the syntactical and validity errors have been corrected, all quality errors have been verified, and all errors requiring commentary have been commented

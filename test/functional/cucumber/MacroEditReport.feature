@@ -1,6 +1,7 @@
 #https://github.com/cfpb/hmda-pilot/issues/33
 #TODO: How to access macro report? Currently not implemented?
 
+@wip
 Feature: Display quality edit report
     As a user
     I want to be able to view the macro edits that failed

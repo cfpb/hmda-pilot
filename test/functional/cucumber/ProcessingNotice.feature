@@ -1,6 +1,7 @@
 #https://github.com/cfpb/hmda-pilot/issues/178
 #TODO: Consider combining with other basic UI features
 
+@wip
 Feature: Processing information warning while file is uploading
     As a user
     I want to know when a file is being processed

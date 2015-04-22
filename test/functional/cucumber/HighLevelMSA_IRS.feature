@@ -1,6 +1,7 @@
 #https://github.com/cfpb/hmda-pilot/issues/163
 #TODO: Find best way to include longer description of what feature should do, maybe update 'So that'
 
+@wip
 Feature: High level summary of MSA and IRS reports
     As a user
     I want to be able to view a summary showing how many LARs have MSA/MD problems

@@ -1,6 +1,7 @@
 #https://github.com/cfpb/hmda-pilot/issues/29
 #TODO: Update language when steps are written, possibly test with more files.
 
+@wip
 Feature: User can view a loan-level report of the syntactical/validity edits
     As a user
     I want to be able to see an electronic report of the edits that have failed at the loan ID level

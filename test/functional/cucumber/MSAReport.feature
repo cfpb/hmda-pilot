@@ -2,6 +2,7 @@
 #https://github.com/cfpb/hmda-pilot/issues/167
 #TODO: Update when implemented. Split 166 and 167 if need be.
 
+@wip
 Feature: MSA report
     As a user
     I want to be able to view a report of the MSA/MD branch location issues
