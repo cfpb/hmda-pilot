@@ -65,7 +65,7 @@ module.exports = function (grunt) {
         files: ['Gruntfile.js']
       },
       markdown: {
-        files: ['ABOUT.md', 'COMMON_QUESTIONS.md'],
+        files: ['ABOUT.md', 'COMMON_QUESTIONS.md', 'TERMS_OF_SERVICE.md'],
         tasks: ['markdown:help']
       },
       livereload: {
@@ -508,6 +508,7 @@ module.exports = function (grunt) {
             files: [{
                 'app/partials/about.html': 'ABOUT.md',
                 'app/views/common_questions.html': 'COMMON_QUESTIONS.md',
+                'app/partials/termsOfService.html': 'TERMS_OF_SERVICE.md',
             }],
             options: {
                 template: 'config/md-to-html.jst',
