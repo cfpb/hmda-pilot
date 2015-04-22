@@ -1,9 +1,9 @@
-<form class="frm-login" style="border: none; padding: 0;">
+<form class="frm-login">
     <div class="login-modal-header">
         <h2>Log in</h2>
     </div>
     <div class="login-modal-body">
-        <p ng-show="loginError" class="page-errors">{{loginError}}</p>
+        <p ng-if="loginError" class="page-errors">{{loginError}}</p>
         <div class="form-group">
             <div class="form-group_item">
                 <label for="txt-pwd" class="form-label-header">Password:</label>
@@ -20,7 +20,7 @@
             </div>
         </div>
     </div>
-    <div ng-show="showTerms" class="login-terms ngdialog-message">
+    <div ng-if="showTerms" class="login-terms ngdialog-message">
         <ng-include src="'partials/termsOfService.html'"></ng-include>
     </div>
 </form>
