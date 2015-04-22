@@ -8,3 +8,33 @@
     -ms-transform: translateY(-@offset);
     transform: translateY(-@offset);
 }
+
+// Support shaking an element
+@-webkit-keyframes shake {
+    0%,100% { -webkit-transform:translateX(0); }
+    20%,60% { -webkit-transform:translateX(-10px); }
+    40%,80% { -webkit-transform:translateX(10px); }
+}
+@-moz-keyframes shake {
+    0%,100% { -moz-transform:translateX(0); }
+    20%,60% { -moz-transform:translateX(-10px); }
+    40%,80% { -moz-transform:translateX(10px); }
+}
+@-o-keyframes shake {
+    0%,100% { -o-transform:translateX(0); }
+    20%,60% { -o-transform:translateX(-10px); }
+    40%,80% { -o-transform:translateX(10px); }
+}
+@keyframes shake {
+    0%,100% { transform:translateX(0); }
+    20%,60% { transform:translateX(-10px); }
+    40%,80% { transform:translateX(10px); }
+}
+.shake {
+    -webkit-animation-name: shake;
+    -moz-animation-name: shake;
+    -o-animation-name: shake;
+    animation-name: shake;
+    animation-duration: .5s;
+    animation-fill-mode: both;
+}

@@ -6,7 +6,7 @@
  * @namespace hmdaPilotApp
  * @module {Controller} Login
  */
-module.exports = /*@ngInject*/ function ($scope, Session) {
+module.exports = /*@ngInject*/ function ($scope, $timeout, Session) {
     $scope.password = '';
     $scope.loginError = '';
     $scope.showTerms = false;
@@ -16,8 +16,10 @@ module.exports = /*@ngInject*/ function ($scope, Session) {
         if (Session.authenticate($scope.password)) {
             $scope.closeThisDialog();
         } else {
-            $scope.loginError = 'Invalid password';
             $scope.password = '';
+            $timeout(function() {
+                $scope.loginError = 'Invalid password';
+            });
         }
     };
 

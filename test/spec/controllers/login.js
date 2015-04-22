@@ -6,12 +6,14 @@ require('angular-mocks');
 describe('Controller: LoginCtrl', function () {
 
     var scope,
+        timeout,
         Session;
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function ($rootScope, $controller, _Session_) {
+    beforeEach(inject(function ($rootScope, $controller, $timeout, _Session_) {
         scope = $rootScope.$new();
+        timeout = $timeout;
         Session = _Session_;
         scope.closeThisDialog = function() { return; };
 
@@ -45,8 +47,9 @@ describe('Controller: LoginCtrl', function () {
         it('should set an error and clear password model when password is invalid', function() {
             scope.password = 'password';
             scope.login();
-            expect(scope.loginError).toBe('Invalid password');
             expect(scope.password).toBe('');
+            timeout.flush();
+            expect(scope.loginError).toBe('Invalid password');
         });
     });
 
