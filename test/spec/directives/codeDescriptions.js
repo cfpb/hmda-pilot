@@ -85,17 +85,15 @@ describe('Directive: Code Descriptions', function () {
 
     beforeEach(inject(function ($rootScope, $compile) {
         scope = $rootScope.$new();
-        element = angular.element('<code-descriptions></code-descriptions>');
+        element = angular.element('<button code-descriptions></button>');
         element = $compile(element)(scope);
         scope.$digest();
         $el = jQuery(element);
     }));
 
-    describe('template', function() {
-        it('should display a button to open the modal', function() {
-            var $btn = $el.find('button');
-            expect($btn.length).toBeGreaterThan(0);
-            $btn.click();
+    describe('when applied to an element', function() {
+        it('should open a modal when clicked', function() {
+            $el.click();
             expect(ngDialog.open).toHaveBeenCalled();
         });
     });
