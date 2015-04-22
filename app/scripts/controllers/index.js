@@ -4,6 +4,7 @@ require('angular');
 
 var app = angular.module('hmdaPilotApp');
 
+app.controller('LoginCtrl', require('./login'));
 app.controller('SelectFileCtrl', require('./selectFile'));
 app.controller('SummarySyntacticalValidityCtrl', require('./summarySyntacticalValidity'));
 app.controller('SummaryQualityMacroCtrl', require('./summaryQualityMacro'));
