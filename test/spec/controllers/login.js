@@ -3,7 +3,7 @@
 require('angular');
 require('angular-mocks');
 
-describe('Controller: ProgressBarCtrl', function () {
+describe('Controller: LoginCtrl', function () {
 
     var scope,
         Session;
