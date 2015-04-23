@@ -2,7 +2,7 @@ exports.config = {
 
     baseUrl: 'http://localhost:9000/',
 
-    specs: ['cucumber/IRSReport.feature'],
+    specs: ['cucumber/MSAReport.feature'],
 
     allScriptsTimeout: 30000,
     getPageTimeout: 30000,

@@ -10,6 +10,6 @@ Feature: IRS report
     Given that I am at the HMDA homepage
     When I upload the 'perfect.dat' file and submit
     And I continue to the msa and irs edit reports page
-    And I click on the 'IRS report' link
-    Then I will see the IRS report
-    And I will see a certification of IRS accuracy
+    And I click on the 'IRS' report link
+    Then I will see the 'IRS' report
+    And I will see a certification of accuracy

@@ -9,6 +9,21 @@ module.exports = function() {
     continueButton = element(by.buttonText('Continue'));
     progressBar = element.all(by.css('div.ngdialog-overlay'));
 
+    verifyMacroErrors = function(index, numErrors) {
+        return element(by.model('response.verified')).click().then(function() {
+            var optionsElements = element(by.model('response.reason')).all(by.tagName('option'));
+            optionsElements.get(1).click().then(function() {
+                return element(by.buttonText('Save and continue')).click().then(function() {
+                    if (index===numErrors-1) {
+                        return;
+                    } else {
+                        return verifyMacroErrors (index+1, numErrors);
+                    }
+                });
+            });
+        });
+    };
+
     waitUrlChange = function(startUrl){
         //Waits for URL to change before allowing execution to move forward. Timeout is at end of fn.
         //Finding start URL within fn is slow, and can happen after a quick page change has occurred
@@ -77,6 +92,31 @@ module.exports = function() {
                         continueButton.click();
                         next();
                     });
+                });
+            });
+        });
+    });
+
+    this.When(/^I continue through the quality macro errors page$/, function (next) {
+        var recentlyChangedUrl;
+        waitUrlChange().then(function(){
+            browser.getCurrentUrl().then(function(url){
+                recentlyChangedUrl = url
+            }).then(function(){
+                continueButton.click();
+            }).then(function(){
+                waitUrlChange().then(function() {
+                    element.all(by.partialLinkText('Q0')).then(function (macroErrors) {
+                        macroErrors[0].click().then(function() {
+                            verifyMacroErrors (0, macroErrors.length).then(function () {
+                                continueButton.click().then(function() {
+                                    waitUrlChange().then(function() {
+                                        next();
+                                    });
+                                });
+                            });
+                        })
+                    })
                 });
             });
         });
