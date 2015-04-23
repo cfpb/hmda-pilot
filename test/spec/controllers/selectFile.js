@@ -99,6 +99,7 @@ describe('Controller: SelectFileCtrl', function () {
             timeout = $timeout;
             Wizard = _Wizard_;
             FileMetadata = _FileMetadata_;
+            ngDialog = _ngDialog_;
             HMDAEngine = mockEngine;
 
             spyOn(HMDAEngine, 'destroyDB');
@@ -131,6 +132,11 @@ describe('Controller: SelectFileCtrl', function () {
 
             it('should call destroyDB', function() {
                 expect(HMDAEngine.destroyDB).toHaveBeenCalled();
+            });
+
+            it('should not open the login dialog', function() {
+                spyOn(ngDialog, 'open');
+                expect(ngDialog.open).not.toHaveBeenCalled();
             });
         });
 
