@@ -39,7 +39,7 @@ describe('Controller: LoginCtrl', function () {
 
     describe('login()', function() {
         it('should close the dialog when password is valid', function() {
-            scope.password = 'foobar';
+            scope.password = 'p1l0t';
             scope.login();
             expect(scope.closeThisDialog).toHaveBeenCalled();
         });

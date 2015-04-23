@@ -30,7 +30,7 @@ describe('Service: Session', function () {
         });
 
         it('should return true and set cookie when password is valid', function() {
-            expect(service.authenticate('foobar')).toBeTruthy();
+            expect(service.authenticate('p1l0t')).toBeTruthy();
             expect(cookieStore.get('validSession')).toBeTruthy();
         });
 

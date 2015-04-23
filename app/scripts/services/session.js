@@ -9,7 +9,7 @@
  */
 module.exports = /*@ngInject*/ function ($cookies, $cookieStore) {
 
-    var validPassword = 'foobar',
+    var validPassword = 'p1l0t',
         session = {
             verifiedQualityEdits: [],
             verifiedMacroEdits: {},
