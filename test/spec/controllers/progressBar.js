@@ -3,7 +3,7 @@
 require('angular');
 require('angular-mocks');
 
-describe('Controller: ProgressBarCtrl', function () {
+describe('Controller: ProgressBarCtrl', function() {
 
     var scope,
         location,
@@ -18,7 +18,7 @@ describe('Controller: ProgressBarCtrl', function () {
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function ($rootScope, $window, $controller) {
+    beforeEach(inject(function($rootScope, $window, $controller) {
         scope = $rootScope.$new();
         scope.closeThisDialog = function() { return; };
         location = $window.location;

@@ -6,7 +6,7 @@
  * @namespace hmdaPilotApp
  * @module {Service} Wizard
  */
-module.exports = /*@ngInject*/ function (StepFactory) {
+module.exports = /*@ngInject*/ function(StepFactory) {
 
     var steps,
         currentStepIdx;

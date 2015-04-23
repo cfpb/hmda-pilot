@@ -6,7 +6,7 @@
  * @namespace hmdaPilotApp
  * @module {Directive} ErrorSummary
  */
-module.exports = /*@ngInject*/ function () {
+module.exports = /*@ngInject*/ function() {
 
     function link(scope) {
         if (angular.equals({}, scope.errors)) {

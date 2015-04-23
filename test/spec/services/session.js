@@ -3,7 +3,7 @@
 require('angular');
 require('angular-mocks');
 
-describe('Service: Session', function () {
+describe('Service: Session', function() {
 
     var service,
         cookieStore,
@@ -11,7 +11,7 @@ describe('Service: Session', function () {
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function ($cookies, $cookieStore, _Configuration_, _Session_) {
+    beforeEach(inject(function($cookies, $cookieStore, _Configuration_, _Session_) {
         service = _Session_;
         cookieStore = $cookieStore;
         Configuration = _Configuration_;

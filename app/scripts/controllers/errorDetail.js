@@ -7,7 +7,7 @@
  * @namespace hmdaPilotApp
  * @module {Controller} ErrorDetail
  */
-module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http, HMDAEngine, Session) {
+module.exports = /*@ngInject*/ function($scope, $routeParams, $location, $http, HMDAEngine, Session) {
 
     // Get the list of errors from the HMDAEngine
     var editType = $routeParams.EditType,
@@ -80,7 +80,7 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
         var path = '/summaryQualityMacro',
             currentIdx = $scope.siblingEdits.indexOf(editId);
         if (currentIdx !== ($scope.siblingEdits.length - 1)) {
-            path = '/detail/' + editType + '/' + $scope.siblingEdits[currentIdx+1];
+            path = '/detail/' + editType + '/' + $scope.siblingEdits[currentIdx + 1];
         }
         $location.path(path);
     }

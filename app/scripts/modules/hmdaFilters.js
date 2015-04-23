@@ -2,9 +2,10 @@
 
 function getFileSpecSection(scope, lineNumber) {
     var scopes = {
-        'lar': 'loanApplicationRegister',
-        'ts': 'transmittalSheet'
+        lar: 'loanApplicationRegister',
+        ts: 'transmittalSheet'
     };
+
     // Set proper scope for properties of hmda file elements
     if (scope === 'hmda') {
         scope = 'lar';
@@ -60,15 +61,15 @@ angular.module('hmdaFilters', [])
 
         // Allow us to convert our string to a date
         String.prototype.toDate = function() {
-            var year = parseInt(this.substr(0,4), 10),
-                month = parseInt(this.substr(4,2), 10) - 1,
-                day = parseInt(this.substr(6,2), 10);
+            var year = parseInt(this.substr(0, 4), 10),
+                month = parseInt(this.substr(4, 2), 10) - 1,
+                day = parseInt(this.substr(6, 2), 10);
 
             if (this.length === 8) {
                 return new Date(year, month, day);
             } else {
-                var hour = parseInt(this.substr(8,2), 10),
-                    minute = parseInt(this.substr(10,2), 10);
+                var hour = parseInt(this.substr(8, 2), 10),
+                    minute = parseInt(this.substr(10, 2), 10);
                 return new Date(year, month, day, hour, minute);
             }
         };
@@ -112,7 +113,7 @@ angular.module('hmdaFilters', [])
      */
     .filter('hmdaMacroValue', ['HMDAEngine', '$filter', function(HMDAEngine, $filter) {
         return function(value, key) {
-            /* jshint camelcase: false */
+            // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
             if (HMDAEngine.starts_with(key, '% of') || HMDAEngine.starts_with(key, '% Difference') || HMDAEngine.ends_with(key, 'Percentage')) {
                 return value + '%';
             } else if (HMDAEngine.starts_with(key, 'Total Dollar')) {
@@ -143,7 +144,7 @@ angular.module('hmdaFilters', [])
      * @return {string}         A capitalized string
      */
     .filter('capitalize', function() {
-        return function (input) {
+        return function(input) {
             return input.charAt(0).toUpperCase() + input.slice(1);
         };
     })
@@ -155,7 +156,7 @@ angular.module('hmdaFilters', [])
      * @return {string}            Agency abbreviation or empty string if not found.
      */
     .filter('agency', function() {
-        return function (agencyCode) {
+        return function(agencyCode) {
             var codes = {
                 1: 'OCC',
                 2: 'FRS',
@@ -194,6 +195,6 @@ angular.module('hmdaFilters', [])
      */
     .filter('paginate', function() {
         return function(input, start, end) {
-            return input.slice(start-1, end);
+            return input.slice(start - 1, end);
         };
     });

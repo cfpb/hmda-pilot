@@ -6,7 +6,7 @@
  * @namespace hmdaPilotApp
  * @module {Factory} StepFactory
  */
-module.exports = /*@ngInject*/ function (StepStatus) {
+module.exports = /*@ngInject*/ function(StepStatus) {
 
     // Constructor
     function Step(title, view) {

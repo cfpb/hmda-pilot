@@ -3,7 +3,7 @@
 require('angular');
 require('angular-mocks');
 
-describe('Controller: SelectFileCtrl', function () {
+describe('Controller: SelectFileCtrl', function() {
 
     var controller,
         scope,
@@ -16,9 +16,9 @@ describe('Controller: SelectFileCtrl', function () {
         HMDAEngine,
         mockEngine = {
             getValidYears: function() { return ['2013', '2014']; },
-            clearHmdaJson: function () { return {}; },
-            clearErrors: function () { return {}; },
-            clearProgress: function () { return {}; },
+            clearHmdaJson: function() { return {}; },
+            clearErrors: function() { return {}; },
+            clearProgress: function() { return {}; },
             fileToJson: function(file, year, next) { return next(null); },
             runSyntactical: function() { return; },
             runValidity: function() { return; },
@@ -26,7 +26,6 @@ describe('Controller: SelectFileCtrl', function () {
             setUseLocalDB: function() { },
             destroyDB: function() { return; }
         };
-
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
@@ -39,12 +38,12 @@ describe('Controller: SelectFileCtrl', function () {
             req.onload = function() {
                 directiveTemplate = this.responseText;
             };
-            req.open('get', '/base/app/'+templateId, false);
+            req.open('get', '/base/app/' + templateId, false);
             req.send();
             $templateCache.put(templateId, directiveTemplate);
         }));
 
-        beforeEach(inject(function ($rootScope, $location, $controller, $timeout, _Wizard_, _FileMetadata_, _Configuration_, _ngDialog_) {
+        beforeEach(inject(function($rootScope, $location, $controller, $timeout, _Wizard_, _FileMetadata_, _Configuration_, _ngDialog_) {
             scope = $rootScope.$new();
             controller = $controller;
             location = $location;
@@ -68,12 +67,11 @@ describe('Controller: SelectFileCtrl', function () {
             });
         }));
 
-        describe('Initial state', function () {
+        describe('Initial state', function() {
             it('should open login ngdialog', function() {
                 expect(ngDialog.open).toHaveBeenCalled();
             });
         });
-
     });
 
     describe('When has valid session cookie', function() {
@@ -86,12 +84,12 @@ describe('Controller: SelectFileCtrl', function () {
             req.onload = function() {
                 directiveTemplate = this.responseText;
             };
-            req.open('get', '/base/app/'+templateId, false);
+            req.open('get', '/base/app/' + templateId, false);
             req.send();
             $templateCache.put(templateId, directiveTemplate);
         }));
 
-        beforeEach(inject(function ($rootScope, $location, $controller, $q, $timeout, _Wizard_, _FileMetadata_, _Configuration_, _ngDialog_) {
+        beforeEach(inject(function($rootScope, $location, $controller, $q, $timeout, _Wizard_, _FileMetadata_, _Configuration_, _ngDialog_) {
             scope = $rootScope.$new();
             controller = $controller;
             location = $location;
@@ -116,8 +114,8 @@ describe('Controller: SelectFileCtrl', function () {
             });
         }));
 
-        describe('Initial state', function () {
-            it('should include a list of reporting years', function () {
+        describe('Initial state', function() {
+            it('should include a list of reporting years', function() {
                 expect(scope.reportingYears.length).toBe(2);
             });
 
@@ -125,7 +123,7 @@ describe('Controller: SelectFileCtrl', function () {
                 expect(scope.hmdaData.year).toBe('2013');
             });
 
-            it('should include an empty errors object', function () {
+            it('should include an empty errors object', function() {
                 expect(scope.errors).toBeDefined();
                 expect(scope.errors).toEqual({});
             });
@@ -148,7 +146,7 @@ describe('Controller: SelectFileCtrl', function () {
                 scope.$digest();
             });
 
-            it('should set the filemane value in the in the scope', function () {
+            it('should set the filemane value in the in the scope', function() {
                 var metadata = FileMetadata.get();
                 expect(metadata.filename).toBe('test.dat');
             });
@@ -233,13 +231,13 @@ describe('Controller: SelectFileCtrl', function () {
                     scope.$digest();
                 });
 
-                it('should mark the current step in the wizard as complete', function () {
+                it('should mark the current step in the wizard as complete', function() {
                     var steps = Wizard.getSteps();
                     expect(steps[0].isActive).toBeFalsy();
                     expect(steps[0].status).toBe('complete');
                 });
 
-                it('should direct the user to the /summarySyntacticalValidity page', function () {
+                it('should direct the user to the /summarySyntacticalValidity page', function() {
                     expect(location.path()).toBe('/summarySyntacticalValidity');
                 });
             });

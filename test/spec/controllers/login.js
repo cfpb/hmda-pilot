@@ -3,7 +3,7 @@
 require('angular');
 require('angular-mocks');
 
-describe('Controller: LoginCtrl', function () {
+describe('Controller: LoginCtrl', function() {
 
     var scope,
         timeout,
@@ -12,7 +12,7 @@ describe('Controller: LoginCtrl', function () {
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function ($rootScope, $controller, $timeout, _Configuration_, _Session_) {
+    beforeEach(inject(function($rootScope, $controller, $timeout, _Configuration_, _Session_) {
         scope = $rootScope.$new();
         timeout = $timeout;
         Configuration = _Configuration_;
@@ -68,5 +68,4 @@ describe('Controller: LoginCtrl', function () {
             expect(scope.showTerms).toBeFalsy();
         });
     });
-
 });

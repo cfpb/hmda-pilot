@@ -41,13 +41,13 @@ module.exports = function() {
         return deferred.promise;
     }
 
-    this.When(/^I wait for the file to be processed$/, function (next) {
+    this.When(/^I wait for the file to be processed$/, function(next) {
         waitUrlChange().then(function(){
             next();
         });
     });
 
-    this.When(/^I continue to the quality and macro edit reports page$/, function (next) {
+    this.When(/^I continue to the quality and macro edit reports page$/, function(next) {
     var recentlyChangedUrl;
         waitUrlChange().then(function(){
             browser.getCurrentUrl().then(function(url){

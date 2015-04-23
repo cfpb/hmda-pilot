@@ -5,7 +5,7 @@
 require('angular');
 require('angular-mocks');
 
-describe('Directive: FileMetadata', function () {
+describe('Directive: FileMetadata', function() {
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
@@ -21,8 +21,8 @@ describe('Directive: FileMetadata', function () {
             get: function() { return mockMetadata; }
         };
 
-    beforeEach(function () {
-        angular.mock.module(function ($provide) {
+    beforeEach(function() {
+        angular.mock.module(function($provide) {
             $provide.value('FileMetadata', mockFileMetadataService);
         });
     });
@@ -34,12 +34,12 @@ describe('Directive: FileMetadata', function () {
         req.onload = function() {
             directiveTemplate = this.responseText;
         };
-        req.open('get', '/base/app/'+templateId, false);
+        req.open('get', '/base/app/' + templateId, false);
         req.send();
         $templateCache.put(templateId, directiveTemplate);
     }));
 
-    beforeEach(inject(function ($rootScope, $compile) {
+    beforeEach(inject(function($rootScope, $compile) {
         scope = $rootScope.$new();
         element = angular.element('<file-metadata></file-metadata>');
         element = $compile(element)(scope);
