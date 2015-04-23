@@ -1,6 +1,7 @@
 #https://github.com/cfpb/hmda-pilot/issues/30
 #TODO: Make sure that path to the report is right, add details, add AC for counts, details of an edit
 
+@wip
 Feature: Display quality edit report
     As a user
     I want to be able to view the quality edits that failed

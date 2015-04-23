@@ -138,7 +138,10 @@ module.exports = function (grunt) {
         options: {
           jshintrc: 'test/.jshintrc'
         },
-        src: ['test/spec/{,*/}*.js']
+        src: [
+          'test/spec/{,*/}*.js',
+          'test/functional/{,*/}*.js'
+        ]
       }
     },
 
@@ -513,7 +516,16 @@ module.exports = function (grunt) {
                 template: 'config/md-to-html.jst',
             }
         }
-    }
+    },
+    protractor: {
+        options: {
+            configFile: 'test/functional/conf.js', // Default config file
+            args: {
+                // Arguments passed to the command
+            }
+        },
+        all: {}
+    },
   });
 
   grunt.loadNpmTasks('grunt-contrib-compress');
@@ -553,6 +565,11 @@ module.exports = function (grunt) {
     'autoprefixer',
     'connect:test',
     'karma'
+  ]);
+
+  grunt.registerTask('functional', [
+    'jshint:test',
+    'protractor'
   ]);
 
   grunt.registerTask('travis-coveralls', [
