@@ -1,8 +1,8 @@
 exports.config = {
 
-    baseUrl: 'http://dev.hmda-pilot.ec2.devis.com/',
+    baseUrl: 'http://localhost:9000/',
 
-    specs: ['cucumber/*.feature'],
+    specs: ['cucumber/IRSReport.feature'],
 
     allScriptsTimeout: 30000,
     getPageTimeout: 30000,

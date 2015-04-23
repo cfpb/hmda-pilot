@@ -61,4 +61,24 @@ module.exports = function() {
             });
         });
     });
+
+    this.When(/^I continue to the msa and irs edit reports page$/, function (next) {
+    var recentlyChangedUrl;
+        waitUrlChange().then(function(){
+            browser.getCurrentUrl().then(function(url){
+                recentlyChangedUrl = url
+            }).then(function(){
+                continueButton.click();
+            }).then(function(){
+                waitUrlChange().then(function(){
+                    continueButton.click();
+                }).then(function(){
+                    waitUrlChange().then(function(){
+                        continueButton.click();
+                        next();
+                    });
+                });
+            });
+        });
+    });
 };
