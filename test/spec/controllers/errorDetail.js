@@ -3,7 +3,7 @@
 require('angular');
 require('angular-mocks');
 
-describe('Controller: ErrorDetailCtrl', function () {
+describe('Controller: ErrorDetailCtrl', function() {
 
     var scope,
         location,
@@ -13,11 +13,11 @@ describe('Controller: ErrorDetailCtrl', function () {
         Session,
         editType = 'syntactical',
         editId = 'S100',
-        mockErrors = {'syntactical': {'S100':'errors for S100', 'S200':'errors for S200'} }; //jshint ignore:line
+        mockErrors = {syntactical: {S100:'errors for S100', S200:'errors for S200'} };
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function ($controller, $rootScope, $location, $httpBackend, _HMDAEngine_, _Session_) {
+    beforeEach(inject(function($controller, $rootScope, $location, $httpBackend, _HMDAEngine_, _Session_) {
         controller = $controller;
         scope = $rootScope.$new();
         httpBackend = $httpBackend;
@@ -27,7 +27,7 @@ describe('Controller: ErrorDetailCtrl', function () {
         HMDAEngine.getErrors = function() { return mockErrors; };
         $httpBackend
             .whenGET('data/macro-comments.json')
-            .respond({'Q100': ['Reason A', 'Reason B'], 'Q200': ['Reason C', 'Reason D']});
+            .respond({Q100: ['Reason A', 'Reason B'], Q200: ['Reason C', 'Reason D']});
 
         controller('ErrorDetailCtrl', {
             $scope: scope,

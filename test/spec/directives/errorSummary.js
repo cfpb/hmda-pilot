@@ -5,13 +5,13 @@
 require('angular');
 require('angular-mocks');
 
-describe('Directive: ErrorSummary', function () {
+describe('Directive: ErrorSummary', function() {
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
     var element,
         scope,
-        mockErrors = {"S270": {"scope": "ts", "explanation": "Century and/or year for action taken date does not match activity century/year.", "description": "Century (CC) and Year (YY) of action taken date must = activity century/year (CCYY) for period being processed.", "errors": [{"lineNumber": "1", "properties": {"actionDate": "2013", "transmittalSheet.activityYear": "2012"} },{"lineNumber": "1", "properties": {"actionDate": "2013", "transmittalSheet.activityYear": "2012"} }], "action": "Correct Entry and Revalidate"}}; //jshint ignore:line
+        mockErrors = {S270: {scope: 'ts', explanation: 'Century and/or year for action taken date does not match activity century/year.', description: 'Century (CC) and Year (YY) of action taken date must = activity century/year (CCYY) for period being processed.', errors: [{lineNumber: '1', properties: {actionDate: '2013', 'transmittalSheet.activityYear': '2012'} }, {lineNumber: '1', properties: {actionDate: '2013', 'transmittalSheet.activityYear': '2012'} }], action: 'Correct Entry and Revalidate'}};
 
     beforeEach(inject(function($templateCache) {
         var directiveTemplate = null;
@@ -20,7 +20,7 @@ describe('Directive: ErrorSummary', function () {
         req.onload = function() {
             directiveTemplate = this.responseText;
         };
-        req.open('get', '/base/app/'+templateId, false);
+        req.open('get', '/base/app/' + templateId, false);
         req.send();
         $templateCache.put(templateId, directiveTemplate);
     }));
@@ -32,7 +32,7 @@ describe('Directive: ErrorSummary', function () {
         req.onload = function() {
             directiveTemplate = this.responseText;
         };
-        req.open('get', '/base/app/'+templateId, false);
+        req.open('get', '/base/app/' + templateId, false);
         req.send();
         $templateCache.put(templateId, directiveTemplate);
     }));
@@ -44,7 +44,7 @@ describe('Directive: ErrorSummary', function () {
         req.onload = function() {
             directiveTemplate = this.responseText;
         };
-        req.open('get', '/base/app/'+templateId, false);
+        req.open('get', '/base/app/' + templateId, false);
         req.send();
         $templateCache.put(templateId, directiveTemplate);
     }));
@@ -52,7 +52,7 @@ describe('Directive: ErrorSummary', function () {
     describe('when there are Syntactical or Validity errors', function() {
         var table;
 
-        beforeEach(inject(function ($rootScope, $compile) {
+        beforeEach(inject(function($rootScope, $compile) {
             scope = $rootScope.$new();
             scope.errors = mockErrors;
             element = angular.element('<error-summary type="syntactical" errors="errors"></error-summary>');
@@ -61,7 +61,7 @@ describe('Directive: ErrorSummary', function () {
             table = jQuery('table', element);
         }));
 
-        it('should display a table of errors', function () {
+        it('should display a table of errors', function() {
             expect(table).toBeDefined();
             expect(table.hasClass('error-summary')).toBeTruthy();
         });
@@ -83,7 +83,7 @@ describe('Directive: ErrorSummary', function () {
     describe('when there are Quality or Macro errors', function() {
         var table;
 
-        beforeEach(inject(function ($rootScope, $compile) {
+        beforeEach(inject(function($rootScope, $compile) {
             scope = $rootScope.$new();
             scope.errors = mockErrors;
             element = angular.element('<error-summary type="quality" errors="errors"></error-summary>');
@@ -92,7 +92,7 @@ describe('Directive: ErrorSummary', function () {
             table = jQuery('table', element);
         }));
 
-        it('should display a table of errors', function () {
+        it('should display a table of errors', function() {
             expect(table).toBeDefined();
             expect(table.hasClass('error-summary')).toBeTruthy();
         });
@@ -114,7 +114,7 @@ describe('Directive: ErrorSummary', function () {
     describe('when there are "special" edit errors (Q029 & Q595)', function() {
         var table;
 
-        beforeEach(inject(function ($rootScope, $compile) {
+        beforeEach(inject(function($rootScope, $compile) {
             scope = $rootScope.$new();
             scope.errors = mockErrors;
             element = angular.element('<error-summary type="special" errors="errors"></error-summary>');
@@ -123,7 +123,7 @@ describe('Directive: ErrorSummary', function () {
             table = jQuery('table', element);
         }));
 
-        it('should display a table of errors', function () {
+        it('should display a table of errors', function() {
             expect(table).toBeDefined();
             expect(table.hasClass('error-summary')).toBeTruthy();
         });
@@ -143,7 +143,7 @@ describe('Directive: ErrorSummary', function () {
     });
 
     describe('when there are no errors', function() {
-        beforeEach(inject(function ($rootScope, $compile) {
+        beforeEach(inject(function($rootScope, $compile) {
             scope = $rootScope.$new();
             scope.errors = {};
             element = angular.element('<error-summary type="test" errors="errors"></error-summary>');

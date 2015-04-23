@@ -26,13 +26,13 @@ module.exports = function() {
         return deferred.promise;
     }
 
-    this.When(/^I upload the '([^']*)' file for validation$/, function (fileName, next) {
+    this.When(/^I upload the '([^']*)' file for validation$/, function(fileName, next) {
         selectFile(fileName).then(function(){
             next();
         });
     });
 
-    this.When(/^I upload the '([^']*)' file and submit$/, function (fileName, next) {
+    this.When(/^I upload the '([^']*)' file and submit$/, function(fileName, next) {
         selectFile(fileName).then(function(){
             submitButton.click();
         }).then(function(){
@@ -40,19 +40,19 @@ module.exports = function() {
         });
     });
 
-    this.When(/^I click the submit button$/, function (next) {
+    this.When(/^I click the submit button$/, function(next) {
         submitButton.click().then(function(){
             next();
         });
     });
 
-    this.Then(/^I am notified that the format is incorrect$/, function (next) {
+    this.Then(/^I am notified that the format is incorrect$/, function(next) {
         expect(pageErrors.count()).to.eventually.equal(1).then(function(){
             next();
         });
     });
 
-    this.Then(/^I am not notified that the format is incorrect$/, function (next) {
+    this.Then(/^I am not notified that the format is incorrect$/, function(next) {
         expect(pageErrors.count()).to.eventually.equal(0).then(function(){
             next();
         });

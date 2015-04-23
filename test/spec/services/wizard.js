@@ -3,7 +3,7 @@
 require('angular');
 require('angular-mocks');
 
-describe('Service: Wizard', function () {
+describe('Service: Wizard', function() {
 
     var service,
         steps,
@@ -11,7 +11,7 @@ describe('Service: Wizard', function () {
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function (_Wizard_, _StepStatus_) {
+    beforeEach(inject(function(_Wizard_, _StepStatus_) {
         service = _Wizard_;
         StepStatus = _StepStatus_;
 
@@ -20,7 +20,7 @@ describe('Service: Wizard', function () {
 
     describe('initSteps()', function() {
 
-        it('should set the first step to active', function () {
+        it('should set the first step to active', function() {
             expect(steps[0].isActive).toBeTruthy();
         });
     });
@@ -31,7 +31,7 @@ describe('Service: Wizard', function () {
             steps = service.getSteps();
         });
 
-        it('should return the steps', function () {
+        it('should return the steps', function() {
             expect(steps[0].status).toBe(StepStatus.incomplete);
             expect(steps[0].isActive).toBeTruthy();
             expect(steps[1].status).toBe(StepStatus.incomplete);
@@ -39,9 +39,9 @@ describe('Service: Wizard', function () {
         });
     });
 
-    describe('getCurrentStep()', function () {
+    describe('getCurrentStep()', function() {
 
-        it('should return the current step', function () {
+        it('should return the current step', function() {
             var step = service.getCurrentStep();
             expect(step.title).toBe('Select file & validate');
             expect(step.view).toBe('selectFile');

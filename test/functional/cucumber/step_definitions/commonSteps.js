@@ -16,7 +16,7 @@ module.exports = function() {
         });
     });
 
-    this.Then(/^I will see a disclaimer at the top$/, function (next) {
+    this.Then(/^I will see a disclaimer at the top$/, function(next) {
         expect(disclaimer.isPresent()).to.eventually.be.true.notify(next);
     });
 };

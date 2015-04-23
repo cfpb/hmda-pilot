@@ -5,7 +5,7 @@
 require('angular');
 require('angular-mocks');
 
-describe('Directive: Code Descriptions', function () {
+describe('Directive: Code Descriptions', function() {
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
@@ -37,12 +37,12 @@ describe('Directive: Code Descriptions', function () {
                     validation: {
                         type: 'number',
                         values: {
-                            '1': 'OCC',
-                            '2': 'FRS',
-                            '3': 'FDIC',
-                            '5': 'NCUA',
-                            '7': 'HUD',
-                            '9': 'CFPB'
+                            1: 'OCC',
+                            2: 'FRS',
+                            3: 'FDIC',
+                            5: 'NCUA',
+                            7: 'HUD',
+                            9: 'CFPB'
                         }
                     }
                 }
@@ -53,12 +53,12 @@ describe('Directive: Code Descriptions', function () {
                     validation: {
                         type: 'number',
                         values: {
-                            '1': 'Conventional (any loan other than FHA, VA, FSA, or RHS loans)',
-                            '2': 'FHA-insured (Federal Housing Administration)',
-                            '3': 'VA-guaranteed (Veterans Administration)',
-                            '4': 'FSA/RHS (Farm Service Agency or Rural Housing Service)'
-                         }
-                     }
+                            1: 'Conventional (any loan other than FHA, VA, FSA, or RHS loans)',
+                            2: 'FHA-insured (Federal Housing Administration)',
+                            3: 'VA-guaranteed (Veterans Administration)',
+                            4: 'FSA/RHS (Farm Service Agency or Rural Housing Service)'
+                        }
+                    }
                 }
             }
         };
@@ -78,12 +78,12 @@ describe('Directive: Code Descriptions', function () {
         req.onload = function() {
             directiveTemplate = this.responseText;
         };
-        req.open('get', '/base/app/'+templateId, false);
+        req.open('get', '/base/app/' + templateId, false);
         req.send();
         $templateCache.put(templateId, directiveTemplate);
     }));
 
-    beforeEach(inject(function ($rootScope, $compile) {
+    beforeEach(inject(function($rootScope, $compile) {
         scope = $rootScope.$new();
         element = angular.element('<button code-descriptions></button>');
         element = $compile(element)(scope);
