@@ -1,0 +1,64 @@
+.ngdialog.login-modal {
+
+    padding-bottom: 160px;
+    padding-top: 100px;
+
+    &.ngdialog-closing .ngdialog-content {
+        -webkit-animation: ngdialog-flyout .5s;
+        animation: ngdialog-flyout .5s;
+    }
+
+    .ngdialog-content {
+        -webkit-animation: ngdialog-flyin .5s;
+        animation: ngdialog-flyin .5s;
+        background: @white;
+        border-radius: 5px;
+        color: @black;
+        margin: 0 auto;
+        max-width: 100%;
+        padding: 1em;
+        position: relative;
+        .u-w40pct;
+        border-top: #2cb34a solid 3px;
+
+        .login-modal-header {
+            padding: 10px 20px;
+            border-bottom: #eeeeee solid 1px;
+
+            h2 {
+                font-weight: bold;
+                margin-bottom: 0;
+            }
+        }
+
+        .login-modal-body {
+            padding: 20px;
+        }
+
+        .login-modal-footer {
+            padding: 15px 20px;
+            border-top: #eeeeee solid 1px;
+            text-align: left;
+            background: #dddddd;
+
+            .login-button, .login-terms-agree {
+                display: inline-block;
+                vertical-align: middle;
+            }
+            .login-button {
+                margin-right: 10px;
+            }
+        }
+
+        .login-terms {
+            padding: 10px;
+            font-size: .95em;
+        }
+    }
+
+
+    .ngdialog-message {
+      margin-bottom: .5em;
+    }
+
+}

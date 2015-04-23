@@ -29,5 +29,16 @@ angular.module('services.config', [])
             showClose: false,
             closeByDocument: false,
             closeByEscape: false,
-        }
+        },
+        loginDialogOptions: {
+            name: 'login',
+            controller: 'LoginCtrl',
+            template: 'partials/login.html',
+            className: 'login-modal',
+            trapFocus: true,
+            showClose: false,
+            closeByDocument: false,
+            closeByEscape: false,
+        },
+        validPassword: 'p1l0t'
     });

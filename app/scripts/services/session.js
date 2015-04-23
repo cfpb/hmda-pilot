@@ -7,14 +7,14 @@
  * @namespace hmdaPilotApp
  * @module {Service} Session
  */
-module.exports = /*@ngInject*/ function () {
+module.exports = /*@ngInject*/ function ($cookies, $cookieStore, Configuration) {
 
     var session = {
-        verifiedQualityEdits: [],
-        verifiedMacroEdits: {},
-        verifiedSpecialEdits: {},
-        verifiedIRSReport: false
-    };
+            verifiedQualityEdits: [],
+            verifiedMacroEdits: {},
+            verifiedSpecialEdits: {},
+            verifiedIRSReport: false
+        };
 
     /**
      * Get the current session
@@ -23,6 +23,30 @@ module.exports = /*@ngInject*/ function () {
      */
     this.getSession = function() {
         return session;
+    };
+
+    /**
+     * Checks to see if the session is valid based on session cookie expiration
+     * @return {Boolean}
+     */
+    this.isValidSession = function() {
+        if ($cookieStore.get('validSession')) {
+            return true;
+        }
+        return false;
+    };
+
+    /**
+     * Authenticate with a password.
+     * @param  {String} password Password
+     * @return {Boolean}         Was authentication successful
+     */
+    this.authenticate = function(password) {
+        if (password === Configuration.validPassword) {
+            $cookieStore.put('validSession', 'true');
+            return true;
+        }
+        return false;
     };
 
     /**

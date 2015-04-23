@@ -12,6 +12,7 @@
 
 require('angular');
 require('angular-aria');
+require('angular-cookies');
 require('angular-resource');
 require('angular-route');
 require('angular-sanitize');
@@ -23,6 +24,7 @@ require('ng-dialog');
 angular
   .module('hmdaPilotApp', [
     'ngAria',
+    'ngCookies',
     'ngResource',
     'ngRoute',
     'ngSanitize',

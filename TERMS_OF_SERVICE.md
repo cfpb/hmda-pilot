@@ -1,0 +1,6 @@
+### Terms of Service
+This site is part of the Consumer Financial Protection Bureau’s (CFPB) work to improve the Home Mortgage Disclosure Act (HMDA) electronic reporting process for financial institutions. This site does not in any way alter or substitute for your obligations for submitting data under HMDA. See ffiec.gov/hmda for more details about your legal obligations.
+
+This site uses cookie technology, which places small files on your computer so that it can remember you when you next come back to the site. None of these cookies store any of your personal information. Although cookies help enhance your experience with this site, if you do not want to accept cookies, the site will work without them.
+
+This site also uses application program interfaces (APIs), which are tools we used to build this application. The APIs communicate with the CFPB’s system and will do things like aggregate traffic patterns and types of HMDA edits. The CFPB will use this information for the purposes of improving the performance of this site. No personally identifiable information will be collected through the use of APIs.
