@@ -7,13 +7,15 @@ describe('Controller: LoginCtrl', function () {
 
     var scope,
         timeout,
+        Configuration,
         Session;
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function ($rootScope, $controller, $timeout, _Session_) {
+    beforeEach(inject(function ($rootScope, $controller, $timeout, _Configuration_, _Session_) {
         scope = $rootScope.$new();
         timeout = $timeout;
+        Configuration = _Configuration_;
         Session = _Session_;
         scope.closeThisDialog = function() { return; };
 
@@ -39,7 +41,7 @@ describe('Controller: LoginCtrl', function () {
 
     describe('login()', function() {
         it('should close the dialog when password is valid', function() {
-            scope.password = 'p1l0t';
+            scope.password = Configuration.validPassword;
             scope.login();
             expect(scope.closeThisDialog).toHaveBeenCalled();
         });

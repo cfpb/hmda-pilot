@@ -13,7 +13,7 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileMe
         fiscalYears = HMDAEngine.getValidYears();
 
     if (! Session.isValidSession()) {
-        loginDialog = ngDialog.open(angular.extend(Session.getLoginDialogOptions()));
+        loginDialog = ngDialog.open(Configuration.loginDialogOptions);
     }
     // Set/Reset the state of different objects on load
     Session.reset();

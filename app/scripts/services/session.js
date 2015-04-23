@@ -7,33 +7,14 @@
  * @namespace hmdaPilotApp
  * @module {Service} Session
  */
-module.exports = /*@ngInject*/ function ($cookies, $cookieStore) {
+module.exports = /*@ngInject*/ function ($cookies, $cookieStore, Configuration) {
 
-    var validPassword = 'p1l0t',
-        session = {
+    var session = {
             verifiedQualityEdits: [],
             verifiedMacroEdits: {},
             verifiedSpecialEdits: {},
             verifiedIRSReport: false
-        },
-        loginDialogOptions = {
-            name: 'login',
-            controller: 'LoginCtrl',
-            template: 'partials/login.html',
-            className: 'login-modal',
-            trapFocus: true,
-            showClose: false,
-            closeByDocument: false,
-            closeByEscape: false,
         };
-
-    /**
-     * Get the options for the login modal
-     * @return {Object} ngDialog options
-     */
-    this.getLoginDialogOptions = function() {
-        return loginDialogOptions;
-    };
 
     /**
      * Get the current session
@@ -61,7 +42,7 @@ module.exports = /*@ngInject*/ function ($cookies, $cookieStore) {
      * @return {Boolean}         Was authentication successful
      */
     this.authenticate = function(password) {
-        if (password === validPassword) {
+        if (password === Configuration.validPassword) {
             $cookieStore.put('validSession', 'true');
             return true;
         }

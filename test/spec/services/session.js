@@ -6,22 +6,16 @@ require('angular-mocks');
 describe('Service: Session', function () {
 
     var service,
-        cookieStore;
+        cookieStore,
+        Configuration;
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function ($cookies, $cookieStore, _Session_) {
+    beforeEach(inject(function ($cookies, $cookieStore, _Configuration_, _Session_) {
         service = _Session_;
         cookieStore = $cookieStore;
+        Configuration = _Configuration_;
     }));
-
-    describe('getLoginDialogOptions()', function() {
-        it('should return dialog options', function() {
-            var options = service.getLoginDialogOptions();
-            expect(options).toBeTruthy();
-            expect(options.name).toBe('login');
-        });
-    });
 
     describe('authenticate()', function() {
         it('should return false and not set cookie when password is invalid', function() {
@@ -30,7 +24,7 @@ describe('Service: Session', function () {
         });
 
         it('should return true and set cookie when password is valid', function() {
-            expect(service.authenticate('p1l0t')).toBeTruthy();
+            expect(service.authenticate(Configuration.validPassword)).toBeTruthy();
             expect(cookieStore.get('validSession')).toBeTruthy();
         });
 
