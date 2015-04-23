@@ -12,9 +12,10 @@ module.exports = /*@ngInject*/ function($scope, $location, $q, $timeout, FileMet
         loginDialog,
         fiscalYears = HMDAEngine.getValidYears();
 
-    if (! Session.isValidSession()) {
+    if (!Session.isValidSession()) {
         loginDialog = ngDialog.open(Configuration.loginDialogOptions);
     }
+
     // Set/Reset the state of different objects on load
     Session.reset();
     HMDAEngine.clearHmdaJson();

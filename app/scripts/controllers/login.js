@@ -6,7 +6,7 @@
  * @namespace hmdaPilotApp
  * @module {Controller} Login
  */
-module.exports = /*@ngInject*/ function ($scope, $timeout, Session) {
+module.exports = /*@ngInject*/ function($scope, $timeout, Session) {
     $scope.password = '';
     $scope.loginError = '';
     $scope.showTerms = false;
