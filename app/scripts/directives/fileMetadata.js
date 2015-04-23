@@ -6,12 +6,12 @@
  * @namespace hmdaPilotApp
  * @module {Directive} FileMetadata
  */
-module.exports = /*@ngInject*/ function () {
+module.exports = /*@ngInject*/ function() {
 
     return {
         restrict: 'E',
         templateUrl: 'partials/fileMetadata.html',
-        controller: /*@ngInject*/ function ($scope, FileMetadata) {
+        controller: /*@ngInject*/ function($scope, FileMetadata) {
             // Initialize $scope variables
             $scope.metadata = {};
             $scope.showMetadata = false;

@@ -6,7 +6,7 @@
  * @namespace hmdaPilotApp
  * @module {Directive} WizardNav
  */
-module.exports = /*@ngInject*/ function ($location, $timeout, StepFactory, Wizard, ngDialog) {
+module.exports = /*@ngInject*/ function($location, $timeout, StepFactory, Wizard, ngDialog) {
 
     function getStepClass(step) {
         if (step.isActive) {
@@ -41,14 +41,14 @@ module.exports = /*@ngInject*/ function ($location, $timeout, StepFactory, Wizar
     function controller($scope, Configuration) {
         if (Configuration.confirmSessionReset) {
             $scope.$on('$locationChangeStart', function(event, newUrl) {
-                if (newUrl.indexOf('#/selectFile') !== -1 ) {
+                if (newUrl.indexOf('#/selectFile') !== -1) {
                     ngDialog.openConfirm({
                         template: 'partials/confirmSessionReset.html'
-                    }).then(function (value) {
+                    }).then(function(value) {
                         if (value === 'reset') {
                             $location.path('/');
                         }
-    			});
+                    });
                     event.preventDefault();
                 }
 
@@ -78,7 +78,7 @@ module.exports = /*@ngInject*/ function ($location, $timeout, StepFactory, Wizar
             }, function() {
                 var newSteps = Wizard.getSteps();
 
-                for (var i=0; i < newSteps.length; i++) {
+                for (var i = 0; i < newSteps.length; i++) {
                     newSteps[i] = getStepClass(newSteps[i]);
                     newSteps[i] = getStepBadge(newSteps[i], i);
                 }
@@ -96,7 +96,7 @@ module.exports = /*@ngInject*/ function ($location, $timeout, StepFactory, Wizar
                 }, 100);
             });
 
-            scope.$on('$routeChangeSuccess', function (event, current, previous) {
+            scope.$on('$routeChangeSuccess', function(event, current, previous) {
                 if (current !== previous) {
                     scope.steps = Wizard.getSteps();
                 }
@@ -104,7 +104,7 @@ module.exports = /*@ngInject*/ function ($location, $timeout, StepFactory, Wizar
             scope.$on('$locationChangeSuccess', function(event, newUrl) {
                 var newSteps = Wizard.getSteps();
 
-                for (var i=0; i < newSteps.length; i++) {
+                for (var i = 0; i < newSteps.length; i++) {
                     if (newUrl.indexOf('#/' + newSteps[i].view) !== -1) {
                         newSteps[i].isFocused = true;
                     } else {

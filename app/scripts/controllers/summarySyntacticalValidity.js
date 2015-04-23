@@ -6,7 +6,7 @@
  * @namespace hmdaPilotApp
  * @module {Controller} SummarySyntacticalValidity
  */
-module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEngine, Wizard, ngDialog, Configuration) {
+module.exports = /*@ngInject*/ function($scope, $location, $q, $timeout, HMDAEngine, Wizard, ngDialog, Configuration) {
 
     // Set/Reset the state of different objects on load
     HMDAEngine.clearProgress();
@@ -23,11 +23,11 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
         if (Configuration.confirmSessionReset) {
             ngDialog.openConfirm({
                 template: 'partials/confirmSessionReset.html'
-            }).then(function (value) {
+            }).then(function(value) {
                 if (value === 'reset') {
                     $location.path('/');
                 }
-    		});
+            });
         } else {
             $location.path('/');
         }
@@ -44,7 +44,7 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
     $scope.next = function() {
         if (hasErrors(HMDAEngine.getErrors().quality) || hasErrors(HMDAEngine.getErrors().macro)) {
             $location.path('/summaryQualityMacro');
-        } else{
+        } else {
             // Give a name to the current step in the process (shown in the progressDialog)
             $scope.processStep = 'Processing Quality and Macro edits...';
 

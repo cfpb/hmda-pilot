@@ -6,12 +6,12 @@
  * @namespace hmdaPilotApp
  * @module {Controller} ProgressBar
  */
-module.exports = /*@ngInject*/ function ($scope, $window, HMDAEngine) {
+module.exports = /*@ngInject*/ function($scope, $window, HMDAEngine) {
 
     $scope.percentageComplete = 0;
 
     function applyProgress(percent) {
-        $scope.$evalAsync(function($scope){
+        $scope.$evalAsync(function($scope) {
             $scope.percentageComplete = percent;
         });
     }

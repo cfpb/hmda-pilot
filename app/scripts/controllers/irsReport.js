@@ -6,7 +6,7 @@
  * @namespace hmdaPilotApp
  * @module {Controller} IRSReport
  */
-module.exports = /*@ngInject*/ function ($scope, $location, $q, HMDAEngine, Session) {
+module.exports = /*@ngInject*/ function($scope, $location, $q, HMDAEngine, Session) {
 
     var hmdaFile = HMDAEngine.getHmdaJson().hmdaFile;
 

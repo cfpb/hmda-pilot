@@ -7,7 +7,7 @@ var ReadableBlobStream = require('readable-blob-stream');
  * @namespace hmdaPilotApp
  * @module {Controller} SelectFile
  */
-module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileMetadata, HMDAEngine, Wizard, Session, ngDialog, Configuration) {
+module.exports = /*@ngInject*/ function($scope, $location, $q, $timeout, FileMetadata, HMDAEngine, Wizard, Session, ngDialog, Configuration) {
     var progressDialog,
         loginDialog,
         fiscalYears = HMDAEngine.getValidYears();
@@ -32,7 +32,8 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileMe
 
     // Set default values for any form fields
     $scope.hmdaData = {
-        year: fiscalYears[fiscalYears.length-2], // 2 because of 0 indexes
+        // 2 because of 0 indexes
+        year: fiscalYears[fiscalYears.length - 2],
         file: '',
         local: false
     };
@@ -55,7 +56,8 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileMe
 
         progressDialog = ngDialog.open(angular.extend(Configuration.progressDialog, {scope: $scope}));
 
-        $timeout(function() { $scope.process(hmdaData); }, 100); // Pause before starting the conversion so that the DOM can update
+        // Pause before starting the conversion so that the DOM can update
+        $timeout(function() { $scope.process(hmdaData); }, 100);
     };
 
     $scope.process = function(hmdaData) {
@@ -86,6 +88,7 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileMe
 
             // Reset progress back to 0
             $scope.percentageComplete = 0;
+
             // Give a name to the current step in the process (shown in the progressDialog)
             $scope.processStep = 'Validating Syntactical and Validity edits...';
 
@@ -116,7 +119,6 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, FileMe
                 $scope.errors.global = err.message;
                 return;
             });
-
         });
     };
 };

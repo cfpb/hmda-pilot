@@ -7,7 +7,7 @@
  * @namespace hmdaPilotApp
  * @module {Service} Session
  */
-module.exports = /*@ngInject*/ function ($cookies, $cookieStore, Configuration) {
+module.exports = /*@ngInject*/ function($cookies, $cookieStore, Configuration) {
 
     var session = {
             verifiedQualityEdits: [],
@@ -99,10 +99,11 @@ module.exports = /*@ngInject*/ function ($cookies, $cookieStore, Configuration) 
      * @param {string} editId to be added
      * @return {Array} verified quality edits
      */
-    this.addToVerifiedQualityEdits = function (editId) {
+    this.addToVerifiedQualityEdits = function(editId) {
         if (session.verifiedQualityEdits.indexOf(editId) === -1) {
             session.verifiedQualityEdits.push(editId);
         }
+
         return session.verifiedQualityEdits;
     };
 
@@ -112,7 +113,7 @@ module.exports = /*@ngInject*/ function ($cookies, $cookieStore, Configuration) 
      * @param {string} editId to be removed
      * @return {Array} verified quality edits
      */
-    this.removeVerifiedQualityEdit = function (editId) {
+    this.removeVerifiedQualityEdit = function(editId) {
         var currIdx = session.verifiedQualityEdits.indexOf(editId);
         session.verifiedQualityEdits.splice(currIdx, 1);
         return session.verifiedQualityEdits;
@@ -136,10 +137,11 @@ module.exports = /*@ngInject*/ function ($cookies, $cookieStore, Configuration) 
      * @param {string} reason
      * @return {Array} verified macro edits
      */
-    this.addToVerifiedMacroEdits = function (editId, reason) {
+    this.addToVerifiedMacroEdits = function(editId, reason) {
         if (reason !== undefined) {
             session.verifiedMacroEdits[editId] = reason;
         }
+
         return this.getVerifiedMacroEditIds();
     };
 
@@ -149,7 +151,7 @@ module.exports = /*@ngInject*/ function ($cookies, $cookieStore, Configuration) 
      * @param {string} editId to be removed
      * @return {Array} verified macro edits
      */
-    this.removeVerifiedMacroEdit = function (editId) {
+    this.removeVerifiedMacroEdit = function(editId) {
         delete session.verifiedMacroEdits[editId];
         return this.getVerifiedMacroEditIds();
     };
@@ -166,6 +168,7 @@ module.exports = /*@ngInject*/ function ($cookies, $cookieStore, Configuration) 
         } else if (session.verifiedSpecialEdits[editId] !== undefined) {
             return angular.copy(session.verifiedSpecialEdits[editId]);
         }
+
         return undefined;
     };
 
@@ -187,7 +190,7 @@ module.exports = /*@ngInject*/ function ($cookies, $cookieStore, Configuration) 
      * @param {Array} selected options
      * @return {object} verified special edits
      */
-    this.addToVerifiedSpecialEdits = function (editId, selected) {
+    this.addToVerifiedSpecialEdits = function(editId, selected) {
         session.verifiedSpecialEdits[editId] = selected;
         return session.verifiedSpecialEdits;
     };
@@ -198,7 +201,7 @@ module.exports = /*@ngInject*/ function ($cookies, $cookieStore, Configuration) 
      * @param {string} editId to be removed
      * @return {object} verified special edits
      */
-    this.removeVerifiedSpecialEdit = function (editId) {
+    this.removeVerifiedSpecialEdit = function(editId) {
         delete session.verifiedSpecialEdits[editId];
         return session.verifiedSpecialEdits;
     };
