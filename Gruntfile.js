@@ -611,6 +611,8 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:dist',
+      'jscs',
+      'jshint',
       'replace:' + env,
       'browserify:dist',
       'ngAnnotate:dist',
