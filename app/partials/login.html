@@ -3,11 +3,11 @@
         <h2>Log in</h2>
     </div>
     <div class="login-modal-body">
-        <p ng-if="loginError" class="page-errors">{{loginError}}</p>
+        <p ng-if="loginError" class="page-errors shake">{{loginError}}</p>
         <div class="form-group">
             <div class="form-group_item">
                 <label for="txt-pwd" class="form-label-header">Password:</label>
-                <input ng-class="{shake: loginError}" id="txt-pwd" type="password" ng-model="password">
+                <input id="txt-pwd" type="password" ng-model="password">
             </div>
         </div>
     </div>
