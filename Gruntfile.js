@@ -1,6 +1,7 @@
 // Generated on 2014-11-18 using generator-angular 0.10.0
 'use strict';
 
+// jscs:disable
 // # Globbing
 // for performance reasons we're only matching one level down:
 // 'test/spec/{,*/}*.js'
@@ -44,14 +45,14 @@ module.exports = function (grunt) {
     watch: {
       js: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.js', 'node_modules/hmda-rule-engine/{,*/}*.js'],
-        tasks: ['newer:jshint:all', 'browserify:dev'],
+        tasks: ['newer:jscs:all', 'newer:jshint:all', 'browserify:dev'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
       },
       jsTest: {
         files: ['test/spec/{,*/}*.js'],
-        tasks: ['newer:jshint:test', 'karma']
+        tasks: ['newer:jscs:test', 'newer:jshint:test', 'karma']
       },
       styles: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
@@ -143,6 +144,25 @@ module.exports = function (grunt) {
           'test/functional/{,*/}*.js'
         ]
       }
+    },
+
+    // Make sure code styles are up to par and there are no obvious mistakes
+    jscs: {
+        options: {
+            config: '.jscsrc',
+            reporter: require('jscs-stylish').path,
+        },
+        all: {
+            src: [
+              '<%= yeoman.app %>/scripts/{,*/}*.js'
+            ]
+        },
+        test: {
+            src: [
+              'test/spec/{,*/}*.js',
+              'test/functional/{,*/}*.js'
+            ]
+        }
     },
 
     // Empties folders to start fresh
@@ -541,6 +561,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
+      'jscs',
       'jshint',
       'replace:local',
       'browserify:dev',
@@ -561,6 +582,7 @@ module.exports = function (grunt) {
   grunt.registerTask('test', [
     'clean:coverage',
     'clean:server',
+    'jscs:test',
     'jshint:test',
     'concurrent:test',
     'autoprefixer',
@@ -569,6 +591,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('functional', [
+    'jscs:test',
     'jshint:test',
     'protractor'
   ]);
