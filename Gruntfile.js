@@ -141,7 +141,7 @@ module.exports = function (grunt) {
         },
         src: [
           'test/spec/{,*/}*.js',
-          'test/functional/{,*/}*.js'
+          'test/functional/cucumber/step_definitions/{,*/}*.js'
         ]
       }
     },
@@ -160,7 +160,7 @@ module.exports = function (grunt) {
         test: {
             src: [
               'test/spec/{,*/}*.js',
-              'test/functional/{,*/}*.js'
+              'test/functional/cucumber/step_definitions/{,*/}*.js'
             ]
         }
     },
