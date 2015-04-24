@@ -2,7 +2,7 @@ exports.config = {
 
     baseUrl: 'http://localhost:9000/',
 
-    specs: ['cucumber/MSAReport.feature'],
+    specs: ['cucumber/LoanLevelEditReport.feature'],
 
     allScriptsTimeout: 30000,
     getPageTimeout: 30000,
