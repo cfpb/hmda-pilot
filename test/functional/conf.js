@@ -1,3 +1,5 @@
+'use strict';
+
 exports.config = {
 
     baseUrl: 'http://dev.hmda-pilot.ec2.devis.com/',
@@ -16,5 +18,11 @@ exports.config = {
         require: 'cucumber/step_definitions/*.js',
         tags: ['~@wip', '~@ignore'],
         format: 'progress'
+    },
+
+    onPrepare: function() {
+        var width = 1280;
+        var height = 1024;
+        browser.driver.manage().window().setSize(width, height);
     }
 };
