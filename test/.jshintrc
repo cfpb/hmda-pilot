@@ -14,9 +14,11 @@
   "trailing": true,
   "smarttabs": true,
   "globals": {
+    "angular": false,
+    "$": false,
+    /* Ignore Jasmine globals */
     "after": false,
     "afterEach": false,
-    "angular": false,
     "before": false,
     "beforeEach": false,
     "browser": false,
@@ -25,6 +27,11 @@
     "inject": false,
     "it": false,
     "jasmine": false,
-    "spyOn": false
+    "spyOn": false,
+    /* Ignore Protractor globals */
+    "protractor": false,
+    "element": false,
+    "by": false,
+    "exist": false
   }
 }
