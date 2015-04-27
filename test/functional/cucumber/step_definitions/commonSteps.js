@@ -15,7 +15,7 @@ module.exports = function() {
         var passwordBox = element.all(by.id('txt-pwd')),
             loginButton = element.all(by.css('.login-button'));
 
-        browser.get('http://dev.hmda-pilot.ec2.devis.com/#/');
+        browser.get(browser.baseUrl);
 
         //Prevents 'are you sure you want to leave?' window from popping up
         browser.executeScript('window.onbeforeunload = function(){};').then(function() {
