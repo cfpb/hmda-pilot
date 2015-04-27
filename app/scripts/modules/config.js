@@ -20,8 +20,8 @@
  */
 angular.module('services.config', [])
     .constant('Configuration', {
-        apiUrl: 'http://localhost:8000',
-        confirmSessionReset: false,
+        apiUrl: 'http://dev.hmda-pilot.ec2.devis.com/api',
+        confirmSessionReset: true,
         progressDialog: {
             name: 'progress',
             controller: 'ProgressBarCtrl',
