@@ -28,6 +28,6 @@ angular.module('services.config', [])
             template: 'partials/progressBar.html',
             showClose: false,
             closeByDocument: false,
-            closeByEscape: false,
+            closeByEscape: false
         }
     });

@@ -6,7 +6,7 @@
  * @namespace hmdaPilotApp
  * @module {Directive} HmdaExport
  */
-module.exports = /*@ngInject*/ function (HMDAEngine) {
+module.exports = /*@ngInject*/ function(HMDAEngine) {
 
     // Adapted from http://stackoverflow.com/questions/24080018/download-file-from-a-asp-net-web-api-method-using-angularjs/24129082#24129082
     /* istanbul ignore next: treating this like a 3rd party plugin and only test that it does get called because mocking this would be INSANE */
@@ -37,7 +37,7 @@ module.exports = /*@ngInject*/ function (HMDAEngine) {
             // Get the blob url creator
             var urlCreator = window.URL || window.webkitURL || window.mozURL || window.msURL;
 
-            if(urlCreator) {
+            if (urlCreator) {
                 // Try to use a download link
                 var link = document.createElement('a');
                 if ('download' in link) {
@@ -56,7 +56,7 @@ module.exports = /*@ngInject*/ function (HMDAEngine) {
                         event.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
                         link.dispatchEvent(event);
                         success = true;
-                    } catch(e) {
+                    } catch (e) {
                         // pass through
                     }
                 }
@@ -69,7 +69,7 @@ module.exports = /*@ngInject*/ function (HMDAEngine) {
                         url = urlCreator.createObjectURL(blob);
                         window.location = url;
                         success = true;
-                    } catch(e) {
+                    } catch (e) {
                         // Pass through
                     }
                 }
@@ -77,7 +77,6 @@ module.exports = /*@ngInject*/ function (HMDAEngine) {
         }
         return;
     }
-
 
     function getFileDate() {
         function pad(number) {
@@ -88,7 +87,7 @@ module.exports = /*@ngInject*/ function (HMDAEngine) {
         }
 
         var now = new Date();
-        return now.getFullYear() + pad(now.getMonth()+1) + pad(now.getDate()) + pad(now.getHours()) + pad(now.getMinutes());
+        return now.getFullYear() + pad(now.getMonth() + 1) + pad(now.getDate()) + pad(now.getHours()) + pad(now.getMinutes());
     }
 
     function exportAll(exportType, errorType) {
@@ -99,7 +98,7 @@ module.exports = /*@ngInject*/ function (HMDAEngine) {
     }
 
     function exportIndividual(exportType, errorType, editId) {
-        HMDAEngine.exportIndividualPromise(errorType, editId).then(function(content){
+        HMDAEngine.exportIndividualPromise(errorType, editId).then(function(content) {
             var filename = exportType + '-' + errorType + '-' + editId + '-' + getFileDate() + '.csv';
             download(content, filename);
         });

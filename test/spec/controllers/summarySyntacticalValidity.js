@@ -3,7 +3,7 @@
 require('angular');
 require('angular-mocks');
 
-describe('Controller: SummarySyntacticalValidityCtrl', function () {
+describe('Controller: SummarySyntacticalValidityCtrl', function() {
 
     var scope,
         location,
@@ -25,7 +25,7 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
             runQuality: function(year, next) { return next(null); },
             runMacro: function(year, next) { return next(null); },
             getDebug: function() { return false; },
-            clearProgress: function () { return {}; }
+            clearProgress: function() { return {}; }
         };
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
@@ -37,12 +37,12 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
         req.onload = function() {
             directiveTemplate = this.responseText;
         };
-        req.open('get', '/base/app/'+templateId, false);
+        req.open('get', '/base/app/' + templateId, false);
         req.send();
         $templateCache.put(templateId, directiveTemplate);
     }));
 
-    beforeEach(inject(function ($rootScope, $location, $controller, $q, $timeout, _Wizard_, _Configuration_) {
+    beforeEach(inject(function($rootScope, $location, $controller, $q, $timeout, _Wizard_, _Configuration_) {
         scope = $rootScope.$new();
         location = $location;
         controller = $controller;
@@ -75,29 +75,29 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
         });
     }));
 
-    beforeEach(inject(function ($templateCache) {
+    beforeEach(inject(function($templateCache) {
         var templateUrl = 'partials/confirmSessionReset.html';
         var asynchronous = false;
 
         var req = new XMLHttpRequest();
-        req.onload = function () {
+        req.onload = function() {
             $templateCache.put(templateUrl, this.responseText);
         };
         req.open('get', '/base/app/' + templateUrl, asynchronous);
         req.send();
     }));
 
-    it('should include the syntactical errors in the scope', function () {
+    it('should include the syntactical errors in the scope', function() {
         expect(scope.syntacticalErrors).toEqual({});
     });
 
-    it('should include the validity errors in the scope', function () {
+    it('should include the validity errors in the scope', function() {
         expect(scope.validityErrors).toEqual({});
     });
 
     describe('hasNext()', function() {
         describe('when there are no edit errors', function() {
-            it('should return true', function () {
+            it('should return true', function() {
                 mockErrors.syntactical = {};
                 mockErrors.validity = {};
                 controller('SummarySyntacticalValidityCtrl', {
@@ -111,7 +111,7 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
         });
 
         describe('when there are syntactical errors', function() {
-            it('should return false', function () {
+            it('should return false', function() {
                 mockErrors.syntactical = {error: 'test'};
                 mockErrors.validity = {};
                 controller('SummarySyntacticalValidityCtrl', {
@@ -125,7 +125,7 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
         });
 
         describe('when there are validity errors', function() {
-            it('should return false', function () {
+            it('should return false', function() {
                 mockErrors.syntactical = {};
                 mockErrors.validity = {error: 'test'};
                 controller('SummarySyntacticalValidityCtrl', {
@@ -157,7 +157,7 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
                 expect(scope.process).not.toHaveBeenCalled();
             });
 
-            it('should direct the user to the /summaryMSA-IRS page', function () {
+            it('should direct the user to the /summaryMSA-IRS page', function() {
                 scope.next();
                 scope.$digest();
                 expect(location.path()).toBe('/summaryQualityMacro');
@@ -236,19 +236,19 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
                 scope.$digest();
             });
 
-            it('should mark the current step in the wizard as complete', function () {
+            it('should mark the current step in the wizard as complete', function() {
                 var steps = Wizard.getSteps();
                 expect(steps[0].isActive).toBeFalsy();
                 expect(steps[0].status).toBe('complete');
             });
 
-            it('should direct the user to the /summaryQualityMacro page', function () {
+            it('should direct the user to the /summaryQualityMacro page', function() {
                 expect(location.path()).toBe('/summaryQualityMacro');
             });
         });
     });
 
-    describe('previous()', function () {
+    describe('previous()', function() {
         describe('when config.confirmSessionReset is true', function() {
             beforeEach(function() {
                 Configuration.confirmSessionReset = true;
@@ -256,7 +256,7 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
                 scope.$digest();
             });
 
-            it('should display the confirmation dialog', function () {
+            it('should display the confirmation dialog', function() {
                 expect(mockNgDialog.openConfirm).toHaveBeenCalled();
                 expect(location.path()).toBe('/');
             });
@@ -269,7 +269,7 @@ describe('Controller: SummarySyntacticalValidityCtrl', function () {
                 scope.$digest();
             });
 
-            it('should take the user to the home page', function () {
+            it('should take the user to the home page', function() {
                 expect(mockNgDialog.openConfirm).not.toHaveBeenCalled();
                 expect(location.path()).toBe('/');
             });

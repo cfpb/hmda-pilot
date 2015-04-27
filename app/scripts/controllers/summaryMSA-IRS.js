@@ -6,7 +6,7 @@
  * @namespace hmdaPilotApp
  * @module {Controller} SummaryMSAIRS
  */
-module.exports = /*@ngInject*/ function ($scope, $location, Wizard, HMDAEngine, Session) {
+module.exports = /*@ngInject*/ function($scope, $location, Wizard, HMDAEngine, Session) {
 
     Array.prototype.diff = function(a) {
         return this.filter(function(i) { return a.indexOf(i) < 0; });
@@ -35,7 +35,7 @@ module.exports = /*@ngInject*/ function ($scope, $location, Wizard, HMDAEngine, 
         return Session.hasVerifiedIRSReport();
     };
 
-    $scope.previous = function () {
+    $scope.previous = function() {
         $location.path('/summaryQualityMacro');
     };
 

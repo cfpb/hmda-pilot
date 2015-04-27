@@ -13,7 +13,7 @@
  *   <paginzation-nav></pagination-nav>
  * </pagination>
  */
-module.exports = /*@ngInject*/ function () {
+module.exports = /*@ngInject*/ function() {
 
     return {
         restrict: 'E',

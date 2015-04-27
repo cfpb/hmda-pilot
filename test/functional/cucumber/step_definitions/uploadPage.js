@@ -1,8 +1,11 @@
-var chai = require('chai');
-var chaiAsPromised = require('chai-as-promised');
-chai.use(chaiAsPromised);
+/* jshint expr:true, -W079 */
+'use strict';
 
-var expect = chai.expect;
+var chai = require('chai'),
+    expect = chai.expect,
+    chaiAsPromised = require('chai-as-promised');
+
+chai.use(chaiAsPromised);
 
 //Necessary for uploading a file
 var path = require('path');
@@ -13,47 +16,47 @@ var submitButton = element(by.css('.form-buttons button'));
 
 module.exports = function() {
 
-    selectFile = function(fileName){
+    var selectFile = function(fileName) {
         var deferred = protractor.promise.defer();
         var fileSelector = element(by.id('file'));
 
         //Get filename as argument, convert into path, send path to selector on site.
-        var fileToUpload = '../files/'+fileName;
+        var fileToUpload = '../files/' + fileName;
         var absolutePath = path.resolve(__dirname, fileToUpload);
 
         fileSelector.sendKeys(absolutePath);
         deferred.fulfill();
         return deferred.promise;
-    }
+    };
 
-    this.When(/^I upload the '([^']*)' file for validation$/, function (fileName, next) {
-        selectFile(fileName).then(function(){
+    this.When(/^I upload the '([^']*)' file for validation$/, function(fileName, next) {
+        selectFile(fileName).then(function() {
             next();
         });
     });
 
-    this.When(/^I upload the '([^']*)' file and submit$/, function (fileName, next) {
-        selectFile(fileName).then(function(){
+    this.When(/^I upload the '([^']*)' file and submit$/, function(fileName, next) {
+        selectFile(fileName).then(function() {
             submitButton.click();
-        }).then(function(){
+        }).then(function() {
             next();
         });
     });
 
-    this.When(/^I click the submit button$/, function (next) {
-        submitButton.click().then(function(){
+    this.When(/^I click the submit button$/, function(next) {
+        submitButton.click().then(function() {
             next();
         });
     });
 
-    this.Then(/^I am notified that the format is incorrect$/, function (next) {
-        expect(pageErrors.count()).to.eventually.equal(1).then(function(){
+    this.Then(/^I am notified that the format is incorrect$/, function(next) {
+        expect(pageErrors.count()).to.eventually.equal(1).then(function() {
             next();
         });
     });
 
-    this.Then(/^I am not notified that the format is incorrect$/, function (next) {
-        expect(pageErrors.count()).to.eventually.equal(0).then(function(){
+    this.Then(/^I am not notified that the format is incorrect$/, function(next) {
+        expect(pageErrors.count()).to.eventually.equal(0).then(function() {
             next();
         });
     });

@@ -3,7 +3,7 @@
 require('angular');
 require('angular-mocks');
 
-describe('Directive: hmdaExport', function () {
+describe('Directive: hmdaExport', function() {
 
     var element,
         scope,
@@ -11,7 +11,7 @@ describe('Directive: hmdaExport', function () {
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function ($rootScope, _HMDAEngine_) {
+    beforeEach(inject(function($rootScope, _HMDAEngine_) {
         scope = $rootScope.$new();
         HMDAEngine = _HMDAEngine_;
 
@@ -27,7 +27,7 @@ describe('Directive: hmdaExport', function () {
     }));
 
     describe('when exporting all edits by type', function() {
-        beforeEach(inject(function ($compile) {
+        beforeEach(inject(function($compile) {
             element = angular.element('<button hmda-export export="all" type="syntactical">Export</button>');
             element = $compile(element)(scope);
             scope.$digest();
@@ -40,7 +40,7 @@ describe('Directive: hmdaExport', function () {
     });
 
     describe('when exporting an individual edit', function() {
-        beforeEach(inject(function ($compile) {
+        beforeEach(inject(function($compile) {
             element = angular.element('<button hmda-export export="individual" type="syntactical" edit-id="S100">Export</button>');
             element = $compile(element)(scope);
             scope.$digest();
@@ -53,7 +53,7 @@ describe('Directive: hmdaExport', function () {
     });
 
     describe('when an invalid export option is given', function() {
-        beforeEach(inject(function ($compile) {
+        beforeEach(inject(function($compile) {
             element = angular.element('<button hmda-export export="foo" type="syntactical" edit-id="S100">Export</button>');
             element = $compile(element)(scope);
             scope.$digest();

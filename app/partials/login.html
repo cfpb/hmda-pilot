@@ -1,0 +1,26 @@
+<form class="frm-login">
+    <div class="login-modal-header">
+        <h2>Log in</h2>
+    </div>
+    <div class="login-modal-body">
+        <p ng-if="loginError" class="page-errors shake">{{loginError}}</p>
+        <div class="form-group">
+            <div class="form-group_item">
+                <label for="txt-pwd" class="form-label-header">Password:</label>
+                <input id="txt-pwd" type="password" ng-model="password">
+            </div>
+        </div>
+    </div>
+    <div class="login-modal-footer">
+        <div class="form-group_item">
+            <button type="submit" ng-click="login()" class="btn login-button">Log in</button>
+
+            <div class="login-terms-agree">
+                By logging in, you agree to the <button class="btn btn__link" ng-click="toggleTerms()">Terms of Service</button>.
+            </div>
+        </div>
+    </div>
+    <div ng-if="showTerms" class="login-terms ngdialog-message">
+        <ng-include src="'partials/termsOfService.html'"></ng-include>
+    </div>
+</form>

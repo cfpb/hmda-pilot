@@ -3,7 +3,7 @@
 require('angular');
 require('angular-mocks');
 
-describe('Controller: SummaryMSAIRSCtrl', function () {
+describe('Controller: SummaryMSAIRSCtrl', function() {
 
     var scope,
         location,
@@ -20,7 +20,7 @@ describe('Controller: SummaryMSAIRSCtrl', function () {
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function ($rootScope, $location, $controller, $q, _Wizard_, _Session_) {
+    beforeEach(inject(function($rootScope, $location, $controller, $q, _Wizard_, _Session_) {
         scope = $rootScope.$new();
         location = $location;
         controller = $controller;
@@ -36,13 +36,13 @@ describe('Controller: SummaryMSAIRSCtrl', function () {
         });
     }));
 
-    it('should include the special errors in the scope', function () {
+    it('should include the special errors in the scope', function() {
         expect(scope.data.specialErrors).toEqual({});
     });
 
     describe('showIRSReport()', function() {
         describe('when the MSA edits have been verified', function() {
-            it('should return true', function () {
+            it('should return true', function() {
                 mockErrors.special = {};
                 controller('SummaryMSAIRSCtrl', {
                     $scope: scope,
@@ -55,7 +55,7 @@ describe('Controller: SummaryMSAIRSCtrl', function () {
         });
 
         describe('when there are unverified MSA edits', function() {
-            it('should return false', function () {
+            it('should return false', function() {
                 mockErrors.special = {Q595: 'test'};
                 controller('SummaryMSAIRSCtrl', {
                     $scope: scope,
@@ -102,7 +102,7 @@ describe('Controller: SummaryMSAIRSCtrl', function () {
 
     describe('hasNext()', function() {
         describe('when the MSA edits and IRS report have been verified', function() {
-            it('should return true', function () {
+            it('should return true', function() {
                 mockErrors.special = {};
                 Session.verifyIRSReport();
                 controller('SummaryMSAIRSCtrl', {
@@ -117,7 +117,7 @@ describe('Controller: SummaryMSAIRSCtrl', function () {
         });
 
         describe('when there are unverified MSA edits', function() {
-            it('should return false', function () {
+            it('should return false', function() {
                 mockErrors.special = {Q595: 'test'};
                 Session.verifyIRSReport();
                 controller('SummaryMSAIRSCtrl', {
@@ -132,7 +132,7 @@ describe('Controller: SummaryMSAIRSCtrl', function () {
         });
 
         describe('when the IRS report has not been verified', function() {
-            it('should return false', function () {
+            it('should return false', function() {
                 mockErrors.special = {};
                 Session.unverifyIRSReport();
                 controller('SummaryMSAIRSCtrl', {
@@ -153,13 +153,13 @@ describe('Controller: SummaryMSAIRSCtrl', function () {
             scope.$digest();
         });
 
-        it('should mark the current step in the wizard as complete', function () {
+        it('should mark the current step in the wizard as complete', function() {
             var steps = Wizard.getSteps();
             expect(steps[0].isActive).toBeFalsy();
             expect(steps[0].status).toBe('complete');
         });
 
-        it('should direct the user to the /validationSummary page', function () {
+        it('should direct the user to the /validationSummary page', function() {
             expect(location.path()).toBe('/validationSummary');
         });
     });
@@ -170,7 +170,7 @@ describe('Controller: SummaryMSAIRSCtrl', function () {
             scope.$digest();
         });
 
-        it('should direct the user to the /summaryQualityMacro page', function () {
+        it('should direct the user to the /summaryQualityMacro page', function() {
             expect(location.path()).toBe('/summaryQualityMacro');
         });
     });

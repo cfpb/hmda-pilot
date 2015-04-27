@@ -9,7 +9,7 @@ describe('Filters: hmdaFilters', function() {
     describe('keyLength', function() {
         it('should return the length of the input object\'s keys', angular.mock.inject(function(keyLengthFilter) {
             expect(keyLengthFilter({})).toBe(0);
-            expect(keyLengthFilter({'foo': true})).toBe(1);
+            expect(keyLengthFilter({foo: true})).toBe(1);
         }));
     });
 
@@ -35,7 +35,7 @@ describe('Filters: hmdaFilters', function() {
             mockFileSpec = {
                 transmittalSheet: {
                     activityYear: {
-                           label: 'Activity Year',
+                        label: 'Activity Year'
                     }
                 },
                 loanApplicationRegister: {
@@ -60,27 +60,27 @@ describe('Filters: hmdaFilters', function() {
         }));
 
         it('should return the length of the input object\'s keys for lar', angular.mock.inject(function(hmdaLabelFilter) {
-            expect(hmdaLabelFilter({'property':'recordID', 'lineNumber':'2'}, 'lar')).toBe('Record Identifier');
+            expect(hmdaLabelFilter({property:'recordID', lineNumber:'2'}, 'lar')).toBe('Record Identifier');
         }));
 
         it('should return the length of the input object\'s keys for ts', angular.mock.inject(function(hmdaLabelFilter) {
-            expect(hmdaLabelFilter({'property':'activityYear', 'lineNumber':'1'}, 'ts')).toBe('Activity Year');
+            expect(hmdaLabelFilter({property:'activityYear', lineNumber:'1'}, 'ts')).toBe('Activity Year');
         }));
 
         it('should return the length of the input object\'s keys for hmda and line 1', angular.mock.inject(function(hmdaLabelFilter) {
-            expect(hmdaLabelFilter({'property':'activityYear', 'lineNumber':'1'}, 'hmda')).toBe('Activity Year');
+            expect(hmdaLabelFilter({property:'activityYear', lineNumber:'1'}, 'hmda')).toBe('Activity Year');
         }));
 
         it('should return the length of the input object\'s keys for hmda and line != 1', angular.mock.inject(function(hmdaLabelFilter) {
-            expect(hmdaLabelFilter({'property':'recordID', 'lineNumber':'x'}, 'hmda')).toBe('Record Identifier');
+            expect(hmdaLabelFilter({property:'recordID', lineNumber:'x'}, 'hmda')).toBe('Record Identifier');
         }));
 
         it('should return the property as label when property can\'t be found and line 1', angular.mock.inject(function(hmdaLabelFilter) {
-            expect(hmdaLabelFilter({'property':'Foo Bar', 'lineNumber':'1'}, 'hmda')).toBe('Foo Bar');
+            expect(hmdaLabelFilter({property:'Foo Bar', lineNumber:'1'}, 'hmda')).toBe('Foo Bar');
         }));
 
         it('should return the property as label when property can\'t be found and line != 1', angular.mock.inject(function(hmdaLabelFilter) {
-            expect(hmdaLabelFilter({'property':'Bar Foo', 'lineNumber':'x'}, 'hmda')).toBe('Bar Foo');
+            expect(hmdaLabelFilter({property:'Bar Foo', lineNumber:'x'}, 'hmda')).toBe('Bar Foo');
         }));
     });
 
@@ -136,11 +136,11 @@ describe('Filters: hmdaFilters', function() {
             };
 
             Date.prototype.formatCFPBDate = function() {
-                return this.getMonth()+1 + '/' + this.getDate() + '/' + this.getFullYear();
+                return this.getMonth() + 1 + '/' + this.getDate() + '/' + this.getFullYear();
             };
 
             Date.prototype.formatCFPBDatetime = function() {
-                return this.getMonth()+1 + '/' + this.getDate() + '/' + this.getFullYear() + ' ' + this.getHours() + ':' + this.getMinutesFormatted();
+                return this.getMonth() + 1 + '/' + this.getDate() + '/' + this.getFullYear() + ' ' + this.getHours() + ':' + this.getMinutesFormatted();
             };
 
             sampleDate = now.getFullYear().toString() + now.getMonthFormatted().toString() + now.getDateFormatted().toString();
@@ -179,7 +179,7 @@ describe('Filters: hmdaFilters', function() {
 
     describe('hmdaMacroValue', function() {
         beforeEach(angular.mock.module(function($provide) {
-            /* jshint camelcase: false */
+            // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
             $provide.value('HMDAEngine', {
                 starts_with: function(key, prefix) { return key.indexOf(prefix) === 0; },
                 ends_with: function(key, suffix) { return key.indexOf(suffix, key.length - suffix.length) !== -1; }

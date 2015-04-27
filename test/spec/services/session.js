@@ -3,15 +3,44 @@
 require('angular');
 require('angular-mocks');
 
-describe('Service: Session', function () {
+describe('Service: Session', function() {
 
-    var service;
+    var service,
+        cookieStore,
+        Configuration;
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function (_Session_) {
+    beforeEach(inject(function($cookies, $cookieStore, _Configuration_, _Session_) {
         service = _Session_;
+        cookieStore = $cookieStore;
+        Configuration = _Configuration_;
     }));
+
+    describe('authenticate()', function() {
+        it('should return false and not set cookie when password is invalid', function() {
+            expect(service.authenticate('password')).toBeFalsy();
+            expect(cookieStore.get('validSession')).toBeFalsy();
+        });
+
+        it('should return true and set cookie when password is valid', function() {
+            expect(service.authenticate(Configuration.validPassword)).toBeTruthy();
+            expect(cookieStore.get('validSession')).toBeTruthy();
+        });
+
+    });
+
+    describe('isValidSession()', function() {
+        it('should be true when cookie is set', function() {
+            cookieStore.put('validSession', 'true');
+            expect(service.isValidSession()).toBeTruthy();
+        });
+
+        it('should be false when cookie does not exist', function() {
+            cookieStore.remove('validSession');
+            expect(service.isValidSession()).toBeFalsy();
+        });
+    });
 
     describe('addToVerifiedQualityEdits()', function() {
         it('should add a string to the array of validated Quality Edit IDs', function() {

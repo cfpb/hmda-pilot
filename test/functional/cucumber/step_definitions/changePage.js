@@ -1,40 +1,41 @@
-var chai = require('chai');
-var chaiAsPromised = require('chai-as-promised');
+/* jshint expr:true, -W079 */
+'use strict';
+
+var chai = require('chai'),
+    chaiAsPromised = require('chai-as-promised');
+
 chai.use(chaiAsPromised);
 
-var expect = chai.expect;
-
 module.exports = function() {
+    var continueButton = element(by.buttonText('Continue'));
+    var progressBar = element.all(by.css('div.ngdialog-overlay'));
 
-    continueButton = element(by.buttonText('Continue'));
-    progressBar = element.all(by.css('div.ngdialog-overlay'));
-
-    verifyMacroErrors = function(index, numErrors) {
+    var verifyMacroErrors = function(index, numErrors) {
         return element(by.model('response.verified')).click().then(function() {
             var optionsElements = element(by.model('response.reason')).all(by.tagName('option'));
             optionsElements.get(1).click().then(function() {
                 return element(by.buttonText('Save and continue')).click().then(function() {
-                    if (index===numErrors-1) {
+                    if (index === numErrors - 1) {
                         return;
                     } else {
-                        return verifyMacroErrors (index+1, numErrors);
+                        return verifyMacroErrors (index + 1, numErrors);
                     }
                 });
             });
         });
     };
 
-    waitUrlChange = function(oldUrl) {
-        //Waits for URL to change before allowing execution to move forward. Timeout is at end of fn.
+    var waitUrlChange = function(oldUrl) {
         //Finding start URL within fn is slow, and can happen after a quick page change has occurred
         //As such, you can pass a start URL (as string) to it and that will be used.
-        var deferred = protractor.promise.defer();
+
         //If URL wasn't passed, find one here. Can lead to timeouts with a quick page change
         if (!oldUrl) {
-            browser.getCurrentUrl().then(function(url){
+            browser.getCurrentUrl().then(function(url) {
                 oldUrl = url;
             });
         }
+
         //Fulfill and return promise when URL changes and no progress bar exists
         var pageChangeConditions = [
             browser.wait(function() {
@@ -48,33 +49,32 @@ module.exports = function() {
                 });
             }, 2000000)
         ];
-        
-        return protractor.promise.all(pageChangeConditions);
-    }
 
-    this.When(/^I wait for the file to be processed$/, function (next) {
-        waitUrlChange().then(function(){
+        return protractor.promise.all(pageChangeConditions);
+    };
+
+    this.When(/^I wait for the file to be processed$/, function(next) {
+        waitUrlChange().then(function() {
             next();
         });
     });
 
-    this.When(/^I continue to the quality and macro edit reports page$/, function (next) {
-    var recentlyChangedUrl;
-        waitUrlChange().then(function(){
-            browser.getCurrentUrl().then(function(url){
-                recentlyChangedUrl = url
-            }).then(function(){
+    this.When(/^I continue to the quality and macro edit reports page$/, function(next) {
+        var recentlyChangedUrl;
+        waitUrlChange().then(function() {
+            browser.getCurrentUrl().then(function(url) {
+                recentlyChangedUrl = url;
+            }).then(function() {
                 continueButton.click();
-            }).then(function(){
+            }).then(function() {
                 waitUrlChange(recentlyChangedUrl);
-            }).then(function(){
+            }).then(function() {
                 next();
             });
         });
     });
 
-    this.When(/^I continue to the msa and irs edit reports page$/, function (next) {
-    var recentlyChangedUrl;
+    this.When(/^I continue to the msa and irs edit reports page$/, function(next) {
         waitUrlChange().then(function() {
             continueButton.click();
             waitUrlChange().then(function() {
@@ -87,8 +87,7 @@ module.exports = function() {
         });
     });
 
-    this.When(/^I continue through the quality macro errors page$/, function (next) {
-        var recentlyChangedUrl;
+    this.When(/^I continue through the quality macro errors page$/, function(next) {
         waitUrlChange().then(function() {
             continueButton.click();
             waitUrlChange().then(function() {

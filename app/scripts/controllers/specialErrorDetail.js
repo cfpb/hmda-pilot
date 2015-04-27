@@ -7,7 +7,7 @@
  * @namespace hmdaPilotApp
  * @module {Controller} SpecialErrorDetail
  */
-module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http, $filter, HMDAEngine, Session) {
+module.exports = /*@ngInject*/ function($scope, $routeParams, $location, $http, $filter, HMDAEngine, Session) {
 
     // Get the list of errors from the HMDAEngine
     var editType = 'special',
@@ -106,7 +106,7 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
         var path = '/summaryMSA-IRS',
             currentIdx = $scope.siblingEdits.indexOf(editId);
         if (currentIdx !== ($scope.siblingEdits.length - 1)) {
-            path = '/detail/' + editType + '/' + $scope.siblingEdits[currentIdx+1];
+            path = '/detail/' + editType + '/' + $scope.siblingEdits[currentIdx + 1];
         }
         $location.path(path);
     }

@@ -3,13 +3,13 @@
 require('angular');
 require('angular-mocks');
 
-describe('Controller: PaginationCtrl', function () {
+describe('Controller: PaginationCtrl', function() {
 
     var scope;
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function ($controller, $rootScope, $timeout) {
+    beforeEach(inject(function($controller, $rootScope, $timeout) {
         scope = $rootScope.$new();
         scope.error = {
             errors: []
@@ -144,7 +144,7 @@ describe('Controller: PaginationCtrl', function () {
         });
 
         it('should set the current page to the last page if greater than total number of pages', function() {
-            scope.currentPage(scope.totalPages()+10);
+            scope.currentPage(scope.totalPages() + 10);
             expect(scope.$parent.paginate.currentPage).toBe(scope.totalPages());
         });
     });
@@ -218,4 +218,3 @@ describe('Controller: PaginationCtrl', function () {
         });
     });
 });
-

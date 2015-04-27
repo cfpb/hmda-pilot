@@ -6,7 +6,7 @@
  * @namespace hmdaPilotApp
  * @module {Directive} Pagination
  */
-module.exports = /*@ngInject*/ function () {
+module.exports = /*@ngInject*/ function() {
 
     return {
         restrict: 'E',

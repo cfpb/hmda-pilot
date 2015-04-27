@@ -6,7 +6,7 @@
  * @namespace hmdaPilotApp
  * @module {Directive} Disclaimer
  */
-module.exports = /*@ngInject*/ function () {
+module.exports = /*@ngInject*/ function() {
 
     var hideClass = 'u-visually-hidden';
 

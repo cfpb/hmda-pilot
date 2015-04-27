@@ -3,7 +3,7 @@
 require('angular');
 require('angular-mocks');
 
-describe('Controller: IRSReportCtrl', function () {
+describe('Controller: IRSReportCtrl', function() {
 
     var scope,
         location,
@@ -15,7 +15,7 @@ describe('Controller: IRSReportCtrl', function () {
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function ($rootScope, $location, $controller, _Session_) {
+    beforeEach(inject(function($rootScope, $location, $controller, _Session_) {
         scope = $rootScope.$new();
         location = $location;
         Session = _Session_;
@@ -36,7 +36,7 @@ describe('Controller: IRSReportCtrl', function () {
     // });
     //
     // describe('backToSummary()', function() {
-    //     it('should direct the user to the /summaryMSA-IRS page', function () {
+    //     it('should direct the user to the /summaryMSA-IRS page', function() {
     //         scope.backToSummary();
     //         scope.$digest();
     //         expect(location.path()).toBe('/summaryMSA-IRS');

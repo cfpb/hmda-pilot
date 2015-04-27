@@ -7,7 +7,7 @@
  * @namespace hmdaPilotApp
  * @module {Service} FileMetadata
  */
-module.exports = /*@ngInject*/ function (HMDAEngine) {
+module.exports = /*@ngInject*/ function(HMDAEngine) {
 
     var fileMetadata = {};
 
