@@ -1,6 +1,7 @@
 // Generated on 2014-11-18 using generator-angular 0.10.0
 'use strict';
 
+// jscs:disable
 // # Globbing
 // for performance reasons we're only matching one level down:
 // 'test/spec/{,*/}*.js'
@@ -44,14 +45,14 @@ module.exports = function (grunt) {
     watch: {
       js: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.js', 'node_modules/hmda-rule-engine/{,*/}*.js'],
-        tasks: ['newer:jshint:all', 'browserify:dev'],
+        tasks: ['newer:jscs:all', 'newer:jshint:all', 'browserify:dev'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
       },
       jsTest: {
         files: ['test/spec/{,*/}*.js'],
-        tasks: ['newer:jshint:test', 'karma']
+        tasks: ['newer:jscs:test', 'newer:jshint:test', 'karma']
       },
       styles: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
@@ -65,7 +66,7 @@ module.exports = function (grunt) {
         files: ['Gruntfile.js']
       },
       markdown: {
-        files: ['ABOUT.md', 'COMMON_QUESTIONS.md'],
+        files: ['ABOUT.md', 'COMMON_QUESTIONS.md', 'TERMS_OF_SERVICE.md'],
         tasks: ['markdown:help']
       },
       livereload: {
@@ -116,14 +117,6 @@ module.exports = function (grunt) {
           open: true,
           base: '<%= yeoman.dist %>'
         }
-      },
-      docs: {
-        options: {
-          port: 9002,
-          open: true,
-          base: 'docs',
-          keepalive: true
-        }
       }
     },
 
@@ -146,8 +139,30 @@ module.exports = function (grunt) {
         options: {
           jshintrc: 'test/.jshintrc'
         },
-        src: ['test/spec/{,*/}*.js']
+        src: [
+          'test/spec/{,*/}*.js',
+          'test/functional/cucumber/step_definitions/{,*/}*.js'
+        ]
       }
+    },
+
+    // Make sure code styles are up to par and there are no obvious mistakes
+    jscs: {
+        options: {
+            config: '.jscsrc',
+            reporter: require('jscs-stylish').path,
+        },
+        all: {
+            src: [
+              '<%= yeoman.app %>/scripts/{,*/}*.js'
+            ]
+        },
+        test: {
+            src: [
+              'test/spec/{,*/}*.js',
+              'test/functional/cucumber/step_definitions/{,*/}*.js'
+            ]
+        }
     },
 
     // Empties folders to start fresh
@@ -501,20 +516,37 @@ module.exports = function (grunt) {
         }]
       }
     },
-    ngdocs: {
-      all: ['<%= yeoman.app %>/scripts/{,*/}*.js']
+    jsdoc : {
+        dist : {
+            src: ['<%= yeoman.app %>/scripts/{,*/}*.js', 'README.md'],
+            options: {
+                destination: 'docs',
+                template : 'node_modules/grunt-jsdoc/node_modules/ink-docstrap/template',
+                configure: '.jsdoc.conf.json'
+            }
+        }
     },
     markdown: {
         help: {
             files: [{
                 'app/partials/about.html': 'ABOUT.md',
                 'app/views/common_questions.html': 'COMMON_QUESTIONS.md',
+                'app/partials/termsOfService.html': 'TERMS_OF_SERVICE.md',
             }],
             options: {
                 template: 'config/md-to-html.jst',
             }
         }
-    }
+    },
+    protractor: {
+        options: {
+            configFile: 'test/functional/conf.js', // Default config file
+            args: {
+                // Arguments passed to the command
+            }
+        },
+        all: {}
+    },
   });
 
   grunt.loadNpmTasks('grunt-contrib-compress');
@@ -529,12 +561,13 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
+      'jscs',
       'jshint',
+      'replace:local',
       'browserify:dev',
       'less:server',
       'concurrent:server',
       'autoprefixer',
-      'replace:local',
       'markdown:help',
       'connect:livereload',
       'watch'
@@ -549,11 +582,18 @@ module.exports = function (grunt) {
   grunt.registerTask('test', [
     'clean:coverage',
     'clean:server',
+    'jscs:test',
     'jshint:test',
     'concurrent:test',
     'autoprefixer',
     'connect:test',
     'karma'
+  ]);
+
+  grunt.registerTask('functional', [
+    'jscs:test',
+    'jshint:test',
+    'protractor'
   ]);
 
   grunt.registerTask('travis-coveralls', [
@@ -571,6 +611,8 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:dist',
+      'jscs',
+      'jshint',
       'replace:' + env,
       'browserify:dist',
       'ngAnnotate:dist',
@@ -604,7 +646,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('generate-docs', [
       'clean:docs',
-      'ngdocs',
-      'connect:docs'
+      'jsdoc:dist'
   ]);
 };

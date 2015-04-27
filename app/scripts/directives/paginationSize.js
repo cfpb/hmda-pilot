@@ -1,13 +1,18 @@
 'use strict';
 
 /**
- * @ngdoc directive
- * @name hmdaPilotApp.directive:PaginationHeader
- * @description
- * # Pagination Header directive
  * Directive for displaying the pagination header
+ *
+ * @namespace hmdaPilotApp
+ * @module {Directive} PaginationSize
+ * @requires pagination
+ *
+ * @example
+ * <pagination>
+ *   <paginzation-size></pagination-size>
+ * </pagination>
  */
-module.exports = /*@ngInject*/ function () {
+module.exports = /*@ngInject*/ function() {
 
     return {
         restrict: 'E',

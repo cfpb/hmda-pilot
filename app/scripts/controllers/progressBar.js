@@ -1,19 +1,26 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name hmdaPilotApp.controller:ProgressBarCtrl
- * @description
- * # ProgressBarCtrl
- * Controller of the hmdaPilotApp
+ * Provides the scope and functions for the progress bar.
+ *
+ * @namespace hmdaPilotApp
+ * @module {Controller} ProgressBar
  */
-module.exports = /*@ngInject*/ function ($scope, HMDAEngine) {
+module.exports = /*@ngInject*/ function($scope, $window, HMDAEngine) {
 
     $scope.percentageComplete = 0;
 
-    HMDAEngine.getProgress().events.on('progressStep', function(percent) {
-        $scope.$apply(function(){
+    function applyProgress(percent) {
+        $scope.$evalAsync(function($scope) {
             $scope.percentageComplete = percent;
         });
-    });
+    }
+
+    HMDAEngine.getProgress().events.on('progressStep', applyProgress);
+    HMDAEngine.getFileProgress().events.on('progressStep', applyProgress);
+
+    $scope.cancel = function() {
+        $scope.closeThisDialog();
+        $window.location.reload();
+    };
 };

@@ -5,22 +5,22 @@
 require('angular');
 require('angular-mocks');
 
-describe('Directive: ErrorDetail', function () {
+describe('Directive: ErrorDetail', function() {
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(angular.mock.module(function($provide){
-        $provide.value('hmdaLabelFilter', function(input){ return input + ' label'; });
-        $provide.value('hmdaValueFilter', function(input){ return input + ' value'; });
+    beforeEach(angular.mock.module(function($provide) {
+        $provide.value('hmdaLabelFilter', function(input) { return input + ' label'; });
+        $provide.value('hmdaValueFilter', function(input) { return input + ' value'; });
     }));
 
     var element,
         scope,
-        mockErrors = {"S270": {"scope": "ts", "explanation": "Century and/or year for action taken date does not match activity century/year.", "description": "Century (CC) and Year (YY) of action taken date must = activity century/year (CCYY) for period being processed.", "errors": [], "action": "Correct Entry and Revalidate"}, //jshint ignore:line
-            "S271": {"scope": "lar", "explanation": "Century and/or year for action taken date does not match activity century/year.", "description": "Century (CC) and Year (YY) of action taken date must = activity century/year (CCYY) for period being processed.", "errors": [{"lineNumber": "1", "properties": {"actionDate": "2013", "transmittalSheet.activityYear": "2012"} },{"lineNumber": "1", "properties": {"actionDate": "2013", "transmittalSheet.activityYear": "2012"} }], "action": "Correct Entry and Revalidate"}}; //jshint ignore:line
+        mockErrors = {S270: {scope: 'ts', explanation: 'Century and/or year for action taken date does not match activity century/year.', description: 'Century (CC) and Year (YY) of action taken date must = activity century/year (CCYY) for period being processed.', errors: [], action: 'Correct Entry and Revalidate'},
+            S271: {scope: 'lar', explanation: 'Century and/or year for action taken date does not match activity century/year.', description: 'Century (CC) and Year (YY) of action taken date must = activity century/year (CCYY) for period being processed.', errors: [{lineNumber: '1', properties: {actionDate: '2013', 'transmittalSheet.activityYear': '2012'} }, {lineNumber: '1', properties: {actionDate: '2013', 'transmittalSheet.activityYear': '2012'} }], action: 'Correct Entry and Revalidate'}};
 
     for (var i = 0; i < 20; i++) {
-        mockErrors.S270.errors.push({'lineNumber': '1', 'properties': {'actionDate': '2013', 'transmittalSheet.activityYear': '2012'} },{'lineNumber': '1', 'properties': {'actionDate': '2013', 'transmittalSheet.activityYear': '2012'} });
+        mockErrors.S270.errors.push({lineNumber: '1', properties: {actionDate: '2013', 'transmittalSheet.activityYear': '2012'} }, {lineNumber: '1', properties: {actionDate: '2013', 'transmittalSheet.activityYear': '2012'} });
     }
 
     beforeEach(inject(function($templateCache) {
@@ -33,7 +33,7 @@ describe('Directive: ErrorDetail', function () {
             req.onload = function() {
                 directiveTemplate = this.responseText;
             };
-            req.open('get', '/base/app/'+templateId, false);
+            req.open('get', '/base/app/' + templateId, false);
             req.send();
             $templateCache.put(templateId, directiveTemplate);
         });
@@ -43,7 +43,7 @@ describe('Directive: ErrorDetail', function () {
 
         var $table;
 
-        beforeEach(inject(function ($rootScope, $compile) {
+        beforeEach(inject(function($rootScope, $compile) {
             scope = $rootScope.$new();
             scope.errorId = 'S270';
             scope.error = mockErrors[scope.errorId];
@@ -54,13 +54,13 @@ describe('Directive: ErrorDetail', function () {
             $table = jQuery('table', element);
         }));
 
-        it('should display a table of errors', function () {
+        it('should display a table of errors', function() {
             expect($table).toBeDefined();
             expect($table.hasClass('error-detail')).toBeTruthy();
         });
 
         describe('table for syntactical, validity or quality errors', function() {
-            it('should display column headers including Loan/Application Number when scope is \'lar\'', inject(function ($rootScope, $compile) {
+            it('should display column headers including Loan/Application Number when scope is \'lar\'', inject(function($rootScope, $compile) {
                 scope = $rootScope.$new();
                 scope.errorId = 'S271';
                 scope.error = mockErrors[scope.errorId];
@@ -99,7 +99,7 @@ describe('Directive: ErrorDetail', function () {
         });
 
         describe('table for macro errors', function() {
-            it('should display the properties for the macro error', inject(function ($rootScope, $compile) {
+            it('should display the properties for the macro error', inject(function($rootScope, $compile) {
                 scope = $rootScope.$new();
                 scope.errorId = 'S271';
                 scope.error = mockErrors[scope.errorId];
@@ -129,7 +129,7 @@ describe('Directive: ErrorDetail', function () {
     });
 
     describe('when there are no errors', function() {
-        beforeEach(inject(function ($rootScope, $compile) {
+        beforeEach(inject(function($rootScope, $compile) {
             scope = $rootScope.$new();
             scope.error = {};
             scope.editType = 'syntactical';

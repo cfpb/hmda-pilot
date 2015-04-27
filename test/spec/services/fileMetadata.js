@@ -3,7 +3,7 @@
 require('angular');
 require('angular-mocks');
 
-describe('Service: FileMetadata', function () {
+describe('Service: FileMetadata', function() {
 
     var service,
         HMDAEngine,
@@ -19,12 +19,12 @@ describe('Service: FileMetadata', function () {
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function (_FileMetadata_, _HMDAEngine_) {
+    beforeEach(inject(function(_FileMetadata_, _HMDAEngine_) {
         service = _FileMetadata_;
         HMDAEngine = _HMDAEngine_;
     }));
 
-    describe('refresh()', function (){
+    describe('refresh()', function() {
         describe('when the rule-engine has processed the file', function() {
             beforeEach(function() {
                 HMDAEngine.setHmdaJson(mockHmdaFile);
@@ -32,7 +32,7 @@ describe('Service: FileMetadata', function () {
                 service.refresh();
             });
 
-            it('should return a metadata object', function (){
+            it('should return a metadata object', function() {
                 var metadata = service.get();
                 expect(metadata.filename).toBe('test.dat');
                 expect(metadata.activityYear).toBe('2015');
@@ -46,7 +46,7 @@ describe('Service: FileMetadata', function () {
                 HMDAEngine.setHmdaJson({});
             });
 
-            it('should return an empty object', function (){
+            it('should return an empty object', function() {
                 expect(service.refresh()).toEqual({});
             });
         });
@@ -58,7 +58,7 @@ describe('Service: FileMetadata', function () {
             service.setFilename('test.dat');
         });
 
-        it('should return an empty object', function (){
+        it('should return an empty object', function() {
             expect(service.clear()).toEqual({});
         });
     });

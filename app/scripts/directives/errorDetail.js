@@ -1,13 +1,12 @@
 'use strict';
 
 /**
- * @ngdoc directive
- * @name hmdaPilotApp.directive:ErrorDetail
- * @description
- * # Error Summary directive
- * Directive for displaying the details of a single edit error
+ * Display the details of a single edit error.
+ *
+ * @namespace hmdaPilotApp
+ * @module {Directive} ErrorDetail
  */
-module.exports = /*@ngInject*/ function () {
+module.exports = /*@ngInject*/ function() {
 
     return {
         restrict: 'E',

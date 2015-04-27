@@ -6,7 +6,12 @@
 @import (less) "../../node_modules/cf-core/src/cf-vars.less";
 @import (less) "../../node_modules/cf-core/src/cf-media-queries.less";
 @import (less) "../../node_modules/cf-core/src/cf-utilities.less";
-@import (less) "../../node_modules/cf-core/src/cf-base.less";
+
+// TODO: Replace with cf-core/src/cf-base.less once the fonts for the Capital
+// Framework are self-hosted.
+// @see https://github.com/cfpb/cf-core/issues/33
+@import (less) "cf-base.less";
+
 @import (less) "../../node_modules/cf-grid/src/cf-grid.less";
 @import (less) "../../node_modules/cf-buttons/src/cf-buttons.less";
 @import (less) "../../node_modules/cf-forms/src/cf-forms.less";
@@ -30,6 +35,12 @@
 @import (less) "utils.less";
 @import (less) "wizard.less";
 @import (less) "progressBar.less";
+@import (less) "login.less";
+
+.webfont-demi {
+    .webfont-demi();
+    font-family: "Avenir Next LT W01 Demi", Arial, sans-serif;
+}
 
 // Layouts
 .wrapper, .wrap {
@@ -72,7 +83,7 @@ footer {
     }
 
     h2 { margin-bottom: .31em; }
-    p { margin: 0; }
+    p { margin: 0; width: 90%; }
     button { position: absolute; right: 0px; top: 0; }
 }
 
@@ -362,6 +373,10 @@ table.row-hover {
 
     .detail-header & {
         margin-top: 0;
+    }
+
+    .code-descriptions {
+        margin-right: 1.5em;
     }
 }
 

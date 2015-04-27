@@ -7,11 +7,17 @@ Feature: MSA report
     I want to be able to view a report of the MSA/MD branch location issues
     So that I can verify MSA location before submitting
 
-  Scenario: Can view MSA report
+  Scenario: Can view MSA (Q595) report
     Given that I am at the HMDA homepage
-    When I upload the "perfect.dat" file for validation
-    And I continue to the MSA and IRS page
-    And I click on the "MSA report" button
-    Then I will see the MSA report
-    And I will see the Q595 report or Q029 report, as appropriate
-    And I will be able to verify accuracy of reported information
+    When I upload the 'Q595.dat' file and submit
+    And I continue through the quality macro errors page
+    And I click on the 'Q595' report link
+    Then I will see the 'Q595' report
+
+  Scenario: Can view Q029 report
+    Given that I am at the HMDA homepage
+    When I upload the 'Q029.dat' file and submit
+    And I continue to the msa and irs edit reports page
+    And I click on the 'Q029' report link
+    Then I will see the 'Q029' report
+    And I will see a verification for all errors

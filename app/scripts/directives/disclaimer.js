@@ -1,13 +1,12 @@
 'use strict';
 
 /**
- * @ngdoc directive
- * @name hmdaPilotApp.directive:Disclaimer
- * @description
- * # Disclaimer directive
- * Directive for displaying a collapsible disclaimer
+ * Displays a collapsible disclaimer.
+ *
+ * @namespace hmdaPilotApp
+ * @module {Directive} Disclaimer
  */
-module.exports = /*@ngInject*/ function () {
+module.exports = /*@ngInject*/ function() {
 
     var hideClass = 'u-visually-hidden';
 

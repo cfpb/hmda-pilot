@@ -1,13 +1,19 @@
 'use strict';
 
 /**
- * @ngdoc directive
- * @name hmdaPilotApp.directive:PaginationFooter
- * @description
- * # Pagination Footer directive
- * Directive for displaying the pagination footer
+ * Directive for displaying the pagination navigation. Provides Previous, Next
+ * and per-page navigation.
+ *
+ * @namespace hmdaPilotApp.directives
+ * @module {Directive} PaginationNav
+ * @requires {@link pagination}
+ *
+ * @example
+ * <pagination>
+ *   <paginzation-nav></pagination-nav>
+ * </pagination>
  */
-module.exports = /*@ngInject*/ function () {
+module.exports = /*@ngInject*/ function() {
 
     return {
         restrict: 'E',

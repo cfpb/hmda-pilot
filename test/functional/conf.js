@@ -1,26 +1,20 @@
 exports.config = {
 
-  framework: 'cucumber',
+    baseUrl: 'http://dev.hmda-pilot.ec2.devis.com/',
 
-  //Pass --specs when running to try an individual test
-  specs: [
-    'cucumber/TestFramework.feature',
-    'cucumber/FileUpload.feature',
-    'cucumber/HighLevelSyntacticalEditReport.feature',
-    'cucumber/HighLevelQualityMacroEditReport.feature',
-    'cucumber/Disclaimer.feature',
-  ],
+    specs: ['cucumber/*.feature'],
 
-  allScriptsTimeout: 30000,
-  getPageTimeout: 30000,
+    allScriptsTimeout: 30000,
+    getPageTimeout: 30000,
 
+    capabilities: {
+        browserName: 'chrome'
+    },
 
-  baseUrl: 'http://dev.hmda-pilot.ec2.devis.com/#/',
-
-  browserName: 'firefox',
-
-  cucumberOpts: {
-    require: 'cucumber/step_definitions/*.js',
-    format: 'summary'
-  }
+    framework: 'cucumber',
+    cucumberOpts: {
+        require: 'cucumber/step_definitions/*.js',
+        tags: ['~@wip', '~@ignore'],
+        format: 'progress'
+    }
 };

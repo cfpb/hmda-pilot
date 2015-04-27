@@ -1,18 +1,17 @@
 'use strict';
 
 /**
- * @ngdoc directive
- * @name hmdaPilotApp.directive:FileMetadata
- * @description
- * # File Metadata directive
- * Directive for displaying metadata relevent to the current HMDA data file
+ * Display metadata relevent to the current HMDA data file.
+ *
+ * @namespace hmdaPilotApp
+ * @module {Directive} FileMetadata
  */
-module.exports = /*@ngInject*/ function () {
+module.exports = /*@ngInject*/ function() {
 
     return {
         restrict: 'E',
         templateUrl: 'partials/fileMetadata.html',
-        controller: /*@ngInject*/ function ($scope, FileMetadata) {
+        controller: /*@ngInject*/ function($scope, FileMetadata) {
             // Initialize $scope variables
             $scope.metadata = {};
             $scope.showMetadata = false;

@@ -1,13 +1,12 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name hmdaPilotApp.controller:SummaryQualityMacroCtrl
- * @description
- * # SummaryQualityMacroCtrl
- * Controller for the Syntactical and Validity Summary view
+ * Provides the scope and functions for the Quality and Macro Summary view.
+ *
+ * @namespace hmdaPilotApp
+ * @module {Controller} SummaryQualityMacro
  */
-module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEngine, Wizard, Session, ngDialog, Configuration) { /*jshint ignore:line*/
+module.exports = /*@ngInject*/ function($scope, $location, $q, $timeout, HMDAEngine, Wizard, Session, ngDialog, Configuration) { /*jshint ignore:line*/
 
     // Set/Reset the state of different objects on load
     HMDAEngine.clearProgress();
@@ -51,7 +50,7 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
         macroErrors: HMDAEngine.getErrors().macro
     };
 
-    $scope.previous = function () {
+    $scope.previous = function() {
         $location.path('/summarySyntacticalValidity');
     };
 
@@ -82,7 +81,8 @@ module.exports = /*@ngInject*/ function ($scope, $location, $q, $timeout, HMDAEn
             console.time('total time for special edits');
         }
 
-        $q.all([HMDAEngine.runSpecial(ruleYear)]).then(function() {
+        Promise.all([HMDAEngine.runSpecial(ruleYear)])
+        .then(function() {
 
             /* istanbul ignore if debug */
             if (HMDAEngine.getDebug()) {

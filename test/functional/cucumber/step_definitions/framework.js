@@ -1,8 +1,11 @@
-var chai = require('chai');
-var chaiAsPromised = require('chai-as-promised');
-chai.use(chaiAsPromised);
+/* jshint expr:true, -W079 */
+'use strict';
 
-var expect = chai.expect;
+var chai = require('chai'),
+    expect = chai.expect,
+    chaiAsPromised = require('chai-as-promised');
+
+chai.use(chaiAsPromised);
 
 module.exports = function() {
 
@@ -24,8 +27,7 @@ module.exports = function() {
         next();
     });
 
-    this.Then(/the title should equal "([^"]*)"$/, function(text, next) {
+    this.Then(/the title should equal '([^']*)'$/, function(text, next) {
         expect(browser.getTitle()).to.eventually.equal(text).and.notify(next);
     });
-
 };

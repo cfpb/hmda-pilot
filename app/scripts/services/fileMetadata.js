@@ -1,20 +1,20 @@
 'use strict';
 
 /**
- * @ngdoc service
- * @name hmdaPilotApp.service:FileMetadata
- * @description
- * # File Metadata service
- * Service to maintain relevent metadata associated with the HMDA data file
+ * Maintains the metadata associated with the HMDA data file. Used primarily by
+ * the fileMetadata directive, but has other uses as well.
+ *
+ * @namespace hmdaPilotApp
+ * @module {Service} FileMetadata
  */
-module.exports = /*@ngInject*/ function (HMDAEngine) {
+module.exports = /*@ngInject*/ function(HMDAEngine) {
 
     var fileMetadata = {};
 
     /**
      * Get the metadata associated with the HMDA Data file
      *
-     * @type {Object}
+     * @return {object} File metadata
      */
     this.get = function() {
         return fileMetadata;
@@ -23,7 +23,7 @@ module.exports = /*@ngInject*/ function (HMDAEngine) {
     /**
      * Store the HMDA Data file's filename for the metadata
      *
-     * @param {String} filename
+     * @param {string} filename
      */
     this.setFilename = function(str) {
         fileMetadata.filename = str;
@@ -32,7 +32,7 @@ module.exports = /*@ngInject*/ function (HMDAEngine) {
     /**
      * Reset the current file metadata
      *
-     * @return {Object} file metadata
+     * @return {object} Empty file metadata
      */
     this.clear = function() {
         fileMetadata = {};
@@ -43,7 +43,7 @@ module.exports = /*@ngInject*/ function (HMDAEngine) {
      * Refresh the relevent metadata associated with the HMDA data file
      * Note: Most of the metadata is pulled in directly from the HMDA Rule Engine
      *
-     * @return {Object} file metadata
+     * @return {object} file metadata
      */
     this.refresh = function() {
         var hmdaFileObj;

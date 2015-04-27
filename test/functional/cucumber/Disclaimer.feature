@@ -1,5 +1,4 @@
 #https://github.com/cfpb/hmda-pilot/issues/186
-#https://github.com/cfpb/hmda-pilot/issues/223
 #TODO: Consider combining with other basic UI features. Change to outline, and test multiple pages
 
 Feature: Display a disclaimer on each page
@@ -10,4 +9,3 @@ Feature: Display a disclaimer on each page
   Scenario: Disclaimer on homepage
     Given that I am at the HMDA homepage
     Then I will see a disclaimer at the top
-    And the text will say "This prototype is a work in progress"

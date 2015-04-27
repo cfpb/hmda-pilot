@@ -15,17 +15,15 @@
   },
   "dependencies": {
     "angular": "1.3.15",
-    "angular-animate": "1.3.15",
     "angular-aria": "1.3.15",
     "angular-cookies": "1.3.15",
-    "angular-filereader": "matteosuppo/angular-filereader#v1.0.2",
     "angular-resource": "1.3.15",
     "angular-route": "1.3.15",
     "angular-sanitize": "1.3.15",
-    "angular-touch": "1.3.15",
-    "hmda-rule-engine": "cfpb/hmda-rule-engine#milestone9",
+    "hmda-rule-engine": "cfpb/hmda-rule-engine#milestone10",
     "ng-dialog": "^0.3.12",
-    "normalize-css": "^2.3.1"
+    "normalize-css": "^2.3.1",
+    "readable-blob-stream": "0.0.0"
   },
   "napa": {
     "cf-buttons": "cfpb/cf-buttons#1.4.0",
@@ -38,6 +36,7 @@
     "cf-layout": "cfpb/cf-layout#0.2.2"
   },
   "devDependencies": {
+    "angular-jsdoc": "^0.3.3",
     "angular-mocks": "1.3.15",
     "browserify-istanbul": "^0.1.2",
     "browserify-shim": "^3.8.3",
@@ -56,25 +55,29 @@
     "grunt-contrib-cssmin": "^0.9.0",
     "grunt-contrib-htmlmin": "^0.3.0",
     "grunt-contrib-imagemin": "^0.9.2",
-    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-jshint": "^0.11.0",
     "grunt-contrib-less": "^0.12.0",
     "grunt-contrib-uglify": "^0.4.0",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-filerev": "^0.2.1",
     "grunt-google-cdn": "^0.4.0",
+    "grunt-jscs": "^1.6.0",
+    "grunt-jsdoc": "^0.6.3",
     "grunt-karma": "^0.9.0",
     "grunt-karma-coveralls": "^2.5.3",
     "grunt-markdown": "^0.7.0",
     "grunt-newer": "^0.7.0",
     "grunt-ng-annotate": "^0.8.0",
-    "grunt-ngdocs": "^0.2.7",
+    "grunt-protractor-runner": "^2.0.0",
     "grunt-replace": "^0.8.0",
     "grunt-svgmin": "^0.4.0",
     "grunt-usemin": "^2.1.1",
     "grunt-wiredep": "^1.7.0",
+    "ink-docstrap": "^0.5.2",
     "jasmine-core": "^2.1.2",
     "jquery": "^1.11.2",
-    "jshint-stylish": "^0.2.0",
+    "jscs-stylish": "^0.3.1",
+    "jshint-stylish": "^1.0.0",
     "karma": "^0.12.25",
     "karma-browserify": "^3.0.1",
     "karma-coverage": "0.2.6",
@@ -92,7 +95,8 @@
   },
   "scripts": {
     "test": "grunt travis-coveralls",
-    "install": "napa"
+    "install": "napa",
+    "postinstall": "node node_modules/protractor/bin/webdriver-manager update"
   },
   "browserify": {
     "transform": [

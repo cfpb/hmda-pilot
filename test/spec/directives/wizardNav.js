@@ -5,7 +5,7 @@
 require('angular');
 require('angular-mocks');
 
-describe('Directive: WizardNav', function () {
+describe('Directive: WizardNav', function() {
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
@@ -17,31 +17,31 @@ describe('Directive: WizardNav', function () {
         Wizard,
         ngDialog;
 
-    beforeEach(inject(function ($templateCache) {
+    beforeEach(inject(function($templateCache) {
         var templateUrl = 'partials/wizardNav.html';
         var asynchronous = false;
 
         var req = new XMLHttpRequest();
-        req.onload = function () {
+        req.onload = function() {
             $templateCache.put(templateUrl, this.responseText);
         };
         req.open('get', '/base/app/' + templateUrl, asynchronous);
         req.send();
     }));
 
-    beforeEach(inject(function ($templateCache) {
+    beforeEach(inject(function($templateCache) {
         var templateUrl = 'partials/confirmSessionReset.html';
         var asynchronous = false;
 
         var req = new XMLHttpRequest();
-        req.onload = function () {
+        req.onload = function() {
             $templateCache.put(templateUrl, this.responseText);
         };
         req.open('get', '/base/app/' + templateUrl, asynchronous);
         req.send();
     }));
 
-    beforeEach(inject(function ($rootScope, $timeout, $location, $compile, _StepFactory_, _Wizard_, _ngDialog_, _Configuration_) {
+    beforeEach(inject(function($rootScope, $timeout, $location, $compile, _StepFactory_, _Wizard_, _ngDialog_, _Configuration_) {
         StepFactory = _StepFactory_;
         Wizard = _Wizard_;
         ngDialog = _ngDialog_;
@@ -72,24 +72,24 @@ describe('Directive: WizardNav', function () {
         $timeout.flush(200);
     }));
 
-    it('should display a link for the currently active step ', function () {
+    it('should display a link for the currently active step ', function() {
         expect(jQuery('li.active > a.title', element)).toBeDefined();
     });
 
-    it('should not display a link for incomplete steps', function () {
+    it('should not display a link for incomplete steps', function() {
         expect(jQuery('li.incomplete > span.title', element)).toBeDefined();
     });
 
-    it('should display a number badge for an incomplete step', function () {
+    it('should display a number badge for an incomplete step', function() {
         expect(jQuery('li.incomplete > span.step-badge', element).hasClass('badge-num')).toBeTruthy();
         expect(jQuery('li.incomplete > span.step-badge', element).eq(0).text()).toBe('3');
     });
 
-    it('should display an approved badge for a completed step', function () {
+    it('should display an approved badge for a completed step', function() {
         expect(jQuery('li.complete > span.step-badge', element).hasClass('cf-icon-approved')).toBeTruthy();
     });
 
-    it('should allow a completed step to be focusable', function () {
+    it('should allow a completed step to be focusable', function() {
         expect(jQuery('li.complete', element).hasClass('focusable')).toBeTruthy();
     });
 
@@ -100,6 +100,19 @@ describe('Directive: WizardNav', function () {
 
         jQuery('a', step).triggerHandler('blur');
         expect(step.hasClass('is_focused')).toBeFalsy();
+    });
+
+    it('should set an already completed step to "is_focused" when it is selected', function() {
+        var $completedStep = jQuery('li.complete', element);
+        scope.$broadcast('$locationChangeSuccess', '#/selectFile');
+        scope.$digest();
+        expect($completedStep.hasClass('is_focused')).toBeTruthy();
+    });
+
+    it('should not set an incomplete step to "is_focused" if it is selected', function() {
+        var $incompletedStep = jQuery('li.incomplete', element);
+        jQuery('a', $incompletedStep).click();
+        expect($incompletedStep.hasClass('is_focused')).toBeFalsy();
     });
 
     describe('when the navigating to /selectFile', function() {

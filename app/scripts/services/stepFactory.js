@@ -1,13 +1,12 @@
 'use strict';
 
 /**
- * @ngdoc interface
- * @name hmdaPilotApp.factory:step
- * @description
- * # Step Factory
  * Factory for creating steps that can be used by the Wizard navigation service.
+ *
+ * @namespace hmdaPilotApp
+ * @module {Factory} StepFactory
  */
-module.exports = /*@ngInject*/ function (StepStatus) {
+module.exports = /*@ngInject*/ function(StepStatus) {
 
     // Constructor
     function Step(title, view) {
@@ -15,6 +14,7 @@ module.exports = /*@ngInject*/ function (StepStatus) {
         this.view = view;
         this.status = StepStatus.incomplete;
         this.isActive = false;
+        this.isFocused = false;
     }
 
     Step.prototype = {
@@ -32,6 +32,10 @@ module.exports = /*@ngInject*/ function (StepStatus) {
 
         markIncomplete: function() {
             this.status = StepStatus.incomplete;
+        },
+
+        isSelectable: function() {
+            return this.status === StepStatus.complete || this.isActive;
         }
     };
 

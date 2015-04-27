@@ -1,13 +1,13 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name hmdaPilotApp.controller:SpecialErrorDetailCtrl
- * @description
- * # SpecialErrorDetailCtrl
- * Controller of the hmdaPilotApp
+ * Provides the scope and functions for the special, Q029 and Q595, Error Detail
+ * views.
+ *
+ * @namespace hmdaPilotApp
+ * @module {Controller} SpecialErrorDetail
  */
-module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http, $filter, HMDAEngine, Session) {
+module.exports = /*@ngInject*/ function($scope, $routeParams, $location, $http, $filter, HMDAEngine, Session) {
 
     // Get the list of errors from the HMDAEngine
     var editType = 'special',
@@ -106,7 +106,7 @@ module.exports = /*@ngInject*/ function ($scope, $routeParams, $location, $http,
         var path = '/summaryMSA-IRS',
             currentIdx = $scope.siblingEdits.indexOf(editId);
         if (currentIdx !== ($scope.siblingEdits.length - 1)) {
-            path = '/detail/' + editType + '/' + $scope.siblingEdits[currentIdx+1];
+            path = '/detail/' + editType + '/' + $scope.siblingEdits[currentIdx + 1];
         }
         $location.path(path);
     }

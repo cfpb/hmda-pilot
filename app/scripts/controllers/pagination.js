@@ -1,13 +1,12 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name hmdaPilotApp.controller:PaginationCtrl
- * @description
- * # PaginationCtrl
- * Controller for pagination
+ * Provides the scope and functions for the {@link pagination} directive.
+ *
+ * @namespace hmdaPilotApp
+ * @module {Controller} Pagination
  */
-module.exports = /*@ngInject*/ function ($scope, $element, $timeout) {
+module.exports = /*@ngInject*/ function($scope, $element, $timeout) {
     $scope.$parent.paginate = {
         currentPage: 1,
         pageSize: 10
@@ -33,25 +32,25 @@ module.exports = /*@ngInject*/ function ($scope, $element, $timeout) {
     });
 
     $scope.selectAll = function(selectedAnswer) {
-        for (var i = $scope.start()-1; i < $scope.end(); i++) {
+        for (var i = $scope.start() - 1; i < $scope.end(); i++) {
             $scope.error.errors[i].properties.select = selectedAnswer;
         }
     };
 
     $scope.checkAll = function() {
         if ($scope.allChecked()) {
-            for (var i = $scope.start()-1; i < $scope.end(); i++) {
+            for (var i = $scope.start() - 1; i < $scope.end(); i++) {
                 $scope.error.errors[i].properties.checkbox = false;
             }
         } else {
-            for (var j = $scope.start()-1; j < $scope.end(); j++) {
+            for (var j = $scope.start() - 1; j < $scope.end(); j++) {
                 $scope.error.errors[j].properties.checkbox = true;
             }
         }
     };
 
     $scope.allChecked = function() {
-        for (var i = $scope.start()-1; i < $scope.end(); i++) {
+        for (var i = $scope.start() - 1; i < $scope.end(); i++) {
             if ($scope.error.errors[i].properties.checkbox === false) {
                 return false;
             }
@@ -60,7 +59,7 @@ module.exports = /*@ngInject*/ function ($scope, $element, $timeout) {
     };
 
     $scope.start = function() {
-        return ($scope.$parent.paginate.currentPage-1) * $scope.$parent.paginate.pageSize + 1;
+        return ($scope.$parent.paginate.currentPage - 1) * $scope.$parent.paginate.pageSize + 1;
     };
 
     $scope.end = function() {

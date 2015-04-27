@@ -3,7 +3,7 @@
 require('angular');
 require('angular-mocks');
 
-describe('Controller: SpecialErrorDetailCtrl', function () {
+describe('Controller: SpecialErrorDetailCtrl', function() {
 
     var scope,
         location,
@@ -11,8 +11,8 @@ describe('Controller: SpecialErrorDetailCtrl', function () {
         mockEngine = {
             getErrors: function() { return mockErrors; }
         },
-        mockErrors = {"special": {"Q595": {"scope": "hmda", "explanation": "Q595 explanation", "description": "Q595 description", "errors": [], "action": "Verify"}, //jshint ignore:line
-            "Q029": {"scope": "hmda", "explanation": "Q029 explanation", "description": "Q029 description", "errors": [], "action": "Verify"}}}; //jshint ignore:line
+        mockErrors = {special: {Q595: {scope: 'hmda', explanation: 'Q595 explanation', description: 'Q595 description', errors: [], action: 'Verify'},
+            Q029: {scope: 'hmda', explanation: 'Q029 explanation', description: 'Q029 description', errors: [], action: 'Verify'}}};
 
     for (var i = 0; i < 10; i++) {
         mockErrors.special.Q595.errors.push({properties: {'LAR Count': 2, 'MSA/MD': '1000' + i, 'MSA/MD name': 'metro area'}});
@@ -21,7 +21,7 @@ describe('Controller: SpecialErrorDetailCtrl', function () {
 
     beforeEach(angular.mock.module('hmdaPilotApp'));
 
-    beforeEach(inject(function ($rootScope, $location, $controller, _Session_) {
+    beforeEach(inject(function($rootScope, $location, $controller, _Session_) {
         scope = $rootScope.$new();
         scope.paginate = {};
         location = $location;
@@ -153,16 +153,16 @@ describe('Controller: SpecialErrorDetailCtrl', function () {
     describe('sort()', function() {
         it('should order the scope errors by a property in ascending order when sorted once', function() {
             scope.sort('properties[\'MSA/MD\']');
-            for (var i = 0; i < scope.error.errors.length-1; i++) {
-                expect(+scope.error.errors[i].properties['MSA/MD']).toBeLessThan(+scope.error.errors[i+1].properties['MSA/MD']);
+            for (var i = 0; i < scope.error.errors.length - 1; i++) {
+                expect(+scope.error.errors[i].properties['MSA/MD']).toBeLessThan(+scope.error.errors[i + 1].properties['MSA/MD']);
             }
         });
 
         it('should order the scope errors by a property in descending order when sorted twice', function() {
             scope.sort('properties[\'MSA/MD\']');
             scope.sort('properties[\'MSA/MD\']');
-            for (var i = 0; i < scope.error.errors.length-1; i++) {
-                expect(+scope.error.errors[i].properties['MSA/MD']).toBeGreaterThan(+scope.error.errors[i+1].properties['MSA/MD']);
+            for (var i = 0; i < scope.error.errors.length - 1; i++) {
+                expect(+scope.error.errors[i].properties['MSA/MD']).toBeGreaterThan(+scope.error.errors[i + 1].properties['MSA/MD']);
             }
         });
 
