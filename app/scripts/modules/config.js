@@ -20,8 +20,8 @@
  */
 angular.module('services.config', [])
     .constant('Configuration', {
-        apiUrl: 'http://dev.hmda-pilot.ec2.devis.com/api',
-        confirmSessionReset: true,
+        apiUrl: 'http://localhost:8000',
+        confirmSessionReset: false,
         progressDialog: {
             name: 'progress',
             controller: 'ProgressBarCtrl',
@@ -29,5 +29,16 @@ angular.module('services.config', [])
             showClose: false,
             closeByDocument: false,
             closeByEscape: false
-        }
+        },
+        loginDialogOptions: {
+            name: 'login',
+            controller: 'LoginCtrl',
+            template: 'partials/login.html',
+            className: 'login-modal',
+            trapFocus: true,
+            showClose: false,
+            closeByDocument: false,
+            closeByEscape: false
+        },
+        validPassword: 'p1l0t'
     });
