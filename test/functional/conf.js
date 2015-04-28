@@ -1,3 +1,8 @@
+'use strict';
+
+var browserWidth = 1280,
+    browserHeight = 1024;
+
 exports.config = {
 
     baseUrl: 'http://dev.hmda-pilot.ec2.devis.com/',
@@ -16,5 +21,9 @@ exports.config = {
         require: 'cucumber/step_definitions/*.js',
         tags: ['~@wip', '~@ignore'],
         format: 'progress'
+    },
+
+    onPrepare: function() {
+        browser.driver.manage().window().setSize(browserWidth, browserHeight);
     }
 };

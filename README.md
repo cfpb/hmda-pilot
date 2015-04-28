@@ -93,7 +93,11 @@ You can then open `./docs/index.html` in your browser to view the documentation.
 
 HMDA Pilot includes a suite of functional tests written using [Cucumber](https://cukes.info/docs/reference#gherkin) and run via [Protractor](http://angular.github.io/protractor/#/), an end-to-end testing tool for AngularJS.
 
-### Running the functional tests
+### Configuring the functional tests
+
+To run the tests in a different browser or change the base URL used by the functional tests, you must update the appropriate sections of `test/functional/conf.js`.
+
+### Running the functional tests locally
 
 To run the functional tests,
 
@@ -103,9 +107,15 @@ $ grunt functional
 
 This will run the tests against the DEV environment in Google Chrome.
 
-### Configuring the functional tests
+### Running the functional tests via SauceLabs
 
-To run the tests in a different browser or change the base URL used by the functional tests, you must update the appropriate sections of `test/functional/conf.js`.
+To run the functional tabs via SauceLabs, you'll first need a SauceLabs account. Once you have one then you'll need to export your username and accesskey as local variables before running the grunt task.
+
+```shell
+$ export SAUCE_USERNAME=<Username>
+$ export SAUCE_ACCESS_KEY=<Accesskey>
+$ grunt functional:sauceLabs
+```
 
 ## Getting involved
 
