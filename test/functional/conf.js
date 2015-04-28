@@ -1,5 +1,8 @@
 'use strict';
 
+var browserWidth = 1280,
+    browserHeight = 1024;
+
 exports.config = {
 
     baseUrl: 'http://dev.hmda-pilot.ec2.devis.com/',
@@ -21,8 +24,6 @@ exports.config = {
     },
 
     onPrepare: function() {
-        var width = 1280;
-        var height = 1024;
-        browser.driver.manage().window().setSize(width, height);
+        browser.driver.manage().window().setSize(browserWidth, browserHeight);
     }
 };
