@@ -75,23 +75,25 @@ angular.module('hmdaFilters', [])
         };
 
         return function(value, scope, property) {
-            var section = getFileSpecSection(scope, value.lineNumber);
-            var fileSpec = HMDAEngine.getFileSpec(HMDAEngine.getRuleYear());
-            var propSpec = fileSpec[section][property];
+            if (value !== 'NA') {
+                var section = getFileSpecSection(scope, value.lineNumber);
+                var fileSpec = HMDAEngine.getFileSpec(HMDAEngine.getRuleYear());
+                var propSpec = fileSpec[section][property];
 
-            if (propSpec !== undefined && propSpec.hasOwnProperty('validation')) {
-                var propVal = propSpec.validation;
-                var result;
+                if (propSpec !== undefined && propSpec.hasOwnProperty('validation')) {
+                    var propVal = propSpec.validation;
+                    var result;
 
-                if (propVal.type === 'percent') {
-                    return value + '%';
-                } else if (propVal.type === 'date' && propVal.match === 'yyyyMMdd') {
-                    return $filter('date')(value.toDate(), 'M/d/yyyy');
-                } else if (propVal.type === 'date' && propVal.match === 'yyyyMMddHHmm') {
-                    return $filter('date')(value.toDate(), 'M/d/yyyy H:mm');
-                } else if (propVal.type === 'currency') {
-                    result = parseInt(value) * parseInt(propVal.multiplier);
-                    return $filter('currency')(result, '$', 0);
+                    if (propVal.type === 'percent') {
+                        return value + '%';
+                    } else if (propVal.type === 'date' && propVal.match === 'yyyyMMdd') {
+                        return $filter('date')(value.toDate(), 'M/d/yyyy');
+                    } else if (propVal.type === 'date' && propVal.match === 'yyyyMMddHHmm') {
+                        return $filter('date')(value.toDate(), 'M/d/yyyy H:mm');
+                    } else if (propVal.type === 'currency') {
+                        result = parseInt(value) * parseInt(propVal.multiplier);
+                        return $filter('currency')(result, '$', 0);
+                    }
                 }
             }
             return value;

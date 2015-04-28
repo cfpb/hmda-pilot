@@ -160,6 +160,10 @@ describe('Filters: hmdaFilters', function() {
             expect(hmdaValueFilter('100', 'lar', 'number')).toBe('100');
         }));
 
+        it('should not format a value of NA', angular.mock.inject(function(hmdaValueFilter) {
+            expect(hmdaValueFilter('NA', 'lar', 'percent')).toBe('NA');
+        }));
+
         it('should format a file-spec property of type percent', angular.mock.inject(function(hmdaValueFilter) {
             expect(hmdaValueFilter('12.34', 'lar', 'percent')).toBe('12.34%');
         }));
