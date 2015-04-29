@@ -587,6 +587,7 @@ module.exports = function (grunt) {
     'clean:server',
     'jscs:test',
     'jshint:test',
+    'replace:local',
     'concurrent:test',
     'autoprefixer',
     'connect:test',
