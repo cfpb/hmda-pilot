@@ -622,6 +622,7 @@ module.exports = function (grunt) {
       'jscs',
       'jshint',
       'replace:' + env,
+      'markdown:help',
       'browserify:dist',
       'ngAnnotate:dist',
       'less:dist',
@@ -633,8 +634,7 @@ module.exports = function (grunt) {
       'uglify',
       'filerev',
       'usemin',
-      'htmlmin',
-      'markdown:help'
+      'htmlmin'
     ]);
   });
 
