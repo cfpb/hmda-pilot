@@ -23,15 +23,6 @@ describe('Filters: hmdaFilters', function() {
                     }
                 }
             },
-            mockMetadata = {
-                filename: 'test.dat',
-                activityYear: '2015',
-                respondentID: '1234567890',
-                totalLineEntries: '42'
-            },
-            mockFileMetadataService = {
-                get: function() { return mockMetadata; }
-            },
             mockFileSpec = {
                 transmittalSheet: {
                     activityYear: {
@@ -52,10 +43,10 @@ describe('Filters: hmdaFilters', function() {
             };
 
         beforeEach(angular.mock.module(function($provide) {
-            $provide.value('FileMetadata', mockFileMetadataService);
             $provide.value('HMDAEngine', {
                 getFileSpec: function() { return mockFileSpec; },
-                getHmdaJson: function() { return mockHmdaFile; }
+                getHmdaJson: function() { return mockHmdaFile; },
+                getRuleYear: function() { return '2015'; }
             });
         }));
 
@@ -73,6 +64,10 @@ describe('Filters: hmdaFilters', function() {
 
         it('should return the length of the input object\'s keys for hmda and line != 1', angular.mock.inject(function(hmdaLabelFilter) {
             expect(hmdaLabelFilter({property:'recordID', lineNumber:'x'}, 'hmda')).toBe('Record Identifier');
+        }));
+
+        it('should return the length of the input object\'s keys for hmda and dot notation ts property', angular.mock.inject(function(hmdaLabelFilter) {
+            expect(hmdaLabelFilter({property:'transmittalSheet.activityYear', lineNumber:'2'}, 'hmda')).toBe('Activity Year');
         }));
 
         it('should return the property as label when property can\'t be found and line 1', angular.mock.inject(function(hmdaLabelFilter) {
