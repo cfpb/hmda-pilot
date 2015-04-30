@@ -75,3 +75,7 @@
 1. **Where can I find out more information about the HMDA Process and my filing obligations?**
 
  HMDA information can be found in several places. A link to the regulation can be found on the [CFPB regulation site](http://www.consumerfinance.gov/regulations/#ecfr). The [HMDA Reporting Getting it Right! Guide](http://www.ffiec.gov/hmda/guide.htm) is also a valuable resource for assisting institutions in their HMDA reporting. It includes a summary of responsibilities and requirements, directions for assembling the necessary tools, and instructions for reporting HMDA data.
+
+1. **As a software developer, where can I find more information what what is going on behind the scenes with the HMDA Pilot?**
+
+ The [HMDA Pilot codebase](https://github.com/cfpb/hmda-pilot/) is open-source and is available via GitHub. Additional [developer documentation](https://github.com/cfpb/hmda-pilot/blob/master/DEVELOPERS.md) is also available.
