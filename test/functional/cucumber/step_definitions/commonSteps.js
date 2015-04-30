@@ -24,8 +24,8 @@ module.exports = function() {
                 passwordBox.sendKeys('p1l0t');
                 loginButton.click();
             }
+            next();
         });
-        next();
     });
 
     this.Then(/^I will see a disclaimer at the top$/, function(next) {

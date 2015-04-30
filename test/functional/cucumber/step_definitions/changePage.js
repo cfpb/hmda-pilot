@@ -28,7 +28,6 @@ module.exports = function() {
     var waitUrlChange = function(oldUrl) {
         //Finding start URL within fn is slow, and can happen after a quick page change has occurred
         //As such, you can pass a start URL (as string) to it and that will be used.
-
         //If URL wasn't passed, find one here. Can lead to timeouts with a quick page change
         if (!oldUrl) {
             browser.getCurrentUrl().then(function(url) {
