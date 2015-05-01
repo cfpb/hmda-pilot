@@ -9,6 +9,12 @@ Nothing presented in the issues or in this repo is a final product unless it is 
 
 **Description**: The HMDA Pilot provides a client side tool to perform validation, error checking and reporting of HMDA submitted files for the current conditions, by following the specifications found on the [FFIEC](http://www.ffiec.gov/hmda) website. In particular, it implements the file specification and most of the edit checks for 2014.
 
+## Additional Information
+
+* [About the HMDA Pilot](ABOUT.md)
+* [Common Questions](COMMON_QUESTIONS.md)
+* [Developer Docs](DEVELOPERS.md)
+
 ## Requirements
 
 The project requires [NodeJS](http://nodejs.org) (npm) to build and manage dependencies and the [HMDA Edit Check API](https://github.com/cfpb/hmda-edit-check-api).
