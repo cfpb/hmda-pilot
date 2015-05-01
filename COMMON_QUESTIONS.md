@@ -14,7 +14,7 @@
 
 1. **What does "Allow HMDA Pilot to store data locally" mean?"**
 
- The HMDA Pilot tool runs the edits locally inside your browser instead of transmitting your file to a server at the CFPB to validate your file. When you start the edit check process, local storage will be established so data that is used to perform some of the edit checks can be transferred to your browser. Checking this option will download approximately 20 MB of census data to your browser, which will help reduce the edit validation processing time if you have 1,000 or more loans. 
+While the HMDA Pilot tool is running locally inside your browser it requires additional information from CFPB servers to perform certain tasks, such as determining valid values for Metropolital Statistical Areas (MSAs). This back and forth network traffic can slow down the overall validation process. Local storage of these resources can speed up this process. Checking this option will download approximately 20 MB of census data to your browser, which will help reduce the edit validation processing time if you have 1,000 or more loans.  
 
 1. **How can I delete the local storage when I am done validating my HMDA file?"**
 
