@@ -25,4 +25,12 @@ module.exports = function() {
             expect(errors[0].element(by.css('.count')).getText()).to.eventually.equal(expectedCount).notify(next);
         });
     });
+
+    this.Then(/^I can verify that the number of quality edit errors is '([^']*)'$/, function(expectedCount, next) {
+        element(by.binding('entries')).getText().then(function(actualCount) {
+            var number = actualCount.match(/\((.+?) /);
+            expect(number[1]).to.equal(expectedCount);
+            next();
+        });
+    });
 };

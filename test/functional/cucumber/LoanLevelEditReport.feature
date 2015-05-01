@@ -9,6 +9,6 @@ Feature: User can view a loan-level report of the syntactical/validity edits
     Given that I am at the HMDA homepage
     When I upload the 'V262short.dat' file and submit
     And I wait for the file to be processed
-    And I click on an edit failure section within the high level summary information
+    And I click on an 'S0' edit failure section within the high level summary information
     Then I am able to see the summary and detail information about the edit failures
 

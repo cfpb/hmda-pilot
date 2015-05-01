@@ -7,14 +7,15 @@ Feature: User can view a loan-level report of the syntactical/validity edits
 
 Scenario Outline: Verifying quality edits
     Given that I am at the HMDA homepage
-    When I upload the '<testfile>' file and submit
-    And I continue through the syntactical and validity errors page
-    And I continue to the msa and irs edit reports page
-    Then I can verify that the number of '<editname>' edit errors is '<errorcount>'
+    When I upload the '<testfile>' file for validation
+    And I click the submit button
+    And I continue to the quality and macro edit reports page
+    And I click on an '<editname>' edit failure section within the high level summary information
+    Then I can verify that the number of quality edit errors is '<errorcount>'
+
     Examples:
       | testfile          | editname   | errorcount |
       | quality/Q020.dat  | Q020       | 1          |
-      | quality/Q033.dat  | Q033       | 1          |
       | quality/Q012.dat  | Q012       | 1          |
       | quality/Q130.dat  | Q130       | 1          |
       | quality/Q022.dat  | Q022       | 200        |
@@ -38,7 +39,6 @@ Scenario Outline: Verifying quality edits
       | quality/Q067.dat  | Q067       | 200        |
       | quality/Q039.dat  | Q039       | 200        |
       | quality/Q040.dat  | Q040       | 200        |
-      | quality/Q061.dat  | Q061       | 200        |
       | quality/Q066.dat  | Q066       | 200        |
       | quality/Q044.dat  | Q044       | 200        |
       | quality/Q045.dat  | Q045       | 200        |

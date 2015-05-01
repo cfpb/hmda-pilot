@@ -59,15 +59,9 @@ module.exports = function() {
     });
 
     this.When(/^I continue to the quality and macro edit reports page$/, function(next) {
-        var recentlyChangedUrl;
         waitUrlChange().then(function() {
-            browser.getCurrentUrl().then(function(url) {
-                recentlyChangedUrl = url;
-            }).then(function() {
-                continueButton.click();
-            }).then(function() {
-                waitUrlChange(recentlyChangedUrl);
-            }).then(function() {
+            continueButton.click();
+            waitUrlChange(browser.getCurrentUrl()).then(function() {
                 next();
             });
         });
@@ -83,6 +77,20 @@ module.exports = function() {
                     next();
                 });
             });
+        });
+    });
+
+    this.When(/^I click on an '(.*)' edit failure section within the high level summary information$/, function(editname, next) {
+        element.all(by.repeater('(key, value) in errors')).filter(function(elem) {
+            return elem.element(by.css('.id')).getText().then(function(id) {
+                if (id === editname) {
+                    return true;
+                }
+                return false;
+            });
+        }).then(function(errorLinks) {
+            errorLinks[0].element(by.partialLinkText(editname)).click();
+            next();
         });
     });
 
