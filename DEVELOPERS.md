@@ -11,7 +11,7 @@ The HMDA Pilot is made up of 4 separate GitHub repositories:
 
 In addition to providing the HMDA Pilot application with validation of data backed checks, the API can also validate single LARs against individual or all edit types.
 
-**Limitation:** Because we're only validating a single LAR, the API can not return errors against the transmital sheet or for edits that require elements of the transmittal sheet to be present.
+**Limitation:** Currently the API only supports validating a single LAR, so it can not return errors against the transmital sheet or for edits that require elements of the transmittal sheet to be present.
 
 ### `isValidLar/:year`
 
