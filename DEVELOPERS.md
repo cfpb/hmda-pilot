@@ -13,13 +13,13 @@ In addition to providing the HMDA Pilot application with validation of data back
 
 **Limitation:** Because we're only validating a single LAR, the API can not return errors against the transmital sheet or for edits that require elements of the transmittal sheet to be present.
 
-### `isValidLar/all/:year`
+### `isValidLar/:year`
 
 Runs all applicable checks against the provided lar.
 
 #### HTTP GET
 ```shell
-$ curl -d "200010000529032991451676935000000000020130117111200122312013011736540311770501.01225    5    1200700   02.0021                                                                                                                                                                                                                                                                              " -H "Content-Type: text/plain" http://hmda-pilot.ec2.devis.com/api/isValidLar/all/2013
+$ curl -d "200010000529032991451676935000000000020130117111200122312013011736540311770501.01225    5    1200700   02.0021                                                                                                                                                                                                                                                                              " -H "Content-Type: text/plain" http://hmda-pilot.ec2.devis.com/api/isValidLar/2013
 ```
 
 #### Response
@@ -48,13 +48,13 @@ $ curl -d "200010000529032991451676935000000000020130117111200122312013011736540
 }
 ```
 
-### `isValidLar/type/:year/:editType`
+### `isValidLar/:year/:editType`
 
 Runs all applicable checks for the supplied type against the provided LAR. Possible `editType` values include: `syntactical`, `validity`, `quality`, `macro`, and `special`.
 
 #### HTTP GET
 ```shell
-$ curl -d "200010000529111017852090299000000000020130117113100200312013011736540311770503.00225    5    12NA  0   NA   21                                                                                                                                                                                                                                                                              " -H "Content-Type: text/plain" http://hmda-pilot.ec2.devis.com/api/isValidLar/type/2013/quality
+$ curl -d "200010000529111017852090299000000000020130117113100200312013011736540311770503.00225    5    12NA  0   NA   21                                                                                                                                                                                                                                                                              " -H "Content-Type: text/plain" http://hmda-pilot.ec2.devis.com/api/isValidLar/2013/quality
 ```
 
 #### Response
