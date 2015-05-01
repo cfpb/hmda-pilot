@@ -4,7 +4,7 @@ The HMDA Pilot is made up of 4 separate GitHub repositories:
 
  * [cfpb/hmda-pilot](https://github.com/cfpb/hmda-pilot) - Contains the code for the the UI which is written in AngularJS 1.3.
  * [cfpb/hmda-rule-spec](https://github.com/cfpb/hmda-rule-spec) - A JSON interpretation of FFIEC's [HMDA .DAT file format](http://www.ffiec.gov/hmda/fileformats.htm) and [validation edits](http://www.ffiec.gov/hmda/edits.htm).
- * [cfpb/hmda-rule-engine](https://github.com/cfpb/hmda-rule-engine) - A custom rule engine driven by the hmda-rule-specs and  written in pure JavaScript so that it can be run via Node.js or in a browser via Browserify.
+ * [cfpb/hmda-rule-engine](https://github.com/cfpb/hmda-rule-engine) - A custom rule engine driven by the hmda-rule-specs and written in [isomorphic JavaScript](http://isomorphic.net/javascript) so that it can be run via Node.js or in a browser via Browserify.
  * [cfpb/hmda-edit-check-api](https://github.com/cfpb/hmda-edit-check-api) - A RESTful API developed using [KrakenJS](http://krakenjs.com/) that provides responses to the data-driven validation edits. The Edit Check API also provides access to a per-LAR validation, see the section below for more information.
 
 ## HMDA Edit Check API
