@@ -9,7 +9,7 @@ The HMDA Pilot is made up of 4 separate GitHub repositories:
 
 ## HMDA Edit Check API
 
-In addition to providing the HMDA Pilot application with validation of data backed checks, the API can also validate single LARs against individual or all edit types.
+In addition to providing the HMDA Pilot application with validation of data backed checks, the API can also validate single LARs against individual or all supported edit types.
 
 **Limitation:** Currently the API only supports validating a single LAR, so it can not return errors against the transmital sheet or for edits that require elements of the transmittal sheet to be present.
 
@@ -42,15 +42,13 @@ $ curl -d "200010000529032991451676935000000000020130117111200122312013011736540
                 "loanNumber": "0329914516769350000000000"
             }]
         }
-    },
-    "macro": {},
-    "special": {}
+    }
 }
 ```
 
 ### `isValidLar/:year/:editType`
 
-Runs all applicable checks for the supplied type against the provided LAR. Possible `editType` values include: `syntactical`, `validity`, `quality`, `macro`, and `special`.
+Runs all applicable checks for the supplied type against the provided LAR. Possible `editType` values include: `syntactical`, `validity` and `quality`.
 
 #### HTTP GET
 ```shell
@@ -90,8 +88,6 @@ $ curl -d "200010000529111017852090299000000000020130117113100200312013011736540
                 "loanNumber": "1110178520902990000000000"
             }]
         }
-    },
-    "macro": {},
-    "special": {}
+    }
 }
 ```
