@@ -2,7 +2,7 @@
 
 1. **What is "HMDA Pilot"?**
 
- This HMDA Pilot is part of the [Consumer Financial Protection Bureau's](http://consumerfinance.gov/) (CFPB) work to improve the Home Mortgage Disclosure Act (HMDA) electronic reporting process for financial institutions. The CFPB is testing whether the HMDA Pilot application makes it easier for HMDA filers to review, validate and correct HMDA file submission edits. This site does not in any way alter or substitute your obligations for submitting data under HMDA. See [ffiec.gov/hmda](http://ffiec.gov/hmda) for more details about your legal obligations.
+ This HMDA Pilot is part of the [Consumer Financial Protection Bureau's](http://consumerfinance.gov/) (CFPB) work to improve the Home Mortgage Disclosure Act (HMDA) electronic reporting process for financial institutions. The CFPB is testing whether the HMDA Pilot application makes it easier for HMDA filers to review, validate and correct HMDA file submission edits. This site does not in any way alter or substitute your obligations for submitting data under HMDA. See [ffiec.gov/hmda](http://www.ffiec.gov/hmda/) for more details about your legal obligations.
 
 1. **Where can I find the file format for the HMDA Dataset I would like to validate with the HMDA Pilot tool?**
 
@@ -12,11 +12,11 @@
 
  The HMDA Pilot tool will validate syntactical, validity, quality and macro quality edits as described in the [validation edits documentation](http://www.ffiec.gov/hmda/edits.htm) on the FFIEC website.
 
-1. **What does "Allow HMDA Pilot to store data locally" mean?"**
+1. **What does "Allow HMDA Pilot to store data locally" mean?**
 
- While the HMDA Pilot tool is running locally inside your browser it requires additional information from CFPB servers to perform certain tasks, such as determining valid values for Metropolital Statistical Areas (MSAs). This back and forth network traffic can slow down the overall validation process. Local storage of these resources can speed up this process. Checking this option will download approximately 20 MB of census data to your browser, which will help reduce the edit validation processing time if you have 1,000 or more loans.  
+ While the HMDA Pilot tool is running locally inside your browser it requires additional information from CFPB servers to perform certain tasks, such as determining valid values for Metropolitan Statistical Areas (MSAs). This back and forth network traffic can slow down the overall validation process. Local storage of these resources can speed up this process. Checking this option will download approximately 20 MB of census data to your browser, which will help reduce the edit validation processing time if you have 1,000 or more loans.  
 
-1. **How can I delete the local storage when I am done validating my HMDA file?"**
+1. **How can I delete the local storage when I am done validating my HMDA file?**
 
  When you click "Start Over" or try to navigate away from the HMDA Pilot site, you will receive a message confirming that you would like to navigate back to the beginning of the process or to another website. Once you click ok to that confirmation message, the local storage will be removed from your browser.
 
@@ -24,7 +24,7 @@
 
  The HMDA Pilot tool will not transmit your Transmittal Sheet or Loan/Application Registers (LARs) to the CFPB. The tool is meant to validate the edits within your system and in your browser, and the CFPB will not have a window into the data that you are using to perform the file validation. The system does not collect any data on your edits, changes or validations of HMDA data, nor does it actually collect any HMDA data.
 
-1. **How do I know that the edit validation is running on my file after I click "Start Validation"**
+1. **How do I know that the edit validation is running on my file after I click "Start Validation"?**
 
  When you click on "Start Validation", a progress bar will appear to show that the syntactical and validity edits are running.
 
@@ -76,6 +76,6 @@
 
  HMDA information can be found in several places. A link to the regulation can be found on the [CFPB regulation site](http://www.consumerfinance.gov/regulations/#ecfr). The [HMDA Reporting Getting it Right! Guide](http://www.ffiec.gov/hmda/guide.htm) is also a valuable resource for assisting institutions in their HMDA reporting. It includes a summary of responsibilities and requirements, directions for assembling the necessary tools, and instructions for reporting HMDA data.
 
-1. **As a software developer, where can I find more information what what is going on behind the scenes with the HMDA Pilot?**
+1. **As a software developer, where can I find more information what is going on behind the scenes with the HMDA Pilot?**
 
  The [HMDA Pilot codebase](https://github.com/cfpb/hmda-pilot/) is open-source and is available via GitHub. Additional [developer documentation](https://github.com/cfpb/hmda-pilot/blob/master/DEVELOPERS.md) is also available.
