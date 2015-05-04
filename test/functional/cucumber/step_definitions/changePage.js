@@ -89,7 +89,7 @@ module.exports = function() {
                 return false;
             });
         }).then(function(errorLinks) {
-            errorLinks[0].element(by.partialLinkText(editname)).click();
+            errorLinks[0].element(by.linkText(editname)).click();
             next();
         });
     });
