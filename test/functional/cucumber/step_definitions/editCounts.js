@@ -17,11 +17,6 @@ module.exports = function() {
                 return false;
             });
         }).then(function(errors) {
-            errors[0].element(by.css('.count')).getText().then(function(actualCount) {
-                if (actualCount !== expectedCount) {
-                    console.log(editname);
-                }
-            });
             expect(errors[0].element(by.css('.count')).getText()).to.eventually.equal(expectedCount).notify(next);
         });
     });
@@ -31,6 +26,15 @@ module.exports = function() {
             var number = actualCount.match(/\((.+?) /);
             expect(number[1]).to.equal(expectedCount);
             next();
+        });
+    });
+
+    this.Then(/^I can verify that the number of macro edit errors is '([^']*)'$/, function(expectedValue, next) {
+        element.all(by.repeater('(key, value) in item.properties')).then(function(properties) {
+            properties[0].element(by.css('.value')).getText().then(function(actualValue) {
+                expect(actualValue).to.equal(expectedValue);
+                next();
+            });
         });
     });
 };

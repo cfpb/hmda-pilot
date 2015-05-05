@@ -24,6 +24,6 @@ module.exports = function() {
     });
 
     this.Then(/^I will see a verification for all errors$/, function(next) {
-        expect(element(by.id('selectAll')).isPresent()).to.eventually.be.true.notify(next);
+        expect(element(by.model('item.properties.select')).isPresent()).to.eventually.be.true.notify(next);
     });
 };

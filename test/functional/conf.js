@@ -1,8 +1,8 @@
 exports.config = {
 
-    baseUrl: 'http://localhost:9000/',
+    baseUrl: 'http://dev.hmda-pilot.ec2.devis.com/',
 
-    specs: ['cucumber/QualityEditCheckCounts.feature'],
+    specs: ['cucumber/*.feature'],
 
     allScriptsTimeout: 30000,
     getPageTimeout: 30000,

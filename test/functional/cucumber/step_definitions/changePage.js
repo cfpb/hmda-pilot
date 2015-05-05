@@ -53,7 +53,7 @@ module.exports = function() {
     };
 
     this.When(/^I wait for the file to be processed$/, function(next) {
-        waitUrlChange().then(function() {
+        waitUrlChange(browser.getCurrentUrl()).then(function() {
             next();
         });
     });
@@ -72,7 +72,7 @@ module.exports = function() {
             continueButton.click();
             waitUrlChange().then(function() {
                 continueButton.click();
-                waitUrlChange().then(function() {
+                waitUrlChange(browser.getCurrentUrl()).then(function() {
                     continueButton.click();
                     next();
                 });

@@ -13,11 +13,3 @@ Feature: MSA report
     And I continue through the quality macro errors page
     And I click on the 'Q595' report link
     Then I will see the 'Q595' report
-
-  Scenario: Can view Q029 report
-    Given that I am at the HMDA homepage
-    When I upload the 'Q029.dat' file and submit
-    And I continue to the msa and irs edit reports page
-    And I click on the 'Q029' report link
-    Then I will see the 'Q029' report
-    And I will see a verification for all errors
