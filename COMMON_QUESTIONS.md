@@ -28,6 +28,25 @@
 
  This HMDA Pilot is part of the [Consumer Financial Protection Bureau's](http://consumerfinance.gov/) (CFPB) work to improve the Home Mortgage Disclosure Act (HMDA) electronic reporting process for financial institutions. The CFPB is testing whether the HMDA Pilot application makes it easier for HMDA filers to review, validate and correct HMDA file submission edits. This site does not in any way alter or substitute your obligations for submitting data under HMDA. See [ffiec.gov/hmda](http://www.ffiec.gov/hmda/) for more details about your legal obligations.
 
+1. **What are the requirements for using the HMDA Pilot?**
+
+  The HMDA Pilot requires that you process your data using one of the following browsers:
+
+  * Firefox 33+
+  * Google Chrome 36+
+  * Internet Explorer 10 or 11
+
+  In addition, because the HMDA Pilot is an application running within your browser, the following guidelines are suggested based on the number of LARs you are trying to validate.
+
+  | Number of LARs | Use Validator Performance Option? |
+  |----------------|-----------------------------------|
+  | Less than 1000 | -                                 |
+  | 1000 to 50K    | Recommended                       |
+  | 50K to 500K    | Required                          |
+  | More than 500K | See below                         |
+
+  If you are attempting to validate more than 500K LARs, validating via the HMDA Pilot may not complete depending on the the processor and memory available to your browser.
+
 1. <a id="question-2"></a>**Where can I find the file format for the HMDA Dataset I would like to validate with the HMDA Pilot tool?** 
 
  The HMDA Pilot tool will accept 2013 or 2014 [properly formatted HMDA .DAT files](http://www.ffiec.gov/hmda/fileformats.htm).
