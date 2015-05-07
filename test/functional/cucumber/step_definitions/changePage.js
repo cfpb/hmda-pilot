@@ -72,9 +72,28 @@ module.exports = function() {
     this.When(/^I upload the '([^']*)' file and submit$/, function(fileName, next) {
         selectFile(fileName).then(function() {
             browser.getCurrentUrl().then(function(url) {
-                console.log('bbbb' + url);
+                console.log(url);
                 currentPage = url;
-            });
+
+                browser.wait(function() {
+                    return submitButton.isDisplayed().then(function(isVisible) {
+                        return isVisible;
+                    });
+                }, 5000000).then(function() {
+                    submitButton.click().then(function() {
+                        next();
+                    });
+                });
+            }); 
+        });
+    });
+
+    this.When(/^I click the submit button$/, function(next) {
+        browser.getCurrentUrl().then(function(url) {
+            currentPage = url;
+            console.log(currentPage);
+
+            // sometimes an issue with the file selector still being displayed when the submit button is clicked
             browser.wait(function() {
                 return submitButton.isDisplayed().then(function(isVisible) {
                     return isVisible;
@@ -83,26 +102,6 @@ module.exports = function() {
                 submitButton.click().then(function() {
                     next();
                 });
-            });
-        }).then(function() {
-            next();
-        });
-    });
-
-    this.When(/^I click the submit button$/, function(next) {
-        browser.getCurrentUrl().then(function(url) {
-            currentPage = url;
-        });
-        console.log('aaaa' + currentPage);
-
-        // sometimes an issue with the file selector still being displayed when the submit button is clicked
-        browser.wait(function() {
-            return submitButton.isDisplayed().then(function(isVisible) {
-                return isVisible;
-            });
-        }, 5000000).then(function() {
-            submitButton.click().then(function() {
-                next();
             });
         });
     });
@@ -114,10 +113,19 @@ module.exports = function() {
     });
 
     this.When(/^I continue to the quality and macro edit reports page$/, function(next) {
-        waitUrlChange().then(function() {
-            continueButton.click();
-            waitUrlChange(browser.getCurrentUrl()).then(function() {
-                next();
+        waitUrlChange(currentPage).then(function() {
+            browser.getCurrentUrl().then(function(url) {
+                currentPage = url;
+                console.log(currentPage);
+
+                // go to Quality/Macro page
+                continueButton.click();
+                waitUrlChange(currentPage).then(function() {
+                    browser.getCurrentUrl().then(function(url) {
+                        currentPage = url;
+                        next();
+                    });
+                });
             });
         });
     });
@@ -176,15 +184,21 @@ module.exports = function() {
     });
 
     this.When(/^I continue through the quality macro errors page$/, function(next) {
-        waitUrlChange().then(function() {
-            continueButton.click();
-            waitUrlChange().then(function() {
-                element.all(by.partialLinkText('Q0')).then(function(macroErrors) {
-                    macroErrors[0].click();
-                    verifyMacroErrors (0, macroErrors.length).then(function() {
-                        continueButton.click();
-                        waitUrlChange().then(function() {
-                            next();
+        waitUrlChange(currentPage).then(function() {
+            browser.getCurrentUrl().then(function(url) {
+                currentPage = url;
+                continueButton.click();
+                waitUrlChange(currentPage).then(function() {
+                    browser.getCurrentUrl().then(function(url) {
+                        currentPage = url;
+                        element.all(by.partialLinkText('Q0')).then(function(macroErrors) {
+                            macroErrors[0].click();
+                            verifyMacroErrors (0, macroErrors.length).then(function() {
+                                continueButton.click();
+                                waitUrlChange(currentPage).then(function() {
+                                    next();
+                                });
+                            });
                         });
                     });
                 });

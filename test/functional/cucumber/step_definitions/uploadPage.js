@@ -30,9 +30,6 @@ module.exports = function() {
 
     this.When(/^I upload the '([^']*)' file for validation$/, function(fileName, next) {
         selectFile(fileName).then(function() {
-            browser.getCurrentUrl().then(function(url) {
-                console.log('bbbb' + url);
-            });
             next();
         });
     });

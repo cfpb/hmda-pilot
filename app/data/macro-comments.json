@@ -30,13 +30,18 @@
         "Purchased a lot of loans this year instead of originating them"
     ],
     "Q011": [
-        "Merged with another FI",
-        "Acquired another FI",
+        "Merged with another FI but have the same Respondent ID and/or Agency Code",
+        "Merged with another FI and have a new Respondent ID and/or Agency Code",
+        "Acquired another FI but have the same Respondent ID and/or Agency Code",
+        "Acquired another FI and have a new Respondent ID and/or Agency Code",
+        "Was acquired by another FI and have a new Respondent ID and/or Agency Code",
+        "Have a new Respondent ID and/or Agency Code",
         "Divested a line of business",
         "Loan applications increased from new home development",
         "Economic downturn in operational area has decreased loan applications",
         "Rising interest rates have decreased home purchases and loan applications",
-        "Refinance volume has decreased due to rising interest rates"
+        "Refinance volume has decreased due to rising interest rates",
+        "Was not a HMDA filer last year"
     ],
     "Q015": [
         "Increased business generally in multifamily loans",
@@ -143,17 +148,32 @@
         "Economic downturn in operational area has decreased loan applications",
         "Loan applications decreased from less new home development",
         "Rising interest rates have decreased home purchases and loan applications",
-        "Refinance volume has decreased due to rising interest rates"
+        "Refinance volume has decreased due to rising interest rates",
+        "Was not a HMDA filer last year",
+        "Merged with another FI and have a new Respondent ID and/or Agency Code",
+        "Acquired another FI and have a new Respondent ID and/or Agency Code",
+        "Was acquired by another FI and have a new Respondent ID and/or Agency Code",
+        "Have a new Respondent ID and/or Agency Code"
     ],
     "Q071": [
         "Selling less FHA loans",
         "Increased selling to private investors",
-        "Increased farm loans and selling to Farmer Mac"
+        "Increased farm loans and selling to Farmer Mac",
+        "Was not a HMDA filer last year",
+        "Merged with another FI and have a new Respondent ID and/or Agency Code",
+        "Acquired another FI and have a new Respondent ID and/or Agency Code",
+        "Was acquired by another FI and have a new Respondent ID and/or Agency Code",
+        "Have a new Respondent ID and/or Agency Code"
     ],
     "Q072": [
         "Selling less FHA loans",
         "Increased selling to private investors",
-        "Increased farm loans and selling to Farmer Mac"
+        "Increased farm loans and selling to Farmer Mac",
+        "Was not a HMDA filer last year",
+        "Merged with another FI and have a new Respondent ID and/or Agency Code",
+        "Acquired another FI and have a new Respondent ID and/or Agency Code",
+        "Was acquired by another FI and have a new Respondent ID and/or Agency Code",
+        "Have a new Respondent ID and/or Agency Code"
     ],
     "Q073": [
         "Keeping more loans in portfolio",
@@ -168,13 +188,22 @@
     "Q075": [
         "Keeping more loans in portfolio",
         "Selling less FHA loans",
-        "Cannot sell increased number of non-QM loans to Fannie Mae/Freddie Mac"
+        "Cannot sell increased number of non-QM loans to Fannie Mae/Freddie Mac",
+        "Was not a HMDA filer last year",
+        "Merged with another FI and have a new Respondent ID and/or Agency Code",
+        "Acquired another FI and have a new Respondent ID and/or Agency Code",
+        "Was acquired by another FI and have a new Respondent ID and/or Agency Code",
+        "Have a new Respondent ID and/or Agency Code"
     ],
     "Q076": [
         "Keeping more loans in portfolio",
         "Selling less FHA loans",
         "Cannot sell increased number of non-QM loans to Fannie Mae/Freddie Mac",
-        "Decreased number of refinances in loan-type makeup"
+        "Was not a HMDA filer last year",
+        "Merged with another FI and have a new Respondent ID and/or Agency Code",
+        "Acquired another FI and have a new Respondent ID and/or Agency Code",
+        "Was acquired by another FI and have a new Respondent ID and/or Agency Code",
+        "Have a new Respondent ID and/or Agency Code"
     ],
     "Q080": [
         "Mainly internet or phone applications so can't determine ethnicity",

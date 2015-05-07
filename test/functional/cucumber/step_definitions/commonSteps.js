@@ -8,23 +8,17 @@ var chai = require('chai'),
 chai.use(chaiAsPromised);
 
 module.exports = function() {
-
     var disclaimer = element(by.css('div.disclaimer'));
 
     this.Given(/^that I am at the HMDA homepage$/, function(next) {
         var passwordBox = element.all(by.id('txt-pwd')),
             loginButton = element.all(by.css('.login-button'));
-        console.log('start of test');
 
         // if session closed, create new session
-        console.log(browser.driver);
-
         browser.get(browser.baseUrl);
-        console.log('getting base url');
 
         //Prevents 'are you sure you want to leave?' window from popping up
         browser.executeScript('window.onbeforeunload = function(){};').then(function() {
-            console.log('checking password');
             if (passwordBox.count() !== 0) {
                 //Log in if we have not already done so
                 passwordBox.sendKeys('p1l0t');
@@ -32,6 +26,7 @@ module.exports = function() {
             }
             next();
         });
+
     });
 
     this.Then(/^I will see a disclaimer at the top$/, function(next) {

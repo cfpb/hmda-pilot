@@ -539,13 +539,16 @@ module.exports = function (grunt) {
         }
     },
     protractor: {
-        options: {
-            configFile: 'test/functional/conf.js', // Default config file
-            args: {
-                // Arguments passed to the command
+        local: {
+            options: {
+                configFile: 'test/functional/conf.js'
             }
         },
-        all: {}
+        sauceLabs: {
+            options: {
+                configFile: 'test/functional/sauce-conf.js'
+            }
+        }
     },
   });
 
@@ -584,17 +587,22 @@ module.exports = function (grunt) {
     'clean:server',
     'jscs:test',
     'jshint:test',
+    'replace:local',
     'concurrent:test',
     'autoprefixer',
     'connect:test',
     'karma'
   ]);
 
-  grunt.registerTask('functional', [
-    'jscs:test',
-    'jshint:test',
-    'protractor'
-  ]);
+  grunt.registerTask('functional', function(type) {
+    type = type || 'local'; // default to running the tests locally, if no other option is specified
+
+    grunt.task.run([
+      'jscs:test',
+      'jshint:test',
+      'protractor:' + type
+    ]);
+  });
 
   grunt.registerTask('travis-coveralls', [
     'test',
@@ -614,6 +622,7 @@ module.exports = function (grunt) {
       'jscs',
       'jshint',
       'replace:' + env,
+      'markdown:help',
       'browserify:dist',
       'ngAnnotate:dist',
       'less:dist',
@@ -625,8 +634,7 @@ module.exports = function (grunt) {
       'uglify',
       'filerev',
       'usemin',
-      'htmlmin',
-      'markdown:help'
+      'htmlmin'
     ]);
   });
 
