@@ -6,9 +6,26 @@ var chai = require('chai'),
 
 chai.use(chaiAsPromised);
 
+var path = require('path');
+
 module.exports = function() {
     var continueButton = element(by.buttonText('Continue'));
     var progressBar = element.all(by.css('div.ngdialog-overlay'));
+    var currentPage;
+    var submitButton = element(by.buttonText('Start validation'));
+
+    var selectFile = function(fileName) {
+        var deferred = protractor.promise.defer();
+        var fileSelector = element(by.id('file'));
+
+        //Get filename as argument, convert into path, send path to selector on site.
+        var fileToUpload = '../files/' + fileName;
+        var absolutePath = path.resolve(__dirname, fileToUpload);
+
+        fileSelector.sendKeys(absolutePath);
+        deferred.fulfill();
+        return deferred.promise;
+    };
 
     var verifyMacroErrors = function(index, numErrors) {
         return element(by.model('response.verified')).click().then(function() {
@@ -52,8 +69,46 @@ module.exports = function() {
         return protractor.promise.all(pageChangeConditions);
     };
 
+    this.When(/^I upload the '([^']*)' file and submit$/, function(fileName, next) {
+        selectFile(fileName).then(function() {
+            browser.getCurrentUrl().then(function(url) {
+                console.log('bbbb' + url);
+                currentPage = url;
+            });
+            browser.wait(function() {
+                return submitButton.isDisplayed().then(function(isVisible) {
+                    return isVisible;
+                });
+            }, 5000000).then(function() {
+                submitButton.click().then(function() {
+                    next();
+                });
+            });
+        }).then(function() {
+            next();
+        });
+    });
+
+    this.When(/^I click the submit button$/, function(next) {
+        browser.getCurrentUrl().then(function(url) {
+            currentPage = url;
+        });
+        console.log('aaaa' + currentPage);
+
+        // sometimes an issue with the file selector still being displayed when the submit button is clicked
+        browser.wait(function() {
+            return submitButton.isDisplayed().then(function(isVisible) {
+                return isVisible;
+            });
+        }, 5000000).then(function() {
+            submitButton.click().then(function() {
+                next();
+            });
+        });
+    });
+
     this.When(/^I wait for the file to be processed$/, function(next) {
-        waitUrlChange(browser.getCurrentUrl()).then(function() {
+        waitUrlChange().then(function() {
             next();
         });
     });
@@ -68,14 +123,40 @@ module.exports = function() {
     });
 
     this.When(/^I continue to the msa and irs edit reports page$/, function(next) {
-        waitUrlChange().then(function() {
-            continueButton.click();
-            waitUrlChange().then(function() {
+        waitUrlChange(currentPage).then(function() {
+            browser.getCurrentUrl().then(function(url) {
+                currentPage = url;
+                console.log(currentPage);
+
+                // go to Quality/Macro page
                 continueButton.click();
-                waitUrlChange(browser.getCurrentUrl()).then(function() {
-                    continueButton.click();
-                    next();
+                waitUrlChange(currentPage).then(function() {
+                    browser.getCurrentUrl().then(function(url) {
+                        currentPage = url;
+                        console.log(currentPage);
+
+                        // go to MSA/Q029/IRS page
+                        continueButton.click();
+                        waitUrlChange(currentPage).then(function() {
+                            browser.getCurrentUrl().then(function(url) {
+                                currentPage = url;
+                                console.log(currentPage);
+                                next();
+                            });
+                        });
+                    });
                 });
+            });
+        });
+    });
+
+    this.When(/^I click on the '([^']*)' report link$/, function(reportName, next) {
+        element(by.linkText(reportName)).click();
+        waitUrlChange(currentPage).then(function() {
+            browser.getCurrentUrl().then(function(url) {
+                currentPage = url;
+                console.log(currentPage);
+                next();
             });
         });
     });

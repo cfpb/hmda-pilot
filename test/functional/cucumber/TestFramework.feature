@@ -8,6 +8,4 @@ Feature: Running Cucumber with Protractor
     Then it should still do normal tests
     Then it should expose the correct global variables
 
-  Scenario: Works with HMDA
-    Given that I am at the HMDA homepage
-    Then the title should equal 'HMDA Pilot | CFPB'
+ 

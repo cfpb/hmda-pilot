@@ -12,7 +12,6 @@ var path = require('path');
 
 //Defining page elements
 var pageErrors = element.all(by.css('.page-errors'));
-var submitButton = element(by.buttonText('Start validation'));
 
 module.exports = function() {
 
@@ -31,37 +30,10 @@ module.exports = function() {
 
     this.When(/^I upload the '([^']*)' file for validation$/, function(fileName, next) {
         selectFile(fileName).then(function() {
+            browser.getCurrentUrl().then(function(url) {
+                console.log('bbbb' + url);
+            });
             next();
-        });
-    });
-
-    this.When(/^I upload the '([^']*)' file and submit$/, function(fileName, next) {
-        selectFile(fileName).then(function() {
-            browser.wait(function() {
-                return submitButton.isDisplayed().then(function(isVisible) {
-                    return isVisible;
-                });
-            }, 5000000).then(function() {
-                submitButton.click().then(function() {
-                    next();
-                });
-            });
-        }).then(function() {
-            next();
-        });
-    });
-
-    this.When(/^I click the submit button$/, function(next) {
-
-        // sometimes an issue with the file selector still being displayed when the submit button is clicked
-        browser.wait(function() {
-            return submitButton.isDisplayed().then(function(isVisible) {
-                return isVisible;
-            });
-        }, 5000000).then(function() {
-            submitButton.click().then(function() {
-                next();
-            });
         });
     });
 

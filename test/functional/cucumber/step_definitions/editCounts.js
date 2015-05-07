@@ -17,7 +17,10 @@ module.exports = function() {
                 return false;
             });
         }).then(function(errors) {
-            expect(errors[0].element(by.css('.count')).getText()).to.eventually.equal(expectedCount).notify(next);
+            errors[0].element(by.css('.count')).getText().then(function(foo) {
+                expect(foo).to.equal(expectedCount);
+                next();
+            });
         });
     });
 
