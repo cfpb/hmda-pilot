@@ -1,6 +1,6 @@
 # About
 
-This HMDA Pilot is part of the [Consumer Financial Protection Bureau's](http://consumerfinance.gov/) (CFPB) work to improve the Home Mortgage Disclosure Act (HMDA) electronic reporting process for financial institutions. This site does not in any way alter or substitute your obligations for submitting data under HMDA. See [ffiec.gov/hmda](http://ffiec.gov/hmda) for more details about your legal obligations.
+This HMDA Pilot is part of the [Consumer Financial Protection Bureau's](http://consumerfinance.gov/) (CFPB) work to improve the Home Mortgage Disclosure Act (HMDA) electronic reporting process for financial institutions. This site does not in any way alter or substitute your obligations for submitting data under HMDA. See [ffiec.gov/hmda](http://www.ffiec.gov/hmda) for more details about your legal obligations.
 
 This HMDA Pilot application makes it easier to review and validate HMDA file submission edits. Institutions can check their HMDA submission files or individual LAR records to determine if there are any syntactical, validity, quality or macro quality edit failures. The site gives institutions the ability to quickly fix any edit errors prior to submission.
 
@@ -30,4 +30,4 @@ The Institution Register Summary (IRS) will display when all syntactical, validi
 
 ### Step 5: Validation Summary
 
-After steps 1-4 are complete and the edit errors have been resolved or verified, the Validation Summary will display and provide the Respondent and File information. This summary will signify that the file is “clean” and ready to file upon agreement with the summary. Once you have reached this screen, you have completed the HMDA Pilot validation.
+After steps 1-4 are complete and the edit errors have been resolved or verified, the Validation Summary will display and provide the Respondent and File information. This summary will signify that the file is "clean" and ready to file upon agreement with the summary. Once you have reached this screen, you have completed the HMDA Pilot validation.
