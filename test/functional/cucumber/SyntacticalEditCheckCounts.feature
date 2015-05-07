@@ -10,7 +10,7 @@ Scenario Outline: Verifying syntactical edits
     Given that I am at the HMDA homepage
     When I upload the '<testfile>' file for validation
     And I click the submit button
-    And I wait for the file to be processed
+    And I continue to the syntactical and validity edit reports page
     Then I can verify that the number of '<editname>' edit errors is '<errorcount>'
     Examples:
       | testfile             | editname   | errorcount |

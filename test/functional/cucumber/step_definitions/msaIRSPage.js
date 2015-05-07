@@ -9,7 +9,6 @@ chai.use(chaiAsPromised);
 
 module.exports = function() {
     this.Then(/^I will see the '([^']*)' report$/, function(reportName, next) {
-        console.log('got here');
         expect(element(by.id(reportName)).isPresent()).to.eventually.be.true.notify(next);
     });
 
@@ -18,7 +17,6 @@ module.exports = function() {
     });
 
     this.Then(/^I will see a verification for all errors$/, function(next) {
-        console.log('got here2');
         expect(element(by.model('item.properties.select')).isPresent()).to.eventually.be.true.notify(next);
     });
 };
