@@ -84,7 +84,7 @@ module.exports = function() {
                         next();
                     });
                 });
-            }); 
+            });
         });
     });
 
@@ -108,7 +108,11 @@ module.exports = function() {
 
     this.When(/^I wait for the file to be processed$/, function(next) {
         waitUrlChange().then(function() {
-            next();
+            browser.getCurrentUrl().then(function(url) {
+                currentPage = url;
+                console.log(currentPage);
+                next();
+            });
         });
     });
 
