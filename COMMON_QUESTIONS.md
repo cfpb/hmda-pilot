@@ -49,7 +49,7 @@
 
   To see if your browser is 32- or 64-bit, check your browser's *About* page.
 
-  If you are attempting to validate more than 500K LARs, validating via the HMDA Pilot may not complete depending on the the processor and memory available to your browser.
+  To validate more than 500K LARs, the processor and memory available to your browser may also be a factor.
 
 1. <a id="question-2"></a>**Where can I find the file format for the HMDA Dataset I would like to validate with the HMDA Pilot tool?** 
 
