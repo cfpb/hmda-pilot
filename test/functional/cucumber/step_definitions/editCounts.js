@@ -17,8 +17,8 @@ module.exports = function() {
                 return false;
             });
         }).then(function(errors) {
-            errors[0].element(by.css('.count')).getText().then(function(foo) {
-                expect(foo).to.equal(expectedCount);
+            errors[0].element(by.css('.count')).getText().then(function(actualCount) {
+                expect(actualCount).to.equal(expectedCount);
                 next();
             });
         });
