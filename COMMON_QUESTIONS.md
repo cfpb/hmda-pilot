@@ -2,6 +2,7 @@
 
 ## Table of Contents
 * [What is "HMDA Pilot"?](#question-1)
+* [What are the requirements for using the HMDA Pilot?](#question-21)
 * [Where can I find the file format for the HMDA Dataset I would like to validate with the HMDA Pilot tool?](#question-2)
 * [Which of the HMDA edits does the HMDA Pilot tool validate?](#question-3)
 * [What does "Allow HMDA Pilot to store data locally" mean?](#question-4)
@@ -28,7 +29,7 @@
 
  This HMDA Pilot is part of the [Consumer Financial Protection Bureau's](http://consumerfinance.gov/) (CFPB) work to improve the Home Mortgage Disclosure Act (HMDA) electronic reporting process for financial institutions. The CFPB is testing whether the HMDA Pilot application makes it easier for HMDA filers to review, validate and correct HMDA file submission edits. This site does not in any way alter or substitute your obligations for submitting data under HMDA. See [ffiec.gov/hmda](http://www.ffiec.gov/hmda/) for more details about your legal obligations.
 
-1. **What are the requirements for using the HMDA Pilot?**
+1. <a id="question-21"></a>**What are the requirements for using the HMDA Pilot?**
 
   The HMDA Pilot requires that you process your data using one of the following browsers:
 
@@ -38,12 +39,15 @@
 
   In addition, because the HMDA Pilot is an application running within your browser, the following guidelines are suggested based on the number of LARs you are trying to validate.
 
-  | Number of LARs | Use Validator Performance Option? |
-  |----------------|-----------------------------------|
-  | Less than 1000 | -                                 |
-  | 1000 to 50K    | Recommended                       |
-  | 50K to 500K    | Required                          |
-  | More than 500K | See below                         |
+  | Number of LARs | Browser type  | Use Validator Performance Option? |
+  |----------------|---------------|-----------------------------------|
+  | Less than 1000 | 32- or 64-bit | Optional                          |
+  | 1000 to 20K    | 32- or 64-bit | Recommended                       |
+  | 20K to 50K     | 64-bit        | Recommended                       |
+  | 50K to 500K    | 64-bit        | Required                          |
+  | More than 500K | 64-bit        | See below                         |
+
+  To see if your browser is 32- or 64-bit, check your browser's *About* page.
 
   If you are attempting to validate more than 500K LARs, validating via the HMDA Pilot may not complete depending on the the processor and memory available to your browser.
 
