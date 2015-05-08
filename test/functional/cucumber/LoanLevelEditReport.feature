@@ -7,7 +7,8 @@ Feature: User can view a loan-level report of the syntactical/validity edits
 
   Scenario: Check loan-level detail
     Given that I am at the HMDA homepage
-    When I upload the 'V262short.dat' file for validation
+    When I click the localDB storage option
+    And I upload the 'V262short.dat' file for validation
     And I click the submit button
     And I continue to the syntactical and validity edit reports page
     And I click on an 'S040' edit failure section within the high level summary information

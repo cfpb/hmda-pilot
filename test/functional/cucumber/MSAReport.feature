@@ -9,7 +9,8 @@ Feature: MSA report
 
   Scenario: Can view MSA (Q595) report
     Given that I am at the HMDA homepage
-    When I upload the 'Q595.dat' file for validation
+    When I click the localDB storage option
+    And I upload the 'Q595.dat' file for validation
     And I click the submit button
     And I continue through the quality macro errors page
     And I click on the 'Q595' report link
@@ -17,7 +18,8 @@ Feature: MSA report
 
   Scenario: Can view Q029 report
     Given that I am at the HMDA homepage
-    When I upload the 'Q029.dat' file for validation
+    When I click the localDB storage option
+    And I upload the 'Q029.dat' file for validation
     And I click the submit button
     And I continue to the msa and irs edit reports page
     And I click on the 'Q029' report link

@@ -9,7 +9,8 @@ Feature: Processing information warning while file is uploading
 
   Scenario: Upload file and see progress bar
     Given that I am at the HMDA homepage
-    When I upload the 'V262short.dat' file for validation
+    When I click the localDB storage option
+    And I upload the 'V262short.dat' file for validation
     And I click the submit button
     Then a progress bar displaying that the system is processing the file is displayed
 

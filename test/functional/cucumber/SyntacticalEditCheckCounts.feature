@@ -8,7 +8,8 @@ Feature: User can view a loan-level report of the syntactical/validity edits
 
 Scenario Outline: Verifying syntactical edits
     Given that I am at the HMDA homepage
-    When I upload the '<testfile>' file for validation
+    When I click the localDB storage option
+    And I upload the '<testfile>' file for validation
     And I click the submit button
     And I continue to the syntactical and validity edit reports page
     Then I can verify that the number of '<editname>' edit errors is '<errorcount>'

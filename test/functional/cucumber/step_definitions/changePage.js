@@ -44,7 +44,6 @@ module.exports = function() {
         waitUrlChange().then(function() {
             browser.getCurrentUrl().then(function(url) {
                 currentPage = url;
-                console.log(currentPage);
                 next();
             });
         });

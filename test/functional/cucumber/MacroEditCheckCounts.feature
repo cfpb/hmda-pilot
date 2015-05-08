@@ -8,7 +8,8 @@ Feature: User can view a loan-level report of the syntactical/validity edits
 
 Scenario Outline: Verifying quality edits
     Given that I am at the HMDA homepage
-    When I upload the '<testfile>' file for validation
+    When I click the localDB storage option
+    And I upload the '<testfile>' file for validation
     And I click the submit button
     And I continue to the quality and macro edit reports page
     And I click on an '<editname>' edit failure section within the high level summary information
