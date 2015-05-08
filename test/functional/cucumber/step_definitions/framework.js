@@ -15,7 +15,6 @@ module.exports = function() {
 
     this.Then(/^it should still do normal tests$/, function(next) {
         expect(true).to.equal(true);
-        console.log('asas');
         next();
     });
 
