@@ -1,10 +1,10 @@
 #https://github.com/cfpb/hmda-pilot/issues/29
 
 @editCheck
-Feature: User can view a loan-level report of the syntactical/validity edits
+Feature: User can double-check edit error counts for validity edits
     As a user
-    I want to be able to see an electronic report of the edits that have failed at the loan ID level
-    So I can fix the data on my system at the loan level or comment on why the failure existed
+    I want to be able to compare edit error counts generated using the SQL checker against the actual rule engine
+    So I can ensure and maintain the correct application of the rules
 
 Scenario Outline: Verifying validity edits
     Given that I am at the HMDA homepage
