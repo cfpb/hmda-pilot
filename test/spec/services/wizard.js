@@ -39,6 +39,13 @@ describe('Service: Wizard', function() {
         });
     });
 
+    describe('getCurrentStepIdx()', function() {
+
+        it('should return the index of the current step', function() {
+            expect(service.getCurrentStepIdx()).toBe(0);
+        });
+    });
+
     describe('getCurrentStep()', function() {
 
         it('should return the current step', function() {
