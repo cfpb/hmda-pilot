@@ -39,13 +39,13 @@
 
   In addition, because the HMDA Pilot is an application running within your browser, the following guidelines are suggested based on the number of LARs you are trying to validate.
 
-  | Number of LARs | Browser type  | Use Validator Performance Option? |
-  |----------------|---------------|-----------------------------------|
-  | Less than 1000 | 32- or 64-bit | Optional                          |
-  | 1000 to 20K    | 32- or 64-bit | Recommended                       |
-  | 20K to 50K     | 64-bit        | Recommended                       |
-  | 50K to 500K    | 64-bit        | Required                          |
-  | More than 500K | 64-bit        | See below                         |
+  | Number of LARs | Browser type  | Store data locally |
+  |----------------|---------------|--------------------|
+  | Less than 1000 | 32- or 64-bit | Optional           |
+  | 1000 to 20K    | 32- or 64-bit | Recommended        |
+  | 20K to 50K     | 64-bit        | Recommended        |
+  | 50K to 500K    | 64-bit        | Required           |
+  | More than 500K | 64-bit        | See below          |
 
   To see if your browser is 32- or 64-bit, check your browser's *About* page.
 
