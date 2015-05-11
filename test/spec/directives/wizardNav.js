@@ -72,6 +72,13 @@ describe('Directive: WizardNav', function() {
         $timeout.flush(200);
     }));
 
+    it('should use an ARIA progressbar to denote progress through the wizard', function() {
+        expect(jQuery('ol', element).attr('role', 'progressbar')).toBeDefined();
+        expect(jQuery('ol', element).attr('aria-valuemin')).toBe('1');
+        expect(jQuery('ol', element).attr('aria-valuemax')).toBe('5');
+        expect(jQuery('ol', element).attr('aria-valuenow')).toBe('2');
+    });
+
     it('should display a link for the currently active step ', function() {
         expect(jQuery('li.active > a.title', element)).toBeDefined();
     });
