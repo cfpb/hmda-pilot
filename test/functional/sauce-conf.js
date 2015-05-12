@@ -8,7 +8,7 @@ var sessionName = 'HMDA Pilot: Dev',
 
 exports.config = {
 
-    baseUrl: 'http://dev.hmda-pilot.ec2.devis.com/',
+    baseUrl: 'http://dev.hmda-pilot.devis.com/',
 
     sauceUser: process.env.SAUCE_USERNAME,
     sauceKey: process.env.SAUCE_ACCESS_KEY,
