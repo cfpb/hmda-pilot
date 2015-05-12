@@ -52,7 +52,7 @@ exports.config = {
     framework: 'cucumber',
     cucumberOpts: {
         require: 'cucumber/step_definitions/*.js',
-        tags: ['~@wip', '~@ignore'],
+        tags: ['~@wip', '~@ignore', '~@editCheck'],
         format: 'progress'
     },
 
