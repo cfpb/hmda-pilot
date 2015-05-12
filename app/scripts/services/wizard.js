@@ -51,6 +51,15 @@ module.exports = /*@ngInject*/ function(StepFactory) {
     };
 
     /**
+     * Get the index of the current step
+     *
+     * @return {Number} current step index
+     */
+    this.getCurrentStepIdx = function() {
+        return currentStepIdx;
+    };
+
+    /**
      * Sets the status of the current step to Complete and makes the next step active
      *
      * @return {Array} steps

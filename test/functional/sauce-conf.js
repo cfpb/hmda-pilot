@@ -8,7 +8,7 @@ var sessionName = 'HMDA Pilot: Dev',
 
 exports.config = {
 
-    baseUrl: 'http://dev.hmda-pilot.ec2.devis.com/',
+    baseUrl: 'http://dev.hmda-pilot.devis.com/',
 
     sauceUser: process.env.SAUCE_USERNAME,
     sauceKey: process.env.SAUCE_ACCESS_KEY,
@@ -22,12 +22,26 @@ exports.config = {
         name: sessionName,
         browserName: 'internet explorer',
         platform: 'ANY',
-        version: '' // Blank defaults to latest version
+        version: '10'
+    }, {
+        browserName: 'internet explorer',
+        platform: 'ANY',
+        version: '11'
+    }, {
+        name: sessionName,
+        browserName: 'chrome',
+        platform: 'ANY',
+        version: '35' // Oldest supported version of Chrome (see COMMON_QUESTIONS.md)
     }, {
         name: sessionName,
         browserName: 'chrome',
         platform: 'ANY',
         version: '' // Blank defaults to latest version
+    }, {
+        name: sessionName,
+        browserName: 'firefox',
+        platform: 'ANY',
+        version: '33' // Oldest supported version of Firefox (see COMMON_QUESTIONS.md)
     }, {
         name: sessionName,
         browserName: 'firefox',
