@@ -3,7 +3,8 @@
 
 var chai = require('chai'),
     expect = chai.expect,
-    chaiAsPromised = require('chai-as-promised');
+    chaiAsPromised = require('chai-as-promised'),
+    remote = require('protractor/node_modules/selenium-webdriver/remote');
 
 chai.use(chaiAsPromised);
 
@@ -19,6 +20,8 @@ module.exports = function() {
     var selectFile = function(fileName) {
         var deferred = protractor.promise.defer();
         var fileSelector = element(by.id('file'));
+
+        browser.driver.setFileDetector(new remote.FileDetector());
 
         //Get filename as argument, convert into path, send path to selector on site.
         var fileToUpload = '../files/' + fileName;

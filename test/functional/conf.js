@@ -5,7 +5,7 @@ var browserWidth = 1280,
 
 exports.config = {
 
-    baseUrl: 'http://dev.hmda-pilot.ec2.devis.com/',
+    baseUrl: 'http://dev.hmda-pilot.devis.com/',
 
     specs: ['cucumber/*.feature'],
 
