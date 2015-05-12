@@ -34,7 +34,7 @@
   The HMDA Pilot requires that you process your data using one of the following browsers:
 
   * Firefox 33+
-  * Google Chrome 36+
+  * Google Chrome 35+
   * Internet Explorer 10 or 11
 
   In addition, because the HMDA Pilot is an application running within your browser, the following guidelines are suggested based on the number of LARs you are trying to validate.
