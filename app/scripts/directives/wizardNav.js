@@ -72,6 +72,8 @@ module.exports = /*@ngInject*/ function($location, $timeout, StepFactory, Wizard
                 return ['/about', '/common-questions'].indexOf($location.path()) === -1;
             };
 
+            scope.currentStepIdx = Wizard.getCurrentStepIdx();
+
             // Watch the Wizard steps to see if they change
             scope.$watch(function() {
                 return Wizard.getCurrentStep();

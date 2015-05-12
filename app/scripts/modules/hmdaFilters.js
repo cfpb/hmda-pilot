@@ -1,6 +1,6 @@
 'use strict';
 
-function getFileSpecSection(scope, lineNumber) {
+function getFileSpecSection(scope, lineNumber, property) {
     var scopes = {
         lar: 'loanApplicationRegister',
         ts: 'transmittalSheet'
@@ -12,8 +12,18 @@ function getFileSpecSection(scope, lineNumber) {
         if (lineNumber === '1') {
             scope = 'ts';
         }
+
+        // Allow referencing TS properties for lineNumbers != 1 (LARs)
+        // using dot notation
+        if (property && property.indexOf('transmittalSheet') !== -1) {
+            scope = 'ts';
+            property = property.replace(/transmittalSheet\./i, '');
+        }
     }
-    return scopes[scope];
+    return {
+        scope: scopes[scope],
+        property: property
+    };
 }
 
 /**
@@ -31,11 +41,11 @@ angular.module('hmdaFilters', [])
      *                            transmittalSheet
      * @return {string}           Human-readable label
      */
-    .filter('hmdaLabel', ['HMDAEngine', 'FileMetadata', function(HMDAEngine, FileMetadata) {
+    .filter('hmdaLabel', ['HMDAEngine', function(HMDAEngine) {
         return function(input, scope) {
-            var section = getFileSpecSection(scope, input.lineNumber);
-            var fileSpec = HMDAEngine.getFileSpec(FileMetadata.get().activityYear);
-            var property = fileSpec[section][input.property];
+            var scopeAndProp = getFileSpecSection(scope, input.lineNumber, input.property);
+            var fileSpec = HMDAEngine.getFileSpec(HMDAEngine.getRuleYear());
+            var property = fileSpec[scopeAndProp.scope][scopeAndProp.property];
             if (property !== undefined && property.hasOwnProperty('label')) {
                 return property.label;
             }
@@ -75,23 +85,25 @@ angular.module('hmdaFilters', [])
         };
 
         return function(value, scope, property) {
-            var section = getFileSpecSection(scope, value.lineNumber);
-            var fileSpec = HMDAEngine.getFileSpec(HMDAEngine.getRuleYear());
-            var propSpec = fileSpec[section][property];
+            if (value !== 'NA') {
+                var scopeAndProp = getFileSpecSection(scope, value.lineNumber, property);
+                var fileSpec = HMDAEngine.getFileSpec(HMDAEngine.getRuleYear());
+                var propSpec = fileSpec[scopeAndProp.scope][scopeAndProp.property];
 
-            if (propSpec !== undefined && propSpec.hasOwnProperty('validation')) {
-                var propVal = propSpec.validation;
-                var result;
+                if (propSpec !== undefined && propSpec.hasOwnProperty('validation')) {
+                    var propVal = propSpec.validation;
+                    var result;
 
-                if (propVal.type === 'percent') {
-                    return value + '%';
-                } else if (propVal.type === 'date' && propVal.match === 'yyyyMMdd') {
-                    return $filter('date')(value.toDate(), 'M/d/yyyy');
-                } else if (propVal.type === 'date' && propVal.match === 'yyyyMMddHHmm') {
-                    return $filter('date')(value.toDate(), 'M/d/yyyy H:mm');
-                } else if (propVal.type === 'currency') {
-                    result = parseInt(value) * parseInt(propVal.multiplier);
-                    return $filter('currency')(result, '$', 0);
+                    if (propVal.type === 'percent') {
+                        return value + '%';
+                    } else if (propVal.type === 'date' && propVal.match === 'yyyyMMdd') {
+                        return $filter('date')(value.toDate(), 'M/d/yyyy');
+                    } else if (propVal.type === 'date' && propVal.match === 'yyyyMMddHHmm') {
+                        return $filter('date')(value.toDate(), 'M/d/yyyy H:mm');
+                    } else if (propVal.type === 'currency') {
+                        result = parseInt(value) * parseInt(propVal.multiplier);
+                        return $filter('currency')(result, '$', 0);
+                    }
                 }
             }
             return value;
