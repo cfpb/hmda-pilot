@@ -9,6 +9,8 @@ chai.use(chaiAsPromised);
 module.exports = function() {
     var continueButton = element(by.buttonText('Continue'));
     var progressBar = element.all(by.css('div.ngdialog-overlay'));
+    var currentPage;
+    var submitButton = element(by.buttonText('Start validation'));
 
     var verifyMacroErrors = function(index, numErrors) {
         return element(by.model('response.verified')).click().then(function() {
@@ -25,22 +27,34 @@ module.exports = function() {
         });
     };
 
-    var waitUrlChange = function(oldUrl) {
-        //Finding start URL within fn is slow, and can happen after a quick page change has occurred
-        //As such, you can pass a start URL (as string) to it and that will be used.
-
-        //If URL wasn't passed, find one here. Can lead to timeouts with a quick page change
-        if (!oldUrl) {
+    var continueToNextPage = function() {
+        var deferred = protractor.promise.defer();
+        waitUrlChange().then(function() {
             browser.getCurrentUrl().then(function(url) {
-                oldUrl = url;
+                currentPage = url;
+                continueButton.click();
+                deferred.fulfill();
             });
-        }
+        });
 
+        return deferred.promise;
+    };
+
+    var waitForNextPage = function(next) {
+        waitUrlChange().then(function() {
+            browser.getCurrentUrl().then(function(url) {
+                currentPage = url;
+                next();
+            });
+        });
+    };
+
+    var waitUrlChange = function() {
         //Fulfill and return promise when URL changes and no progress bar exists
         var pageChangeConditions = [
             browser.wait(function() {
                 return browser.getCurrentUrl().then(function(url) {
-                    return (url !== oldUrl);
+                    return (url !== currentPage);
                 });
             }, 2000000),
             browser.wait(function() {
@@ -53,54 +67,73 @@ module.exports = function() {
         return protractor.promise.all(pageChangeConditions);
     };
 
-    this.When(/^I wait for the file to be processed$/, function(next) {
-        waitUrlChange().then(function() {
-            next();
-        });
-    });
+    this.When(/^I click the submit button$/, function(next) {
+        browser.getCurrentUrl().then(function(url) {
+            currentPage = url;
 
-    this.When(/^I continue to the quality and macro edit reports page$/, function(next) {
-        var recentlyChangedUrl;
-        waitUrlChange().then(function() {
-            browser.getCurrentUrl().then(function(url) {
-                recentlyChangedUrl = url;
-            }).then(function() {
-                continueButton.click();
-            }).then(function() {
-                waitUrlChange(recentlyChangedUrl);
-            }).then(function() {
-                next();
-            });
-        });
-    });
-
-    this.When(/^I continue to the msa and irs edit reports page$/, function(next) {
-        waitUrlChange().then(function() {
-            continueButton.click();
-            waitUrlChange().then(function() {
-                continueButton.click();
-                waitUrlChange().then(function() {
-                    continueButton.click();
+            // sometimes an issue with the file selector still being displayed when the submit button is clicked
+            browser.wait(function() {
+                return submitButton.isDisplayed().then(function(isVisible) {
+                    return isVisible;
+                });
+            }, 5000000).then(function() {
+                submitButton.click().then(function() {
                     next();
                 });
             });
         });
     });
 
+    this.When(/^I continue to the syntactical and validity edit reports page$/, function(next) {
+        waitForNextPage(next);
+    });
+
+    this.When(/^I continue to the quality and macro edit reports page$/, function(next) {
+        continueToNextPage().then(function() {
+            waitForNextPage(next);
+        });
+    });
+
+    this.When(/^I continue to the msa and irs edit reports page$/, function(next) {
+        continueToNextPage().then(function() {
+            continueToNextPage().then(function() {
+                waitForNextPage(next);
+            });
+        });
+    });
+
+    this.When(/^I click on the '([^']*)' report link$/, function(reportName, next) {
+        element(by.linkText(reportName)).click();
+        waitForNextPage(next);
+    });
+
+    this.When(/^I click on an '(.*)' edit failure section within the high level summary information$/, function(editname, next) {
+        element.all(by.repeater('(key, value) in errors')).filter(function(elem) {
+            return elem.element(by.css('.id')).getText().then(function(id) {
+                if (id === editname) {
+                    return true;
+                }
+                return false;
+            });
+        }).then(function(errorLinks) {
+            errorLinks[0].element(by.linkText(editname)).click();
+            waitForNextPage(next);
+        });
+    });
+
     this.When(/^I continue through the quality macro errors page$/, function(next) {
-        waitUrlChange().then(function() {
-            continueButton.click();
-            waitUrlChange().then(function() {
-                element.all(by.partialLinkText('Q0')).then(function(macroErrors) {
-                    macroErrors[0].click();
-                    verifyMacroErrors (0, macroErrors.length).then(function() {
-                        continueButton.click();
-                        waitUrlChange().then(function() {
-                            next();
-                        });
-                    });
+        var continueThroughQualityErrors = function() {
+            element.all(by.partialLinkText('Q0')).then(function(macroErrors) {
+                macroErrors[0].click();
+                verifyMacroErrors (0, macroErrors.length).then(function() {
+                    continueButton.click();
+                    waitForNextPage(next);
                 });
             });
+        };
+
+        continueToNextPage().then(function() {
+            waitForNextPage(continueThroughQualityErrors);
         });
     });
 };
