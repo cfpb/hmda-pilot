@@ -544,6 +544,11 @@ module.exports = function (grunt) {
                 configFile: 'test/functional/conf.js'
             }
         },
+        editChecks: {
+            options: {
+                configFile: 'test/functional/editCheck-conf.js'
+            }
+        },
         sauceLabs: {
             options: {
                 configFile: 'test/functional/sauce-conf.js'
