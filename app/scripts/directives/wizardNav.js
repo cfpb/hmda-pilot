@@ -41,7 +41,7 @@ module.exports = /*@ngInject*/ function($location, $timeout, StepFactory, Wizard
     function controller($scope, Configuration) {
         if (Configuration.confirmSessionReset) {
             $scope.$on('$locationChangeStart', function(event, newUrl) {
-                if (newUrl.indexOf('#/selectFile') !== -1) {
+                if (newUrl.indexOf('/selectFile') !== -1) {
                     ngDialog.openConfirm({
                         template: 'partials/confirmSessionReset.html'
                     }).then(function(value) {
@@ -107,7 +107,7 @@ module.exports = /*@ngInject*/ function($location, $timeout, StepFactory, Wizard
                 var newSteps = Wizard.getSteps();
 
                 for (var i = 0; i < newSteps.length; i++) {
-                    if (newUrl.indexOf('#/' + newSteps[i].view) !== -1) {
+                    if (newUrl.indexOf('/' + newSteps[i].view) !== -1) {
                         newSteps[i].isFocused = true;
                     } else {
                         newSteps[i].isFocused = false;
