@@ -67,7 +67,7 @@ module.exports = function (grunt) {
       },
       markdown: {
         files: ['ABOUT.md', 'COMMON_QUESTIONS.md', 'TERMS_OF_SERVICE.md'],
-        tasks: ['markdown:help']
+        tasks: ['markdown']
       },
       livereload: {
         options: {
@@ -527,14 +527,31 @@ module.exports = function (grunt) {
         }
     },
     markdown: {
-        help: {
+        docs: {
             files: [{
                 'app/partials/about.html': 'ABOUT.md',
-                'app/views/common_questions.html': 'COMMON_QUESTIONS.md',
-                'app/partials/termsOfService.html': 'TERMS_OF_SERVICE.md',
+                'app/partials/termsOfService.html': 'TERMS_OF_SERVICE.md'
+            }],
+            options: {
+                template: 'config/md-to-html.jst'
+            }
+        },
+        faq: {
+            files: [{
+                'app/views/common_questions.html': 'COMMON_QUESTIONS.md'
             }],
             options: {
                 template: 'config/md-to-html.jst',
+                postCompile: function(src) {
+                    // Add a ending '-' to links in the TOC that end with a '?' because the markdown converter adds it
+                    src.replace(/<a href="(#.*)">(.*)<\/a>/g, function(match, link, text) {
+                        var suffix = '?';
+                        if (text.indexOf(suffix, text.length - suffix.length) !== -1) {
+                            src = src.replace(link, link + '-');
+                        }
+                    });
+                    return src;
+                }
             }
         }
     },
@@ -576,7 +593,7 @@ module.exports = function (grunt) {
       'less:server',
       'concurrent:server',
       'autoprefixer',
-      'markdown:help',
+      'markdown',
       'connect:livereload',
       'watch'
     ]);
@@ -627,7 +644,7 @@ module.exports = function (grunt) {
       'jscs',
       'jshint',
       'replace:' + env,
-      'markdown:help',
+      'markdown',
       'browserify:dist',
       'ngAnnotate:dist',
       'less:dist',
