@@ -5,7 +5,7 @@ var browserWidth = 1280,
 
 exports.config = {
 
-    baseUrl: 'http://dev.hmda-pilot.ec2.devis.com/',
+    baseUrl: 'http://dev.hmda-pilot.devis.com/',
 
     specs: ['cucumber/*.feature'],
 
@@ -19,7 +19,7 @@ exports.config = {
     framework: 'cucumber',
     cucumberOpts: {
         require: 'cucumber/step_definitions/*.js',
-        tags: ['~@wip', '~@ignore'],
+        tags: ['~@wip', '~@ignore', '~@editCheck'],
         format: 'progress'
     },
 
