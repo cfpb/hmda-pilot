@@ -12,6 +12,10 @@ module.exports = function() {
         expect(element(by.id(reportName)).isPresent()).to.eventually.be.true.notify(next);
     });
 
+    this.Then(/^I can continue to the IRS report$/, function(next) {
+        expect(element(by.linkText('IRS')).isPresent()).to.eventually.be.true.notify(next);
+    });
+
     this.Then(/^I will see a certification of accuracy$/, function(next) {
         expect(element(by.id('verify')).isPresent()).to.eventually.be.true.notify(next);
     });

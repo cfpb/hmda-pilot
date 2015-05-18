@@ -125,7 +125,7 @@ module.exports = function() {
         var continueThroughQualityErrors = function() {
             element.all(by.partialLinkText('Q0')).then(function(macroErrors) {
                 macroErrors[0].click();
-                verifyMacroErrors (0, macroErrors.length).then(function() {
+                verifyMacroErrors(0, macroErrors.length).then(function() {
                     continueButton.click();
                     waitForNextPage(next);
                 });
@@ -134,6 +134,70 @@ module.exports = function() {
 
         continueToNextPage().then(function() {
             waitForNextPage(continueThroughQualityErrors);
+        });
+    });
+
+    this.When(/^I correct all macro errors$/, function(next) {
+        element(by.id('macro')).all(by.partialLinkText('Q0')).then(function(macroErrors) {
+            macroErrors[0].click();
+            verifyMacroErrors(0, macroErrors.length).then(function() {
+                next();
+            });
+        });
+    });
+
+    this.When(/^I correct all quality errors$/, function(next) {
+        var verifyAndContinue = function(index, numErrors, callback) {
+            element(by.model('response.verified')).click().then(function() {
+                element(by.buttonText('Save and continue')).click();
+                waitForNextPage(function() {
+                    if (index === numErrors) {
+                        next();
+                    } else {
+                        callback(index + 1, numErrors);
+                    }
+                });
+            });
+        };
+
+        var continueThroughQualityErrors = function(index, numErrors) {
+            element(by.binding('entries')).getText().then(function(actualCount) {
+                element(by.model('$parent.paginate.pageSize')).$('option:checked').getText().then(function(pageSize) {
+                    var totalPages = actualCount.match(/\((.+?) /)[1] / pageSize;
+                    if (totalPages > 1) {
+                        element(by.model('currentPage')).clear();
+                        element(by.model('currentPage')).sendKeys(totalPages).then(function() {
+                            element(by.css('.pagination_submit')).click();
+                            verifyAndContinue(index, numErrors, continueThroughQualityErrors);
+                        });
+                    } else {
+                        verifyAndContinue(index, numErrors, continueThroughQualityErrors);
+                    }
+                });
+            });
+        };
+
+        element(by.id('quality')).all(by.partialLinkText('Q0')).then(function(qualityErrors) {
+            qualityErrors[0].click();
+            continueThroughQualityErrors(0, qualityErrors.length);
+        });
+    });
+
+    this.When(/^I correct all report errors$/, function(next) {
+        // for now this means just visiting the page
+        element(by.buttonText('Save and continue')).click();
+        waitForNextPage(next);
+    });
+
+    this.When(/^I verify the 'IRS' report and continue$/, function(next) {
+        browser.getCurrentUrl().then(function(url) {
+            currentPage = url;
+            element(by.id('verify')).click();
+            element(by.buttonText('Save and continue')).click();
+            waitForNextPage(function() {
+                continueButton.click();
+                waitForNextPage(next);
+            });
         });
     });
 };
