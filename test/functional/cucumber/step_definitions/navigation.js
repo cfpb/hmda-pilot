@@ -31,7 +31,7 @@ module.exports = function() {
         }).then(function(selectFileStep) {
             selectFileStep[0].click();
             browser.getCurrentUrl().then(function(url) {
-                var targetUrl = browser.baseUrl + '#/' + pageUrl;
+                var targetUrl = browser.baseUrl + pageUrl;
                 expect(url).to.equal(targetUrl);
                 next();
             });
