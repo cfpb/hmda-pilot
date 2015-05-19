@@ -8,8 +8,8 @@
  */
 module.exports = /*@ngInject*/ function(StepFactory) {
 
-    var steps,
-        currentStepIdx;
+    var steps = [],
+        currentStepIdx = 0;
 
     /**
      * Initialize the steps used in the wizard
