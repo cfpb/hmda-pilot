@@ -111,7 +111,7 @@ describe('Directive: WizardNav', function() {
 
     it('should set an already completed step to "is_focused" when it is selected', function() {
         var $completedStep = jQuery('li.complete', element);
-        scope.$broadcast('$locationChangeSuccess', '#/selectFile');
+        scope.$broadcast('$locationChangeSuccess', '/selectFile');
         scope.$digest();
         expect($completedStep.hasClass('is_focused')).toBeTruthy();
     });
@@ -126,7 +126,7 @@ describe('Directive: WizardNav', function() {
         describe('and Configuration.confirmSessionReset is true', function() {
             it('should display a confirmation dialog', function() {
                 Configuration.confirmSessionReset = true;
-                scope.$broadcast('$locationChangeStart', '#/selectFile');
+                scope.$broadcast('$locationChangeStart', '/selectFile');
                 scope.$digest();
                 expect(ngDialog.openConfirm).not.toHaveBeenCalled();
                 expect(location.path()).toBe('/');
@@ -135,7 +135,7 @@ describe('Directive: WizardNav', function() {
         describe('and Configuration.confirmSessionReset is false', function() {
             it('should display a confirmation dialog', function() {
                 Configuration.confirmSessionReset = true;
-                scope.$broadcast('$locationChangeStart', '#/selectFile');
+                scope.$broadcast('$locationChangeStart', '/selectFile');
                 scope.$digest();
                 expect(ngDialog.openConfirm).toHaveBeenCalled();
                 expect(location.path()).toBe('/');
@@ -145,7 +145,7 @@ describe('Directive: WizardNav', function() {
 
     describe('when the navigating anywhere else', function() {
         it('should not display the confirmation dialog', function() {
-            scope.$broadcast('$locationChangeStart', '#/test');
+            scope.$broadcast('$locationChangeStart', '/test');
             scope.$digest();
             expect(ngDialog.openConfirm).not.toHaveBeenCalled();
         });

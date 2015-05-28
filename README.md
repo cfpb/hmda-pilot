@@ -123,6 +123,16 @@ $ export SAUCE_ACCESS_KEY=<Accesskey>
 $ grunt functional:sauceLabs
 ```
 
+### Running the edit check functional tests
+
+The functional testing framework has also been setup to test edit checks themselves by testing to make sure that known errors appear with a given DAT files. To run these tests use the following
+
+```shell
+$ grunt functional:editChecks
+```
+
+This will run the edit check tests locally against the DEV environment in Google Chrome.
+
 ## Getting involved
 
 For details on how to get involved, please first read our [CONTRIBUTING](CONTRIBUTING.md) guidelines.

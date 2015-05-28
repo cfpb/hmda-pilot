@@ -2,7 +2,7 @@
     <ol role="progressbar" aria-valuemin="1" aria-valuemax="{{steps.length}}" aria-valuenow="{{currentStepIdx+1}}">
         <li ng-repeat="step in steps" class="step {{step.stepClass}}" aria-hidden="{{!step.isSelectable()}}">
             <span aria-label="Step {{$index+1}}" class="{{step.badgeClass}}">{{step.badgeText}}</span>
-            <a class="step-title" ng-if="step.isSelectable()" ng-href="/#/{{step.view}}">{{step.title}}</a>
+            <a class="step-title" ng-if="step.isSelectable()" ng-href="/{{step.view}}">{{step.title}}</a>
             <span class="step-title" ng-if="!step.isSelectable()">{{step.title}}</span>
         </li>
     </ol>

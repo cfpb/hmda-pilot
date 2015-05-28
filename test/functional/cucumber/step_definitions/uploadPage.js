@@ -3,7 +3,8 @@
 
 var chai = require('chai'),
     expect = chai.expect,
-    chaiAsPromised = require('chai-as-promised');
+    chaiAsPromised = require('chai-as-promised'),
+    remote = require('protractor/node_modules/selenium-webdriver/remote');
 
 chai.use(chaiAsPromised);
 
@@ -12,13 +13,14 @@ var path = require('path');
 
 //Defining page elements
 var pageErrors = element.all(by.css('.page-errors'));
-var submitButton = element(by.css('.form-buttons button'));
 
 module.exports = function() {
 
     var selectFile = function(fileName) {
         var deferred = protractor.promise.defer();
         var fileSelector = element(by.id('file'));
+
+        browser.driver.setFileDetector(new remote.FileDetector());
 
         //Get filename as argument, convert into path, send path to selector on site.
         var fileToUpload = '../files/' + fileName;
@@ -31,20 +33,6 @@ module.exports = function() {
 
     this.When(/^I upload the '([^']*)' file for validation$/, function(fileName, next) {
         selectFile(fileName).then(function() {
-            next();
-        });
-    });
-
-    this.When(/^I upload the '([^']*)' file and submit$/, function(fileName, next) {
-        selectFile(fileName).then(function() {
-            submitButton.click();
-        }).then(function() {
-            next();
-        });
-    });
-
-    this.When(/^I click the submit button$/, function(next) {
-        submitButton.click().then(function() {
             next();
         });
     });
