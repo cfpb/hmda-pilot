@@ -41,7 +41,7 @@ Technologies used include [AngularJS](http://angularjs.org), [Browserify](http:/
     ```shell
     $ grunt test
     ```
-1. Download or clone the HMDA Edit Check API and following the instructions for [running the API locally](https://github.com/cfpb/hmda-edit-check-api#running-locally)
+1. Download or clone the HMDA Edit Check API and following the instructions for [running the API locally](https://github.com/cfpb/hmda-edit-check-api#running-locally) or for using the Docker container.
 
 ### Running locally
 
@@ -78,6 +78,27 @@ $ grunt zip
 ```
 
 This task produces `dist/hmda-pilot.zip`, which can then be deployed by your continuous integration platform, or manually deployed into your server environment.
+
+### Using Docker
+
+You can also deploy using a Docker container. You can simply run the `build-docker-container.sh` script to build the container image, or, use the following steps:
+
+```shell
+$ grunt build:docker
+$ docker build -t hmda-pilot .
+```
+
+Now that you have a container image, you have to run it. This requires setting some environment variables for the container:
+ - `HMDA_PILOT_API_HOST`
+ - `HMDA_PILOT_API_PORT`
+These environment variables configure the proxy configuration in `nginx` to point to the proper API to alleviate issues with CORS (Cross-Origin Resource Sharing) requests, so that the API is accessible via the same URL as the pilot.
+
+An example of using these variables in your run looks like:
+```
+docker run -d --name hmda-pilot -p 80:80 -e "HMDA_PILOT_API_HOST=my.api.server" -e "HMDA_PILOT_API_PORT=8000" hmda-pilot
+```
+
+You can also use the `run-docker-container.sh` script, which will use Docker `--link` to run the API and the pilot on the same machine and automatically configures the envrironment variables for you.
 
 #### Per-Environment Configuration
 
