@@ -502,6 +502,19 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.app %>/scripts/modules/'
         }]
       },
+      docker: {
+        options: {
+          patterns: [{
+            json: grunt.file.readJSON('./config/environments/docker.json')
+          }]
+        },
+        files: [{
+          expand: true,
+          flatten: true,
+          src: ['./config/config.js'],
+          dest: '<%= yeoman.app %>/scripts/modules/'
+        }]
+      },
       production: {
         options: {
           patterns: [{
