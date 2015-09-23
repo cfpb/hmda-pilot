@@ -1,14 +1,19 @@
 #!/bin/sh
 
 ##### add dependencies
-apk --update add nginx sed
-chown -R nginx:nginx /var/www
+apk --update add nginx sed make gcc g++ python git
 
 ##### Move some things into place
-cp -f /tmp/scripts/nginx.conf /etc/nginx
-cp -f /tmp/scripts/hmda-pilot.conf.tmpl /etc/nginx
-cp -f /tmp/scripts/entrypoint.sh /
-cp -f /tmp/scripts/update-nginx-config.sh /etc/nginx
+cp -f docker-files/nginx.conf /etc/nginx
+cp -f docker-files/hmda-pilot.conf.tmpl /etc/nginx
+cp -f docker-files/entrypoint.sh /
+cp -f docker-files/update-nginx-config.sh /etc/nginx
+
+
+mkdir -p /var/www/hmda-pilot
+chown -R nginx:nginx /var/www
+adduser -S notroot
+chown -R notroot /usr/local/app
 
 ##### Clean up
-rm -rf /var/cache/apk/* /tmp/scripts
+rm -rf /var/cache/apk/*
