@@ -10,7 +10,7 @@ cp -f docker-files/entrypoint.sh /
 cp -f docker-files/update-nginx-config.sh /etc/nginx
 
 ##### Set permissions
-mkdir -p /var/www/hmda-pilot
+mkdir -p /var/www/
 chown -R nginx:nginx /var/www
 adduser -S notroot
 chown -R notroot /usr/local/app

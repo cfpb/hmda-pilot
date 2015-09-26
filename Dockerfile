@@ -12,7 +12,7 @@ RUN docker-files/run-node.sh
 
 USER root
 
-RUN mv dist/* /var/www/hmda-pilot
+RUN cp -r dist/ /var/www/hmda-pilot/
 
 EXPOSE 80 443
 
