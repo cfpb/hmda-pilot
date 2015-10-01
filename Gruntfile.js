@@ -289,6 +289,10 @@ module.exports = function (grunt) {
     //   dist: {}
     // },
 
+// Removed due to failure to build on alpine
+// Currently only saves ~7kb    
+// Could pre-minify images when they're checked in
+//
 //    imagemin: {
 //      dist: {
 //        files: [{
