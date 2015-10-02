@@ -289,17 +289,20 @@ module.exports = function (grunt) {
     //   dist: {}
     // },
 
-    imagemin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/images',
-          src: '{,*/}*.{png,jpg,jpeg,gif}',
-          dest: '<%= yeoman.dist %>/images'
-        }]
-      }
-    },
-
+// Removed due to failure to build on alpine
+// Currently only saves ~7kb    
+// Could pre-minify images when they're checked in
+//
+//    imagemin: {
+//      dist: {
+//        files: [{
+//          expand: true,
+//          cwd: '<%= yeoman.app %>/images',
+//          src: '{,*/}*.{png,jpg,jpeg,gif}',
+//          dest: '<%= yeoman.dist %>/images'
+//        }]
+//      }
+//    },
     svgmin: {
       dist: {
         files: [{
@@ -383,7 +386,7 @@ module.exports = function (grunt) {
       ],
       dist: [
         'copy:styles',
-        'imagemin',
+       // 'imagemin',
         'svgmin'
       ]
     },

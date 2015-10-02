@@ -1,12 +1,21 @@
-FROM alpine:3.2
+FROM mhart/alpine-node:0.10
 
-ADD ./dist /var/www/hmda-pilot
-COPY ./docker-files /tmp/scripts
+WORKDIR /usr/local/app
 
-# Use a custom build script instead of messy chained together RUN
-# or multiple RUN statements that add bloat to the image
-RUN /tmp/scripts/run.sh
+COPY . .
+
+RUN docker-files/run.sh
+
+USER notroot
+
+RUN docker-files/run-node.sh
+
+USER root
+
+RUN cp -r dist/ /var/www/hmda-pilot/
 
 EXPOSE 80 443
+
 ENTRYPOINT ["/entrypoint.sh"]
+
 CMD ["nginx"]

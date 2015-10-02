@@ -112,7 +112,7 @@ describe('Filters: hmdaFilters', function() {
 
             Date.prototype.getMonthFormatted = function() {
                 var month = this.getMonth();
-                return month < 10 ? '0' + (month + 1) : month + 1;
+                return month < 9 ? '0' + (month + 1) : month + 1;
             };
 
             Date.prototype.getDateFormatted = function() {
