@@ -1,4 +1,4 @@
 {
-    "apiUrl": "",
+    "apiUrl": "/api",
     "confirmSessionReset": true
 }
