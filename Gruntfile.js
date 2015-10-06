@@ -345,7 +345,7 @@ module.exports = function (grunt) {
             '*.html',
             'views/{,*/}*.html',
             'partials/{,*/}*.html',
-            'images/{,*/}*.{webp}',
+            'images/{,*/}*.{webp,png}',
             'fonts/{,*/}*.*',
             'data/{,*/}*.*'
           ]
@@ -385,8 +385,7 @@ module.exports = function (grunt) {
         'copy:styles'
       ],
       dist: [
-        'copy:styles',
-       // 'imagemin',
+        'copy:dist',
         'svgmin'
       ]
     },
